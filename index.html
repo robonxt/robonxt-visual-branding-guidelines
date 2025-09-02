@@ -44,6 +44,17 @@
 			--color-success-bg: rgba(34, 197, 94, 0.1);
 			--color-warning-bg: rgba(245, 158, 11, 0.1);
 			--color-error-bg: rgba(217, 68, 82, 0.1);
+
+			/* Radius Tokens */
+			--radius-sm: 4px;
+			--radius-md: 8px;
+			--radius-lg: 16px;
+			--radius-full: 9999px;
+
+			/* Motion Tokens */
+			--duration-quick: 150ms;
+			--duration-medium: 300ms;
+			--ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 		}
 
 		/* Dark Theme Colors */
@@ -189,6 +200,414 @@
 
 		#theme-toggle-checkbox:checked+#theme-toggle-label:before {
 			transform: translateX(28px);
+		}
+
+		/* Updated Button Styles */
+		.btn {
+			border-radius: var(--radius-md);
+			transition: all var(--duration-quick) var(--ease-standard);
+			outline: none;
+			/* We will handle focus with a visible ring */
+		}
+
+		.btn:focus-visible {
+			/* Accessibility focus ring */
+			box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
+		}
+
+		/* Form Input Styles */
+		.form-input {
+			background-color: var(--color-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			padding: 0.5rem 0.75rem;
+			/* 8px 12px */
+			color: var(--color-text-high);
+			transition: all var(--duration-quick) var(--ease-standard);
+			outline: none;
+		}
+
+		.form-input:focus-visible {
+			border-color: var(--color-primary);
+			box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
+		}
+
+		.form-input:disabled {
+			background-color: var(--color-border);
+			cursor: not-allowed;
+			opacity: 0.7;
+		}
+
+		/* Toggle Switch Styles */
+		.toggle-switch {
+			position: relative;
+			display: inline-block;
+			width: 44px;
+			height: 24px;
+		}
+
+		.toggle-switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.toggle-slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: var(--color-border);
+			border-radius: var(--radius-full);
+			transition: all var(--duration-medium) var(--ease-standard);
+		}
+
+		.toggle-slider:before {
+			position: absolute;
+			content: "";
+			height: 18px;
+			width: 18px;
+			left: 3px;
+			bottom: 3px;
+			background-color: white;
+			border-radius: var(--radius-full);
+			transition: all var(--duration-medium) var(--ease-standard);
+		}
+
+		input:checked+.toggle-slider {
+			background-color: var(--color-primary);
+		}
+
+		input:checked+.toggle-slider:before {
+			transform: translateX(20px);
+		}
+
+		/* Tab Styles */
+		.tabs-container {
+			display: flex;
+			gap: 8px;
+			/* space-xs */
+			border-bottom: 1px solid var(--color-border);
+			padding: 0 8px;
+			/* space-xs */
+		}
+
+		.tab {
+			padding: 8px 16px;
+			/* space-xs, space-sm */
+			border: none;
+			background: none;
+			color: var(--color-text-medium);
+			cursor: pointer;
+			font-size: 0.875rem;
+			font-weight: 500;
+			border-radius: var(--radius-md) var(--radius-md) 0 0;
+			transition: all var(--duration-quick) var(--ease-standard);
+		}
+
+		.tab:hover {
+			color: var(--color-text-high);
+		}
+
+		.tab.active {
+			color: var(--color-text-on-primary);
+			background-color: var(--color-primary);
+		}
+
+		/* Interactive Card Style */
+		.interactive-card {
+			background-color: var(--color-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-lg);
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+			transition: all var(--duration-medium) var(--ease-standard);
+			overflow: hidden;
+			/* To contain the top border */
+			position: relative;
+			cursor: pointer;
+			/* Add a pointer to signal interactivity */
+		}
+
+		.interactive-card:hover {
+			/* The 'lift' effect */
+			transform: translateY(-4px);
+			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+		}
+
+		.surface {
+			background-color: var(--color-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-lg);
+			padding: 1.5rem;
+			/* 24px / space-md */
+		}
+
+		/* Checkbox & Radio Styles */
+		.form-checkbox,
+		.form-radio {
+			appearance: none;
+			background-color: var(--color-surface);
+			border: 1px solid var(--color-border);
+			width: 1.25rem;
+			/* 20px */
+			height: 1.25rem;
+			/* 20px */
+			transition: all var(--duration-quick) var(--ease-standard);
+			cursor: pointer;
+		}
+
+		.form-checkbox:checked,
+		.form-radio:checked {
+			background-color: var(--color-primary);
+			border-color: var(--color-primary);
+		}
+
+		.form-checkbox {
+			border-radius: var(--radius-sm);
+		}
+
+		.form-checkbox:checked {
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+			background-size: 100% 100%;
+		}
+
+		.form-radio {
+			border-radius: var(--radius-full);
+		}
+
+		.form-radio:checked {
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+			background-size: 100% 100%;
+		}
+
+		/* Select/Dropdown Styles */
+		.form-select {
+			appearance: none;
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238A94A6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+			background-position: right 0.75rem center;
+			background-repeat: no-repeat;
+			background-size: 1.5em 1.5em;
+			padding-right: 2.5rem;
+		}
+
+		/* Slider Styles */
+		.form-slider {
+			appearance: none;
+			width: 100%;
+			height: 8px;
+			background: var(--color-border);
+			border-radius: var(--radius-full);
+			outline: none;
+			transition: opacity .2s;
+		}
+
+		.form-slider::-webkit-slider-thumb {
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			background: var(--color-primary);
+			border-radius: var(--radius-full);
+			cursor: pointer;
+			border: 3px solid var(--color-surface);
+			box-shadow: 0 0 0 1px var(--color-border);
+		}
+
+		.form-slider::-moz-range-thumb {
+			width: 20px;
+			height: 20px;
+			background: var(--color-primary);
+			border-radius: var(--radius-full);
+			cursor: pointer;
+			border: 3px solid var(--color-surface);
+			box-shadow: 0 0 0 1px var(--color-border);
+		}
+
+		/* Navigation: Breadcrumbs */
+		.breadcrumbs {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			/* space-xs */
+		}
+
+		.breadcrumbs-link {
+			color: var(--color-text-medium);
+			font-size: 0.875rem;
+			font-weight: 500;
+		}
+
+		.breadcrumbs-link:hover {
+			color: var(--color-primary);
+		}
+
+		.breadcrumbs-separator {
+			color: var(--color-border);
+		}
+
+		/* Navigation: Pagination */
+		.pagination {
+			display: flex;
+			gap: 4px;
+		}
+
+		.pagination-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			font-size: 0.875rem;
+			font-weight: 500;
+			color: var(--color-text-high);
+			cursor: pointer;
+			transition: all var(--duration-quick) var(--ease-standard);
+		}
+
+		.pagination-item:hover {
+			border-color: var(--color-primary);
+		}
+
+		.pagination-item.active {
+			background-color: var(--color-primary);
+			border-color: var(--color-primary);
+			color: var(--color-text-on-primary);
+		}
+
+		/* Feedback: Modal */
+		.modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			visibility: hidden;
+			transition: all var(--duration-medium) var(--ease-standard);
+		}
+
+		.modal-overlay.visible {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.modal-content {
+			background-color: var(--color-surface);
+			border-radius: var(--radius-lg);
+			padding: 24px;
+			/* space-md */
+			width: 90%;
+			max-width: 500px;
+			transform: scale(0.95);
+			transition: all var(--duration-medium) var(--ease-standard);
+		}
+
+		.modal-overlay.visible .modal-content {
+			transform: scale(1);
+		}
+
+		/* Feedback: Toast */
+		.toast {
+			position: fixed;
+			bottom: 24px;
+			/* space-md */
+			right: 24px;
+			/* space-md */
+			background-color: var(--color-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-md);
+			padding: 16px;
+			/* space-sm */
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			/* space-sm */
+			transform: translateY(20px);
+			opacity: 0;
+			visibility: hidden;
+			transition: all var(--duration-medium) var(--ease-standard);
+		}
+
+		.toast.visible {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+
+		/* Data Display: Accordion */
+		.accordion-item {
+			border-bottom: 1px solid var(--color-border);
+		}
+
+		.accordion-header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 16px 8px;
+			/* space-sm, space-xs */
+			cursor: pointer;
+			font-weight: 500;
+			color: var(--color-text-high);
+		}
+
+		.accordion-icon {
+			transition: transform var(--duration-medium) var(--ease-standard);
+		}
+
+		.accordion-header[aria-expanded="true"] .accordion-icon {
+			transform: rotate(180deg);
+		}
+
+		.accordion-content {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height var(--duration-medium) var(--ease-standard), padding var(--duration-medium) var(--ease-standard);
+		}
+
+		/* Data Display: Avatar */
+		.avatar {
+			display: inline-block;
+			border-radius: var(--radius-full);
+			object-fit: cover;
+			border: 2px solid var(--color-surface);
+			box-shadow: 0 0 0 1px var(--color-border);
+		}
+
+		/* Data Display: Table */
+		.table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.table th,
+		.table td {
+			text-align: left;
+			padding: 12px 16px;
+			/* a bit less than space-sm */
+			border-bottom: 1px solid var(--color-border);
+		}
+
+		.table th {
+			font-size: 0.75rem;
+			/* 12px */
+			font-weight: 600;
+			color: var(--color-text-medium);
+			text-transform: uppercase;
+		}
+
+		.table td {
+			font-size: 0.875rem;
+			/* 14px */
+			color: var(--color-text-high);
 		}
 	</style>
 </head>
@@ -492,108 +911,380 @@
 			</div>
 		</section>
 
-
-
 		<div class="my-12 border-b border-color"></div>
 
-		<!-- Section: Components in Action -->
+		<!-- Section: Layout Primitives -->
 		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Components in Action</h2>
-			<p class="text-base mt-2 text-medium">See how the complete identity system applies to common UI elements.
-			</p>
-
-			<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-				<!-- Left Column -->
-				<div class="space-y-8">
-					<div>
-						<h3 class="text-[1.25rem] font-semibold text-high">Buttons</h3>
-						<div class="mt-4 p-6 card rounded-lg flex flex-wrap gap-2 items-center">
-							<button
-								class="btn btn-primary text-sm font-medium py-2 px-4 rounded-md flex items-center gap-2"><span
-									class="material-symbols-rounded" style="font-size: 18px;">check_circle</span>Primary
-								Action</button>
-							<button
-								class="btn btn-secondary text-sm font-medium py-2 px-4 rounded-md">Secondary</button>
-							<button class="btn btn-outline text-sm font-medium py-2 px-4 rounded-md">Outline</button>
-						</div>
-					</div>
-					<div>
-						<h3 class="text-[1.25rem] font-semibold text-high">Card Component</h3>
-						<div class="mt-4 card rounded-lg overflow-hidden">
-							<div class="bg-primary h-2"></div>
-							<div class="p-6">
-								<h4 class="text-[1.25rem] font-semibold text-high">Project Showcase</h4>
-								<p class="mt-2 text-base text-medium leading-relaxed">This card uses `24px` of padding.
-									The margin between this text and the title is `8px`.</p>
-								<button class="btn btn-primary text-sm font-medium py-2 px-4 rounded-md mt-6">View
-									Project</button>
-							</div>
-						</div>
+			<h2 class="text-[1.5rem] font-semibold text-high">Layout Primitives</h2>
+			<p class="text-base mt-2 text-medium">The architectural foundation for all pages. These components define
+				structure and hierarchy.</p>
+			<div class="mt-8 space-y-8">
+				<div>
+					<h3 class="text-[1.25rem] font-semibold text-high">1. Section</h3>
+					<p class="mt-2 text-base text-medium leading-relaxed">A semantic wrapper with no visual style. Its
+						only job is to create vertical spacing between groups of content using margins.</p>
+				</div>
+				<div>
+					<h3 class="text-[1.25rem] font-semibold text-high">2. Container</h3>
+					<p class="mt-2 text-base text-medium leading-relaxed">The primary, **static** canvas for main
+						content. It has no animation or hover effects. Use it for the main workspace of a page.</p>
+					<div class="mt-4 surface">
+						<p class="text-high">This is a Container. It holds the main content, like this text and the form
+							controls below.</p>
 					</div>
 				</div>
-
-				<!-- Right Column -->
-				<div class="space-y-8">
-					<div>
-						<h3 class="text-[1.25rem] font-semibold text-high">Functional Alerts</h3>
-						<div class="mt-4 space-y-4">
-							<div class="p-4 rounded-md flex items-start"
-								style="background-color: var(--color-success-bg);">
-								<span class="material-symbols-rounded mr-3 flex-shrink-0"
-									style="color: var(--color-success); font-size: 20px;">task_alt</span>
-								<p class="text-sm font-medium text-high">Success! Your changes have been saved.</p>
-							</div>
-							<div class="p-4 rounded-md flex items-start"
-								style="background-color: var(--color-warning-bg);">
-								<span class="material-symbols-rounded mr-3 flex-shrink-0"
-									style="color: var(--color-warning); font-size: 20px;">warning</span>
-								<p class="text-sm font-medium text-high">Warning: Your trial period is ending soon.</p>
-							</div>
-							<div class="p-4 rounded-md flex items-start"
-								style="background-color: var(--color-error-bg);">
-								<span class="material-symbols-rounded mr-3 flex-shrink-0"
-									style="color: var(--color-error); font-size: 20px;">error</span>
-								<p class="text-sm font-medium text-high">Error: Could not connect to the server.</p>
-							</div>
+				<div>
+					<h3 class="text-[1.25rem] font-semibold text-high">3. Interactive Card</h3>
+					<p class="mt-2 text-base text-medium leading-relaxed">An **interactive** element used for summaries
+						or links. It has a hover effect to signal that it is clickable.</p>
+					<div class="mt-4 interactive-card">
+						<div class="h-2 bg-primary"></div>
+						<div class="p-6">
+							<p class="text-high">This is an Interactive Card. Notice the 'lift' effect when you hover
+								over it.</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
+		<div class="my-12 border-b border-color"></div>
+
+		<!-- Section: Components Library -->
+		<section>
+			<h2 class="text-[1.5rem] font-semibold text-high">Component Library</h2>
+			<p class="text-base mt-2 text-medium">The core interactive elements of the robonxt design language. All
+				components are built using the brand's design tokens.</p>
+
+			<div class="mt-8 space-y-12">
+
+				<!-- Form Controls -->
+				<div>
+					<h3 class="text-[1.25rem] font-semibold text-high">1. Form Controls</h3>
+					<p class="mt-2 text-base text-medium">The full suite of components for user input, all sharing a
+						consistent design language.</p>
+
+					<div class="mt-6 surface space-y-8">
+
+						<!-- Text Input -->
+						<div class="space-y-2">
+							<label for="name-input-2" class="text-sm font-medium text-high">Text Input</label>
+							<input type="text" id="name-input-2" placeholder="Your name"
+								class="form-input block w-full md:w-1/2">
+						</div>
+
+						<!-- Select / Dropdown -->
+						<div class="space-y-2">
+							<label for="select-menu" class="text-sm font-medium text-high">Select Menu</label>
+							<select id="select-menu" class="form-input form-select block w-full md:w-1/2">
+								<option>Option 1</option>
+								<option>Option 2</option>
+								<option>Option 3</option>
+							</select>
+						</div>
+
+						<!-- Checkboxes & Radios -->
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+							<div class="space-y-4">
+								<p class="text-sm font-medium text-high">Checkbox Group</p>
+								<div class="flex items-center gap-3">
+									<input id="check1" type="checkbox" class="form-checkbox">
+									<label for="check1" class="text-high">Option A</label>
+								</div>
+								<div class="flex items-center gap-3">
+									<input id="check2" type="checkbox" class="form-checkbox" checked>
+									<label for="check2" class="text-high">Option B</label>
+								</div>
+							</div>
+							<div class="space-y-4">
+								<p class="text-sm font-medium text-high">Radio Group</p>
+								<div class="flex items-center gap-3">
+									<input id="radio1" type="radio" name="radio-group" class="form-radio">
+									<label for="radio1" class="text-high">Choice X</label>
+								</div>
+								<div class="flex items-center gap-3">
+									<input id="radio2" type="radio" name="radio-group" class="form-radio" checked>
+									<label for="radio2" class="text-high">Choice Y</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- Toggle Switch -->
+						<div class="space-y-4">
+							<p class="text-sm font-medium text-high">Toggle Switch</p>
+							<label class="toggle-switch">
+								<input type="checkbox" checked>
+								<span class="toggle-slider"></span>
+							</label>
+						</div>
+
+						<!-- Slider -->
+						<div class="space-y-4">
+							<label for="slider" class="text-sm font-medium text-high">Slider</label>
+							<input type="range" id="slider" min="0" max="100" value="50"
+								class="form-slider w-full md:w-1/2">
+						</div>
+
+					</div>
+				</div>
+
+				<!-- 2. Navigation -->
+				<div class="mt-12">
+					<h3 class="text-[1.25rem] font-semibold text-high">2. Navigation</h3>
+					<p class="mt-2 text-base text-medium">Components that help users move around the application.</p>
+
+					<div class="mt-6 surface space-y-8">
+						<!-- Breadcrumbs -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Breadcrumbs</p>
+							<nav class="breadcrumbs">
+								<a href="#" class="breadcrumbs-link">Home</a>
+								<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
+								<a href="#" class="breadcrumbs-link">Projects</a>
+								<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
+								<span class="text-sm font-medium text-high">robonxt/ui</span>
+							</nav>
+						</div>
+						<!-- Pagination -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Pagination</p>
+							<nav class="pagination">
+								<button class="pagination-item"><span
+										class="material-symbols-rounded">chevron_left</span></button>
+								<button class="pagination-item">1</button>
+								<button class="pagination-item active">2</button>
+								<button class="pagination-item">3</button>
+								<button class="pagination-item">...</button>
+								<button class="pagination-item">8</button>
+								<button class="pagination-item"><span
+										class="material-symbols-rounded">chevron_right</span></button>
+							</nav>
+						</div>
+					</div>
+				</div>
+
+				<!-- 3. Feedback & Overlays -->
+				<div class="mt-12">
+					<h3 class="text-[1.25rem] font-semibold text-high">3. Feedback & Overlays</h3>
+					<p class="mt-2 text-base text-medium">Components the system uses to communicate with the user.</p>
+
+					<div class="mt-6 surface space-y-8">
+						<!-- Modal -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Modal / Dialog</p>
+							<button class="btn btn-primary text-sm font-medium py-2 px-4" id="open-modal-btn">Open
+								Modal</button>
+						</div>
+						<!-- Toast -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Toast / Notification</p>
+							<button class="btn btn-outline text-sm font-medium py-2 px-4" id="show-toast-btn">Show
+								Toast</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- 4. Data Display -->
+				<div class="mt-12">
+					<h3 class="text-[1.25rem] font-semibold text-high">4. Data Display</h3>
+					<p class="mt-2 text-base text-medium">Components for presenting information clearly.</p>
+
+					<div class="mt-6 surface space-y-8">
+						<!-- Accordion -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Accordion</p>
+							<div class="border-t border-color" id="accordion">
+								<div class="accordion-item">
+									<button class="accordion-header" aria-expanded="false">
+										<span>Is this a design system?</span>
+										<span class="material-symbols-rounded accordion-icon">expand_more</span>
+									</button>
+									<div class="accordion-content">
+										<p class="pb-4 px-2 text-medium">Yes. It's a comprehensive set of rules and
+											components built on design tokens.</p>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<button class="accordion-header" aria-expanded="false">
+										<span>Can it be used for any project?</span>
+										<span class="material-symbols-rounded accordion-icon">expand_more</span>
+									</button>
+									<div class="accordion-content">
+										<p class="pb-4 px-2 text-medium">Absolutely. The token-based architecture makes
+											it platform-agnostic.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Avatar -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Avatar</p>
+							<img src="https://via.placeholder.com/64" alt="User Avatar" class="avatar"
+								style="width: 64px; height: 64px;">
+						</div>
+						<!-- Table -->
+						<div>
+							<p class="text-sm font-medium text-high mb-4">Table</p>
+							<div class="overflow-x-auto">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Project</th>
+											<th>Status</th>
+											<th>Last Updated</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>robonxt/ui</td>
+											<td>Active</td>
+											<td>2 min ago</td>
+										</tr>
+										<tr>
+											<td>Parody Website</td>
+											<td>Archived</td>
+											<td>3 months ago</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
 	</main>
 
 	<footer class="text-center py-8 mt-12 border-t border-color">
-		<p class="text-xs text-medium">&copy; 2025 robonxt. Built by robo.</p>
+		<p class="text-xs text-medium">&copy; 2025 robonxt. Built by robonxt.</p>
 	</footer>
 
 	<script>
-		const themeToggle = document.getElementById('theme-toggle-checkbox');
-		const docElement = document.documentElement;
-		const applyTheme = (isDark) => {
-			if (isDark) {
-				docElement.classList.add('dark');
-				docElement.classList.remove('light');
-				themeToggle.checked = true;
+		// This is the best practice. It ensures all HTML is loaded before the script runs.
+		window.addEventListener('DOMContentLoaded', () => {
+
+			// --- Theme Toggle Logic ---
+			const themeToggle = document.getElementById('theme-toggle-checkbox');
+			const docElement = document.documentElement;
+			const applyTheme = (isDark) => {
+				if (isDark) {
+					docElement.classList.add('dark');
+					docElement.classList.remove('light');
+					themeToggle.checked = true;
+				} else {
+					docElement.classList.add('light');
+					docElement.classList.remove('dark');
+					themeToggle.checked = false;
+				}
+			};
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme) {
+				applyTheme(savedTheme === 'dark');
 			} else {
-				docElement.classList.add('light');
-				docElement.classList.remove('dark');
-				themeToggle.checked = false;
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				applyTheme(prefersDark);
 			}
-		};
-		const savedTheme = localStorage.getItem('theme');
-		if (savedTheme) {
-			applyTheme(savedTheme === 'dark');
-		} else {
-			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-			applyTheme(prefersDark);
-		}
-		themeToggle.addEventListener('change', () => {
-			const isDark = themeToggle.checked;
-			applyTheme(isDark);
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			themeToggle.addEventListener('change', () => {
+				const isDark = themeToggle.checked;
+				applyTheme(isDark);
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			});
+
+
+			// --- Interactive Tabs Logic ---
+			const tabsContainer = document.getElementById('tabs-container');
+			const tabsContent = document.getElementById('tabs-content');
+			const tabContents = {
+				'1': "Content for Profile. This shows user information.",
+				'2': "Content for Settings. Here you can configure your preferences.",
+				'3': "Content for Billing. View your invoices and payment methods."
+			};
+			if (tabsContainer) {
+				tabsContainer.addEventListener('click', (e) => {
+					if (e.target.classList.contains('tab')) {
+						tabsContainer.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+						e.target.classList.add('active');
+						const tabNumber = e.target.dataset.tab;
+						tabsContent.textContent = tabContents[tabNumber];
+					}
+				});
+			}
+
+
+			// --- Modal Logic ---
+			const openModalBtn = document.getElementById('open-modal-btn');
+			const closeModalBtn = document.getElementById('close-modal-btn');
+			const modalOverlay = document.getElementById('modal-overlay');
+			if (openModalBtn && modalOverlay) {
+				openModalBtn.addEventListener('click', () => modalOverlay.classList.add('visible'));
+			}
+			if (closeModalBtn && modalOverlay) {
+				closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('visible'));
+			}
+
+
+			// --- Toast Logic ---
+			const showToastBtn = document.getElementById('show-toast-btn');
+			const toast = document.getElementById('toast');
+			if (showToastBtn && toast) {
+				showToastBtn.addEventListener('click', () => {
+					toast.classList.add('visible');
+					setTimeout(() => {
+						toast.classList.remove('visible');
+					}, 3000);
+				});
+			}
+
+
+			// --- Accordion Logic ---
+			const accordion = document.getElementById('accordion');
+			if (accordion) {
+				accordion.addEventListener('click', (e) => {
+					const header = e.target.closest('.accordion-header');
+					if (header) {
+						const content = header.nextElementSibling;
+						const isExpanded = header.getAttribute('aria-expanded') === 'true';
+						header.setAttribute('aria-expanded', !isExpanded);
+						if (!isExpanded) {
+							content.style.maxHeight = content.scrollHeight + 'px';
+							content.style.paddingTop = '8px';
+							content.style.paddingBottom = '16px';
+						} else {
+							content.style.maxHeight = '0';
+							content.style.paddingTop = '0';
+							content.style.paddingBottom = '0';
+						}
+					}
+				});
+			}
+
 		});
 	</script>
+
+	<!-- Modal Overlay -->
+	<div class="modal-overlay" id="modal-overlay">
+		<div class="modal-content">
+			<div class="flex justify-between items-center">
+				<h3 class="text-[1.25rem] font-semibold text-high">Modal Title</h3>
+				<button class="text-medium hover:text-high" id="close-modal-btn"><span
+						class="material-symbols-rounded">close</span></button>
+			</div>
+			<p class="mt-4 text-base text-medium">This is the content of the modal. It appears on top of the main
+				content and requires an action.</p>
+			<div class="mt-6 flex justify-end gap-4">
+				<button class="btn btn-outline text-sm font-medium py-2 px-4">Cancel</button>
+				<button class="btn btn-primary text-sm font-medium py-2 px-4">Confirm</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Toast Notification -->
+	<div class="toast" id="toast">
+		<span class="material-symbols-rounded text-primary">task_alt</span>
+		<p class="text-sm font-medium text-high">Your action was successful!</p>
+	</div>
 
 </body>
 
