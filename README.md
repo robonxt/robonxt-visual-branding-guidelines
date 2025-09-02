@@ -115,7 +115,7 @@ All designs must be **Mobile First.**
 
 ### Layout Primitives
 -   **Section:** A semantic wrapper with no visual style. Its only job is to create vertical margin (`space-xl` or `space-2xl`) between groups of content on a page.
--   **Container:** A non-interactive, static "canvas" for the main content of a page. It has a background, border, and radius, but **no animation or shadow.**
+-   **Surface (Container):** A non-interactive, static "canvas" for the main content of a page. It has a background, border, and radius, but **no animation or shadow.**
 -   **Interactive Card:** An interactive element used for summaries or links. It uses the "lift" animation on hover and can have brand accents like a top border or contextual icon.
 
 ---
@@ -135,7 +135,7 @@ The tangible, interactive elements of the brand.
 | :------------ | :----- | :--------------------------------------------- |
 | `radius-sm`   | 4px    | Small elements like checkboxes.                |
 | `radius-md`   | 8px    | **Default.** Buttons, inputs.                  |
-| `radius-lg`   | 16px   | Larger components: Containers, Cards, Modals.  |
+| `radius-lg`   | 16px   | Larger components: Surfaces, Cards, Modals.  |
 | `radius-full` | 9999px | Circular elements: Pills, Toggles, Avatars.    |
 
 ### Motion System

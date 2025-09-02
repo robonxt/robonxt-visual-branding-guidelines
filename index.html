@@ -956,36 +956,36 @@
 			<p class="text-base mt-2 text-medium">The core interactive elements of the robonxt design language. All
 				components are built using the brand's design tokens.</p>
 
-			<div class="mt-8 space-y-12">
+			<!-- Space-efficient, collapsible categories using native details/summary -->
+			<div class="mt-8 space-y-6">
 
-				<!-- Form Controls -->
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">1. Form Controls</h3>
-					<p class="mt-2 text-base text-medium">The full suite of components for user input, all sharing a
-						consistent design language.</p>
-
-					<div class="mt-6 surface space-y-8">
-
-						<!-- Text Input -->
-						<div class="space-y-2">
-							<label for="name-input-2" class="text-sm font-medium text-high">Text Input</label>
-							<input type="text" id="name-input-2" placeholder="Your name"
-								class="form-input block w-full md:w-1/2">
-						</div>
-
-						<!-- Select / Dropdown -->
-						<div class="space-y-2">
-							<label for="select-menu" class="text-sm font-medium text-high">Select Menu</label>
-							<select id="select-menu" class="form-input form-select block w-full md:w-1/2">
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-							</select>
+				<!-- 1. Form Controls -->
+				<details open class="surface">
+					<summary class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+						<span class="text-[1.25rem] font-semibold text-high">1. Form Controls</span>
+						<span class="material-symbols-rounded text-medium">expand_more</span>
+					</summary>
+					<div class="pt-2 pb-2 space-y-6">
+						<p class="text-base text-medium">The full suite of components for user input, all sharing a consistent design language.</p>
+						<!-- Inputs in a compact grid -->
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div class="space-y-2">
+								<label for="name-input-2" class="text-sm font-medium text-high">Text Input</label>
+								<input type="text" id="name-input-2" placeholder="Your name" class="form-input block w-full">
+							</div>
+							<div class="space-y-2">
+								<label for="select-menu" class="text-sm font-medium text-high">Select Menu</label>
+								<select id="select-menu" class="form-input form-select block w-full">
+									<option>Option 1</option>
+									<option>Option 2</option>
+									<option>Option 3</option>
+								</select>
+							</div>
 						</div>
 
 						<!-- Checkboxes & Radios -->
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="space-y-4">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div class="space-y-3">
 								<p class="text-sm font-medium text-high">Checkbox Group</p>
 								<div class="flex items-center gap-3">
 									<input id="check1" type="checkbox" class="form-checkbox">
@@ -996,7 +996,7 @@
 									<label for="check2" class="text-high">Option B</label>
 								</div>
 							</div>
-							<div class="space-y-4">
+							<div class="space-y-3">
 								<p class="text-sm font-medium text-high">Radio Group</p>
 								<div class="flex items-center gap-3">
 									<input id="radio1" type="radio" name="radio-group" class="form-radio">
@@ -1009,148 +1009,144 @@
 							</div>
 						</div>
 
-						<!-- Toggle Switch -->
-						<div class="space-y-4">
-							<p class="text-sm font-medium text-high">Toggle Switch</p>
-							<label class="toggle-switch">
-								<input type="checkbox" checked>
-								<span class="toggle-slider"></span>
-							</label>
+						<!-- Toggle & Slider side-by-side -->
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+							<div class="space-y-2">
+								<p class="text-sm font-medium text-high">Toggle Switch</p>
+								<label class="toggle-switch">
+									<input type="checkbox" checked>
+									<span class="toggle-slider"></span>
+								</label>
+							</div>
+							<div class="space-y-2">
+								<label for="slider" class="text-sm font-medium text-high">Slider</label>
+								<input type="range" id="slider" min="0" max="100" value="50" class="form-slider w-full">
+							</div>
 						</div>
-
-						<!-- Slider -->
-						<div class="space-y-4">
-							<label for="slider" class="text-sm font-medium text-high">Slider</label>
-							<input type="range" id="slider" min="0" max="100" value="50"
-								class="form-slider w-full md:w-1/2">
-						</div>
-
 					</div>
-				</div>
+				</details>
 
 				<!-- 2. Navigation -->
-				<div class="mt-12">
-					<h3 class="text-[1.25rem] font-semibold text-high">2. Navigation</h3>
-					<p class="mt-2 text-base text-medium">Components that help users move around the application.</p>
-
-					<div class="mt-6 surface space-y-8">
-						<!-- Breadcrumbs -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Breadcrumbs</p>
-							<nav class="breadcrumbs">
-								<a href="#" class="breadcrumbs-link">Home</a>
-								<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
-								<a href="#" class="breadcrumbs-link">Projects</a>
-								<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
-								<span class="text-sm font-medium text-high">robonxt/ui</span>
-							</nav>
-						</div>
-						<!-- Pagination -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Pagination</p>
-							<nav class="pagination">
-								<button class="pagination-item"><span
-										class="material-symbols-rounded">chevron_left</span></button>
-								<button class="pagination-item">1</button>
-								<button class="pagination-item active">2</button>
-								<button class="pagination-item">3</button>
-								<button class="pagination-item">...</button>
-								<button class="pagination-item">8</button>
-								<button class="pagination-item"><span
-										class="material-symbols-rounded">chevron_right</span></button>
-							</nav>
+				<details class="surface">
+					<summary class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+						<span class="text-[1.25rem] font-semibold text-high">2. Navigation</span>
+						<span class="material-symbols-rounded text-medium">expand_more</span>
+					</summary>
+					<div class="pt-2 pb-2">
+						<p class="text-base text-medium">Components that help users move around the application.</p>
+						<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Breadcrumbs</p>
+								<nav class="breadcrumbs">
+									<a href="#" class="breadcrumbs-link">Home</a>
+									<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
+									<a href="#" class="breadcrumbs-link">Projects</a>
+									<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
+									<span class="text-sm font-medium text-high">robonxt/ui</span>
+								</nav>
+							</div>
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Pagination</p>
+								<nav class="pagination">
+									<button class="pagination-item"><span class="material-symbols-rounded">chevron_left</span></button>
+									<button class="pagination-item">1</button>
+									<button class="pagination-item active">2</button>
+									<button class="pagination-item">3</button>
+									<button class="pagination-item">...</button>
+									<button class="pagination-item">8</button>
+									<button class="pagination-item"><span class="material-symbols-rounded">chevron_right</span></button>
+								</nav>
+							</div>
 						</div>
 					</div>
-				</div>
+				</details>
 
 				<!-- 3. Feedback & Overlays -->
-				<div class="mt-12">
-					<h3 class="text-[1.25rem] font-semibold text-high">3. Feedback & Overlays</h3>
-					<p class="mt-2 text-base text-medium">Components the system uses to communicate with the user.</p>
-
-					<div class="mt-6 surface space-y-8">
-						<!-- Modal -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Modal / Dialog</p>
-							<button class="btn btn-primary text-sm font-medium py-2 px-4" id="open-modal-btn">Open
-								Modal</button>
-						</div>
-						<!-- Toast -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Toast / Notification</p>
-							<button class="btn btn-outline text-sm font-medium py-2 px-4" id="show-toast-btn">Show
-								Toast</button>
+				<details class="surface">
+					<summary class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+						<span class="text-[1.25rem] font-semibold text-high">3. Feedback & Overlays</span>
+						<span class="material-symbols-rounded text-medium">expand_more</span>
+					</summary>
+					<div class="pt-2 pb-2">
+						<p class="text-base text-medium">Components the system uses to communicate with the user.</p>
+						<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Modal / Dialog</p>
+								<button class="btn btn-primary text-sm font-medium py-2 px-4" id="open-modal-btn">Open Modal</button>
+							</div>
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Toast / Notification</p>
+								<button class="btn btn-outline text-sm font-medium py-2 px-4" id="show-toast-btn">Show Toast</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				</details>
 
 				<!-- 4. Data Display -->
-				<div class="mt-12">
-					<h3 class="text-[1.25rem] font-semibold text-high">4. Data Display</h3>
-					<p class="mt-2 text-base text-medium">Components for presenting information clearly.</p>
-
-					<div class="mt-6 surface space-y-8">
-						<!-- Accordion -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Accordion</p>
-							<div class="border-t border-color" id="accordion">
-								<div class="accordion-item">
-									<button class="accordion-header" aria-expanded="false">
-										<span>Is this a design system?</span>
-										<span class="material-symbols-rounded accordion-icon">expand_more</span>
-									</button>
-									<div class="accordion-content">
-										<p class="pb-4 px-2 text-medium">Yes. It's a comprehensive set of rules and
-											components built on design tokens.</p>
+				<details class="surface">
+					<summary class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+						<span class="text-[1.25rem] font-semibold text-high">4. Data Display</span>
+						<span class="material-symbols-rounded text-medium">expand_more</span>
+					</summary>
+					<div class="pt-2 pb-2">
+						<p class="text-base text-medium">Components for presenting information clearly.</p>
+						<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Accordion</p>
+								<div class="border-t border-color" id="accordion">
+									<div class="accordion-item">
+										<button class="accordion-header" aria-expanded="false">
+											<span>Is this a design system?</span>
+											<span class="material-symbols-rounded accordion-icon">expand_more</span>
+										</button>
+										<div class="accordion-content">
+											<p class="pb-4 px-2 text-medium">Yes. It's a comprehensive set of rules and components built on design tokens.</p>
+										</div>
 									</div>
-								</div>
-								<div class="accordion-item">
-									<button class="accordion-header" aria-expanded="false">
-										<span>Can it be used for any project?</span>
-										<span class="material-symbols-rounded accordion-icon">expand_more</span>
-									</button>
-									<div class="accordion-content">
-										<p class="pb-4 px-2 text-medium">Absolutely. The token-based architecture makes
-											it platform-agnostic.</p>
+									<div class="accordion-item">
+										<button class="accordion-header" aria-expanded="false">
+											<span>Can it be used for any project?</span>
+											<span class="material-symbols-rounded accordion-icon">expand_more</span>
+										</button>
+										<div class="accordion-content">
+											<p class="pb-4 px-2 text-medium">Absolutely. The token-based architecture makes it platform-agnostic.</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- Avatar -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Avatar</p>
-							<div class="avatar bg-primary text-white flex items-center justify-center font-semibold text-lg rounded-full"
-								style="width: 64px; height: 64px;">robo</div>
-						</div>
-						<!-- Table -->
-						<div>
-							<p class="text-sm font-medium text-high mb-4">Table</p>
-							<div class="overflow-x-auto">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Project</th>
-											<th>Status</th>
-											<th>Last Updated</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>robonxt/ui</td>
-											<td>Active</td>
-											<td>2 min ago</td>
-										</tr>
-										<tr>
-											<td>Parody Website</td>
-											<td>Archived</td>
-											<td>3 months ago</td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Avatar</p>
+								<div class="avatar bg-primary text-white flex items-center justify-center font-semibold text-lg rounded-full" style="width: 64px; height: 64px;">robo</div>
+							</div>
+							<div class="md:col-span-2 surface p-4">
+								<p class="text-sm font-medium text-high mb-4">Table</p>
+								<div class="overflow-x-auto">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Project</th>
+												<th>Status</th>
+												<th>Last Updated</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>robonxt/ui</td>
+												<td>Active</td>
+												<td>2 min ago</td>
+											</tr>
+											<tr>
+												<td>Parody Website</td>
+												<td>Archived</td>
+												<td>3 months ago</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</details>
 
 			</div>
 		</section>
