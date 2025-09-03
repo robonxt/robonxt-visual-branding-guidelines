@@ -38,29 +38,30 @@ The color system is designed for clarity and accessibility in both light and dar
 
 ### Primary & Accent Colors
 
-| Role      | Color Name | Hex       | Use Case                                   |
-| :-------- | :--------- | :-------- | :----------------------------------------- |
-| **Primary** | Teal       | `#14B8A6` | Main interactive elements, CTAs, active states. |
-| **Accent**  | Crimson    | `#D94452` | Secondary actions, destructive actions, errors. |
+| Role | Color Name | Hex | Use Case |
+| :--- | :--- | :--- | :--- |
+| **Primary** | Teal | `#14B8A6` | Main interactive elements, CTAs, active states. |
+| **Primary (Alt)** | Soft Green | `#6EE7B7` | Alternative primary for softer, more organic contexts. |
+| **Accent** | Bold Red | `#B91C1C` | Secondary actions, destructive actions, errors. |
 
 ### Neutrals
 
-| Name         | Hex       | Light Mode Use                 | Dark Mode Use                      |
-| :----------- | :-------- | :----------------------------- | :--------------------------------- |
-| Paper        | `#F5F7FA` | Main page background           | High-emphasis text                 |
-| Light Gray   | `#E1E5EA` | Borders, dividers              | -                                  |
-| Medium Gray  | `#8A94A6` | Medium-emphasis text           | Medium-emphasis text               |
-| Slate        | `#343F4B` | High-emphasis text             | Borders, dividers                  |
-| Onyx         | `#1F2933` | -                              | Component background (Surface/Container) |
-| Deep Onyx    | `#161F27` | -                              | Main page background               |
+| Name | Hex | Light Mode Use | Dark Mode Use |
+| :--- | :--- | :--- | :--- |
+| Paper | `#F5F7FA` | Main page background | High-emphasis text |
+| Light Gray | `#E1E5EA` | Borders, dividers | - |
+| Medium Gray | `#8A94A6` | Medium-emphasis text | Medium-emphasis text |
+| Slate | `#343F4B` | High-emphasis text | Borders, dividers |
+| Onyx | `#1F2933` | - | Component background (Surface/Container) |
+| Deep Onyx | `#161F27` | - | Main page background |
 
 ### Functional Colors
 
-| Role      | Color Name | Hex       | Use Case                               |
-| :-------- | :--------- | :-------- | :------------------------------------- |
-| **Success** | Green      | `#22C55E` | Success messages, confirmations.       |
-| **Warning** | Amber      | `#F59E0B` | Warnings, non-critical alerts.         |
-| **Error**   | Crimson    | `#D94452` | Error messages, destructive actions.   |
+| Role | Color Name | Hex | Use Case |
+| :--- | :--- | :--- | :--- |
+| **Success** | Green | `#22C55E` | Success messages, confirmations. |
+| **Warning** | Amber | `#F59E0B` | Warnings, non-critical alerts. |
+| **Error** | Bold Red | `#B91C1C` | Error messages, destructive actions. |
 
 ---
 
@@ -263,6 +264,26 @@ Modals are overlays that disable the main content to require an interaction. The
 -   **Motion:**
     -   The modal and backdrop should fade and scale in/out using `duration-slow` (500ms) for a smooth, non-jarring transition.
 
+### Dropdowns
+
+Dropdowns provide a list of actions or options in a temporary menu that appears when a user interacts with a button or trigger.
+
+-   **Structure**:
+    -   **Trigger:** A `Button` component (typically `Outline` or `Ghost`) that toggles the menu's visibility.
+    -   **Menu:** The main container that holds the list of items. Uses `color-surface`.
+    -   **Menu Item:** An interactive element within the menu, often including an icon and text.
+    -   **Divider:** A horizontal rule (`stroke-sm`) used to group related menu items.
+-   **Primitives**:
+    -   **Elevation:** `shadow-md`.
+    -   **Corner Radius:** `radius-lg` (16px) for the menu, `radius-md` (8px) for the items inside.
+    -   **Border:** `stroke-sm` (1px) around the menu.
+-   **Layout & Spacing**:
+    -   The menu should appear `space-xs` (8px) away from its trigger.
+    -   The menu itself has `space-xs` (8px) of internal padding.
+    -   Menu items have `space-xs` (8px) vertical and `space-sm` (16px) horizontal padding.
+-   **Motion**:
+    -   The menu should fade and translate into view using `duration-medium` (300ms) for a smooth appearance.
+
 ---
 
 ## 8. Theming System
@@ -273,17 +294,17 @@ While the color system defines the palette, the theming system defines its appli
 
 Components should reference these tokens, not the raw color names, to support theming.
 
-| Semantic Token         | Light Mode Value | Dark Mode Value | Use Case                                               |
-| :--------------------- | :--------------- | :-------------- | :----------------------------------------------------- |
-| `color-primary`        | `Teal`           | `Teal`          | Main interactive elements, CTAs, active states.        |
-| `color-accent`         | `Crimson`        | `Crimson`       | Destructive actions, errors.                           |
-| `color-background`     | `Paper`          | `Deep Onyx`     | The main page background.                              |
-| `color-surface`        | `Paper`          | `Onyx`          | Component backgrounds (Cards, Modals).                 |
-| `color-text-high`      | `Slate`          | `Paper`         | High-emphasis text (Headings, body).                   |
-| `color-text-medium`    | `Medium Gray`    | `Medium Gray`   | Medium-emphasis text (Labels, helper text).            |
-| `color-text-low`       | `Light Gray`     | `Slate`         | Low-emphasis text, disabled states.                    |
-| `color-border-default` | `Light Gray`     | `Slate`         | Default borders and dividers.                          |
-| `color-border-focus`   | `Teal`           | `Teal`          | Focus rings on interactive elements.                   |
-| `color-success`        | `Green`          | `Green`         | Success states and messaging.                          |
-| `color-warning`        | `Amber`          | `Amber`         | Warning states and messaging.                          |
-| `color-error`          | `Crimson`        | `Crimson`       | Error states and messaging.                            |
+| Semantic Token | Light Mode Value | Dark Mode Value | Use Case |
+| :--- | :--- | :--- | :--- |
+| `color-primary` | `Teal` | `Teal` | Main interactive elements, CTAs, active states. |
+| `color-accent` | `Bold Red` | `Bold Red` | Destructive actions, errors. |
+| `color-background` | `Paper` | `Deep Onyx` | The main page background. |
+| `color-surface` | `Paper` | `Onyx` | Component backgrounds (Cards, Modals). |
+| `color-text-high` | `Slate` | `Paper` | High-emphasis text (Headings, body). |
+| `color-text-medium` | `Medium Gray` | `Medium Gray` | Medium-emphasis text (Labels, helper text). |
+| `color-text-low` | `Light Gray` | `Slate` | Low-emphasis text, disabled states. |
+| `color-border-default` | `Light Gray` | `Slate` | Default borders and dividers. |
+| `color-border-focus` | `Teal` | `Teal` | Focus rings on interactive elements. |
+| `color-success` | `Green` | `Green` | Success states and messaging. |
+| `color-warning` | `Amber` | `Amber` | Warning states and messaging. |
+| `color-error` | `Bold Red` | `Bold Red` | Error states and messaging. |
