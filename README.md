@@ -3,7 +3,6 @@
 This document outlines the complete brand identity and design system for "robonxt". It provides a set of rules and guidelines to ensure consistency, professionalism, and a unique brand personality across all projects and platforms.
 
 
-
 # Table of Contents
 
 - [1. The Core Philosophy: The Pragmatic Professional](#1-the-core-philosophy-the-pragmatic-professional)
@@ -11,9 +10,6 @@ This document outlines the complete brand identity and design system for "robonx
 - [3. Typography System](#3-typography-system)
 - [4. Layout & Spacing](#4-layout--spacing)
 - [5. Component Design](#5-component-design)
-- [6. Voice & Tone](#6-voice--tone)
-
-
 
 
 ## 1. The Core Philosophy: The Pragmatic Professional
@@ -24,6 +20,14 @@ This persona is a confident, expert guide that is so good at its job that it can
 
 -   **Personality:** Semi-minimalist, parts professional and parts playful.
 -   **Golden Rule:** **Clarity first, always.** Personality and humor must never sacrifice the user's ability to understand.
+
+### Voice & Tone
+
+The brand's voice is the direct expression of its persona.
+
+-   **Default Tone (95% of content):** Casual, clear, concise, and helpful. Uses simple language and contractions. The goal is to be an approachable expert.
+-   **The Clever Aside (5% of content):** In low-stakes moments (success messages, empty states), the brand can use witty, context-aware humor (puns, dad jokes).
+-   **The Golden Rule for Voice:** Never use a joke if it gets in the way of clarity. For critical information like error messages, the tone is **100% professional and direct.**
 
 ---
 
@@ -144,14 +148,3 @@ The tangible, interactive elements of the brand.
     -   `150ms`: For quick feedback (hover effects).
     -   `300ms`: **Default.** For state changes (toggle switches).
     -   `500ms`: For large transitions (modals appearing).
-
----
-
-## 6. Voice & Tone
-
-The brand's personality in written communication.
-
--   **Persona:** **The Pragmatic Professional**
--   **Default Tone (95% of content):** Casual, clear, concise, and helpful. Uses simple language and contractions. The goal is to be an approachable expert.
--   **The Clever Aside (5% of content):** In low-stakes moments (success messages, empty states), the brand can use witty, context-aware humor (puns, dad jokes).
--   **The Golden Rule:** Never use a joke if it gets in the way of clarity. For critical information like error messages, the tone is **100% professional and direct.**
