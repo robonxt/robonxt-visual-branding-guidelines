@@ -1,1305 +1,1161 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en" data-theme="light">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>robonxt - Brand Identity System</title>
-	<script src="https://cdn.tailwindcss.com"></script>
+	<title>robonxt | Professional Design System Showcase</title>
+
+	<!-- 1. FONT & ICONS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-	<link
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-		rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 	<style>
-		/* Define custom CSS variables for our color palette. This makes theme switching easy! */
+		/*-------------------------------------------*/
+		/* 0. ROOT & THEME DEFINITIONS               */
+		/*-------------------------------------------*/
 		:root {
-			--font-sans: 'Inter', sans-serif;
+			/* FONT FAMILY */
+			--font-family: 'Inter', sans-serif;
 
-			/* Light Theme Colors (Default) */
-			--color-primary: #14B8A6;
-			/* Teal */
-			--color-secondary: #D94452;
-			/* Crimson */
-			--color-background: #F5F7FA;
-			/* Paper */
-			--color-surface: #FFFFFF;
-			/* White */
-			--color-text-high: #343F4B;
-			/* Slate */
-			--color-text-medium: #8A94A6;
-			/* Medium Gray */
-			--color-text-on-primary: #FFFFFF;
-			/* White */
-			--color-border: #E1E5EA;
-			/* Light Gray */
+			/* TYPOGRAPHY SCALE */
+			--font-jumbo: 900 10rem/1.3 var(--font-family);
+			--font-display-xl: 700 6rem/1.3 var(--font-family);
+			--font-h1: 700 2.25rem/1.3 var(--font-family);
+			--font-h2: 600 1.5rem/1.3 var(--font-family);
+			--font-h3: 600 1.25rem/1.3 var(--font-family);
+			--font-body-lead: 400 1.125rem/1.6 var(--font-family);
+			--font-body-base: 400 1rem/1.6 var(--font-family);
+			--font-label: 500 0.875rem/1.6 var(--font-family);
+			--font-caption: 400 0.875rem/1.6 var(--font-family);
+			--font-micro: 400 0.75rem/1.6 var(--font-family);
+			--font-fine-print: 400 0.625rem/1.6 var(--font-family);
+			--heading-letter-spacing: -1%;
 
-			--color-success: #22C55E;
-			--color-warning: #F59E0B;
-			--color-error: #D94452;
-			/* Using Crimson for error */
+			/* SPACING (8-Point Grid) */
+			--space-xs: 8px;
+			--space-sm: 16px;
+			--space-md: 24px;
+			--space-lg: 32px;
+			--space-xl: 48px;
+			--space-2xl: 64px;
 
-			/* Alert background colors with transparency */
-			--color-success-bg: rgba(34, 197, 94, 0.1);
-			--color-warning-bg: rgba(245, 158, 11, 0.1);
-			--color-error-bg: rgba(217, 68, 82, 0.1);
-
-			/* Radius Tokens */
+			/* CORE PRIMITIVES */
 			--radius-sm: 4px;
 			--radius-md: 8px;
 			--radius-lg: 16px;
 			--radius-full: 9999px;
+			--stroke-sm: 1px;
+			--stroke-md: 2px;
+			--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+			--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-			/* Motion Tokens */
+			/* MOTION SYSTEM */
 			--duration-quick: 150ms;
 			--duration-medium: 300ms;
-			--ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+			--duration-slow: 500ms;
+			--easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+			/* RAW COLORS */
+			--teal: #14B8A6;
+			--crimson: #D94452;
+			--green: #22C55E;
+			--amber: #F59E0B;
+			--paper: #F5F7FA;
+			--white: #FFFFFF;
+			--light-gray: #E1E5EA;
+			--medium-gray: #8A94A6;
+			--slate: #343F4B;
+			--onyx: #1F2933;
+			--deep-onyx: #161F27;
 		}
 
-		/* Dark Theme Colors */
-		.dark {
-			--color-background: #161F27;
-			/* Deep Onyx */
-			--color-surface: #1F2933;
-			/* Onyx */
-			--color-text-high: #F5F7FA;
-			/* Paper */
-			--color-text-medium: #8A94A6;
-			/* Medium Gray */
-			--color-border: #343F4B;
-			/* Slate */
+		[data-theme="light"] {
+			--color-primary: var(--teal);
+			--color-accent: var(--crimson);
+			--color-background: var(--paper);
+			--color-surface: var(--white);
+			--color-text-high: var(--slate);
+			--color-text-medium: var(--medium-gray);
+			--color-text-low: var(--light-gray);
+			--color-border-default: var(--light-gray);
+			--color-border-focus: var(--teal);
+			--color-success: var(--green);
+			--color-warning: var(--amber);
+			--color-error: var(--crimson);
+		}
 
-			/* Alert background colors with transparency for dark mode */
-			--color-success-bg: rgba(34, 197, 94, 0.15);
-			--color-warning-bg: rgba(245, 158, 11, 0.15);
-			--color-error-bg: rgba(217, 68, 82, 0.15);
+		[data-theme="dark"] {
+			--color-primary: var(--teal);
+			--color-accent: var(--crimson);
+			--color-background: var(--deep-onyx);
+			--color-surface: var(--onyx);
+			--color-text-high: var(--paper);
+			--color-text-medium: var(--medium-gray);
+			--color-text-low: var(--slate);
+			--color-border-default: var(--slate);
+			--color-border-focus: var(--teal);
+			--color-success: var(--green);
+			--color-warning: var(--amber);
+			--color-error: var(--crimson);
+		}
+
+		/*-------------------------------------------*/
+		/* 1. GLOBAL STYLES & RESETS                 */
+		/*-------------------------------------------*/
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: var(--color-background);
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: var(--color-border-default);
+			border-radius: var(--radius-full);
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: var(--color-text-medium);
+		}
+
+		body {
+			margin: 0;
+			background-color: var(--color-background);
+			color: var(--color-text-high);
+			font: var(--font-body-base);
+			transition: background-color var(--duration-medium), color var(--duration-medium);
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin: 0;
+			letter-spacing: var(--heading-letter-spacing);
+		}
+
+		h1 {
+			font: var(--font-h1);
+		}
+
+		h2 {
+			font: var(--font-h2);
+		}
+
+		h3 {
+			font: var(--font-h3);
+		}
+
+		p {
+			margin-block-start: 0;
 		}
 
 		.material-symbols-rounded {
 			font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+			font-size: 24px;
+			vertical-align: middle;
 		}
 
-		/* Apply the variables using Tailwind's arbitrary value support */
-		body {
-			font-family: var(--font-sans);
+		/*-------------------------------------------*/
+		/* 2. LAYOUT & PAGE STRUCTURE                */
+		/*-------------------------------------------*/
+		.container {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 var(--space-lg);
+		}
+
+		.page-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: var(--space-sm) 0;
+			border-bottom: var(--stroke-sm) solid var(--color-border-default);
+			position: sticky;
+			top: 0;
 			background-color: var(--color-background);
-			color: var(--color-text-medium);
-			transition: background-color 0.3s ease, color 0.3s ease;
+			z-index: 10;
+			transition: background-color var(--duration-medium);
 		}
 
-		/* Helper classes to apply our theme colors */
-		.bg-primary {
+		.brand-logo {
+			font: var(--font-h2);
+			color: var(--color-primary);
+			display: flex;
+			align-items: center;
+			gap: var(--space-xs);
+		}
+
+		.hero {
+			text-align: center;
+			padding: var(--space-2xl) 0;
+		}
+
+		.hero h1 {
+			font: var(--font-display-xl);
+			letter-spacing: -2px;
+		}
+
+		.hero p {
+			font: var(--font-body-lead);
+			color: var(--color-text-medium);
+			max-width: 600px;
+			margin: var(--space-md) auto 0;
+		}
+
+		.ds-section {
+			padding-top: var(--space-xl);
+			margin-top: var(--space-xl);
+			border-top: var(--stroke-sm) solid var(--color-border-default);
+		}
+
+		.ds-grid {
+			display: grid;
+			gap: var(--space-lg);
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			margin-top: var(--space-lg);
+		}
+
+		.component-showcase-grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: var(--space-lg);
+		}
+
+		@media (min-width: 1024px) {
+			.component-showcase-grid {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		.ds-surface {
+			background-color: var(--color-surface);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-lg);
+			padding: var(--space-md);
+			transition: background-color var(--duration-medium), border-color var(--duration-medium);
+			height: 100%;
+		}
+
+		.ds-surface h3 {
+			margin-bottom: var(--space-md);
+		}
+
+		.ds-interactive-card {
+			cursor: pointer;
+			box-shadow: var(--shadow-md);
+			transition: transform var(--duration-quick) var(--easing), box-shadow var(--duration-quick) var(--easing);
+		}
+
+		.ds-interactive-card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.page-footer {
+			text-align: center;
+			padding: var(--space-lg);
+			margin-top: var(--space-2xl);
+			border-top: var(--stroke-sm) solid var(--color-border-default);
+			font: var(--font-caption);
+			color: var(--color-text-medium);
+		}
+
+		/*-------------------------------------------*/
+		/* 3. COMPONENT IMPLEMENTATIONS              */
+		/*-------------------------------------------*/
+
+		/* THEME SWITCH */
+		.theme-switch-wrapper {
+			display: flex;
+			align-items: center;
+			gap: var(--space-xs);
+		}
+
+		.theme-switch {
+			position: relative;
+			display: inline-block;
+			width: 44px;
+			height: 24px;
+		}
+
+		.theme-switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.theme-slider {
+			position: absolute;
+			cursor: pointer;
+			inset: 0;
+			background-color: var(--color-border-default);
+			border-radius: var(--radius-full);
+			transition: var(--duration-quick) var(--easing);
+		}
+
+		.theme-slider:before {
+			position: absolute;
+			content: "";
+			height: 18px;
+			width: 18px;
+			left: 3px;
+			bottom: 3px;
+			background-color: var(--white);
+			border-radius: 50%;
+			transition: var(--duration-quick) var(--easing);
+		}
+
+		input:checked+.theme-slider {
 			background-color: var(--color-primary);
 		}
 
-		.bg-secondary {
-			background-color: var(--color-secondary);
+		input:checked+.theme-slider:before {
+			transform: translateX(20px);
 		}
 
-		.bg-background {
-			background-color: var(--color-background);
+		.theme-switch-wrapper .material-symbols-rounded {
+			color: var(--color-text-medium);
+			transition: color var(--duration-quick);
 		}
 
-		.bg-surface {
+		[data-theme="light"] .theme-switch-wrapper .icon-light {
+			color: var(--color-primary);
+		}
+
+		[data-theme="dark"] .theme-switch-wrapper .icon-dark {
+			color: var(--color-primary);
+		}
+
+		/* COLOR SWATCHES */
+		.color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+			gap: var(--space-sm);
+		}
+
+		.color-swatch {
+			border-radius: var(--radius-md);
+			padding: var(--space-sm);
+			border: var(--stroke-sm) solid var(--color-border-default);
 			background-color: var(--color-surface);
 		}
 
-		.text-high {
-			color: var(--color-text-high);
+		.color-swatch .swatch-color {
+			height: 80px;
+			width: 100%;
+			border-radius: var(--radius-sm);
+			border: var(--stroke-sm) solid var(--color-border-default);
 		}
 
-		.text-medium {
+		.color-swatch .swatch-name {
+			font: var(--font-label);
+			margin-top: var(--space-xs);
+		}
+
+		.color-swatch .swatch-hex {
+			font: var(--font-micro);
 			color: var(--color-text-medium);
 		}
 
-		.text-on-primary {
-			color: var(--color-text-on-primary);
+		/* TYPOGRAPHY SHOWCASE */
+		.type-showcase {
+			border-bottom: var(--stroke-sm) solid var(--color-border-default);
+			padding-bottom: var(--space-sm);
+			margin-bottom: var(--space-sm);
 		}
 
-		.border-color {
-			border-color: var(--color-border);
+		.type-showcase:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+			margin-bottom: 0;
 		}
 
-		/* Component specific styles */
-		.card {
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+		.type-showcase .role {
+			font: var(--font-label);
+			color: var(--color-text-medium);
 		}
 
+		.type-showcase .text-jumbo {
+			font: var(--font-jumbo);
+		}
+
+		.type-showcase .text-display-xl {
+			font: var(--font-display-xl);
+		}
+
+		.type-showcase .text-h1 {
+			font: var(--font-h1);
+			letter-spacing: var(--heading-letter-spacing);
+		}
+
+		.type-showcase .text-h2 {
+			font: var(--font-h2);
+			letter-spacing: var(--heading-letter-spacing);
+		}
+
+		.type-showcase .text-h3 {
+			font: var(--font-h3);
+			letter-spacing: var(--heading-letter-spacing);
+		}
+
+		.type-showcase .text-body-lead {
+			font: var(--font-body-lead);
+		}
+
+		.type-showcase .text-body-base {
+			font: var(--font-body-base);
+		}
+
+		.type-showcase .text-label {
+			font: var(--font-label);
+		}
+
+		.type-showcase .text-caption {
+			font: var(--font-caption);
+		}
+
+		.type-showcase .text-micro {
+			font: var(--font-micro);
+		}
+
+		.type-showcase .text-fine-print {
+			font: var(--font-fine-print);
+		}
+
+		/* BUTTONS */
 		.btn {
-			transition: all var(--duration-quick) var(--ease-standard);
+			display: inline-flex;
+			align-items: center;
+			gap: var(--space-xs);
+			font: var(--font-label);
+			padding: var(--space-xs) var(--space-sm);
+			border-radius: var(--radius-md);
+			border: var(--stroke-sm) solid transparent;
+			cursor: pointer;
+			text-decoration: none;
+			transition: all var(--duration-quick) var(--easing);
+		}
+
+		.btn:focus-visible {
+			outline: var(--stroke-md) solid var(--color-border-focus);
+			outline-offset: 2px;
+		}
+
+		.btn:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
 		}
 
 		.btn-primary {
 			background-color: var(--color-primary);
-			color: var(--color-text-on-primary);
+			color: var(--white);
 		}
 
-		.btn-primary:hover {
-			filter: brightness(110%);
+		.btn-primary:hover:not(:disabled) {
+			background-color: #0F766E;
 		}
 
 		.btn-secondary {
-			background-color: var(--color-secondary);
-			color: var(--color-text-on-primary);
+			background-color: var(--color-accent);
+			color: var(--white);
 		}
 
-		.btn-secondary:hover {
-			filter: brightness(110%);
+		.btn-secondary:hover:not(:disabled) {
+			background-color: #B91C1C;
 		}
 
 		.btn-outline {
 			background-color: transparent;
+			border-color: var(--color-border-default);
 			color: var(--color-text-high);
-			border: 1px solid var(--color-border);
 		}
 
-		.btn-outline:hover {
-			background-color: var(--color-border);
-		}
-
-		/* Theme Switcher Toggle */
-		#theme-toggle-container {
-			position: relative;
-			width: 56px;
-			height: 28px;
-		}
-
-		#theme-toggle-checkbox {
-			opacity: 0;
-			width: 0;
-			height: 0;
-		}
-
-		#theme-toggle-label {
-			position: absolute;
-			cursor: pointer;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
+		.btn-outline:hover:not(:disabled) {
 			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			border-radius: 9999px;
-			transition: background-color 0.3s;
+			border-color: var(--color-text-medium);
 		}
 
-		#theme-toggle-label:before {
-			position: absolute;
-			content: "";
-			height: 20px;
-			width: 20px;
-			left: 3px;
-			bottom: 3px;
-			background-color: var(--color-primary);
-			border-radius: 50%;
-			transition: transform 0.3s;
-		}
-
-		#theme-toggle-checkbox:checked+#theme-toggle-label:before {
-			transform: translateX(28px);
-		}
-
-		/* Updated Button Styles */
-		.btn {
-			border-radius: var(--radius-md);
-			transition: all var(--duration-quick) var(--ease-standard);
-			outline: none;
-			/* We will handle focus with a visible ring */
-		}
-
-		.btn:focus-visible {
-			/* Accessibility focus ring */
-			box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
-		}
-
-		/* Form Input Styles */
-		.form-input {
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			border-radius: var(--radius-md);
-			padding: 8px 16px;
+		.btn-ghost {
+			background-color: transparent;
 			color: var(--color-text-high);
-			transition: all var(--duration-quick) var(--ease-standard);
+		}
+
+		.btn-ghost:hover:not(:disabled) {
+			background-color: var(--color-surface);
+		}
+
+		/* ALERTS */
+		.alert {
+			display: flex;
+			align-items: flex-start;
+			gap: var(--space-sm);
+			padding: var(--space-sm);
+			border-radius: var(--radius-md);
+			border: var(--stroke-sm) solid;
+		}
+
+		.alert-content {
+			flex: 1;
+		}
+
+		.alert-title {
+			font: var(--font-label);
+			margin-bottom: 4px;
+		}
+
+		.alert-description {
+			font: var(--font-caption);
+			color: var(--color-text-medium);
+			margin: 0;
+		}
+
+		.alert-success {
+			background-color: #ECFDF5;
+			border-color: #A7F3D0;
+			color: #065F46;
+		}
+
+		.alert-warning {
+			background-color: #FFFBEB;
+			border-color: #FDE68A;
+			color: #B45309;
+		}
+
+		.alert-error {
+			background-color: #FEF2F2;
+			border-color: #FECACA;
+			color: #B91C1C;
+		}
+
+		[data-theme="dark"] .alert-success {
+			background-color: #064E3B;
+			border-color: #34D399;
+			color: #D1FAE5;
+		}
+
+		[data-theme="dark"] .alert-warning {
+			background-color: #78350F;
+			border-color: #FBBF24;
+			color: #FEF3C7;
+		}
+
+		[data-theme="dark"] .alert-error {
+			background-color: #991B1B;
+			border-color: #F87171;
+			color: #FEE2E2;
+		}
+
+		/* INPUT FIELD */
+		.input-group {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-xs);
+		}
+
+		.input-group label {
+			font: var(--font-label);
+			color: var(--color-text-high);
+		}
+
+		.input-field {
+			font: var(--font-body-base);
+			padding: var(--space-xs) var(--space-sm);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-md);
+			background: var(--color-surface);
+			color: var(--color-text-high);
+			transition: border-color var(--duration-quick) var(--easing);
+		}
+
+		.input-field:hover {
+			border-color: var(--color-text-medium);
+		}
+
+		.input-field:focus-visible {
 			outline: none;
+			border-width: var(--stroke-md);
+			border-color: var(--color-border-focus);
 		}
 
-		.form-input:focus-visible {
-			border-color: var(--color-primary);
-			box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
+		.input-group.error .input-field,
+		.input-group.error .input-field:focus-visible {
+			border-color: var(--color-error);
 		}
 
-		.form-input:disabled {
-			background-color: var(--color-border);
+		.input-group.error label,
+		.input-group.error .helper-text {
+			color: var(--color-error);
+		}
+
+		.input-field:disabled {
+			background: var(--color-text-low);
 			cursor: not-allowed;
 			opacity: 0.7;
 		}
 
-		/* Toggle Switch Styles */
-		.toggle-switch {
-			position: relative;
-			display: inline-block;
-			width: 48px;
-			/* Multiple of 8 */
-			height: 24px;
-		}
-
-		.toggle-switch input {
-			opacity: 0;
-			width: 0;
-			height: 0;
-		}
-
-		.toggle-slider {
-			position: absolute;
-			cursor: pointer;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-color: var(--color-border);
-			border-radius: var(--radius-full);
-			transition: all var(--duration-medium) var(--ease-standard);
-		}
-
-		.toggle-slider:before {
-			position: absolute;
-			content: "";
-			height: 16px;
-			width: 16px;
-			left: 4px;
-			bottom: 4px;
-			background-color: white;
-			border-radius: var(--radius-full);
-			transition: all var(--duration-medium) var(--ease-standard);
-		}
-
-		input:checked+.toggle-slider {
-			background-color: var(--color-primary);
-		}
-
-		input:checked+.toggle-slider:before {
-			transform: translateX(24px);
-		}
-
-		/* Tab Styles */
-		.tabs-container {
-			display: flex;
-			gap: 8px;
-			/* space-xs */
-			border-bottom: 1px solid var(--color-border);
-			padding: 0 8px;
-			/* space-xs */
-		}
-
-		.tab {
-			padding: 8px 16px;
-			/* space-xs, space-sm */
-			border: none;
-			background: none;
+		.helper-text {
+			font: var(--font-caption);
 			color: var(--color-text-medium);
-			cursor: pointer;
-			font-size: 0.875rem;
-			font-weight: 500;
-			border-radius: var(--radius-md) var(--radius-md) 0 0;
-			transition: all var(--duration-quick) var(--ease-standard);
 		}
 
-		.tab:hover {
-			color: var(--color-text-high);
-		}
-
-		.tab.active {
-			color: var(--color-text-on-primary);
-			background-color: var(--color-primary);
-		}
-
-		/* Interactive Card Style */
-		.interactive-card {
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			border-radius: var(--radius-lg);
-			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-			transition: all var(--duration-medium) var(--ease-standard);
-			overflow: hidden;
-			/* To contain the top border */
-			position: relative;
-			cursor: pointer;
-			/* Add a pointer to signal interactivity */
-		}
-
-		.interactive-card:hover {
-			/* The 'lift' effect */
-			transform: translateY(-4px);
-			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-		}
-
-		.surface {
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			border-radius: var(--radius-lg);
-			padding: 24px;
-			/* space-md */
-		}
-
-		/* Checkbox & Radio Styles */
-		.form-checkbox,
-		.form-radio {
-			appearance: none;
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			width: 16px;
-			height: 16px;
-			transition: all var(--duration-quick) var(--ease-standard);
-			cursor: pointer;
-			flex-shrink: 0;
-			/* Prevent shrinking in flex layouts */
-		}
-
-		.form-checkbox:checked,
-		.form-radio:checked {
-			background-color: var(--color-primary);
-			border-color: var(--color-primary);
-		}
-
-		.form-checkbox {
-			border-radius: var(--radius-sm);
-		}
-
-		.form-checkbox:checked {
-			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-			background-size: 100% 100%;
-		}
-
-		.form-radio {
-			border-radius: var(--radius-full);
-		}
-
-		.form-radio:checked {
-			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
-			background-size: 100% 100%;
-		}
-
-		/* Select/Dropdown Styles */
-		.form-select {
-			appearance: none;
-			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238A94A6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-			background-position: right 0.75rem center;
-			background-repeat: no-repeat;
-			background-size: 1.5em 1.5em;
-			padding-right: 40px;
-			/* space-lg + space-xs */
-		}
-
-		/* Slider Styles */
-		.form-slider {
-			appearance: none;
-			width: 100%;
-			height: 8px;
-			background: var(--color-border);
-			border-radius: var(--radius-full);
-			outline: none;
-			transition: opacity .2s;
-		}
-
-		.form-slider::-webkit-slider-thumb {
-			appearance: none;
-			width: 24px;
-			height: 24px;
-			background: var(--color-primary);
-			border-radius: var(--radius-full);
-			cursor: pointer;
-			border: 4px solid var(--color-surface);
-			box-shadow: 0 0 0 1px var(--color-border);
-		}
-
-		.form-slider::-moz-range-thumb {
-			width: 24px;
-			height: 24px;
-			background: var(--color-primary);
-			border-radius: var(--radius-full);
-			cursor: pointer;
-			border: 4px solid var(--color-surface);
-			box-shadow: 0 0 0 1px var(--color-border);
-		}
-
-		/* Navigation: Breadcrumbs */
-		.breadcrumbs {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			/* space-xs */
-		}
-
-		.breadcrumbs-link {
-			color: var(--color-text-medium);
-			font-size: 0.875rem;
-			font-weight: 500;
-		}
-
-		.breadcrumbs-link:hover {
-			color: var(--color-primary);
-		}
-
-		.breadcrumbs-separator {
-			color: var(--color-border);
-		}
-
-		/* Navigation: Pagination */
-		.pagination {
-			display: flex;
-			gap: 8px;
-			/* Corrected to be a multiple of 8 */
-		}
-
-		.pagination-item {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 40px;
-			height: 40px;
-			border: 1px solid var(--color-border);
-			border-radius: var(--radius-md);
-			font-size: 0.875rem;
-			font-weight: 500;
-			color: var(--color-text-high);
-			cursor: pointer;
-			transition: all var(--duration-quick) var(--ease-standard);
-		}
-
-		.pagination-item:hover {
-			border-color: var(--color-primary);
-		}
-
-		.pagination-item.active {
-			background-color: var(--color-primary);
-			border-color: var(--color-primary);
-			color: var(--color-text-on-primary);
-		}
-
-		/* Feedback: Modal */
-		.modal-overlay {
+		/* MODAL */
+		.modal-backdrop {
 			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
+			inset: 0;
 			background-color: rgba(0, 0, 0, 0.5);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			opacity: 0;
 			visibility: hidden;
-			transition: all var(--duration-medium) var(--ease-standard);
-			z-index: 50;
+			transition: opacity var(--duration-slow) var(--easing), visibility var(--duration-slow) var(--easing);
+			z-index: 100;
 		}
 
-		.modal-overlay.visible {
+		.modal-backdrop.is-visible {
 			opacity: 1;
 			visibility: visible;
 		}
 
-		.modal-content {
+		.modal-surface {
 			background-color: var(--color-surface);
 			border-radius: var(--radius-lg);
-			padding: 24px;
-			/* space-md */
+			box-shadow: var(--shadow-lg);
 			width: 90%;
 			max-width: 500px;
 			transform: scale(0.95);
-			transition: all var(--duration-medium) var(--ease-standard);
+			transition: transform var(--duration-slow) var(--easing);
 		}
 
-		.modal-overlay.visible .modal-content {
+		.modal-backdrop.is-visible .modal-surface {
 			transform: scale(1);
 		}
 
-		/* Feedback: Toast */
-		.toast {
-			position: fixed;
-			bottom: 24px;
-			/* space-md */
-			right: 24px;
-			/* space-md */
-			background-color: var(--color-surface);
-			border: 1px solid var(--color-border);
-			border-radius: var(--radius-md);
-			padding: 16px;
-			/* space-sm */
-			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-			display: flex;
-			align-items: center;
-			gap: 16px;
-			/* space-sm */
-			transform: translateY(24px);
-			opacity: 0;
-			visibility: hidden;
-			transition: all var(--duration-medium) var(--ease-standard);
-			z-index: 50;
-		}
-
-		.toast.visible {
-			transform: translateY(0);
-			opacity: 1;
-			visibility: visible;
-		}
-
-		/* Data Display: Accordion */
-		.accordion-item {
-			border-bottom: 1px solid var(--color-border);
-		}
-
-		.accordion-item:last-child {
-			border-bottom: none;
-		}
-
-		.accordion-header {
-			width: 100%;
+		.modal-header {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 16px 8px;
-			/* space-sm, space-xs */
-			cursor: pointer;
-			font-weight: 500;
-			color: var(--color-text-high);
+			padding: var(--space-md);
+			border-bottom: var(--stroke-sm) solid var(--color-border-default);
 		}
 
-		.accordion-icon {
-			transition: transform var(--duration-medium) var(--ease-standard);
+		.modal-body {
+			padding: var(--space-md);
 		}
 
-		.accordion-header[aria-expanded="true"] .accordion-icon {
-			transform: rotate(180deg);
+		.modal-footer {
+			display: flex;
+			justify-content: flex-end;
+			gap: var(--space-sm);
+			padding: var(--space-md);
+			background-color: var(--color-background);
+			border-bottom-left-radius: var(--radius-lg);
+			border-bottom-right-radius: var(--radius-lg);
 		}
 
-		.accordion-content {
-			max-height: 0;
-			overflow: hidden;
-			transition: max-height var(--duration-medium) var(--ease-standard), padding var(--duration-medium) var(--ease-standard);
-		}
-
-		.accordion-content-inner {
-			padding: 8px 8px 16px;
-			/* space-xs, space-xs, space-sm */
-		}
-
-		/* Data Display: Avatar */
+		/* AVATARS */
 		.avatar {
-			display: inline-flex;
-			/* Use flex for centering */
-			align-items: center;
-			justify-content: center;
+			display: inline-block;
 			border-radius: var(--radius-full);
+			background-color: var(--color-primary);
+			color: var(--white);
+			text-align: center;
+			font-weight: 500;
 			object-fit: cover;
-			border: 2px solid var(--color-surface);
-			box-shadow: 0 0 0 1px var(--color-border);
 		}
 
-		/* Data Display: Table */
-		.table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		.table th,
-		.table td {
-			text-align: left;
-			padding: 16px;
-			/* Corrected to be a multiple of 8 */
-			border-bottom: 1px solid var(--color-border);
-		}
-
-		.table th {
-			font-size: 0.75rem;
-			/* 12px */
-			font-weight: 600;
-			color: var(--color-text-medium);
-			text-transform: uppercase;
-		}
-
-		.table td {
+		.avatar-sm {
+			width: 32px;
+			height: 32px;
+			line-height: 32px;
 			font-size: 0.875rem;
-			/* 14px */
+		}
+
+		.avatar-md {
+			width: 48px;
+			height: 48px;
+			line-height: 48px;
+			font-size: 1.25rem;
+		}
+
+		.avatar-lg {
+			width: 64px;
+			height: 64px;
+			line-height: 64px;
+			font-size: 1.75rem;
+		}
+
+		/* TABS */
+		.tabs-list {
+			display: flex;
+			border-bottom: var(--stroke-sm) solid var(--color-border-default);
+		}
+
+		.tab-trigger {
+			font: var(--font-label);
+			padding: var(--space-xs) var(--space-sm);
+			border: none;
+			background: none;
+			cursor: pointer;
+			color: var(--color-text-medium);
+			position: relative;
+		}
+
+		.tab-trigger::after {
+			content: '';
+			position: absolute;
+			bottom: -1px;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: var(--color-primary);
+			transform: scaleX(0);
+			transition: transform var(--duration-medium) var(--easing);
+		}
+
+		.tab-trigger.active {
+			color: var(--color-primary);
+		}
+
+		.tab-trigger.active::after {
+			transform: scaleX(1);
+		}
+
+		.tab-content {
+			padding-top: var(--space-md);
+		}
+
+		.tab-pane {
+			display: none;
+		}
+
+		.tab-pane.active {
+			display: block;
+		}
+
+		/* DROPDOWN */
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-menu {
+			position: absolute;
+			top: calc(100% + var(--space-xs));
+			right: 0;
+			background-color: var(--color-surface);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-lg);
+			box-shadow: var(--shadow-md);
+			padding: var(--space-xs);
+			min-width: 200px;
+			z-index: 50;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: opacity var(--duration-medium) var(--easing), transform var(--duration-medium) var(--easing);
+		}
+
+		.dropdown-menu.is-visible {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		.dropdown-item {
+			display: flex;
+			align-items: center;
+			gap: var(--space-sm);
+			width: 100%;
+			padding: var(--space-xs) var(--space-sm);
+			border: none;
+			background: none;
+			text-align: left;
+			font: var(--font-label);
 			color: var(--color-text-high);
+			border-radius: var(--radius-md);
+			cursor: pointer;
+		}
+
+		.dropdown-item:hover {
+			background-color: var(--color-background);
+		}
+
+		.dropdown-item .material-symbols-rounded {
+			font-size: 20px;
+			color: var(--color-text-medium);
+		}
+
+		.dropdown-divider {
+			height: 1px;
+			background-color: var(--color-border-default);
+			margin: var(--space-xs) 0;
+		}
+
+		/* PROGRESS INDICATOR */
+		.progress-bar {
+			width: 100%;
+			height: 8px;
+			background-color: var(--color-border-default);
+			border-radius: var(--radius-full);
+			overflow: hidden;
+		}
+
+		.progress-indicator {
+			height: 100%;
+			width: 66%;
+			background-color: var(--color-primary);
+			border-radius: var(--radius-full);
 		}
 	</style>
 </head>
 
-<body class="bg-background min-h-screen antialiased">
+<body>
 
-	<!-- Header -->
-	<header class="border-b border-color py-6 px-8">
-		<div class="max-w-7xl mx-auto flex justify-between items-center">
-			<div>
-				<h1 class="text-[2.25rem] font-bold text-high leading-tight">robonxt</h1>
-				<p class="text-base text-medium mt-1">A Visual Identity & Color System Guide</p>
-			</div>
-			<div class="flex items-center space-x-4">
-				<span class="text-sm font-medium text-medium">Dark Mode</span>
-				<div id="theme-toggle-container">
-					<input type="checkbox" id="theme-toggle-checkbox">
-					<label for="theme-toggle-checkbox" id="theme-toggle-label"></label>
-				</div>
-			</div>
+	<header class="page-header container">
+		<div class="brand-logo">
+			<span class="material-symbols-rounded" style="font-size: 2.25rem;">robot_2</span>
+			robonxt
+		</div>
+		<div class="theme-switch-wrapper">
+			<span class="material-symbols-rounded icon-light">light_mode</span>
+			<label class="theme-switch">
+				<input type="checkbox" id="theme-checkbox">
+				<span class="theme-slider"></span>
+			</label>
+			<span class="material-symbols-rounded icon-dark">dark_mode</span>
 		</div>
 	</header>
 
-	<main class="max-w-7xl mx-auto py-12 px-8">
+	<main class="container">
+		<section class="hero">
+			<h1>The Pragmatic Professional</h1>
+			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This page is built
+				entirely from the defined tokens and components, demonstrating a system that is clear, efficient, and a
+				little clever.</p>
+		</section>
 
-		<!-- Section: Core Palette -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Core Palette</h2>
-			<p class="text-base mt-2 text-medium">The foundational colors for the robonxt brand, designed for clarity,
-				accessibility, and personality.</p>
-			<div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-				<div class="text-center">
-					<div class="w-full h-32 rounded-lg bg-primary shadow-md"></div>
-					<h3 class="mt-3 text-[1.25rem] font-semibold text-high">Primary</h3>
-					<p class="text-sm text-medium">Teal / #14B8A6</p>
+		<section class="ds-section">
+			<h2>Color System</h2>
+			<p>The semantic color palette. These tokens adapt to light and dark modes, ensuring accessibility and brand
+				consistency. Click the theme switch in the header to see them change.</p>
+			<div class="color-grid" style="margin-top: var(--space-lg);">
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--teal);"></div>
+					<div class="swatch-name">Teal (Primary)</div>
+					<div class="swatch-hex">#14B8A6</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-32 rounded-lg bg-secondary shadow-md"></div>
-					<h3 class="mt-3 text-[1.25rem] font-semibold text-high">Secondary</h3>
-					<p class="text-sm text-medium">Crimson / #D94452</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--crimson);"></div>
+					<div class="swatch-name">Crimson (Accent)</div>
+					<div class="swatch-hex">#D94452</div>
 				</div>
-			</div>
-			<h3 class="mt-10 text-[1.25rem] font-semibold text-high">Neutrals</h3>
-			<div class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow"
-						style="background-color: #F5F7FA; border: 1px solid #E1E5EA;"></div>
-					<p class="mt-2 text-sm font-medium text-high">Paper</p>
-					<p class="text-xs text-medium">#F5F7FA</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--green);"></div>
+					<div class="swatch-name">Green (Success)</div>
+					<div class="swatch-hex">#22C55E</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow" style="background-color: #E1E5EA;"></div>
-					<p class="mt-2 text-sm font-medium text-high">Light Gray</p>
-					<p class="text-xs text-medium">#E1E5EA</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--amber);"></div>
+					<div class="swatch-name">Amber (Warning)</div>
+					<div class="swatch-hex">#F59E0B</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow" style="background-color: #8A94A6;"></div>
-					<p class="mt-2 text-sm font-medium text-high">Medium Gray</p>
-					<p class="text-xs text-medium">#8A94A6</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--color-background);"></div>
+					<div class="swatch-name">Page Background</div>
+					<div class="swatch-hex">var(--color-background)</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow" style="background-color: #343F4B;"></div>
-					<p class="mt-2 text-sm font-medium text-on-primary">Slate</p>
-					<p class="text-xs text-medium">#343F4B</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--color-surface);"></div>
+					<div class="swatch-name">Component Surface</div>
+					<div class="swatch-hex">var(--color-surface)</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow" style="background-color: #1F2933;"></div>
-					<p class="mt-2 text-sm font-medium text-on-primary">Onyx</p>
-					<p class="text-xs text-medium">#1F2933</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--color-text-high);"></div>
+					<div class="swatch-name">High-Emphasis Text</div>
+					<div class="swatch-hex">var(--color-text-high)</div>
 				</div>
-				<div class="text-center">
-					<div class="w-full h-24 rounded-lg shadow" style="background-color: #161F27;"></div>
-					<p class="mt-2 text-sm font-medium text-on-primary">Deep Onyx</p>
-					<p class="text-xs text-medium">#161F27</p>
+				<div class="color-swatch">
+					<div class="swatch-color" style="background-color: var(--color-border-default);"></div>
+					<div class="swatch-name">Default Border</div>
+					<div class="swatch-hex">var(--color-border-default)</div>
 				</div>
 			</div>
 		</section>
 
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Typography System -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Typography System</h2>
-			<p class="text-base mt-2 text-medium">The master typographic scale for the robonxt brand, using the Inter
-				font family.</p>
-			<div class="mt-8 card rounded-lg p-8 space-y-8">
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Jumbo</p>
-						<p class="text-medium text-sm">10rem (160px) / Black (900)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[10rem] font-black leading-[1.0] -tracking-tight overflow-hidden">Ag
-						</p>
-					</div>
+		<section class="ds-section">
+			<h2>Typography System</h2>
+			<p>A single, highly-legible font family, `Inter`, is used across the entire system to ensure consistency and
+				clarity. The scale is designed for clear hierarchy on any screen size.</p>
+			<div class="ds-surface" style="margin-top: var(--space-lg);">
+				<div class="type-showcase"><span class="role">Display XL / 96px Bold</span>
+					<p class="text-display-xl">Hero Title</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Display XL</p>
-						<p class="text-medium text-sm">6rem (96px) / Bold (700)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[6rem] font-bold leading-tight -tracking-tight">Ag</p>
-					</div>
+				<div class="type-showcase"><span class="role">Heading 1 / 36px Bold</span>
+					<p class="text-h1">Primary Page Title</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Display L</p>
-						<p class="text-medium text-sm">4.5rem (72px) / Bold (700)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[4.5rem] font-bold leading-tight -tracking-tight">Ag</p>
-					</div>
+				<div class="type-showcase"><span class="role">Heading 2 / 24px Semi-Bold</span>
+					<p class="text-h2">Section Title</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Heading 1</p>
-						<p class="text-medium text-sm">2.25rem (36px) / Bold (700)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[2.25rem] font-bold leading-tight -tracking-tight">The quick brown fox
-						</p>
-					</div>
+				<div class="type-showcase"><span class="role">Heading 3 / 20px Semi-Bold</span>
+					<p class="text-h3">Component Title</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Heading 2</p>
-						<p class="text-medium text-sm">1.5rem (24px) / Semi-Bold (600)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[1.5rem] font-semibold leading-snug">The quick brown fox</p>
-					</div>
+				<div class="type-showcase"><span class="role">Body (Lead) / 18px Regular</span>
+					<p class="text-body-lead">This is an introductory paragraph. It's slightly larger to grab the user's
+						attention and lead them into the main content.</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Body (Lead)</p>
-						<p class="text-medium text-sm">1.125rem (18px) / Regular (400)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-[1.125rem] leading-relaxed">The quick brown fox jumps over the lazy
-							dog. This is an introductory paragraph used to draw the user in.</p>
-					</div>
+				<div class="type-showcase"><span class="role">Body (Base) / 16px Regular</span>
+					<p class="text-body-base">This is the default body text. All the main content, like this very
+						sentence, uses this style for optimal readability.</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Body (Base)</p>
-						<p class="text-medium text-sm">1rem (16px) / Regular (400)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-base leading-relaxed">The quick brown fox jumps over the lazy dog. This
-							is the default body text for all long-form content.</p>
-					</div>
+				<div class="type-showcase"><span class="role">Label / 14px Medium</span>
+					<p class="text-label">Button & Form Labels</p>
 				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Label</p>
-						<p class="text-medium text-sm">0.875rem (14px) / Medium (500)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-high text-sm font-medium">The quick brown fox</p>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Micro</p>
-						<p class="text-medium text-sm">0.75rem (12px) / Regular (400)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-medium text-xs">The quick brown fox jumps over the lazy dog.</p>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-baseline gap-4">
-					<div class="md:w-1/3 text-left">
-						<p class="text-high font-medium">Fine Print</p>
-						<p class="text-medium text-sm">0.625rem (10px) / Regular (400)</p>
-					</div>
-					<div class="flex-grow">
-						<p class="text-medium text-[0.625rem] leading-relaxed">The quick brown fox jumps over the lazy
-							dog. For legal disclaimers only.</p>
-					</div>
+				<div class="type-showcase"><span class="role">Caption / 14px Regular</span>
+					<p class="text-caption">Helper text, metadata, and captions live here.</p>
 				</div>
 			</div>
 		</section>
 
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Spacing & Layout -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Spacing & Layout (8-Point Grid)</h2>
-			<p class="text-base mt-2 text-medium">All spacing values (margins, padding, gaps) must be a multiple of 8px
-				to ensure consistency and a clean layout. This creates a predictable visual rhythm.</p>
-			<div class="mt-8 card rounded-lg p-8 space-y-6">
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-xs (8px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 8px;"></div>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-sm (16px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 16px;"></div>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-md (24px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 24px;"></div>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-lg (32px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 32px;"></div>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-xl (48px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 48px;"></div>
-					</div>
-				</div>
-				<div class="flex flex-col md:flex-row items-start gap-4">
-					<div class="md:w-1/3">
-						<p class="text-high font-medium">space-2xl (64px)</p>
-					</div>
-					<div class="flex-grow">
-						<div class="bg-primary h-4 rounded" style="width: 64px;"></div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Iconography -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Iconography</h2>
-			<p class="text-base mt-2 text-medium">The brand uses the <a href="https://fonts.google.com/icons"
-					target="_blank" class="text-primary font-medium">Material Symbols</a> library in the "Rounded" style
-				for a consistent, friendly, and professional appearance. Icons should always inherit the color of the
-				surrounding text.</p>
-			<div class="mt-8 card rounded-lg p-8">
-				<h3 class="text-[1.25rem] font-semibold text-high">Sizing Rules</h3>
-				<div class="mt-6 flex flex-wrap items-center gap-8">
-					<div class="text-center">
-						<p class="text-xs text-medium mb-2">16px</p><span class="material-symbols-rounded text-high"
-							style="font-size: 16px;">home</span>
-					</div>
-					<div class="text-center">
-						<p class="text-xs text-medium mb-2">24px (Default)</p><span
-							class="material-symbols-rounded text-high" style="font-size: 24px;">settings</span>
-					</div>
-					<div class="text-center">
-						<p class="text-xs text-medium mb-2">32px</p><span class="material-symbols-rounded text-high"
-							style="font-size: 32px;">gamepad</span>
-					</div>
-					<div class="text-center">
-						<p class="text-xs text-medium mb-2">48px</p><span class="material-symbols-rounded text-high"
-							style="font-size: 48px;">smart_toy</span>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Voice & Tone -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Voice & Tone: The Pragmatic Professional</h2>
-			<div class="mt-4 text-base text-medium leading-relaxed space-y-4">
-				<p>The robonxt voice is built on a single principle: <strong>Clarity first, always.</strong> Our
-					personality never
-					sacrifices the user's ability to understand. The voice is professional, helpful, and direct, but
-					uses a casual, human tone.</p>
-			</div>
-			<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">Default Voice (95% of the time)</h3>
-					<p class="mt-2 text-base text-medium leading-relaxed">For all UI copy, instructions, and critical
-						messages. Be clear, concise, and helpful.</p>
-					<blockquote class="mt-4 p-4 border-l-4 border-color bg-background text-high rounded-r-lg">"To change
-						your theme, open the settings panel and select 'Appearance'."</blockquote>
-				</div>
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">The Clever Aside (5% of the time)</h3>
-					<p class="mt-2 text-base text-medium leading-relaxed">For low-stakes moments like success messages
-						or marketing copy. Be witty and context-aware.</p>
-					<blockquote class="mt-4 p-4 border-l-4 border-color bg-background text-high rounded-r-lg">"Project
-						saved! All your hard work is safe and sound."</blockquote>
-				</div>
-			</div>
-		</section>
-
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Layout Primitives -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Layout Primitives</h2>
-			<p class="text-base mt-2 text-medium">The architectural foundation for all pages. These components define
-				structure and hierarchy.</p>
-			<div class="mt-8 space-y-8">
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">1. Section</h3>
-					<p class="mt-2 text-base text-medium leading-relaxed">A semantic wrapper with no visual style. Its
-						only job is to create vertical spacing between groups of content using margins.</p>
-				</div>
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">2. Container</h3>
-					<p class="mt-2 text-base text-medium leading-relaxed">The primary, <strong>static</strong> canvas
-						for main
-						content. It has no animation or hover effects. Use it for the main workspace of a page.</p>
-					<div class="mt-4 surface">
-						<p class="text-high">This is a Container. It holds the main content, like this text and the form
-							controls below.</p>
-					</div>
-				</div>
-				<div>
-					<h3 class="text-[1.25rem] font-semibold text-high">3. Interactive Card</h3>
-					<p class="mt-2 text-base text-medium leading-relaxed">An <strong>interactive</strong> element used
-						for summaries
-						or links. It has a hover effect to signal that it is clickable.</p>
-					<div class="mt-4 interactive-card">
-						<div class="h-2 bg-primary"></div>
-						<div class="p-6">
-							<p class="text-high">This is an Interactive Card. Notice the 'lift' effect when you hover
-								over it.</p>
+		<section class="ds-section">
+			<h2>Core Components</h2>
+			<p>The tangible, interactive elements of the brand. Built from our core primitives and designed for clarity.
+			</p>
+			<div class="component-showcase-grid" style="margin-top: var(--space-lg);">
+				<!-- Column 1 -->
+				<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+					<div class="ds-surface">
+						<h3>Buttons</h3>
+						<div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+							<button class="btn btn-primary">Primary</button>
+							<button class="btn btn-secondary">Secondary</button>
+							<button class="btn btn-outline">Outline</button>
+							<button class="btn btn-ghost">Ghost</button>
+							<button class="btn btn-primary" disabled>Disabled</button>
 						</div>
 					</div>
-				</div>
-			</div>
-		</section>
-
-		<div class="my-12 border-b border-color"></div>
-
-		<!-- Section: Components Library -->
-		<section>
-			<h2 class="text-[1.5rem] font-semibold text-high">Component Library</h2>
-			<p class="text-base mt-2 text-medium">The core interactive elements of the robonxt design language. All
-				components are built using the brand's design tokens.</p>
-
-			<div class="mt-8 space-y-6">
-
-				<!-- 1. Form Controls -->
-				<details open class="surface">
-					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
-						<span class="text-[1.25rem] font-semibold text-high">1. Form Controls</span>
-						<span class="material-symbols-rounded text-medium">expand_more</span>
-					</summary>
-					<div class="pt-4 pb-2 space-y-8">
-						<p class="text-base text-medium">The full suite of components for user input, all sharing a
-							consistent design language.</p>
-
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="space-y-2">
-								<label for="name-input-2" class="text-sm font-medium text-high">Text Input</label>
-								<input type="text" id="name-input-2" placeholder="Your name"
-									class="form-input block w-full">
+					<div class="ds-surface">
+						<h3>Input Fields</h3>
+						<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+							<div class="input-group">
+								<label for="name">Name</label>
+								<input type="text" id="name" class="input-field" placeholder="Default state">
+								<span class="helper-text">This is some helpful text.</span>
 							</div>
-							<div class="space-y-2">
-								<label for="select-menu" class="text-sm font-medium text-high">Select Menu</label>
-								<select id="select-menu" class="form-input form-select block w-full">
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
-								</select>
+							<div class="input-group error">
+								<label for="email">Email</label>
+								<input type="email" id="email" class="input-field" value="not-an-email">
+								<span class="helper-text">Please enter a valid email address.</span>
 							</div>
 						</div>
-
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="space-y-4">
-								<p class="text-sm font-medium text-high">Checkbox Group</p>
-								<div class="flex items-center gap-4">
-									<input id="check1" type="checkbox" class="form-checkbox">
-									<label for="check1" class="text-high text-sm">Option A</label>
+					</div>
+					<div class="ds-surface">
+						<h3>Tabs</h3>
+						<div>
+							<div class="tabs-list">
+								<button class="tab-trigger active" data-tab="tab1">Profile</button>
+								<button class="tab-trigger" data-tab="tab2">Dashboard</button>
+								<button class="tab-trigger" data-tab="tab3">Settings</button>
+							</div>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab1">
+									<p>This is the profile tab content. It's clean, simple, and right to the point.</p>
 								</div>
-								<div class="flex items-center gap-4">
-									<input id="check2" type="checkbox" class="form-checkbox" checked>
-									<label for="check2" class="text-high text-sm">Option B</label>
+								<div class="tab-pane" id="tab2">
+									<p>Welcome to your dashboard. All your important information lives here.</p>
 								</div>
-							</div>
-							<div class="space-y-4">
-								<p class="text-sm font-medium text-high">Radio Group</p>
-								<div class="flex items-center gap-4">
-									<input id="radio1" type="radio" name="radio-group" class="form-radio">
-									<label for="radio1" class="text-high text-sm">Choice X</label>
-								</div>
-								<div class="flex items-center gap-4">
-									<input id="radio2" type="radio" name="radio-group" class="form-radio" checked>
-									<label for="radio2" class="text-high text-sm">Choice Y</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-							<div class="space-y-2">
-								<p class="text-sm font-medium text-high">Toggle Switch</p>
-								<label class="toggle-switch mt-2">
-									<input type="checkbox" checked>
-									<span class="toggle-slider"></span>
-								</label>
-							</div>
-							<div class="space-y-2">
-								<label for="slider" class="text-sm font-medium text-high">Slider</label>
-								<input type="range" id="slider" min="0" max="100" value="50"
-									class="form-slider w-full mt-2">
-							</div>
-						</div>
-					</div>
-				</details>
-
-				<!-- 2. Navigation -->
-				<details class="surface">
-					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
-						<span class="text-[1.25rem] font-semibold text-high">2. Navigation</span>
-						<span class="material-symbols-rounded text-medium">expand_more</span>
-					</summary>
-					<div class="pt-4 pb-2 space-y-8">
-						<p class="text-base text-medium">Components that help users move around the application.</p>
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Breadcrumbs</p>
-								<nav class="breadcrumbs">
-									<a href="#" class="breadcrumbs-link">Home</a>
-									<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
-									<a href="#" class="breadcrumbs-link">Projects</a>
-									<span class="material-symbols-rounded breadcrumbs-separator">chevron_right</span>
-									<span class="text-sm font-medium text-high">robonxt/ui</span>
-								</nav>
-							</div>
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Pagination</p>
-								<nav class="pagination">
-									<button class="pagination-item"><span
-											class="material-symbols-rounded">chevron_left</span></button>
-									<button class="pagination-item">1</button>
-									<button class="pagination-item active">2</button>
-									<button class="pagination-item">3</button>
-									<button class="pagination-item">...</button>
-									<button class="pagination-item">8</button>
-									<button class="pagination-item"><span
-											class="material-symbols-rounded">chevron_right</span></button>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</details>
-
-				<!-- 3. Feedback & Overlays -->
-				<details class="surface">
-					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
-						<span class="text-[1.25rem] font-semibold text-high">3. Feedback & Overlays</span>
-						<span class="material-symbols-rounded text-medium">expand_more</span>
-					</summary>
-					<div class="pt-4 pb-2 space-y-8">
-						<p class="text-base text-medium">Components the system uses to communicate with the user.</p>
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Modal / Dialog</p>
-								<button class="btn btn-primary text-sm font-medium py-2 px-4" id="open-modal-btn">Open
-									Modal</button>
-							</div>
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Toast / Notification</p>
-								<button class="btn btn-outline text-sm font-medium py-2 px-4" id="show-toast-btn">Show
-									Toast</button>
-							</div>
-						</div>
-					</div>
-				</details>
-
-				<!-- 4. Data Display -->
-				<details class="surface">
-					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
-						<span class="text-[1.25rem] font-semibold text-high">4. Data Display</span>
-						<span class="material-symbols-rounded text-medium">expand_more</span>
-					</summary>
-					<div class="pt-4 pb-2 space-y-8">
-						<p class="text-base text-medium">Components for presenting information clearly.</p>
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Accordion</p>
-								<div class="border-t border-color" id="accordion">
-									<div class="accordion-item">
-										<button class="accordion-header" aria-expanded="false">
-											<span>Is this a design system?</span>
-											<span class="material-symbols-rounded accordion-icon">expand_more</span>
-										</button>
-										<div class="accordion-content">
-											<div class="accordion-content-inner text-medium">Yes. It's a comprehensive
-												set of rules and components built on design tokens.</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<button class="accordion-header" aria-expanded="false">
-											<span>Can it be used for any project?</span>
-											<span class="material-symbols-rounded accordion-icon">expand_more</span>
-										</button>
-										<div class="accordion-content">
-											<div class="accordion-content-inner text-medium">Absolutely. The token-based
-												architecture makes it platform-agnostic.</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Avatar</p>
-								<div class="avatar bg-primary text-on-primary font-semibold text-lg"
-									style="width: 64px; height: 64px;">robo</div>
-							</div>
-							<div class="md:col-span-2 surface p-4">
-								<p class="text-sm font-medium text-high mb-4">Table</p>
-								<div class="overflow-x-auto">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Project</th>
-												<th>Status</th>
-												<th>Last Updated</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>robonxt/ui</td>
-												<td>Active</td>
-												<td>2 min ago</td>
-											</tr>
-											<tr>
-												<td>Parody Website</td>
-												<td>Archived</td>
-												<td>3 months ago</td>
-											</tr>
-										</tbody>
-									</table>
+								<div class="tab-pane" id="tab3">
+									<p>Here you can configure your application settings and preferences.</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</details>
-
+					<div class="ds-interactive-card ds-surface">
+						<h3>Interactive Card</h3>
+						<p>This card lifts on hover, using `shadow-md` by default and `shadow-lg` on interaction. It's
+							perfect for linking to other pages or summarizing content.</p>
+					</div>
+				</div>
+				<!-- Column 2 -->
+				<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+					<div class="ds-surface">
+						<h3>Alerts</h3>
+						<div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+							<div class="alert alert-success"><span class="material-symbols-rounded">task_alt</span>
+								<div class="alert-content">
+									<div class="alert-title">Success Message</div>
+									<p class="alert-description">Your changes have been saved.</p>
+								</div>
+							</div>
+							<div class="alert alert-warning"><span class="material-symbols-rounded">warning</span>
+								<div class="alert-content">
+									<div class="alert-title">Warning Message</div>
+									<p class="alert-description">Your session is about to expire.</p>
+								</div>
+							</div>
+							<div class="alert alert-error"><span class="material-symbols-rounded">error</span>
+								<div class="alert-content">
+									<div class="alert-title">Error Message</div>
+									<p class="alert-description">Could not complete the request.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ds-surface">
+						<h3>Dropdown & Avatars</h3>
+						<div style="display: flex; justify-content: space-between; align-items: center;">
+							<div style="display: flex; align-items: center; gap: var(--space-sm);">
+								<img src="https://i.pravatar.cc/48?u=a" alt="Avatar" class="avatar avatar-md">
+								<div class="avatar avatar-md">JD</div>
+								<div class="avatar avatar-sm">A</div>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-outline" id="dropdown-toggle">
+									<span>Options</span>
+									<span class="material-symbols-rounded" style="font-size: 20px;">expand_more</span>
+								</button>
+								<div class="dropdown-menu" id="dropdown-menu">
+									<button class="dropdown-item"><span
+											class="material-symbols-rounded">person</span>View Profile</button>
+									<button class="dropdown-item"><span
+											class="material-symbols-rounded">settings</span>Account Settings</button>
+									<div class="dropdown-divider"></div>
+									<button class="dropdown-item"><span class="material-symbols-rounded"
+											style="color: var(--color-error);">logout</span>Log Out</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ds-surface">
+						<h3>Modals & Progress</h3>
+						<p>Modals are used for critical tasks that require user focus. They use `shadow-lg` for
+							elevation.</p>
+						<div class="progress-bar" style="margin: var(--space-md) 0;">
+							<div class="progress-indicator"></div>
+						</div>
+						<button class="btn btn-outline" id="open-modal-btn">
+							<span class="material-symbols-rounded" style="font-size: 20px;">open_in_new</span>
+							Launch Deletion Modal
+						</button>
+					</div>
+				</div>
 			</div>
 		</section>
-
 	</main>
 
-	<footer class="text-center py-8 mt-12 border-t border-color">
-		<p class="text-xs text-medium">&copy; 2025 robonxt. Built by robonxt.</p>
+	<footer class="page-footer">
+		robonxt Design System &copy; 2025. A demonstration of pragmatic professionalism.
 	</footer>
 
-	<script>
-		window.addEventListener('DOMContentLoaded', () => {
-
-			// --- Theme Toggle Logic ---
-			const themeToggle = document.getElementById('theme-toggle-checkbox');
-			const docElement = document.documentElement;
-			const applyTheme = (isDark) => {
-				if (isDark) {
-					docElement.classList.add('dark');
-					docElement.classList.remove('light');
-					themeToggle.checked = true;
-				} else {
-					docElement.classList.add('light');
-					docElement.classList.remove('dark');
-					themeToggle.checked = false;
-				}
-			};
-			const savedTheme = localStorage.getItem('theme');
-			if (savedTheme) {
-				applyTheme(savedTheme === 'dark');
-			} else {
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				applyTheme(prefersDark);
-			}
-			themeToggle.addEventListener('change', () => {
-				const isDark = themeToggle.checked;
-				applyTheme(isDark);
-				localStorage.setItem('theme', isDark ? 'dark' : 'light');
-			});
-
-			// --- Modal Logic ---
-			const openModalBtn = document.getElementById('open-modal-btn');
-			const closeModalBtn = document.getElementById('close-modal-btn');
-			const modalOverlay = document.getElementById('modal-overlay');
-			if (openModalBtn && modalOverlay) {
-				openModalBtn.addEventListener('click', () => modalOverlay.classList.add('visible'));
-			}
-			if (closeModalBtn && modalOverlay) {
-				closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('visible'));
-			}
-			// Close modal on overlay click
-			if (modalOverlay) {
-				modalOverlay.addEventListener('click', (e) => {
-					if (e.target === modalOverlay) {
-						modalOverlay.classList.remove('visible');
-					}
-				});
-			}
-
-
-			// --- Toast Logic ---
-			const showToastBtn = document.getElementById('show-toast-btn');
-			const toast = document.getElementById('toast');
-			if (showToastBtn && toast) {
-				let toastTimeout;
-				showToastBtn.addEventListener('click', () => {
-					clearTimeout(toastTimeout);
-					toast.classList.add('visible');
-					toastTimeout = setTimeout(() => {
-						toast.classList.remove('visible');
-					}, 3000);
-				});
-			}
-
-
-			// --- Accordion Logic ---
-			const accordion = document.getElementById('accordion');
-			if (accordion) {
-				accordion.addEventListener('click', (e) => {
-					const header = e.target.closest('.accordion-header');
-					if (header) {
-						const content = header.nextElementSibling;
-						const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-						// Optional: Close other open accordions
-						// const allHeaders = accordion.querySelectorAll('.accordion-header');
-						// allHeaders.forEach(h => {
-						// 	h.setAttribute('aria-expanded', 'false');
-						// 	h.nextElementSibling.style.maxHeight = '0';
-						// });
-
-						header.setAttribute('aria-expanded', !isExpanded);
-						if (!isExpanded) {
-							content.style.maxHeight = content.scrollHeight + 'px';
-						} else {
-							content.style.maxHeight = '0';
-						}
-					}
-				});
-			}
-
-		});
-	</script>
-
-	<!-- Modal Overlay -->
-	<div class="modal-overlay" id="modal-overlay">
-		<div class="modal-content">
-			<div class="flex justify-between items-center">
-				<h3 class="text-[1.25rem] font-semibold text-high">Modal Title</h3>
-				<button class="text-medium hover:text-high" id="close-modal-btn"><span
+	<!-- Modal Structure (Initially Hidden) -->
+	<div class="modal-backdrop" id="modal-backdrop">
+		<div class="modal-surface">
+			<header class="modal-header">
+				<h3>Are you absolutely sure?</h3>
+				<button class="btn btn-ghost" id="close-modal-btn"><span
 						class="material-symbols-rounded">close</span></button>
+			</header>
+			<div class="modal-body">
+				<p>This action cannot be undone. This will permanently delete the selected item and remove its data from
+					our servers. This is a critical task, so the tone is direct and the choices are clear.</p>
 			</div>
-			<p class="mt-4 text-base text-medium">This is the content of the modal. It appears on top of the main
-				content and requires an action.</p>
-			<div class="mt-6 flex justify-end gap-4">
-				<button class="btn btn-outline text-sm font-medium py-2 px-4">Cancel</button>
-				<button class="btn btn-primary text-sm font-medium py-2 px-4">Confirm</button>
-			</div>
+			<footer class="modal-footer">
+				<button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
+				<button class="btn btn-secondary">Yes, delete it</button>
+			</footer>
 		</div>
 	</div>
 
-	<!-- Toast Notification -->
-	<div class="toast" id="toast">
-		<span class="material-symbols-rounded text-primary">task_alt</span>
-		<p class="text-sm font-medium text-high">Your action was successful!</p>
-	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// --- THEME SWITCHER ---
+			const themeCheckbox = document.getElementById('theme-checkbox');
+			const htmlEl = document.documentElement;
 
+			const setTheme = (theme) => {
+				htmlEl.setAttribute('data-theme', theme);
+				localStorage.setItem('robonxt_theme', theme);
+				themeCheckbox.checked = theme === 'dark';
+			};
+
+			const savedTheme = localStorage.getItem('robonxt_theme') || 'light';
+			setTheme(savedTheme);
+
+			themeCheckbox.addEventListener('change', () => {
+				const newTheme = themeCheckbox.checked ? 'dark' : 'light';
+				setTheme(newTheme);
+			});
+
+			// --- MODAL LOGIC ---
+			const openModalBtn = document.getElementById('open-modal-btn');
+			const closeModalBtn = document.getElementById('close-modal-btn');
+			const cancelModalBtn = document.getElementById('cancel-modal-btn');
+			const modalBackdrop = document.getElementById('modal-backdrop');
+
+			const openModal = () => modalBackdrop.classList.add('is-visible');
+			const closeModal = () => modalBackdrop.classList.remove('is-visible');
+
+			openModalBtn.addEventListener('click', openModal);
+			closeModalBtn.addEventListener('click', closeModal);
+			cancelModalBtn.addEventListener('click', closeModal);
+			modalBackdrop.addEventListener('click', (event) => { if (event.target === modalBackdrop) closeModal(); });
+			document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modalBackdrop.classList.contains('is-visible')) closeModal(); });
+
+			// --- DROPDOWN LOGIC ---
+			const dropdownToggle = document.getElementById('dropdown-toggle');
+			const dropdownMenu = document.getElementById('dropdown-menu');
+
+			dropdownToggle.addEventListener('click', (event) => {
+				event.stopPropagation();
+				dropdownMenu.classList.toggle('is-visible');
+			});
+
+			document.addEventListener('click', (event) => {
+				if (dropdownToggle && !dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+					dropdownMenu.classList.remove('is-visible');
+				}
+			});
+
+			// --- TABS LOGIC ---
+			const tabContainer = document.querySelector('.tabs-list');
+			if (tabContainer) {
+				tabContainer.addEventListener('click', (event) => {
+					if (event.target.classList.contains('tab-trigger')) {
+						const targetTabId = event.target.dataset.tab;
+
+						// Update triggers
+						tabContainer.querySelectorAll('.tab-trigger').forEach(trigger => trigger.classList.remove('active'));
+						event.target.classList.add('active');
+
+						// Update panes
+						document.querySelectorAll('.tab-pane').forEach(pane => {
+							pane.classList.remove('active');
+							if (pane.id === targetTabId) {
+								pane.classList.add('active');
+							}
+						});
+					}
+				});
+			}
+		});
+	</script>
 </body>
 
 </html>
