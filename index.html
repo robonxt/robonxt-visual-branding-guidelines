@@ -220,8 +220,7 @@
 			background-color: var(--color-surface);
 			border: 1px solid var(--color-border);
 			border-radius: var(--radius-md);
-			padding: 0.5rem 0.75rem;
-			/* 8px 12px */
+			padding: 8px 16px;
 			color: var(--color-text-high);
 			transition: all var(--duration-quick) var(--ease-standard);
 			outline: none;
@@ -242,7 +241,8 @@
 		.toggle-switch {
 			position: relative;
 			display: inline-block;
-			width: 44px;
+			width: 48px;
+			/* Multiple of 8 */
 			height: 24px;
 		}
 
@@ -267,10 +267,10 @@
 		.toggle-slider:before {
 			position: absolute;
 			content: "";
-			height: 18px;
-			width: 18px;
-			left: 3px;
-			bottom: 3px;
+			height: 16px;
+			width: 16px;
+			left: 4px;
+			bottom: 4px;
 			background-color: white;
 			border-radius: var(--radius-full);
 			transition: all var(--duration-medium) var(--ease-standard);
@@ -281,7 +281,7 @@
 		}
 
 		input:checked+.toggle-slider:before {
-			transform: translateX(20px);
+			transform: translateX(24px);
 		}
 
 		/* Tab Styles */
@@ -340,8 +340,8 @@
 			background-color: var(--color-surface);
 			border: 1px solid var(--color-border);
 			border-radius: var(--radius-lg);
-			padding: 1.5rem;
-			/* 24px / space-md */
+			padding: 24px;
+			/* space-md */
 		}
 
 		/* Checkbox & Radio Styles */
@@ -350,12 +350,12 @@
 			appearance: none;
 			background-color: var(--color-surface);
 			border: 1px solid var(--color-border);
-			width: 1.25rem;
-			/* 20px */
-			height: 1.25rem;
-			/* 20px */
+			width: 16px;
+			height: 16px;
 			transition: all var(--duration-quick) var(--ease-standard);
 			cursor: pointer;
+			flex-shrink: 0;
+			/* Prevent shrinking in flex layouts */
 		}
 
 		.form-checkbox:checked,
@@ -389,7 +389,8 @@
 			background-position: right 0.75rem center;
 			background-repeat: no-repeat;
 			background-size: 1.5em 1.5em;
-			padding-right: 2.5rem;
+			padding-right: 40px;
+			/* space-lg + space-xs */
 		}
 
 		/* Slider Styles */
@@ -405,22 +406,22 @@
 
 		.form-slider::-webkit-slider-thumb {
 			appearance: none;
-			width: 20px;
-			height: 20px;
+			width: 24px;
+			height: 24px;
 			background: var(--color-primary);
 			border-radius: var(--radius-full);
 			cursor: pointer;
-			border: 3px solid var(--color-surface);
+			border: 4px solid var(--color-surface);
 			box-shadow: 0 0 0 1px var(--color-border);
 		}
 
 		.form-slider::-moz-range-thumb {
-			width: 20px;
-			height: 20px;
+			width: 24px;
+			height: 24px;
 			background: var(--color-primary);
 			border-radius: var(--radius-full);
 			cursor: pointer;
-			border: 3px solid var(--color-surface);
+			border: 4px solid var(--color-surface);
 			box-shadow: 0 0 0 1px var(--color-border);
 		}
 
@@ -449,7 +450,8 @@
 		/* Navigation: Pagination */
 		.pagination {
 			display: flex;
-			gap: 4px;
+			gap: 8px;
+			/* Corrected to be a multiple of 8 */
 		}
 
 		.pagination-item {
@@ -491,6 +493,7 @@
 			opacity: 0;
 			visibility: hidden;
 			transition: all var(--duration-medium) var(--ease-standard);
+			z-index: 50;
 		}
 
 		.modal-overlay.visible {
@@ -530,10 +533,11 @@
 			align-items: center;
 			gap: 16px;
 			/* space-sm */
-			transform: translateY(20px);
+			transform: translateY(24px);
 			opacity: 0;
 			visibility: hidden;
 			transition: all var(--duration-medium) var(--ease-standard);
+			z-index: 50;
 		}
 
 		.toast.visible {
@@ -545,6 +549,10 @@
 		/* Data Display: Accordion */
 		.accordion-item {
 			border-bottom: 1px solid var(--color-border);
+		}
+
+		.accordion-item:last-child {
+			border-bottom: none;
 		}
 
 		.accordion-header {
@@ -573,9 +581,17 @@
 			transition: max-height var(--duration-medium) var(--ease-standard), padding var(--duration-medium) var(--ease-standard);
 		}
 
+		.accordion-content-inner {
+			padding: 8px 8px 16px;
+			/* space-xs, space-xs, space-sm */
+		}
+
 		/* Data Display: Avatar */
 		.avatar {
-			display: inline-block;
+			display: inline-flex;
+			/* Use flex for centering */
+			align-items: center;
+			justify-content: center;
 			border-radius: var(--radius-full);
 			object-fit: cover;
 			border: 2px solid var(--color-surface);
@@ -591,8 +607,8 @@
 		.table th,
 		.table td {
 			text-align: left;
-			padding: 12px 16px;
-			/* a bit less than space-sm */
+			padding: 16px;
+			/* Corrected to be a multiple of 8 */
 			border-bottom: 1px solid var(--color-border);
 		}
 
@@ -615,7 +631,7 @@
 <body class="bg-background min-h-screen antialiased">
 
 	<!-- Header -->
-	<header class="border-b border-color py-6 px-4 sm:px-6 lg:px-8">
+	<header class="border-b border-color py-6 px-8">
 		<div class="max-w-7xl mx-auto flex justify-between items-center">
 			<div>
 				<h1 class="text-[2.25rem] font-bold text-high leading-tight">robonxt</h1>
@@ -631,7 +647,7 @@
 		</div>
 	</header>
 
-	<main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+	<main class="max-w-7xl mx-auto py-12 px-8">
 
 		<!-- Section: Core Palette -->
 		<section>
@@ -655,33 +671,33 @@
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow"
 						style="background-color: #F5F7FA; border: 1px solid #E1E5EA;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-600">Paper</p>
-					<p class="text-xs text-slate-500">#F5F7FA</p>
+					<p class="mt-2 text-sm font-medium text-high">Paper</p>
+					<p class="text-xs text-medium">#F5F7FA</p>
 				</div>
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow" style="background-color: #E1E5EA;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-600">Light Gray</p>
-					<p class="text-xs text-slate-500">#E1E5EA</p>
+					<p class="mt-2 text-sm font-medium text-high">Light Gray</p>
+					<p class="text-xs text-medium">#E1E5EA</p>
 				</div>
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow" style="background-color: #8A94A6;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-500">Medium Gray</p>
-					<p class="text-xs text-slate-400">#8A94A6</p>
+					<p class="mt-2 text-sm font-medium text-high">Medium Gray</p>
+					<p class="text-xs text-medium">#8A94A6</p>
 				</div>
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow" style="background-color: #343F4B;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-300">Slate</p>
-					<p class="text-xs text-slate-400">#343F4B</p>
+					<p class="mt-2 text-sm font-medium text-on-primary">Slate</p>
+					<p class="text-xs text-medium">#343F4B</p>
 				</div>
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow" style="background-color: #1F2933;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-300">Onyx</p>
-					<p class="text-xs text-slate-400">#1F2933</p>
+					<p class="mt-2 text-sm font-medium text-on-primary">Onyx</p>
+					<p class="text-xs text-medium">#1F2933</p>
 				</div>
 				<div class="text-center">
 					<div class="w-full h-24 rounded-lg shadow" style="background-color: #161F27;"></div>
-					<p class="mt-2 text-sm font-medium text-slate-300">Deep Onyx</p>
-					<p class="text-xs text-slate-400">#161F27</p>
+					<p class="mt-2 text-sm font-medium text-on-primary">Deep Onyx</p>
+					<p class="text-xs text-medium">#161F27</p>
 				</div>
 			</div>
 		</section>
@@ -693,7 +709,7 @@
 			<h2 class="text-[1.5rem] font-semibold text-high">Typography System</h2>
 			<p class="text-base mt-2 text-medium">The master typographic scale for the robonxt brand, using the Inter
 				font family.</p>
-			<div class="mt-8 card rounded-lg p-6 md:p-10 space-y-8">
+			<div class="mt-8 card rounded-lg p-8 space-y-8">
 				<div class="flex flex-col md:flex-row items-baseline gap-4 border-b border-color pb-6">
 					<div class="md:w-1/3 text-left">
 						<p class="text-high font-medium">Jumbo</p>
@@ -799,7 +815,7 @@
 			<h2 class="text-[1.5rem] font-semibold text-high">Spacing & Layout (8-Point Grid)</h2>
 			<p class="text-base mt-2 text-medium">All spacing values (margins, padding, gaps) must be a multiple of 8px
 				to ensure consistency and a clean layout. This creates a predictable visual rhythm.</p>
-			<div class="mt-8 card rounded-lg p-6 md:p-8 space-y-6">
+			<div class="mt-8 card rounded-lg p-8 space-y-6">
 				<div class="flex flex-col md:flex-row items-start gap-4">
 					<div class="md:w-1/3">
 						<p class="text-high font-medium">space-xs (8px)</p>
@@ -860,7 +876,7 @@
 					target="_blank" class="text-primary font-medium">Material Symbols</a> library in the "Rounded" style
 				for a consistent, friendly, and professional appearance. Icons should always inherit the color of the
 				surrounding text.</p>
-			<div class="mt-8 card rounded-lg p-6 md:p-8">
+			<div class="mt-8 card rounded-lg p-8">
 				<h3 class="text-[1.25rem] font-semibold text-high">Sizing Rules</h3>
 				<div class="mt-6 flex flex-wrap items-center gap-8">
 					<div class="text-center">
@@ -959,21 +975,19 @@
 			<p class="text-base mt-2 text-medium">The core interactive elements of the robonxt design language. All
 				components are built using the brand's design tokens.</p>
 
-			<!-- Space-efficient, collapsible categories using native details/summary -->
 			<div class="mt-8 space-y-6">
 
 				<!-- 1. Form Controls -->
 				<details open class="surface">
-					<summary
-						class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
 						<span class="text-[1.25rem] font-semibold text-high">1. Form Controls</span>
 						<span class="material-symbols-rounded text-medium">expand_more</span>
 					</summary>
-					<div class="pt-2 pb-2 space-y-6">
+					<div class="pt-4 pb-2 space-y-8">
 						<p class="text-base text-medium">The full suite of components for user input, all sharing a
 							consistent design language.</p>
-						<!-- Inputs in a compact grid -->
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 							<div class="space-y-2">
 								<label for="name-input-2" class="text-sm font-medium text-high">Text Input</label>
 								<input type="text" id="name-input-2" placeholder="Your name"
@@ -989,44 +1003,43 @@
 							</div>
 						</div>
 
-						<!-- Checkboxes & Radios -->
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<div class="space-y-3">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+							<div class="space-y-4">
 								<p class="text-sm font-medium text-high">Checkbox Group</p>
-								<div class="flex items-center gap-3">
+								<div class="flex items-center gap-4">
 									<input id="check1" type="checkbox" class="form-checkbox">
-									<label for="check1" class="text-high">Option A</label>
+									<label for="check1" class="text-high text-sm">Option A</label>
 								</div>
-								<div class="flex items-center gap-3">
+								<div class="flex items-center gap-4">
 									<input id="check2" type="checkbox" class="form-checkbox" checked>
-									<label for="check2" class="text-high">Option B</label>
+									<label for="check2" class="text-high text-sm">Option B</label>
 								</div>
 							</div>
-							<div class="space-y-3">
+							<div class="space-y-4">
 								<p class="text-sm font-medium text-high">Radio Group</p>
-								<div class="flex items-center gap-3">
+								<div class="flex items-center gap-4">
 									<input id="radio1" type="radio" name="radio-group" class="form-radio">
-									<label for="radio1" class="text-high">Choice X</label>
+									<label for="radio1" class="text-high text-sm">Choice X</label>
 								</div>
-								<div class="flex items-center gap-3">
+								<div class="flex items-center gap-4">
 									<input id="radio2" type="radio" name="radio-group" class="form-radio" checked>
-									<label for="radio2" class="text-high">Choice Y</label>
+									<label for="radio2" class="text-high text-sm">Choice Y</label>
 								</div>
 							</div>
 						</div>
 
-						<!-- Toggle & Slider side-by-side -->
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 							<div class="space-y-2">
 								<p class="text-sm font-medium text-high">Toggle Switch</p>
-								<label class="toggle-switch">
+								<label class="toggle-switch mt-2">
 									<input type="checkbox" checked>
 									<span class="toggle-slider"></span>
 								</label>
 							</div>
 							<div class="space-y-2">
 								<label for="slider" class="text-sm font-medium text-high">Slider</label>
-								<input type="range" id="slider" min="0" max="100" value="50" class="form-slider w-full">
+								<input type="range" id="slider" min="0" max="100" value="50"
+									class="form-slider w-full mt-2">
 							</div>
 						</div>
 					</div>
@@ -1034,14 +1047,13 @@
 
 				<!-- 2. Navigation -->
 				<details class="surface">
-					<summary
-						class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
 						<span class="text-[1.25rem] font-semibold text-high">2. Navigation</span>
 						<span class="material-symbols-rounded text-medium">expand_more</span>
 					</summary>
-					<div class="pt-2 pb-2">
+					<div class="pt-4 pb-2 space-y-8">
 						<p class="text-base text-medium">Components that help users move around the application.</p>
-						<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 							<div class="surface p-4">
 								<p class="text-sm font-medium text-high mb-4">Breadcrumbs</p>
 								<nav class="breadcrumbs">
@@ -1072,14 +1084,13 @@
 
 				<!-- 3. Feedback & Overlays -->
 				<details class="surface">
-					<summary
-						class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
 						<span class="text-[1.25rem] font-semibold text-high">3. Feedback & Overlays</span>
 						<span class="material-symbols-rounded text-medium">expand_more</span>
 					</summary>
-					<div class="pt-2 pb-2">
+					<div class="pt-4 pb-2 space-y-8">
 						<p class="text-base text-medium">Components the system uses to communicate with the user.</p>
-						<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6">
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 							<div class="surface p-4">
 								<p class="text-sm font-medium text-high mb-4">Modal / Dialog</p>
 								<button class="btn btn-primary text-sm font-medium py-2 px-4" id="open-modal-btn">Open
@@ -1096,14 +1107,13 @@
 
 				<!-- 4. Data Display -->
 				<details class="surface">
-					<summary
-						class="cursor-pointer list-none select-none py-3 px-2 md:px-1 flex items-center justify-between">
+					<summary class="cursor-pointer list-none select-none p-2 flex items-center justify-between">
 						<span class="text-[1.25rem] font-semibold text-high">4. Data Display</span>
 						<span class="material-symbols-rounded text-medium">expand_more</span>
 					</summary>
-					<div class="pt-2 pb-2">
+					<div class="pt-4 pb-2 space-y-8">
 						<p class="text-base text-medium">Components for presenting information clearly.</p>
-						<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 							<div class="surface p-4">
 								<p class="text-sm font-medium text-high mb-4">Accordion</p>
 								<div class="border-t border-color" id="accordion">
@@ -1113,8 +1123,8 @@
 											<span class="material-symbols-rounded accordion-icon">expand_more</span>
 										</button>
 										<div class="accordion-content">
-											<p class="pb-4 px-2 text-medium">Yes. It's a comprehensive set of rules and
-												components built on design tokens.</p>
+											<div class="accordion-content-inner text-medium">Yes. It's a comprehensive
+												set of rules and components built on design tokens.</div>
 										</div>
 									</div>
 									<div class="accordion-item">
@@ -1123,15 +1133,15 @@
 											<span class="material-symbols-rounded accordion-icon">expand_more</span>
 										</button>
 										<div class="accordion-content">
-											<p class="pb-4 px-2 text-medium">Absolutely. The token-based architecture
-												makes it platform-agnostic.</p>
+											<div class="accordion-content-inner text-medium">Absolutely. The token-based
+												architecture makes it platform-agnostic.</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="surface p-4">
 								<p class="text-sm font-medium text-high mb-4">Avatar</p>
-								<div class="avatar bg-primary text-white flex items-center justify-center font-semibold text-lg rounded-full"
+								<div class="avatar bg-primary text-on-primary font-semibold text-lg"
 									style="width: 64px; height: 64px;">robo</div>
 							</div>
 							<div class="md:col-span-2 surface p-4">
@@ -1174,7 +1184,6 @@
 	</footer>
 
 	<script>
-		// This is the best practice. It ensures all HTML is loaded before the script runs.
 		window.addEventListener('DOMContentLoaded', () => {
 
 			// --- Theme Toggle Logic ---
@@ -1204,27 +1213,6 @@
 				localStorage.setItem('theme', isDark ? 'dark' : 'light');
 			});
 
-
-			// --- Interactive Tabs Logic ---
-			const tabsContainer = document.getElementById('tabs-container');
-			const tabsContent = document.getElementById('tabs-content');
-			const tabContents = {
-				'1': "Content for Profile. This shows user information.",
-				'2': "Content for Settings. Here you can configure your preferences.",
-				'3': "Content for Billing. View your invoices and payment methods."
-			};
-			if (tabsContainer) {
-				tabsContainer.addEventListener('click', (e) => {
-					if (e.target.classList.contains('tab')) {
-						tabsContainer.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-						e.target.classList.add('active');
-						const tabNumber = e.target.dataset.tab;
-						tabsContent.textContent = tabContents[tabNumber];
-					}
-				});
-			}
-
-
 			// --- Modal Logic ---
 			const openModalBtn = document.getElementById('open-modal-btn');
 			const closeModalBtn = document.getElementById('close-modal-btn');
@@ -1235,15 +1223,25 @@
 			if (closeModalBtn && modalOverlay) {
 				closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('visible'));
 			}
+			// Close modal on overlay click
+			if (modalOverlay) {
+				modalOverlay.addEventListener('click', (e) => {
+					if (e.target === modalOverlay) {
+						modalOverlay.classList.remove('visible');
+					}
+				});
+			}
 
 
 			// --- Toast Logic ---
 			const showToastBtn = document.getElementById('show-toast-btn');
 			const toast = document.getElementById('toast');
 			if (showToastBtn && toast) {
+				let toastTimeout;
 				showToastBtn.addEventListener('click', () => {
+					clearTimeout(toastTimeout);
 					toast.classList.add('visible');
-					setTimeout(() => {
+					toastTimeout = setTimeout(() => {
 						toast.classList.remove('visible');
 					}, 3000);
 				});
@@ -1258,15 +1256,19 @@
 					if (header) {
 						const content = header.nextElementSibling;
 						const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+						// Optional: Close other open accordions
+						// const allHeaders = accordion.querySelectorAll('.accordion-header');
+						// allHeaders.forEach(h => {
+						// 	h.setAttribute('aria-expanded', 'false');
+						// 	h.nextElementSibling.style.maxHeight = '0';
+						// });
+
 						header.setAttribute('aria-expanded', !isExpanded);
 						if (!isExpanded) {
 							content.style.maxHeight = content.scrollHeight + 'px';
-							content.style.paddingTop = '8px';
-							content.style.paddingBottom = '16px';
 						} else {
 							content.style.maxHeight = '0';
-							content.style.paddingTop = '0';
-							content.style.paddingBottom = '0';
 						}
 					}
 				});
