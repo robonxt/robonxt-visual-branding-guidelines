@@ -284,6 +284,27 @@ Dropdowns provide a list of actions or options in a temporary menu that appears 
 -   **Motion**:
     -   The menu should fade and translate into view using `duration-medium` (300ms) for a smooth appearance.
 
+### Pill Selector (Tab Navigation)
+
+A primary navigation component used to switch between a small, mutually exclusive set of views. It provides clear visual feedback with a sliding "pill" indicator that animates smoothly between the active and inactive states.
+
+-   **Structure:**
+    -   **Track (`.tab-list`):** A container with a `radius-full` background that acts as the track for the slider.
+    -   **Pill Slider (`.tab-slider`):** An absolutely positioned element with a background, `radius-full`, and `shadow-sm`. Its width and position are controlled by JavaScript to align with the active tab.
+    -   **Tab Button (`.tab-button`):** The individual, clickable navigation items. The active tab receives a distinct text color.
+-   **Primitives:**
+    -   **Corner Radius:** `radius-full` for both the track and the sliding pill.
+    -   **Elevation:** `shadow-sm` on the pill slider to lift it slightly off the track.
+-   **Layout & Spacing:**
+    -   Internal padding on the track provides space around the buttons.
+    -   Buttons use `space-sm` for horizontal padding.
+-   **Motion:**
+    -   The pill slider animates its `transform` and `width` properties using `duration-medium` and the standard easing curve for a fluid, responsive feel as the user clicks between tabs.
+-   **Behavior (JavaScript-driven):**
+    -   The component's state is managed via the URL hash (`#home`, `#about`), enabling deep linking and browser history support.
+    -   JavaScript calculates the size and position of the active tab button on click or page load and animates the pill slider to match.
+    -   The slider position is recalculated on window resize to ensure it remains correctly aligned in responsive layouts.
+
 ---
 
 ## 8. Theming System
