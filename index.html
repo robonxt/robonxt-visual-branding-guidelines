@@ -62,7 +62,7 @@
 
 			/* RAW COLORS */
 			--teal: #14B8A6;
-			--crimson: #D94452;
+			--bold-red: #B91C1C;
 			--green: #22C55E;
 			--amber: #F59E0B;
 			--paper: #F5F7FA;
@@ -76,9 +76,9 @@
 
 		[data-theme="light"] {
 			--color-primary: var(--teal);
-			--color-accent: var(--crimson);
+			--color-accent: var(--bold-red);
 			--color-background: var(--paper);
-			--color-surface: var(--white);
+			--color-surface: var(--paper);
 			--color-text-high: var(--slate);
 			--color-text-medium: var(--medium-gray);
 			--color-text-low: var(--light-gray);
@@ -86,12 +86,12 @@
 			--color-border-focus: var(--teal);
 			--color-success: var(--green);
 			--color-warning: var(--amber);
-			--color-error: var(--crimson);
+			--color-error: var(--bold-red);
 		}
 
 		[data-theme="dark"] {
 			--color-primary: var(--teal);
-			--color-accent: var(--crimson);
+			--color-accent: var(--bold-red);
 			--color-background: var(--deep-onyx);
 			--color-surface: var(--onyx);
 			--color-text-high: var(--paper);
@@ -101,7 +101,7 @@
 			--color-border-focus: var(--teal);
 			--color-success: var(--green);
 			--color-warning: var(--amber);
-			--color-error: var(--crimson);
+			--color-error: var(--bold-red);
 		}
 
 		/*-------------------------------------------*/
@@ -541,7 +541,7 @@
 		.alert-error {
 			background-color: #FEF2F2;
 			border-color: #FECACA;
-			color: #B91C1C;
+			color: var(--color-error);
 		}
 
 		[data-theme="dark"] .alert-success {
@@ -863,9 +863,9 @@
 					<div class="swatch-hex">#14B8A6</div>
 				</div>
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--crimson);"></div>
-					<div class="swatch-name">Crimson (Accent)</div>
-					<div class="swatch-hex">#D94452</div>
+					<div class="swatch-color" style="background-color: var(--bold-red);"></div>
+					<div class="swatch-name">Bold Red (Accent)</div>
+					<div class="swatch-hex">#B91C1C</div>
 				</div>
 				<div class="color-swatch">
 					<div class="swatch-color" style="background-color: var(--green);"></div>
