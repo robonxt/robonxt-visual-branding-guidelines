@@ -290,7 +290,7 @@ A primary navigation component used to switch between a small, mutually exclusiv
 
 -   **Structure:**
     -   **Track (`.tab-list`):** A container with a `radius-full` background that acts as the track for the slider.
-    -   **Pill Slider (`.tab-slider`):** An absolutely positioned element with a background, `radius-full`, and `shadow-sm`. Its width and position are controlled by JavaScript to align with the active tab.
+    -   **Pill Slider (`.tab-slider`):** An absolutely positioned element with a background, `radius-full`, and `shadow-sm`. Its width and position are controlled by JavaScript to align with the active tab. Can be colored.
     -   **Tab Button (`.tab-button`):** The individual, clickable navigation items. The active tab receives a distinct text color.
 -   **Primitives:**
     -   **Corner Radius:** `radius-full` for both the track and the sliding pill.

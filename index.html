@@ -824,6 +824,100 @@
 			background-color: var(--color-primary);
 			border-radius: var(--radius-full);
 		}
+
+		/* PILL SELECTOR */
+		.pill-selector-group {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			background-color: var(--color-background);
+			border-radius: var(--radius-full);
+			padding: 4px;
+			border: var(--stroke-sm) solid var(--color-border-default);
+		}
+
+		.btn-pill {
+			font: var(--font-label);
+			padding: var(--space-xs) var(--space-sm);
+			border-radius: var(--radius-full);
+			border: none;
+			background-color: transparent;
+			color: var(--color-text-medium);
+			cursor: pointer;
+			transition: color var(--duration-medium) var(--easing);
+			z-index: 1;
+		}
+
+		.btn-pill.active {
+			color: var(--white);
+		}
+
+		.pill-slider {
+			position: absolute;
+			top: 4px;
+			left: 4px;
+			background-color: var(--color-primary);
+			border-radius: var(--radius-full);
+			box-shadow: var(--shadow-sm);
+			transition: transform var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
+			z-index: 0;
+		}
+
+		/* SLIDER */
+		.slider-container {
+			position: relative;
+			padding-top: var(--space-sm);
+		}
+
+		.slider {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 100%;
+			height: 8px;
+			background: var(--color-border-default);
+			border-radius: var(--radius-full);
+			outline: none;
+			opacity: 0.9;
+			transition: opacity .2s;
+		}
+
+		.slider:hover {
+			opacity: 1;
+		}
+
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			background: var(--color-primary);
+			border-radius: 50%;
+			cursor: pointer;
+			border: 2px solid var(--color-surface);
+		}
+
+		.slider::-moz-range-thumb {
+			width: 20px;
+			height: 20px;
+			background: var(--color-primary);
+			border-radius: 50%;
+			cursor: pointer;
+			border: 2px solid var(--color-surface);
+		}
+
+		.slider-value-label {
+			position: absolute;
+			top: -10px;
+			background-color: var(--color-text-high);
+			color: var(--color-surface);
+			padding: 2px 6px;
+			border-radius: var(--radius-sm);
+			font: var(--font-micro);
+			transform: translateX(-50%);
+			white-space: nowrap;
+			opacity: 0;
+			transition: opacity var(--duration-quick);
+		}
 	</style>
 </head>
 
@@ -987,10 +1081,25 @@
 							</div>
 						</div>
 					</div>
-					<div class="ds-interactive-card ds-surface">
+					<div class="ds-surface ds-interactive-card">
 						<h3>Interactive Card</h3>
-						<p>This card lifts on hover, using `shadow-md` by default and `shadow-lg` on interaction. It's
-							perfect for linking to other pages or summarizing content.</p>
+						<p class="caption">This surface has hover and shadow effects, making it suitable for clickable cards that link to other pages or trigger actions.</p>
+					</div>
+					<div class="ds-surface">
+						<h3>Pill Selector</h3>
+						<div class="pill-selector-group" id="pill-selector-1">
+							<button class="btn-pill active" data-value="daily">Daily</button>
+							<button class="btn-pill" data-value="monthly">Monthly</button>
+							<button class="btn-pill" data-value="yearly">Yearly</button>
+						</div>
+						<p class="caption">Selected: <span id="pill-value-1">daily</span></p>
+					</div>
+					<div class="ds-surface">
+						<h3>Slider</h3>
+						<div class="slider-container">
+							<input type="range" min="0" max="100" value="50" class="slider" id="my-slider">
+							<div class="slider-value-label">50</div>
+						</div>
 					</div>
 				</div>
 				<!-- Column 2 -->
@@ -1153,6 +1262,72 @@
 						});
 					}
 				});
+			}
+
+			// --- PILL SELECTOR LOGIC ---
+			function setupPillSelector(selectorId, valueDisplayId) {
+				const group = document.getElementById(selectorId);
+				if (!group) return;
+
+				const valueDisplay = document.getElementById(valueDisplayId);
+				const buttons = group.querySelectorAll('.btn-pill');
+				const slider = document.createElement('div');
+				slider.className = 'pill-slider';
+				group.prepend(slider);
+
+				function updateSlider(activeButton) {
+					if (!activeButton) return;
+					const rect = activeButton.getBoundingClientRect();
+					const groupRect = group.getBoundingClientRect();
+					slider.style.width = `${rect.width}px`;
+					slider.style.height = `${rect.height}px`;
+					slider.style.transform = `translateX(${rect.left - groupRect.left - 4}px)`;
+				}
+
+				group.addEventListener('click', (e) => {
+					if (e.target.classList.contains('btn-pill')) {
+						buttons.forEach(btn => btn.classList.remove('active'));
+						e.target.classList.add('active');
+						updateSlider(e.target);
+						if (valueDisplay) {
+							valueDisplay.textContent = e.target.dataset.value;
+						}
+					}
+				});
+
+				const initialActive = group.querySelector('.btn-pill.active');
+				if (initialActive) {
+					updateSlider(initialActive);
+				}
+				window.addEventListener('resize', () => {
+					const active = group.querySelector('.btn-pill.active');
+					if(active) updateSlider(active);
+				});
+			}
+
+			setupPillSelector('pill-selector-1', 'pill-value-1');
+
+			// --- SLIDER LOGIC ---
+			const slider = document.getElementById('my-slider');
+			const sliderValueLabel = document.querySelector('.slider-value-label');
+
+			if (slider && sliderValueLabel) {
+				function updateSliderLabel(value) {
+					const percent = (value - slider.min) / (slider.max - slider.min);
+					const labelPosition = percent * (slider.offsetWidth - 20) + 10;
+					sliderValueLabel.style.left = `${labelPosition}px`;
+					sliderValueLabel.textContent = value;
+				}
+
+				slider.addEventListener('input', () => updateSliderLabel(slider.value));
+
+				slider.addEventListener('mouseenter', () => sliderValueLabel.style.opacity = '1');
+				slider.addEventListener('mouseleave', () => sliderValueLabel.style.opacity = '0');
+				slider.addEventListener('mousedown', () => sliderValueLabel.style.opacity = '1');
+				slider.addEventListener('mouseup', () => sliderValueLabel.style.opacity = '0');
+
+				// Initial position
+				updateSliderLabel(slider.value);
 			}
 		});
 	</script>
