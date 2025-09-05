@@ -9,7 +9,7 @@
 	<!-- 1. FONT & ICONS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
@@ -21,36 +21,29 @@
 			/* FONT FAMILY */
 			--font-family: 'Inter', sans-serif;
 
-			/* TYPOGRAPHY SCALE */
-			/* Use fluid sizes with clamp() to avoid overflow on small screens */
-			--font-jumbo: 900 clamp(3.5rem, 12vw, 10rem)/1.3 var(--font-family);
-			--font-display-xl: 700 clamp(2.5rem, 8vw, 6rem)/1.3 var(--font-family);
-			--font-h1: 700 clamp(1.5rem, 5vw, 2.25rem)/1.3 var(--font-family);
+			/* TYPOGRAPHY SCALE (from README) */
+			--font-h1: 700 2.25rem/1.3 var(--font-family);
 			--font-h2: 600 1.5rem/1.3 var(--font-family);
 			--font-h3: 600 1.25rem/1.3 var(--font-family);
-			--font-body-lead: 400 1.125rem/1.6 var(--font-family);
 			--font-body-base: 400 1rem/1.6 var(--font-family);
 			--font-label: 500 0.875rem/1.6 var(--font-family);
 			--font-caption: 400 0.875rem/1.6 var(--font-family);
-			--font-micro: 400 0.75rem/1.6 var(--font-family);
-			--font-fine-print: 400 0.625rem/1.6 var(--font-family);
 			--heading-letter-spacing: -1%;
 
-			/* SPACING (8-Point Grid) */
+			/* SPACING (8-Point Grid from README) */
 			--space-xs: 8px;
 			--space-sm: 16px;
 			--space-md: 24px;
 			--space-lg: 32px;
 			--space-xl: 48px;
-			--space-2xl: 64px;
 
 			/* CORE PRIMITIVES */
 			--radius-sm: 4px;
 			--radius-md: 8px;
 			--radius-lg: 16px;
 			--radius-full: 9999px;
-			--stroke-sm: 1px;
-			--stroke-md: 2px;
+			--stroke-sm: 1.5px;
+			--stroke-md: 3px;
 			--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 			--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 			--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -61,48 +54,56 @@
 			--duration-slow: 500ms;
 			--easing: cubic-bezier(0.4, 0, 0.2, 1);
 
-			/* RAW COLORS */
-			--teal: #14B8A6;
-			--bold-red: #B91C1C;
-			--green: #22C55E;
-			--amber: #F59E0B;
-			--paper: #F5F7FA;
+			/* RAW COLORS (from tokens.json) */
+			/* Brand */
+			--brand-teal: #14B8A6;
+			--brand-red: #B91C1C;
+			--brand-soft-green: #6EE7B7;
+			--brand-slate: #343F4B;
+			/* Functional */
+			--functional-success: #059669;
+			--functional-warning: #D97706;
+			--functional-danger: #DC2626;
+			/* UI Neutrals */
 			--white: #FFFFFF;
-			--light-gray: #E1E5EA;
-			--medium-gray: #8A94A6;
-			--slate: #343F4B;
-			--onyx: #1F2933;
-			--deep-onyx: #161F27;
+			--gray-900: #111827;
+			--gray-800: #1F2937;
+			--gray-700: #374151;
+			--gray-600: #4B5563;
+			--gray-500: #6B7280;
+			--gray-300: #D1D5DB;
+			--gray-200: #E5E7EB;
 		}
 
+		/* THEME DEFINITIONS (from README) */
 		[data-theme="light"] {
-			--color-primary: var(--teal);
-			--color-accent: var(--bold-red);
-			--color-background: var(--paper);
-			--color-surface: var(--paper);
-			--color-text-high: var(--slate);
-			--color-text-medium: var(--medium-gray);
-			--color-text-low: var(--light-gray);
-			--color-border-default: var(--light-gray);
-			--color-border-focus: var(--teal);
-			--color-success: var(--green);
-			--color-warning: var(--amber);
-			--color-error: var(--bold-red);
+			--color-primary: var(--brand-teal);
+			--color-secondary: var(--brand-red);
+			--color-background: var(--white);
+			--color-surface: var(--white);
+			--color-text-high: var(--gray-900);
+			--color-text-medium: var(--gray-600);
+			--color-text-low: var(--gray-500);
+			--color-border-default: var(--gray-200);
+			--color-border-focus: var(--brand-teal);
+			--color-success: var(--functional-success);
+			--color-warning: var(--functional-warning);
+			--color-error: var(--functional-danger);
 		}
 
 		[data-theme="dark"] {
-			--color-primary: var(--teal);
-			--color-accent: var(--bold-red);
-			--color-background: var(--deep-onyx);
-			--color-surface: var(--onyx);
-			--color-text-high: var(--paper);
-			--color-text-medium: var(--medium-gray);
-			--color-text-low: var(--slate);
-			--color-border-default: var(--slate);
-			--color-border-focus: var(--teal);
-			--color-success: var(--green);
-			--color-warning: var(--amber);
-			--color-error: var(--bold-red);
+			--color-primary: var(--brand-teal);
+			--color-secondary: var(--brand-red);
+			--color-background: var(--gray-900);
+			--color-surface: var(--gray-800);
+			--color-text-high: var(--white);
+			--color-text-medium: var(--gray-300);
+			--color-text-low: var(--gray-500);
+			--color-border-default: var(--gray-700);
+			--color-border-focus: var(--brand-teal);
+			--color-success: var(--functional-success);
+			--color-warning: var(--functional-warning);
+			--color-error: var(--functional-danger);
 		}
 
 		/*-------------------------------------------*/
@@ -137,7 +138,7 @@
 			color: var(--color-text-high);
 			font: var(--font-body-base);
 			transition: background-color var(--duration-medium), color var(--duration-medium);
-			overflow-x: hidden; /* prevent accidental horizontal scroll */
+			overflow-x: hidden;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 		}
@@ -150,7 +151,6 @@
 		h6 {
 			margin: 0;
 			letter-spacing: var(--heading-letter-spacing);
-			/* allow long words to wrap to avoid overflow */
 			overflow-wrap: anywhere;
 		}
 
@@ -189,14 +189,14 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: var(--space-xs); /* compact vertically; container handles horizontal padding */
-			/* Floating surface look */
+			padding: var(--space-md);
 			background-color: var(--color-surface);
 			border: var(--stroke-sm) solid var(--color-border-default);
 			border-radius: var(--radius-lg);
 			box-shadow: var(--shadow-md);
 			position: sticky;
-			top: 0;
+			top: var(--space-sm);
+			margin-top: var(--space-sm);
 			z-index: 10;
 			transition: background-color var(--duration-medium), box-shadow var(--duration-medium), border-color var(--duration-medium);
 		}
@@ -217,16 +217,11 @@
 
 		.hero {
 			text-align: center;
-			padding: var(--space-2xl) 0;
-		}
-
-		.hero h1 {
-			font: var(--font-display-xl);
-			letter-spacing: -2px;
+			padding: var(--space-xl) 0;
 		}
 
 		.hero p {
-			font: var(--font-body-lead);
+			font: var(--font-body-base);
 			color: var(--color-text-medium);
 			max-width: 600px;
 			margin: var(--space-md) auto 0;
@@ -284,7 +279,7 @@
 		.page-footer {
 			text-align: center;
 			padding: var(--space-lg);
-			margin-top: var(--space-2xl);
+			margin-top: var(--space-xl);
 			border-top: var(--stroke-sm) solid var(--color-border-default);
 			font: var(--font-caption);
 			color: var(--color-text-medium);
@@ -362,13 +357,12 @@
 			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 			gap: var(--space-sm);
 		}
-		
+
 		.color-swatch {
 			border-radius: var(--radius-md);
 			padding: var(--space-sm);
 			border: var(--stroke-sm) solid var(--color-border-default);
 			background-color: var(--color-surface);
-			/* Interactive card behavior */
 			cursor: pointer;
 			box-shadow: var(--shadow-md);
 			transition: transform var(--duration-quick) var(--easing), box-shadow var(--duration-quick) var(--easing), border-color var(--duration-quick) var(--easing);
@@ -384,7 +378,7 @@
 			outline: var(--stroke-md) solid var(--color-border-focus);
 			outline-offset: 2px;
 		}
-		
+
 		.color-swatch .swatch-color {
 			height: 80px;
 			width: 100%;
@@ -398,11 +392,10 @@
 		}
 
 		.color-swatch .swatch-hex {
-			font: var(--font-micro);
+			font: var(--font-caption);
 			color: var(--color-text-medium);
 		}
 
-		/* Brief feedback when copied */
 		.color-swatch .swatch-hex.copied {
 			color: var(--color-primary);
 			font-weight: 600;
@@ -426,14 +419,6 @@
 			color: var(--color-text-medium);
 		}
 
-		.type-showcase .text-jumbo {
-			font: var(--font-jumbo);
-		}
-
-		.type-showcase .text-display-xl {
-			font: var(--font-display-xl);
-		}
-
 		.type-showcase .text-h1 {
 			font: var(--font-h1);
 			letter-spacing: var(--heading-letter-spacing);
@@ -449,10 +434,6 @@
 			letter-spacing: var(--heading-letter-spacing);
 		}
 
-		.type-showcase .text-body-lead {
-			font: var(--font-body-lead);
-		}
-
 		.type-showcase .text-body-base {
 			font: var(--font-body-base);
 		}
@@ -463,14 +444,6 @@
 
 		.type-showcase .text-caption {
 			font: var(--font-caption);
-		}
-
-		.type-showcase .text-micro {
-			font: var(--font-micro);
-		}
-
-		.type-showcase .text-fine-print {
-			font: var(--font-fine-print);
 		}
 
 		/* BUTTONS */
@@ -504,15 +477,17 @@
 
 		.btn-primary:hover:not(:disabled) {
 			background-color: #0F766E;
+			/* Darker teal */
 		}
 
 		.btn-secondary {
-			background-color: var(--color-accent);
+			background-color: var(--color-secondary);
 			color: var(--white);
 		}
 
 		.btn-secondary:hover:not(:disabled) {
-			background-color: #B91C1C;
+			background-color: #991B1B;
+			/* Darker red */
 		}
 
 		.btn-outline {
@@ -561,9 +536,9 @@
 		}
 
 		.alert-success {
-			background-color: #ECFDF5;
+			background-color: #F0FDF4;
 			border-color: #A7F3D0;
-			color: #065F46;
+			color: #047857;
 		}
 
 		.alert-warning {
@@ -575,7 +550,7 @@
 		.alert-error {
 			background-color: #FEF2F2;
 			border-color: #FECACA;
-			color: var(--color-error);
+			color: #B91C1C;
 		}
 
 		[data-theme="dark"] .alert-success {
@@ -594,6 +569,11 @@
 			background-color: #991B1B;
 			border-color: #F87171;
 			color: #FEE2E2;
+		}
+
+		.alert-error,
+		[data-theme="dark"] .alert-error {
+			color: var(--color-error);
 		}
 
 		/* INPUT FIELD */
@@ -946,7 +926,7 @@
 			color: var(--color-surface);
 			padding: 2px 6px;
 			border-radius: var(--radius-sm);
-			font: var(--font-micro);
+			font: var(--font-caption);
 			transform: translateX(-50%);
 			white-space: nowrap;
 			opacity: 0;
@@ -986,29 +966,29 @@
 				consistency. Click the theme switch in the header to see them change.</p>
 			<div class="color-grid" style="margin-top: var(--space-lg);">
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--teal);"></div>
-					<div class="swatch-name">Teal (Primary)</div>
+					<div class="swatch-color" style="background-color: var(--brand-teal);"></div>
+					<div class="swatch-name">Brand Teal</div>
 					<div class="swatch-hex">#14B8A6</div>
 				</div>
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--bold-red);"></div>
-					<div class="swatch-name">Bold Red (Accent)</div>
+					<div class="swatch-color" style="background-color: var(--brand-red);"></div>
+					<div class="swatch-name">Brand Red</div>
 					<div class="swatch-hex">#B91C1C</div>
 				</div>
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--green);"></div>
-					<div class="swatch-name">Green (Success)</div>
-					<div class="swatch-hex">#22C55E</div>
+					<div class="swatch-color" style="background-color: var(--functional-success);"></div>
+					<div class="swatch-name">Success Green</div>
+					<div class="swatch-hex">#059669</div>
 				</div>
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--amber);"></div>
-					<div class="swatch-name">Amber (Warning)</div>
-					<div class="swatch-hex">#F59E0B</div>
+					<div class="swatch-color" style="background-color: var(--functional-warning);"></div>
+					<div class="swatch-name">Warning Amber</div>
+					<div class="swatch-hex">#D97706</div>
 				</div>
 				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--color-background);"></div>
-					<div class="swatch-name">Page Background</div>
-					<div class="swatch-hex">var(--color-background)</div>
+					<div class="swatch-color" style="background-color: var(--functional-danger);"></div>
+					<div class="swatch-name">Danger Red</div>
+					<div class="swatch-hex">#DC2626</div>
 				</div>
 				<div class="color-swatch">
 					<div class="swatch-color" style="background-color: var(--color-surface);"></div>
@@ -1033,9 +1013,6 @@
 			<p>A single, highly-legible font family, `Inter`, is used across the entire system to ensure consistency and
 				clarity. The scale is designed for clear hierarchy on any screen size.</p>
 			<div class="ds-surface" style="margin-top: var(--space-lg);">
-				<div class="type-showcase"><span class="role">Display XL / 96px Bold</span>
-					<p class="text-display-xl">Hero Title</p>
-				</div>
 				<div class="type-showcase"><span class="role">Heading 1 / 36px Bold</span>
 					<p class="text-h1">Primary Page Title</p>
 				</div>
@@ -1044,10 +1021,6 @@
 				</div>
 				<div class="type-showcase"><span class="role">Heading 3 / 20px Semi-Bold</span>
 					<p class="text-h3">Component Title</p>
-				</div>
-				<div class="type-showcase"><span class="role">Body (Lead) / 18px Regular</span>
-					<p class="text-body-lead">This is an introductory paragraph. It's slightly larger to grab the user's
-						attention and lead them into the main content.</p>
 				</div>
 				<div class="type-showcase"><span class="role">Body (Base) / 16px Regular</span>
 					<p class="text-body-base">This is the default body text. All the main content, like this very
@@ -1117,7 +1090,8 @@
 					</div>
 					<div class="ds-surface ds-interactive-card">
 						<h3>Interactive Card</h3>
-						<p class="caption">This surface has hover and shadow effects, making it suitable for clickable cards that link to other pages or trigger actions.</p>
+						<p class="text-caption">This surface has hover and shadow effects, making it suitable for
+							clickable cards that link to other pages or trigger actions.</p>
 					</div>
 					<div class="ds-surface">
 						<h3>Pill Selector</h3>
@@ -1126,7 +1100,7 @@
 							<button class="btn-pill" data-value="monthly">Monthly</button>
 							<button class="btn-pill" data-value="yearly">Yearly</button>
 						</div>
-						<p class="caption">Selected: <span id="pill-value-1">daily</span></p>
+						<p class="text-caption">Selected: <span id="pill-value-1">daily</span></p>
 					</div>
 					<div class="ds-surface">
 						<h3>Slider</h3>
@@ -1282,17 +1256,11 @@
 				tabContainer.addEventListener('click', (event) => {
 					if (event.target.classList.contains('tab-trigger')) {
 						const targetTabId = event.target.dataset.tab;
-
-						// Update triggers
 						tabContainer.querySelectorAll('.tab-trigger').forEach(trigger => trigger.classList.remove('active'));
 						event.target.classList.add('active');
-
-						// Update panes
 						document.querySelectorAll('.tab-pane').forEach(pane => {
 							pane.classList.remove('active');
-							if (pane.id === targetTabId) {
-								pane.classList.add('active');
-							}
+							if (pane.id === targetTabId) pane.classList.add('active');
 						});
 					}
 				});
@@ -1302,7 +1270,6 @@
 			function setupPillSelector(selectorId, valueDisplayId) {
 				const group = document.getElementById(selectorId);
 				if (!group) return;
-
 				const valueDisplay = document.getElementById(valueDisplayId);
 				const buttons = group.querySelectorAll('.btn-pill');
 				const slider = document.createElement('div');
@@ -1323,22 +1290,17 @@
 						buttons.forEach(btn => btn.classList.remove('active'));
 						e.target.classList.add('active');
 						updateSlider(e.target);
-						if (valueDisplay) {
-							valueDisplay.textContent = e.target.dataset.value;
-						}
+						if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
 					}
 				});
 
 				const initialActive = group.querySelector('.btn-pill.active');
-				if (initialActive) {
-					updateSlider(initialActive);
-				}
+				if (initialActive) updateSlider(initialActive);
 				window.addEventListener('resize', () => {
 					const active = group.querySelector('.btn-pill.active');
-					if(active) updateSlider(active);
+					if (active) updateSlider(active);
 				});
 			}
-
 			setupPillSelector('pill-selector-1', 'pill-value-1');
 
 			// --- SLIDER LOGIC ---
@@ -1352,27 +1314,19 @@
 					sliderValueLabel.style.left = `${labelPosition}px`;
 					sliderValueLabel.textContent = value;
 				}
-
 				slider.addEventListener('input', () => updateSliderLabel(slider.value));
-
 				slider.addEventListener('mouseenter', () => sliderValueLabel.style.opacity = '1');
 				slider.addEventListener('mouseleave', () => sliderValueLabel.style.opacity = '0');
 				slider.addEventListener('mousedown', () => sliderValueLabel.style.opacity = '1');
 				slider.addEventListener('mouseup', () => sliderValueLabel.style.opacity = '0');
-
-				// Initial position
 				updateSliderLabel(slider.value);
 			}
 
 			// --- COLOR SWATCH COPY LOGIC ---
 			function rgbToHex(rgbStr) {
-				// Handles rgb(a) strings like "rgb(20, 184, 166)" or "rgba(20, 184, 166, 1)"
 				const match = rgbStr.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
 				if (!match) return null;
-				const r = Number(match[1]).toString(16).padStart(2, '0');
-				const g = Number(match[2]).toString(16).padStart(2, '0');
-				const b = Number(match[3]).toString(16).padStart(2, '0');
-				return `#${r}${g}${b}`.toUpperCase();
+				return `#${Number(match[1]).toString(16).padStart(2, '0')}${Number(match[2]).toString(16).padStart(2, '0')}${Number(match[3]).toString(16).padStart(2, '0')}`.toUpperCase();
 			}
 
 			async function copyTextToClipboard(text) {
@@ -1381,63 +1335,40 @@
 						await navigator.clipboard.writeText(text);
 						return true;
 					}
-					// Fallback for non-secure contexts
 					const ta = document.createElement('textarea');
-					ta.value = text;
-					ta.style.position = 'fixed';
-					ta.style.opacity = '0';
+					ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
 					document.body.appendChild(ta);
-					ta.focus();
-					ta.select();
-					document.execCommand('copy');
+					ta.focus(); ta.select(); document.execCommand('copy');
 					document.body.removeChild(ta);
 					return true;
-				} catch (e) {
-					return false;
-				}
+				} catch (e) { return false; }
 			}
 
 			function setupColorSwatches() {
-				const swatches = document.querySelectorAll('.color-swatch');
-				swatches.forEach((swatch) => {
-					// Make accessible as a button-like card
+				document.querySelectorAll('.color-swatch').forEach((swatch) => {
 					swatch.setAttribute('tabindex', '0');
 					swatch.setAttribute('role', 'button');
 					const colorEl = swatch.querySelector('.swatch-color');
 					const hexLabel = swatch.querySelector('.swatch-hex');
-
-					function getComputedHex() {
-						if (!colorEl) return null;
-						const bg = getComputedStyle(colorEl).backgroundColor;
-						return rgbToHex(bg);
-					}
+					const originalHexText = hexLabel.textContent;
 
 					async function handleCopy() {
-						const hex = getComputedHex();
+						const computedStyle = getComputedStyle(colorEl).backgroundColor;
+						const hex = rgbToHex(computedStyle);
 						if (!hex) return;
 						const ok = await copyTextToClipboard(hex);
-						if (hexLabel) {
-							const original = hexLabel.textContent;
-							hexLabel.textContent = ok ? `Copied ${hex}` : hex;
-							hexLabel.classList.add('copied');
-							setTimeout(() => {
-								hexLabel.textContent = original;
-								hexLabel.classList.remove('copied');
-							}, 1200);
-						}
-						swatch.setAttribute('title', hex);
+						const originalText = hexLabel.textContent;
+						hexLabel.textContent = ok ? `Copied ${hex}` : hex;
+						hexLabel.classList.add('copied');
+						setTimeout(() => {
+							hexLabel.textContent = originalHexText;
+							hexLabel.classList.remove('copied');
+						}, 1200);
 					}
-
 					swatch.addEventListener('click', handleCopy);
-					swatch.addEventListener('keydown', (e) => {
-						if (e.key === 'Enter' || e.key === ' ') {
-							e.preventDefault();
-							handleCopy();
-						}
-					});
+					swatch.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopy(); } });
 				});
 			}
-
 			setupColorSwatches();
 		});
 	</script>

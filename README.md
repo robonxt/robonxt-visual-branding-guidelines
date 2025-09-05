@@ -107,8 +107,8 @@ Core Elements are the primitive building blocks that create the look and feel of
 
 | Token | Value | Use Case |
 | :--- | :--- | :--- |
-| `stroke-sm` | 1px | **Default.** Borders, dividers. |
-| `stroke-md` | 2px | Focus rings, active state indicators. |
+| `stroke-sm` | 1.5px | **Default.** Borders, dividers. |
+| `stroke-md` | 3px | Focus rings, active state indicators. |
 
 ### 2.3. Elevation (Shadows)
 
