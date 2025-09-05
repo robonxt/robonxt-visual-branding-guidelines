@@ -185,21 +185,30 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: var(--space-sm) 0;
-			border-bottom: var(--stroke-sm) solid var(--color-border-default);
+			padding: var(--space-xs); /* compact vertically; container handles horizontal padding */
+			/* Floating surface look */
+			background-color: var(--color-surface);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-lg);
+			box-shadow: var(--shadow-md);
 			position: sticky;
 			top: 0;
-			background-color: var(--color-background);
 			z-index: 10;
-			transition: background-color var(--duration-medium);
+			transition: background-color var(--duration-medium), box-shadow var(--duration-medium), border-color var(--duration-medium);
 		}
 
 		.brand-logo {
-			font: var(--font-h2);
+			font: var(--font-h3);
 			color: var(--color-primary);
 			display: flex;
 			align-items: center;
 			gap: var(--space-xs);
+		}
+
+		@media (min-width: 640px) {
+			.brand-logo {
+				font: var(--font-h2);
+			}
 		}
 
 		.hero {
@@ -925,7 +934,7 @@
 
 	<header class="page-header container">
 		<div class="brand-logo">
-			<span class="material-symbols-rounded" style="font-size: 2.25rem;">robot_2</span>
+			<span class="material-symbols-rounded">robot_2</span>
 			robonxt
 		</div>
 		<div class="theme-switch-wrapper">
