@@ -362,14 +362,29 @@
 			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 			gap: var(--space-sm);
 		}
-
+		
 		.color-swatch {
 			border-radius: var(--radius-md);
 			padding: var(--space-sm);
 			border: var(--stroke-sm) solid var(--color-border-default);
 			background-color: var(--color-surface);
+			/* Interactive card behavior */
+			cursor: pointer;
+			box-shadow: var(--shadow-md);
+			transition: transform var(--duration-quick) var(--easing), box-shadow var(--duration-quick) var(--easing), border-color var(--duration-quick) var(--easing);
+			user-select: none;
 		}
 
+		.color-swatch:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.color-swatch:focus-visible {
+			outline: var(--stroke-md) solid var(--color-border-focus);
+			outline-offset: 2px;
+		}
+		
 		.color-swatch .swatch-color {
 			height: 80px;
 			width: 100%;
@@ -385,6 +400,12 @@
 		.color-swatch .swatch-hex {
 			font: var(--font-micro);
 			color: var(--color-text-medium);
+		}
+
+		/* Brief feedback when copied */
+		.color-swatch .swatch-hex.copied {
+			color: var(--color-primary);
+			font-weight: 600;
 		}
 
 		/* TYPOGRAPHY SHOWCASE */
@@ -1342,6 +1363,82 @@
 				// Initial position
 				updateSliderLabel(slider.value);
 			}
+
+			// --- COLOR SWATCH COPY LOGIC ---
+			function rgbToHex(rgbStr) {
+				// Handles rgb(a) strings like "rgb(20, 184, 166)" or "rgba(20, 184, 166, 1)"
+				const match = rgbStr.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+				if (!match) return null;
+				const r = Number(match[1]).toString(16).padStart(2, '0');
+				const g = Number(match[2]).toString(16).padStart(2, '0');
+				const b = Number(match[3]).toString(16).padStart(2, '0');
+				return `#${r}${g}${b}`.toUpperCase();
+			}
+
+			async function copyTextToClipboard(text) {
+				try {
+					if (navigator.clipboard && window.isSecureContext) {
+						await navigator.clipboard.writeText(text);
+						return true;
+					}
+					// Fallback for non-secure contexts
+					const ta = document.createElement('textarea');
+					ta.value = text;
+					ta.style.position = 'fixed';
+					ta.style.opacity = '0';
+					document.body.appendChild(ta);
+					ta.focus();
+					ta.select();
+					document.execCommand('copy');
+					document.body.removeChild(ta);
+					return true;
+				} catch (e) {
+					return false;
+				}
+			}
+
+			function setupColorSwatches() {
+				const swatches = document.querySelectorAll('.color-swatch');
+				swatches.forEach((swatch) => {
+					// Make accessible as a button-like card
+					swatch.setAttribute('tabindex', '0');
+					swatch.setAttribute('role', 'button');
+					const colorEl = swatch.querySelector('.swatch-color');
+					const hexLabel = swatch.querySelector('.swatch-hex');
+
+					function getComputedHex() {
+						if (!colorEl) return null;
+						const bg = getComputedStyle(colorEl).backgroundColor;
+						return rgbToHex(bg);
+					}
+
+					async function handleCopy() {
+						const hex = getComputedHex();
+						if (!hex) return;
+						const ok = await copyTextToClipboard(hex);
+						if (hexLabel) {
+							const original = hexLabel.textContent;
+							hexLabel.textContent = ok ? `Copied ${hex}` : hex;
+							hexLabel.classList.add('copied');
+							setTimeout(() => {
+								hexLabel.textContent = original;
+								hexLabel.classList.remove('copied');
+							}, 1200);
+						}
+						swatch.setAttribute('title', hex);
+					}
+
+					swatch.addEventListener('click', handleCopy);
+					swatch.addEventListener('keydown', (e) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault();
+							handleCopy();
+						}
+					});
+				});
+			}
+
+			setupColorSwatches();
 		});
 	</script>
 </body>
