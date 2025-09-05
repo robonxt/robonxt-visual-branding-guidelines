@@ -22,9 +22,10 @@
 			--font-family: 'Inter', sans-serif;
 
 			/* TYPOGRAPHY SCALE */
-			--font-jumbo: 900 10rem/1.3 var(--font-family);
-			--font-display-xl: 700 6rem/1.3 var(--font-family);
-			--font-h1: 700 2.25rem/1.3 var(--font-family);
+			/* Use fluid sizes with clamp() to avoid overflow on small screens */
+			--font-jumbo: 900 clamp(3.5rem, 12vw, 10rem)/1.3 var(--font-family);
+			--font-display-xl: 700 clamp(2.5rem, 8vw, 6rem)/1.3 var(--font-family);
+			--font-h1: 700 clamp(1.5rem, 5vw, 2.25rem)/1.3 var(--font-family);
 			--font-h2: 600 1.5rem/1.3 var(--font-family);
 			--font-h3: 600 1.25rem/1.3 var(--font-family);
 			--font-body-lead: 400 1.125rem/1.6 var(--font-family);
@@ -136,6 +137,7 @@
 			color: var(--color-text-high);
 			font: var(--font-body-base);
 			transition: background-color var(--duration-medium), color var(--duration-medium);
+			overflow-x: hidden; /* prevent accidental horizontal scroll */
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 		}
@@ -148,6 +150,8 @@
 		h6 {
 			margin: 0;
 			letter-spacing: var(--heading-letter-spacing);
+			/* allow long words to wrap to avoid overflow */
+			overflow-wrap: anywhere;
 		}
 
 		h1 {
