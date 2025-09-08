@@ -10,24 +10,70 @@ Foundations are the fundamental building blocks of our design language.
 The "robonxt" brand persona is a confident, efficient expert with a witty, human touch.
 *   **Golden Rule:** **Clarity first, always.**
 
+#### Voice & Tone
+*   **Default Tone (90% of content):** Casual, clear, concise, and helpful. Uses simple language and contractions. The goal is to be an approachable expert.
+*   **The Clever Aside (10% of content):** In low-stakes moments (success messages, empty states), the brand can use witty, context-aware humor.
+*   **The Golden Rule for Voice:** Never use a joke if it gets in the way of clarity. For critical information like error messages, the tone is 100% professional and direct.
+
 ### 1.2. Color System
-Our color system is built for brand expression and accessibility. It is divided into three distinct palettes.
+Our color system is built for brand expression and accessibility.
 
-#### 1.2.1. Brand Palette
-These are the primary colors that define the brand's personality. They are used for interactive elements, logos, and high-emphasis marketing moments.
+#### 1.2.1. Logo Palette
+These colors are reserved for the official "robonxt" logo and related core brand assets. **They should not be used for interactive UI components like buttons or text** to maintain brand distinction.
 
-| Role | Color Name | Hex | Use Case |
-| :--- | :--- | :--- | :--- |
-| **Primary** | Brand Teal | `#14B8A6`| The main interactive color for CTAs, active states, and links. |
-| **Secondary** | Brand Red | `#B91C1C`| A high-emphasis accent for secondary actions. **Not for errors.** |
-| **Accent (Positive)** | Soft Green | `#6EE7B7`| For positive highlights, success illustrations, or gentle callouts. |
-| **Accent (Neutral)** | Slate | `#343F4B` | For sophisticated, non-vibrant accents in illustrations or backgrounds. |
+| Color Name | Hex |
+| :--- | :--- |
+| Logo Teal | `#14B8A6`|
+| Logo Red | `#B91C1C`|
+| Logo Slate | `#343F4B`|
+| Logo Ink | `#111827`|
 
-#### 1.2.2. Neutrals Palette
-Our neutrals are split into two groups: a high-contrast set for core UI and an extended set for creative flexibility.
+#### 1.2.2. Brand Palette
+Core interactive colors for the UI. The `500` or `600` shade is the default, with lighter shades for backgrounds/hovers and darker shades for active states.
 
+**Primary: Indigo**
+The main color for calls-to-action, links, and active states.
+
+| Token | Hex |
+| :--- | :--- |
+| `indigo-50` | `#EEF2FF` |
+| `indigo-100` | `#E0E7FF` |
+| `indigo-200` | `#C7D2FE` |
+| `indigo-300` | `#A5B4FC` |
+| `indigo-400` | `#818CF8` |
+| **`indigo-500`** | **`#6366F1`** |
+| **`indigo-600`** | **`#4F46E5`** |
+| `indigo-700` | `#4338CA` |
+| `indigo-800` | `#3730A3` |
+| `indigo-900` | `#312E81` |
+
+**Secondary: Fuchsia**
+A high-emphasis accent color for secondary actions.
+
+| Token | Hex |
+| :--- | :--- |
+| `fuchsia-50` | `#FDF4FF` |
+| `fuchsia-100` | `#FAE8FF` |
+| `fuchsia-200` | `#F5D0FE` |
+| `fuchsia-300` | `#F0ABFC` |
+| `fuchsia-400` | `#E879F9` |
+| **`fuchsia-500`** | **`#D946EF`** |
+| `fuchsia-600` | `#C026D3` |
+| `fuchsia-700` | `#A21CAF` |
+| `fuchsia-800` | `#86198F` |
+| `fuchsia-900` | `#701A75` |
+
+**Accents**
+For illustrations, highlights, or gentle callouts. Not for primary interaction.
+
+| Role | Color Name | Hex |
+| :--- | :--- | :--- |
+| **Positive** | Soft Green | `#6EE7B7` |
+| **Neutral** | Cool Gray | `#64748B` |
+
+#### 1.2.3. Neutrals Palette
 **UI Neutrals (High Contrast)**
-**Use this palette for all core UI surfaces, text, and borders.** It is designed to guarantee accessibility and consistency in both light and dark modes.
+Use this palette for all core UI surfaces, text, and borders.
 
 | Name | Hex | Light Mode Use | Dark Mode Use |
 | :--- | :--- | :--- | :--- |
@@ -36,21 +82,10 @@ Our neutrals are split into two groups: a high-contrast set for core UI and an e
 | **Text (Medium)** | `#4B5563` | Sub-headings, labels, helper text. | Medium-emphasis text (`#D1D5DB`) |
 | **Text (Low)** | `#9CA3AF` | Disabled text, decorative details. | Low-emphasis, disabled text (`#6B7280`) |
 | **Border** | `#E5E7EB` | Dividers, default borders. | Borders, dividers (`#374151`) |
-| **Surface (Dark)** | `#111827` | *(Not Used)* | Main page background |
-| **Surface Alt (Dark)** | `#1F2937`| *(Not Used)* | Component background (Cards, Modals) |
+| **Night** | `#0F172A` | *(Not Used)* | Main page background |
+| **Surface (Dark)** | `#1E293B`| *(Not Used)* | Component background (Cards, Modals) |
 
-**Extended Neutrals**
-Use this palette for marketing materials, backgrounds, illustrations, or decorative elements where high-contrast text is not directly applied.
-
-| Name | Hex | Primary Use Case |
-| :--- | :--- | :--- |
-| Paper | `#F5F7FA` | Subtle, off-white backgrounds for web pages or sections. |
-| Light Gray | `#E1E5EA` | Alternative, lighter border color. |
-| Medium Gray| `#8A94A6` | Mid-tone accents in illustrations. |
-| Onyx | `#1F2933` | Alternative dark surface for components in dark mode. |
-| Deep Onyx | `#161F27` | Alternative dark background for dark mode. |
-
-#### 1.2.3. Functional Palette
+#### 1.2.4. Functional Palette
 These colors communicate system status and must be used exclusively for that purpose.
 
 | Role | Color Name | Hex | Use Case |
@@ -60,8 +95,7 @@ These colors communicate system status and must be used exclusively for that pur
 | **Danger** | Danger Red | `#DC2626` | Error messages, destructive actions. |
 
 ### 1.3. Typography
-
-The system uses a single, highly-legible font family, `Inter`, to ensure consistency.
+The system uses a single, highly-legible font family, `Inter`.
 
 *   **Font Family:** `Inter`
 *   **Line Height:** `1.6` for body text, `1.3` for headings.
@@ -77,8 +111,7 @@ The system uses a single, highly-legible font family, `Inter`, to ensure consist
 | **Caption** | `0.875rem` / 14px | Regular (400) |
 
 ### 1.4. Spacing
-
-All spacing values are based on an **8-Point Grid System**. Use these tokens for all padding, margins, and gaps.
+All spacing values are based on an **8-Point Grid System**.
 
 | Token | Value | Use Case |
 | :--- | :--- | :--- |
@@ -91,8 +124,6 @@ All spacing values are based on an **8-Point Grid System**. Use these tokens for
 ---
 
 ## 2. Core Elements
-
-Core Elements are the primitive building blocks that create the look and feel of our components.
 
 ### 2.1. Corner Radius
 
@@ -119,11 +150,7 @@ Core Elements are the primitive building blocks that create the look and feel of
 | `shadow-lg` | Prominent shadow for critical overlays like Modals. |
 
 ### 2.4. Motion
-
-Motion provides feedback and guides the user's attention.
-
 *   **Easing:** All animations use `cubic-bezier(0.4, 0, 0.2, 1)`.
-*   **Default Duration:** `300ms` for standard state changes.
 
 | Token | Value | Use Case |
 | :--- | :--- | :--- |
@@ -135,34 +162,82 @@ Motion provides feedback and guides the user's attention.
 
 ## 3. Components
 
-Components are the reusable, interactive elements of the user interface. They are built by combining Foundations and Core Elements.
-
-### 3.1. Buttons
-
-Buttons trigger actions. Their style indicates their level of importance.
-
-*   **Primary:** Solid `Brand Teal` fill. For the most important action.
-*   **Secondary:** Solid `Brand Red` fill. For alternative, high-emphasis actions.
-*   **Outline:** Transparent with a border. For medium-emphasis actions.
-*   **Ghost:** Transparent with no border. For low-emphasis actions.
-
-### 3.2. Iconography
-
+### 3.1. Iconography
 *   **Library:** **Material Symbols**
 *   **Style:** **Rounded** (exclusively)
 *   **Sizing:** Must use the 8-point grid (`16px`, `24px`, `32px`). `24px` is the default.
 *   **Color:** Icons should inherit the color of the surrounding text (`currentColor`).
 
+### 3.2. Buttons
+*   **Primary:** Solid `Brand Indigo` fill. For the most important action.
+*   **Secondary:** Solid `Brand Fuchsia` fill. For alternative, high-emphasis actions.
+*   **Outline:** Transparent with a border. For medium-emphasis actions.
+*   **Ghost:** Transparent with no border. For low-emphasis actions.
+
 ### 3.3. Input Fields
-
-Inputs collect data from the user.
-
 *   **Primitives:** Use `radius-md` and `stroke-sm`.
-*   **States:** The label and border must re-color on `focus` (to `Brand Teal`) and `error` (to `Danger Red`) to provide clear feedback. The focus state must use `stroke-md` (2px).
+*   **States:** The label and border must re-color on `focus` (to `Brand Indigo`) and `error` (to `Danger Red`). The focus state must use `stroke-md`.
+*   **Spacing:** Label is `space-xs` from the container; internal padding is `space-sm`.
 
-### 3.4. Modals
+### 3.4. Alerts
+*   **Structure:** Icon + Title/Description + Optional Close Button.
+*   **Types:** Must use the functional colors (`Success`, `Warning`, `Danger`) and a neutral `Info` style.
 
-Modals are overlays used for critical tasks or confirmations.
+### 3.5. Header
+*   **Purpose:** A persistent surface for global navigation and branding.
+*   **Layout:** Uses Flexbox (`justify-content: space-between`) to align the logo to the left and actions to the right.
+*   **Spacing:** Horizontal padding is `space-md` (24px) on desktop and `space-sm` (16px) on mobile.
+*   **Separation:** A `stroke-sm` bottom border using `color-border-default` separates it from page content.
+*   **Behavior:** Sticky to the top of the viewport.
 
+### 3.6. Dropdowns
+*   **Purpose:** A menu that appears when a user interacts with a trigger element.
+*   **Structure:** Composed of a trigger `button` and a menu container.
+*   **Primitives:** The menu uses `radius-lg`, `shadow-md`, and a `stroke-sm` border.
+*   **Spacing:** Padding within the menu is `space-xs`. Interactive items inside use `radius-md` with `space-xs` vertical and `space-sm` horizontal padding.
+*   **Motion:** Fades and translates into view using `duration-medium`.
+
+### 3.7. Modals
 *   **Primitives:** Use `radius-lg` and `shadow-lg`.
-*   **Layout:** Content padding must be `space-md` (24px). The footer should contain clear actions, like a `Primary` "Confirm" and an `Outline` "Cancel" button.
+*   **Layout:** Content padding must be `space-md`. The footer should contain clear actions, like a `Primary` "Confirm" and an `Outline` "Cancel" button.
+*   **Motion:** Modal and backdrop fade and scale in/out using `duration-slow`.
+
+### 3.8. Selection Controls
+*   **Pill Selectors:** For selecting one option from a small, related set.
+    *   **Structure:** A container with `radius-full` holds multiple `button` elements. A single "slider" element moves behind the active button.
+    *   **Slider:** The moving element has `radius-full` and uses `color-primary`.
+    *   **Motion:** The slider animates its position and width using `duration-medium`.
+*   **Switches:** For binary on/off states.
+    *   **Structure:** Composed of a track and thumb, both with `radius-full`.
+    *   **Motion:** The thumb animates with `duration-quick`.	
+
+---
+
+## 4. Theming System
+
+Components should reference these semantic tokens, not raw color names, to support theming and interactive states.
+
+| Semantic Token | Light Mode Value | Dark Mode Value |
+| :--- | :--- | :--- |
+| **Primary Interaction** | | |
+| `color-primary` | `indigo-600` | `indigo-500` |
+| `color-primary-hover` | `indigo-700` | `indigo-400` |
+| `color-primary-active` | `indigo-800` | `indigo-300` |
+| **Accent Interaction** | | |
+| `color-accent` | `fuchsia-600` | `fuchsia-500` |
+| `color-accent-hover` | `fuchsia-700` | `fuchsia-400` |
+| **Surfaces** | | |
+| `color-background` | `white` | `night` (`#0F172A`) |
+| `color-surface` | `white` | `surface-dark` (`#1E293B`) |
+| `color-surface-hover`| `gray-50` | `gray-800` |
+| **Text** | | |
+| `color-text-high` | `gray-900` | `white` |
+| `color-text-medium`| `gray-600` | `gray-300` |
+| `color-text-low` | `gray-400` | `gray-500` |
+| **Borders** | | |
+| `color-border-default`| `gray-200` | `gray-700` |
+| `color-border-focus`| `indigo-500` | `indigo-400` |
+| **Functional** | | |
+| `color-success` | `Success Green` | `Success Green` |
+| `color-warning` | `Warning Amber` | `Warning Amber` |
+| `color-error` | `Danger Red` | `Danger Red` | 
