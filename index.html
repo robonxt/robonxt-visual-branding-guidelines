@@ -55,55 +55,105 @@
 			--easing: cubic-bezier(0.4, 0, 0.2, 1);
 
 			/* RAW COLORS (from tokens.json) */
-			/* Brand */
-			--brand-teal: #14B8A6;
-			--brand-red: #B91C1C;
-			--brand-soft-green: #6EE7B7;
-			--brand-slate: #343F4B;
-			/* Functional */
-			--functional-success: #059669;
-			--functional-warning: #D97706;
-			--functional-danger: #DC2626;
-			/* UI Neutrals */
+			/* Brand Primary: Indigo */
+			--indigo-50: #EEF2FF;
+			--indigo-100: #E0E7FF;
+			--indigo-200: #C7D2FE;
+			--indigo-300: #A5B4FC;
+			--indigo-400: #818CF8;
+			--indigo-500: #6366F1;
+			--indigo-600: #4F46E5;
+			--indigo-700: #4338CA;
+			--indigo-800: #3730A3;
+			--indigo-900: #312E81;
+
+			/* Brand Secondary: Fuchsia */
+			--fuchsia-50: #FDF4FF;
+			--fuchsia-100: #FAE8FF;
+			--fuchsia-200: #F5D0FE;
+			--fuchsia-300: #F0ABFC;
+			--fuchsia-400: #E879F9;
+			--fuchsia-500: #D946EF;
+			--fuchsia-600: #C026D3;
+			--fuchsia-700: #A21CAF;
+			--fuchsia-800: #86198F;
+			--fuchsia-900: #701A75;
+
+			/* Neutrals */
 			--white: #FFFFFF;
-			--gray-900: #111827;
-			--gray-800: #1F2937;
-			--gray-700: #374151;
-			--gray-600: #4B5563;
-			--gray-500: #6B7280;
-			--gray-300: #D1D5DB;
+			--night: #0F172A;
+			--gray-50: #F9FAFB;
+			--gray-100: #F3F4F6;
 			--gray-200: #E5E7EB;
+			--gray-300: #D1D5DB;
+			--gray-400: #9CA3AF;
+			--gray-500: #6B7280;
+			--gray-600: #4B5563;
+			--gray-700: #374151;
+			--gray-800: #1F2937;
+			--gray-900: #111827;
+
+			/* Functional */
+			--success: #059669;
+			--warning: #D97706;
+			--danger: #DC2626;
+
+			/* Logo Palette (logo use only) */
+			--logo-teal: #14B8A6;
+			--logo-red: #B91C1C;
+			--logo-slate: #343F4B;
+			--logo-ink: #111827;
 		}
 
-		/* THEME DEFINITIONS (from README) */
+		/* THEME DEFINITIONS (semantic tokens from README/tokens.json) */
 		[data-theme="light"] {
-			--color-primary: var(--brand-teal);
-			--color-secondary: var(--brand-red);
+			/* Primary Interaction */
+			--color-primary: var(--indigo-600);
+			--color-primary-hover: var(--indigo-700);
+			--color-primary-active: var(--indigo-800);
+			/* Accent Interaction */
+			--color-accent: var(--fuchsia-600);
+			--color-accent-hover: var(--fuchsia-700);
+			/* Surfaces */
 			--color-background: var(--white);
 			--color-surface: var(--white);
+			--color-surface-hover: var(--gray-50);
+			/* Text */
 			--color-text-high: var(--gray-900);
 			--color-text-medium: var(--gray-600);
-			--color-text-low: var(--gray-500);
+			--color-text-low: var(--gray-400);
+			/* Borders */
 			--color-border-default: var(--gray-200);
-			--color-border-focus: var(--brand-teal);
-			--color-success: var(--functional-success);
-			--color-warning: var(--functional-warning);
-			--color-error: var(--functional-danger);
+			--color-border-focus: var(--indigo-500);
+			/* Functional */
+			--color-success: var(--success);
+			--color-warning: var(--warning);
+			--color-error: var(--danger);
 		}
 
 		[data-theme="dark"] {
-			--color-primary: var(--brand-teal);
-			--color-secondary: var(--brand-red);
-			--color-background: var(--gray-900);
+			/* Primary Interaction */
+			--color-primary: var(--indigo-500);
+			--color-primary-hover: var(--indigo-400);
+			--color-primary-active: var(--indigo-300);
+			/* Accent Interaction */
+			--color-accent: var(--fuchsia-500);
+			--color-accent-hover: var(--fuchsia-400);
+			/* Surfaces */
+			--color-background: var(--night);
 			--color-surface: var(--gray-800);
+			--color-surface-hover: var(--gray-700);
+			/* Text */
 			--color-text-high: var(--white);
 			--color-text-medium: var(--gray-300);
 			--color-text-low: var(--gray-500);
+			/* Borders */
 			--color-border-default: var(--gray-700);
-			--color-border-focus: var(--brand-teal);
-			--color-success: var(--functional-success);
-			--color-warning: var(--functional-warning);
-			--color-error: var(--functional-danger);
+			--color-border-focus: var(--indigo-400);
+			/* Functional */
+			--color-success: var(--success);
+			--color-warning: var(--warning);
+			--color-error: var(--danger);
 		}
 
 		/*-------------------------------------------*/
@@ -177,6 +227,81 @@
 		}
 
 		/*-------------------------------------------*/
+		/* 1a. UTILITY CLASSES (Guidelines)          */
+		/*-------------------------------------------*/
+		.text-high {
+			color: var(--color-text-high);
+		}
+
+		.text-medium {
+			color: var(--color-text-medium);
+		}
+
+		.text-low {
+			color: var(--color-text-low);
+		}
+
+		.text-success {
+			color: var(--color-success);
+		}
+
+		.text-warning {
+			color: var(--color-warning);
+		}
+
+		.text-error {
+			color: var(--color-error);
+		}
+
+		.bg-background {
+			background-color: var(--color-background);
+		}
+
+		.bg-surface {
+			background-color: var(--color-surface);
+		}
+
+		.bg-surface-hover {
+			background-color: var(--color-surface-hover);
+		}
+
+		.border-default {
+			border-color: var(--color-border-default);
+		}
+
+		.border-focus {
+			border-color: var(--color-border-focus);
+		}
+
+		.shadow-sm {
+			box-shadow: var(--shadow-sm);
+		}
+
+		.shadow-md {
+			box-shadow: var(--shadow-md);
+		}
+
+		.shadow-lg {
+			box-shadow: var(--shadow-lg);
+		}
+
+		.radius-sm {
+			border-radius: var(--radius-sm);
+		}
+
+		.radius-md {
+			border-radius: var(--radius-md);
+		}
+
+		.radius-lg {
+			border-radius: var(--radius-lg);
+		}
+
+		.radius-full {
+			border-radius: var(--radius-full);
+		}
+
+		/*-------------------------------------------*/
 		/* 2. LAYOUT & PAGE STRUCTURE                */
 		/*-------------------------------------------*/
 		.container {
@@ -189,16 +314,20 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: var(--space-md);
+			padding: var(--space-sm) var(--space-sm);
 			background-color: var(--color-surface);
-			border: var(--stroke-sm) solid var(--color-border-default);
-			border-radius: var(--radius-lg);
-			box-shadow: var(--shadow-md);
+			border-bottom: var(--stroke-sm) solid var(--color-border-default);
 			position: sticky;
-			top: var(--space-sm);
-			margin-top: var(--space-sm);
+			top: 0;
+			margin-top: 0;
 			z-index: 10;
 			transition: background-color var(--duration-medium), box-shadow var(--duration-medium), border-color var(--duration-medium);
+		}
+
+		@media (min-width: 640px) {
+			.page-header {
+				padding: var(--space-sm) var(--space-md);
+			}
 		}
 
 		.brand-logo {
@@ -263,6 +392,23 @@
 
 		.ds-surface h3 {
 			margin-bottom: var(--space-md);
+		}
+
+		/* LOGO SHOWCASE */
+		.logo-section .text-logo {
+			font: var(--font-h2);
+			letter-spacing: var(--heading-letter-spacing);
+			color: var(--logo-slate);
+		}
+
+		.logo-section .text-logo .accent {
+			color: var(--logo-teal);
+		}
+
+		@media (min-width: 640px) {
+			.logo-section .text-logo {
+				font: var(--font-h1);
+			}
 		}
 
 		.ds-interactive-card {
@@ -476,18 +622,24 @@
 		}
 
 		.btn-primary:hover:not(:disabled) {
-			background-color: #0F766E;
-			/* Darker teal */
+			background-color: var(--color-primary-hover);
+		}
+
+		.btn-primary:active:not(:disabled) {
+			background-color: var(--color-primary-active);
 		}
 
 		.btn-secondary {
-			background-color: var(--color-secondary);
+			background-color: var(--color-accent);
 			color: var(--white);
 		}
 
 		.btn-secondary:hover:not(:disabled) {
-			background-color: #991B1B;
-			/* Darker red */
+			background-color: var(--color-accent-hover);
+		}
+
+		.btn-secondary:active:not(:disabled) {
+			filter: brightness(0.95);
 		}
 
 		.btn-outline {
@@ -497,7 +649,7 @@
 		}
 
 		.btn-outline:hover:not(:disabled) {
-			background-color: var(--color-surface);
+			background-color: var(--color-surface-hover);
 			border-color: var(--color-text-medium);
 		}
 
@@ -507,7 +659,21 @@
 		}
 
 		.btn-ghost:hover:not(:disabled) {
-			background-color: var(--color-surface);
+			background-color: var(--color-surface-hover);
+		}
+
+		/* Destructive Button */
+		.btn-danger {
+			background-color: var(--color-error);
+			color: var(--white);
+		}
+
+		.btn-danger:hover:not(:disabled) {
+			filter: brightness(0.95);
+		}
+
+		.btn-danger:active:not(:disabled) {
+			filter: brightness(0.9);
 		}
 
 		/* ALERTS */
@@ -536,44 +702,28 @@
 		}
 
 		.alert-success {
-			background-color: #F0FDF4;
-			border-color: #A7F3D0;
-			color: #047857;
+			background-color: var(--color-surface-hover);
+			border-color: var(--color-success);
+			color: var(--color-success);
 		}
 
 		.alert-warning {
-			background-color: #FFFBEB;
-			border-color: #FDE68A;
-			color: #B45309;
+			background-color: var(--color-surface-hover);
+			border-color: var(--color-warning);
+			color: var(--color-warning);
 		}
 
 		.alert-error {
-			background-color: #FEF2F2;
-			border-color: #FECACA;
-			color: #B91C1C;
-		}
-
-		[data-theme="dark"] .alert-success {
-			background-color: #064E3B;
-			border-color: #34D399;
-			color: #D1FAE5;
-		}
-
-		[data-theme="dark"] .alert-warning {
-			background-color: #78350F;
-			border-color: #FBBF24;
-			color: #FEF3C7;
-		}
-
-		[data-theme="dark"] .alert-error {
-			background-color: #991B1B;
-			border-color: #F87171;
-			color: #FEE2E2;
-		}
-
-		.alert-error,
-		[data-theme="dark"] .alert-error {
+			background-color: var(--color-surface-hover);
+			border-color: var(--color-error);
 			color: var(--color-error);
+		}
+
+		/* Neutral Info Alert */
+		.alert-info {
+			background-color: var(--color-surface-hover);
+			border-color: var(--color-border-default);
+			color: var(--color-text-medium);
 		}
 
 		/* INPUT FIELD */
@@ -809,12 +959,14 @@
 		}
 
 		.dropdown-item:hover {
-			background-color: var(--color-background);
+			background-color: var(--color-surface-hover);
 		}
 
 		.dropdown-item .material-symbols-rounded {
-			font-size: 20px;
-			color: var(--color-text-medium);
+			font-size: 24px;
+			/* 8pt grid default */
+			color: currentColor;
+			/* inherit */
 		}
 
 		.dropdown-divider {
@@ -932,15 +1084,273 @@
 			opacity: 0;
 			transition: opacity var(--duration-quick);
 		}
+
+		/*-------------------------------------------*/
+		/* 4. ADDITIONAL SHOWCASE HELPERS            */
+
+		.spacing-row {
+			display: flex;
+			align-items: flex-end;
+			gap: var(--space-sm);
+			flex-wrap: wrap;
+		}
+
+		.spacing-block {
+			background: var(--color-primary);
+			color: var(--white);
+			border-radius: var(--radius-sm);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			height: 32px;
+		}
+
+		.radius-demo {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+			gap: var(--space-sm);
+		}
+
+		.radius-item {
+			background: var(--color-surface);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			padding: var(--space-md);
+			text-align: center;
+		}
+
+		.border-demo {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: var(--space-sm);
+		}
+
+		.border-item {
+			background: var(--color-surface);
+			padding: var(--space-md);
+			text-align: center;
+			border-radius: var(--radius-md);
+			border: var(--stroke-sm) solid var(--color-border-default);
+		}
+
+		.border-item.focus {
+			outline: var(--stroke-md) solid var(--color-border-focus);
+			outline-offset: 2px;
+		}
+
+		.shadow-demo {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: var(--space-sm);
+		}
+
+		.shadow-item {
+			background: var(--color-surface);
+			padding: var(--space-md);
+			border-radius: var(--radius-md);
+			border: var(--stroke-sm) solid var(--color-border-default);
+		}
+
+		.motion-demo {
+			display: flex;
+			gap: var(--space-sm);
+			flex-wrap: wrap;
+		}
+
+		.motion-box {
+			width: 64px;
+			height: 64px;
+			border-radius: var(--radius-md);
+			background: var(--color-accent);
+			transform: translateX(0);
+		}
+
+		.motion-box.quick {
+			transition: transform var(--duration-quick) var(--easing);
+		}
+
+		.motion-box.medium {
+			transition: transform var(--duration-medium) var(--easing);
+		}
+
+		.motion-box.slow {
+			transition: transform var(--duration-slow) var(--easing);
+		}
+
+		.motion-box.move {
+			transform: translateX(56px);
+		}
+
+		.icon-row {
+			display: flex;
+			align-items: center;
+			gap: var(--space-sm);
+			color: var(--color-text-high);
+		}
+
+		.icon-16 {
+			font-size: 16px;
+		}
+
+		.icon-24 {
+			font-size: 24px;
+		}
+
+		.icon-32 {
+			font-size: 32px;
+		}
+
+		/* Header Nav (tabs + mobile) */
+		.header-left {
+			display: flex;
+			align-items: center;
+			gap: var(--space-sm);
+			flex: 1;
+		}
+
+		.mobile-nav {
+			position: relative;
+			display: none;
+		}
+
+		.mobile-nav-title {
+			display: none;
+			color: var(--color-text-high);
+			font: var(--font-label);
+		}
+
+		@media (max-width: 768px) {
+			.mobile-nav {
+				display: block;
+			}
+
+			.mobile-nav-title {
+				display: block;
+			}
+		}
+
+		.mobile-nav-dropdown {
+			position: absolute;
+			top: calc(100% + 4px);
+			left: 0;
+			background: var(--color-surface);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-lg);
+			box-shadow: var(--shadow-md);
+			padding: 4px;
+			min-width: 220px;
+			z-index: 60;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-6px);
+			transition: opacity var(--duration-medium) var(--easing), transform var(--duration-medium) var(--easing);
+		}
+
+		.mobile-nav-dropdown.is-visible {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		.mobile-nav-link {
+			display: block;
+			width: 100%;
+			text-align: left;
+			padding: var(--space-xs) var(--space-sm);
+			border: none;
+			background: none;
+			color: var(--color-text-high);
+			font: var(--font-label);
+			border-radius: var(--radius-md);
+			cursor: pointer;
+		}
+
+		.mobile-nav-link:hover,
+		.mobile-nav-link.active {
+			background: var(--color-surface-hover);
+		}
+
+		.tab-list {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			background: var(--color-background);
+			border: var(--stroke-sm) solid var(--color-border-default);
+			border-radius: var(--radius-full);
+			padding: 4px;
+			overflow: hidden;
+		}
+
+		.tab-button {
+			font: var(--font-label);
+			padding: var(--space-xs) var(--space-sm);
+			border: none;
+			background: transparent;
+			color: var(--color-text-medium);
+			border-radius: var(--radius-full);
+			cursor: pointer;
+			position: relative;
+			z-index: 1;
+		}
+
+		.tab-button.active {
+			color: var(--white);
+		}
+
+		.tab-slider {
+			position: absolute;
+			top: 4px;
+			left: 4px;
+			height: calc(100% - 8px);
+			width: 0;
+			background: var(--color-primary);
+			border-radius: var(--radius-full);
+			box-shadow: var(--shadow-sm);
+			transform: translateX(0);
+			transition: transform var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
+			z-index: 0;
+		}
+
+		@media (max-width: 768px) {
+			.tab-list {
+				display: none;
+			}
+		}
+
+		/* Smooth scrolling and anchor offset for sticky header */
+		html {
+			scroll-behavior: smooth;
+		}
+
+		.hero,
+		.ds-section {
+			scroll-margin-top: 80px;
+		}
 	</style>
 </head>
 
 <body>
 
 	<header class="page-header container">
-		<div class="brand-logo">
-			<span class="material-symbols-rounded">robot_2</span>
-			robonxt
+		<div class="header-left">
+			<div class="mobile-nav">
+				<button class="btn btn-icon" id="btn-mobile-nav" aria-label="Open menu" aria-haspopup="true"
+					aria-expanded="false" aria-controls="mobile-nav-dropdown">
+					<span class="material-symbols-rounded">menu</span>
+				</button>
+				<div class="mobile-nav-dropdown" id="mobile-nav-dropdown" role="menu"></div>
+			</div>
+			<div class="mobile-nav-title" id="mobile-nav-title"></div>
+			<nav class="tab-list" id="wrapper-tabs">
+				<div class="tab-slider"></div>
+				<button class="tab-button active" data-tab="foundations" data-target="#foundations">Foundations</button>
+				<button class="tab-button" data-tab="logo" data-target="#logo">Logo</button>
+				<button class="tab-button" data-tab="colors" data-target="#colors">Colors</button>
+				<button class="tab-button" data-tab="core" data-target="#core">Core</button>
+				<button class="tab-button" data-tab="icons" data-target="#icons">Icons</button>
+				<button class="tab-button" data-tab="theming" data-target="#theming">Theme</button>
+				<button class="tab-button" data-tab="typography" data-target="#typography">Typography</button>
+				<button class="tab-button" data-tab="components" data-target="#components">Components</button>
+			</nav>
 		</div>
 		<div class="theme-switch-wrapper">
 			<span class="material-symbols-rounded icon-light">light_mode</span>
@@ -953,62 +1363,395 @@
 	</header>
 
 	<main class="container">
-		<section class="hero">
+		<section id="overview" class="hero">
 			<h1>The Pragmatic Professional</h1>
 			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This page is built
 				entirely from the defined tokens and components, demonstrating a system that is clear, efficient, and a
 				little clever.</p>
 		</section>
 
-		<section class="ds-section">
-			<h2>Color System</h2>
-			<p>The semantic color palette. These tokens adapt to light and dark modes, ensuring accessibility and brand
-				consistency. Click the theme switch in the header to see them change.</p>
-			<div class="color-grid" style="margin-top: var(--space-lg);">
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--brand-teal);"></div>
-					<div class="swatch-name">Brand Teal</div>
-					<div class="swatch-hex">#14B8A6</div>
+		<!-- Foundations -->
+		<section id="foundations" class="ds-section">
+			<h2>Foundations</h2>
+			<div class="ds-grid">
+				<div class="ds-surface">
+					<h3>Core Philosophy</h3>
+					<p class="text-medium"><strong>Golden Rule:</strong> Clarity first, always. The brand persona is a
+						confident, efficient expert with a witty, human touch.</p>
 				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--brand-red);"></div>
-					<div class="swatch-name">Brand Red</div>
-					<div class="swatch-hex">#B91C1C</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--functional-success);"></div>
-					<div class="swatch-name">Success Green</div>
-					<div class="swatch-hex">#059669</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--functional-warning);"></div>
-					<div class="swatch-name">Warning Amber</div>
-					<div class="swatch-hex">#D97706</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--functional-danger);"></div>
-					<div class="swatch-name">Danger Red</div>
-					<div class="swatch-hex">#DC2626</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--color-surface);"></div>
-					<div class="swatch-name">Component Surface</div>
-					<div class="swatch-hex">var(--color-surface)</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--color-text-high);"></div>
-					<div class="swatch-name">High-Emphasis Text</div>
-					<div class="swatch-hex">var(--color-text-high)</div>
-				</div>
-				<div class="color-swatch">
-					<div class="swatch-color" style="background-color: var(--color-border-default);"></div>
-					<div class="swatch-name">Default Border</div>
-					<div class="swatch-hex">var(--color-border-default)</div>
+				<div class="ds-surface">
+					<h3>Voice & Tone</h3>
+					<ul class="text-medium" style="margin:0; padding-left: 1rem;">
+						<li><strong>Default Tone (90%)</strong>: Casual, clear, concise, helpful.</li>
+						<li><strong>Clever Aside (10%)</strong>: Witty in low‑stakes moments.</li>
+						<li><strong>Critical</strong>: Be 100% professional and direct.</li>
+					</ul>
 				</div>
 			</div>
 		</section>
 
+		<!-- Logo (Wordmark) -->
+		<section id="logo" class="ds-section logo-section">
+			<h2>Logo</h2>
+			<div class="ds-grid">
+				<div class="ds-surface">
+					<h3>Wordmark</h3>
+					<p class="text-logo"><span class="accent">robo</span>nxt</p>
+					<p class="text-caption" style="margin-top: var(--space-sm); color: var(--color-text-medium);">
+						Placeholder wordmark. Replace with official SVG when available. Logo colors are defined in the
+						Color System section.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Color System -->
+		<section id="colors" class="ds-section">
+			<h2>Color System</h2>
+			<div class="ds-grid" style="margin-top: var(--space-lg);">
+				<div class="ds-surface">
+					<h3>Logo Palette</h3>
+					<p class="text-caption">Reserved for the official logo and core brand assets only.</p>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--logo-teal);"></div>
+							<div class="swatch-name">Logo Teal</div>
+							<div class="swatch-hex">var(--logo-teal)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--logo-red);"></div>
+							<div class="swatch-name">Logo Red</div>
+							<div class="swatch-hex">var(--logo-red)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--logo-slate);"></div>
+							<div class="swatch-name">Logo Slate</div>
+							<div class="swatch-hex">var(--logo-slate)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--logo-ink);"></div>
+							<div class="swatch-name">Logo Ink</div>
+							<div class="swatch-hex">var(--logo-ink)</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ds-surface">
+					<h3>Brand Palette · Indigo</h3>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-50);"></div>
+							<div class="swatch-name">Indigo 50</div>
+							<div class="swatch-hex">var(--indigo-50)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-100);"></div>
+							<div class="swatch-name">Indigo 100</div>
+							<div class="swatch-hex">var(--indigo-100)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-200);"></div>
+							<div class="swatch-name">Indigo 200</div>
+							<div class="swatch-hex">var(--indigo-200)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-300);"></div>
+							<div class="swatch-name">Indigo 300</div>
+							<div class="swatch-hex">var(--indigo-300)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-400);"></div>
+							<div class="swatch-name">Indigo 400</div>
+							<div class="swatch-hex">var(--indigo-400)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-500);"></div>
+							<div class="swatch-name"><strong>Indigo 500</strong></div>
+							<div class="swatch-hex">var(--indigo-500)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-600);"></div>
+							<div class="swatch-name"><strong>Indigo 600</strong></div>
+							<div class="swatch-hex">var(--indigo-600)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-700);"></div>
+							<div class="swatch-name">Indigo 700</div>
+							<div class="swatch-hex">var(--indigo-700)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-800);"></div>
+							<div class="swatch-name">Indigo 800</div>
+							<div class="swatch-hex">var(--indigo-800)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--indigo-900);"></div>
+							<div class="swatch-name">Indigo 900</div>
+							<div class="swatch-hex">var(--indigo-900)</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ds-surface">
+					<h3>Brand Palette · Fuchsia</h3>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-50);"></div>
+							<div class="swatch-name">Fuchsia 50</div>
+							<div class="swatch-hex">var(--fuchsia-50)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-100);"></div>
+							<div class="swatch-name">Fuchsia 100</div>
+							<div class="swatch-hex">var(--fuchsia-100)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-200);"></div>
+							<div class="swatch-name">Fuchsia 200</div>
+							<div class="swatch-hex">var(--fuchsia-200)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-300);"></div>
+							<div class="swatch-name">Fuchsia 300</div>
+							<div class="swatch-hex">var(--fuchsia-300)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-400);"></div>
+							<div class="swatch-name">Fuchsia 400</div>
+							<div class="swatch-hex">var(--fuchsia-400)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-500);"></div>
+							<div class="swatch-name"><strong>Fuchsia 500</strong></div>
+							<div class="swatch-hex">var(--fuchsia-500)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-600);"></div>
+							<div class="swatch-name"><strong>Fuchsia 600</strong></div>
+							<div class="swatch-hex">var(--fuchsia-600)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-700);"></div>
+							<div class="swatch-name">Fuchsia 700</div>
+							<div class="swatch-hex">var(--fuchsia-700)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-800);"></div>
+							<div class="swatch-name">Fuchsia 800</div>
+							<div class="swatch-hex">var(--fuchsia-800)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--fuchsia-900);"></div>
+							<div class="swatch-name">Fuchsia 900</div>
+							<div class="swatch-hex">var(--fuchsia-900)</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ds-surface">
+					<h3>4. Neutrals Palette</h3>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--white);"></div>
+							<div class="swatch-name">Surface</div>
+							<div class="swatch-hex">var(--white)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--night);"></div>
+							<div class="swatch-name">Night</div>
+							<div class="swatch-hex">var(--night)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--gray-50);"></div>
+							<div class="swatch-name">Gray 50</div>
+							<div class="swatch-hex">var(--gray-50)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--gray-200);"></div>
+							<div class="swatch-name">Border</div>
+							<div class="swatch-hex">var(--gray-200)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--gray-900);"></div>
+							<div class="swatch-name">Text High</div>
+							<div class="swatch-hex">var(--gray-900)</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ds-surface">
+					<h3>5. Functional Palette</h3>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--success);"></div>
+							<div class="swatch-name">Success</div>
+							<div class="swatch-hex">var(--success)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--warning);"></div>
+							<div class="swatch-name">Warning</div>
+							<div class="swatch-hex">var(--warning)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--danger);"></div>
+							<div class="swatch-name">Danger</div>
+							<div class="swatch-hex">var(--danger)</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Removed: separate Neutrals & Functional (now under Color System) -->
+
+		<!-- Spacing (8pt Grid) -->
 		<section class="ds-section">
+			<h2>Spacing · 8‑Point Grid</h2>
+			<div class="ds-surface">
+				<div class="spacing-row">
+					<div class="spacing-block" style="width: var(--space-xs);">xs</div>
+					<div class="spacing-block" style="width: var(--space-sm);">sm</div>
+					<div class="spacing-block" style="width: var(--space-md);">md</div>
+					<div class="spacing-block" style="width: var(--space-lg);">lg</div>
+					<div class="spacing-block" style="width: var(--space-xl);">xl</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Core Elements -->
+		<section id="core" class="ds-section">
+			<h2>Core Elements</h2>
+			<div class="ds-grid">
+				<div class="ds-surface">
+					<h3>Corner Radius</h3>
+					<div class="radius-demo" style="margin-top: var(--space-sm);">
+						<div class="radius-item" style="border-radius: var(--radius-sm);">radius-sm (4px)</div>
+						<div class="radius-item" style="border-radius: var(--radius-md);">radius-md (8px)</div>
+						<div class="radius-item" style="border-radius: var(--radius-lg);">radius-lg (16px)</div>
+						<div class="radius-item" style="border-radius: var(--radius-full);">radius-full</div>
+					</div>
+				</div>
+				<div class="ds-surface">
+					<h3>Borders</h3>
+					<div class="border-demo" style="margin-top: var(--space-sm);">
+						<div class="border-item">stroke-sm (1.5px)</div>
+						<div class="border-item focus">stroke-md (3px) · Focus</div>
+					</div>
+				</div>
+				<div class="ds-surface">
+					<h3>Elevation (Shadows)</h3>
+					<div class="shadow-demo" style="margin-top: var(--space-sm);">
+						<div class="shadow-item shadow-sm">shadow-sm</div>
+						<div class="shadow-item shadow-md">shadow-md</div>
+						<div class="shadow-item shadow-lg">shadow-lg</div>
+					</div>
+				</div>
+				<div class="ds-surface">
+					<h3>Motion</h3>
+					<p class="text-caption">Easing: cubic-bezier(0.4, 0, 0.2, 1)</p>
+					<div class="motion-demo" id="motion-demo" style="margin-top: var(--space-sm);">
+						<div class="motion-box quick"></div>
+						<div class="motion-box medium"></div>
+						<div class="motion-box slow"></div>
+					</div>
+					<button class="btn btn-outline" id="motion-toggle"
+						style="margin-top: var(--space-sm);">Animate</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Iconography -->
+		<section id="icons" class="ds-section">
+			<h2>Iconography</h2>
+			<div class="ds-grid">
+				<div class="ds-surface">
+					<h3>Material Symbols · Rounded</h3>
+					<p class="text-caption">Icons inherit text color via <code>currentColor</code> and follow the
+						8‑point grid.</p>
+					<div class="icon-row" style="margin-top: var(--space-sm);">
+						<span class="material-symbols-rounded icon-16">bolt</span>
+						<span class="material-symbols-rounded icon-24">bolt</span>
+						<span class="material-symbols-rounded icon-32">bolt</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Theming System -->
+		<section id="theming" class="ds-section">
+			<h2>Theming System</h2>
+			<p>Components reference semantic tokens so themes can swap values without changing component code.</p>
+			<div class="ds-grid">
+				<div class="ds-surface">
+					<h3>Semantic Tokens (Light/Dark)</h3>
+					<div class="color-grid" style="margin-top: var(--space-sm);">
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-primary);"></div>
+							<div class="swatch-name">color-primary</div>
+							<div class="swatch-hex">var(--color-primary)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-primary-hover);"></div>
+							<div class="swatch-name">color-primary-hover</div>
+							<div class="swatch-hex">var(--color-primary-hover)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-primary-active);"></div>
+							<div class="swatch-name">color-primary-active</div>
+							<div class="swatch-hex">var(--color-primary-active)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-accent);"></div>
+							<div class="swatch-name">color-accent</div>
+							<div class="swatch-hex">var(--color-accent)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-accent-hover);"></div>
+							<div class="swatch-name">color-accent-hover</div>
+							<div class="swatch-hex">var(--color-accent-hover)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-surface);"></div>
+							<div class="swatch-name">color-surface</div>
+							<div class="swatch-hex">var(--color-surface)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-text-high);"></div>
+							<div class="swatch-name">color-text-high</div>
+							<div class="swatch-hex">var(--color-text-high)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-border-default);"></div>
+							<div class="swatch-name">color-border-default</div>
+							<div class="swatch-hex">var(--color-border-default)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-border-focus);"></div>
+							<div class="swatch-name">color-border-focus</div>
+							<div class="swatch-hex">var(--color-border-focus)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-success);"></div>
+							<div class="swatch-name">color-success</div>
+							<div class="swatch-hex">var(--color-success)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-warning);"></div>
+							<div class="swatch-name">color-warning</div>
+							<div class="swatch-hex">var(--color-warning)</div>
+						</div>
+						<div class="color-swatch">
+							<div class="swatch-color" style="background-color: var(--color-error);"></div>
+							<div class="swatch-name">color-error</div>
+							<div class="swatch-hex">var(--color-error)</div>
+						</div>
+					</div>
+					<p class="text-caption" style="margin-top: var(--space-sm);">Use the theme switch in the header to
+						see values adapt.</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="typography" class="ds-section">
 			<h2>Typography System</h2>
 			<p>A single, highly-legible font family, `Inter`, is used across the entire system to ensure consistency and
 				clarity. The scale is designed for clear hierarchy on any screen size.</p>
@@ -1035,7 +1778,7 @@
 			</div>
 		</section>
 
-		<section class="ds-section">
+		<section id="components" class="ds-section">
 			<h2>Core Components</h2>
 			<p>The tangible, interactive elements of the brand. Built from our core primitives and designed for clarity.
 			</p>
@@ -1133,6 +1876,13 @@
 									<p class="alert-description">Could not complete the request.</p>
 								</div>
 							</div>
+							<div class="alert alert-info"><span class="material-symbols-rounded">info</span>
+								<div class="alert-content">
+									<div class="alert-title">Information</div>
+									<p class="alert-description">Heads up: settings were saved, but some changes take
+										effect after reload.</p>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="ds-surface">
@@ -1146,7 +1896,7 @@
 							<div class="dropdown">
 								<button class="btn btn-outline" id="dropdown-toggle">
 									<span>Options</span>
-									<span class="material-symbols-rounded" style="font-size: 20px;">expand_more</span>
+									<span class="material-symbols-rounded">expand_more</span>
 								</button>
 								<div class="dropdown-menu" id="dropdown-menu">
 									<button class="dropdown-item"><span
@@ -1154,8 +1904,8 @@
 									<button class="dropdown-item"><span
 											class="material-symbols-rounded">settings</span>Account Settings</button>
 									<div class="dropdown-divider"></div>
-									<button class="dropdown-item"><span class="material-symbols-rounded"
-											style="color: var(--color-error);">logout</span>Log Out</button>
+									<button class="dropdown-item"><span
+											class="material-symbols-rounded text-error">logout</span>Log Out</button>
 								</div>
 							</div>
 						</div>
@@ -1168,7 +1918,7 @@
 							<div class="progress-indicator"></div>
 						</div>
 						<button class="btn btn-outline" id="open-modal-btn">
-							<span class="material-symbols-rounded" style="font-size: 20px;">open_in_new</span>
+							<span class="material-symbols-rounded">open_in_new</span>
 							Launch Deletion Modal
 						</button>
 					</div>
@@ -1195,7 +1945,7 @@
 			</div>
 			<footer class="modal-footer">
 				<button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
-				<button class="btn btn-secondary">Yes, delete it</button>
+				<button class="btn btn-danger">Yes, delete it</button>
 			</footer>
 		</div>
 	</div>
@@ -1249,6 +1999,128 @@
 					dropdownMenu.classList.remove('is-visible');
 				}
 			});
+
+			// --- HEADER TABS (Pill Slider) & MOBILE NAV ---
+			(function initHeaderTabs() {
+				const wrapper = document.getElementById('wrapper-tabs');
+				if (!wrapper) return;
+				const slider = wrapper.querySelector('.tab-slider');
+				const buttons = Array.from(wrapper.querySelectorAll('.tab-button'));
+				const mobileBtn = document.getElementById('btn-mobile-nav');
+				const mobileDropdown = document.getElementById('mobile-nav-dropdown');
+				const mobileTitle = document.getElementById('mobile-nav-title');
+
+				function setActive(btn) {
+					buttons.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					moveSlider(btn);
+					if (mobileTitle) mobileTitle.textContent = btn.textContent.trim();
+				}
+
+				function moveSlider(tab, noTransition = false) {
+					if (!tab || !slider) return;
+					if (noTransition) slider.style.transition = 'none';
+					const left = tab.offsetLeft;
+					slider.style.width = `${tab.offsetWidth}px`;
+					slider.style.transform = `translateX(${left}px)`;
+					if (noTransition) requestAnimationFrame(() => slider.style.transition = '');
+				}
+
+				function scrollToTarget(btn) {
+					const targetSel = btn.getAttribute('data-target');
+					const targetEl = targetSel ? document.querySelector(targetSel) : null;
+					if (targetEl) {
+						targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					}
+				}
+
+				// Click behavior
+				wrapper.addEventListener('click', (e) => {
+					const btn = e.target.closest('.tab-button');
+					if (!btn) return;
+					setActive(btn);
+					scrollToTarget(btn);
+				});
+
+				// Initialize slider to active or first
+				const initial = wrapper.querySelector('.tab-button.active') || buttons[0];
+				if (initial) {
+					requestAnimationFrame(() => moveSlider(initial));
+					if (mobileTitle) mobileTitle.textContent = initial.textContent.trim();
+				}
+
+				// Update on resize (e.g., variable widths)
+				window.addEventListener('resize', () => {
+					const active = wrapper.querySelector('.tab-button.active') || buttons[0];
+					if (active) moveSlider(active);
+				});
+
+				// Recalculate after fonts/layout stabilize
+				if (window.document && 'fonts' in document && document.fonts.ready) {
+					document.fonts.ready.then(() => {
+						const active = wrapper.querySelector('.tab-button.active') || buttons[0];
+						if (active) moveSlider(active, true);
+					});
+				}
+				window.addEventListener('load', () => {
+					const active = wrapper.querySelector('.tab-button.active') || buttons[0];
+					if (active) moveSlider(active, true);
+				}, { once: true });
+
+				// Observe wrapper size changes (e.g., font swap, viewport changes)
+				if ('ResizeObserver' in window) {
+					const ro = new ResizeObserver(() => {
+						const active = wrapper.querySelector('.tab-button.active') || buttons[0];
+						if (active) moveSlider(active, true);
+					});
+					ro.observe(wrapper);
+				}
+
+				// Build Mobile Dropdown from header tabs
+				if (mobileDropdown && buttons.length) {
+					mobileDropdown.innerHTML = buttons.map((b, i) => {
+						const activeCls = b.classList.contains('active') ? ' active' : '';
+						return `<button class="mobile-nav-link${activeCls}" data-index="${i}" role="menuitem">${b.textContent.trim()}</button>`;
+					}).join('');
+					// Fallback guard
+					if (!mobileDropdown.innerHTML.trim()) {
+						mobileDropdown.innerHTML = `<button class="mobile-nav-link active" data-index="0" role="menuitem">Home</button>`;
+					}
+
+					mobileDropdown.addEventListener('click', (e) => {
+						const link = e.target.closest('.mobile-nav-link');
+						if (!link) return;
+						const idx = Number(link.getAttribute('data-index'));
+						const btn = buttons[idx];
+						if (!btn) return;
+						setActive(btn);
+						scrollToTarget(btn);
+						mobileDropdown.classList.remove('is-visible');
+					});
+				}
+
+				// Mobile menu toggle and outside click
+				if (mobileBtn && mobileDropdown) {
+					mobileBtn.setAttribute('aria-controls', 'mobile-nav-dropdown');
+					mobileBtn.addEventListener('click', (e) => {
+						e.stopPropagation();
+						mobileDropdown.classList.toggle('is-visible');
+						mobileBtn.setAttribute('aria-expanded', mobileDropdown.classList.contains('is-visible') ? 'true' : 'false');
+					});
+					// Add touchstart for some mobile browsers where click may be delayed/suppressed
+					mobileBtn.addEventListener('touchstart', (e) => {
+						e.stopPropagation();
+						mobileDropdown.classList.toggle('is-visible');
+						mobileBtn.setAttribute('aria-expanded', mobileDropdown.classList.contains('is-visible') ? 'true' : 'false');
+					}, { passive: true });
+					document.addEventListener('click', (e) => {
+						if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
+							mobileDropdown.classList.remove('is-visible');
+							mobileBtn.setAttribute('aria-expanded', 'false');
+						}
+					});
+				}
+			})();
 
 			// --- TABS LOGIC ---
 			const tabContainer = document.querySelector('.tabs-list');
@@ -1370,6 +2242,145 @@
 				});
 			}
 			setupColorSwatches();
+
+			// --- TABS (Header) ---
+			(function initTabs() {
+				const tabContainer = document.getElementById('wrapper-tabs');
+				if (!tabContainer) return;
+				const tabs = Array.from(tabContainer.querySelectorAll('.tab-button'));
+				const slider = tabContainer.querySelector('.tab-slider');
+				const sections = tabs.map(t => document.querySelector(t.getAttribute('data-target'))).filter(Boolean);
+
+				function moveSlider(tab, noTransition = false) {
+					if (!tab || !slider) return;
+					if (noTransition) slider.style.transition = 'none';
+					const left = tab.offsetLeft;
+					const width = tab.clientWidth;
+					slider.style.width = width + 'px';
+					slider.style.transform = `translateX(${left}px)`;
+					if (noTransition) requestAnimationFrame(() => slider.style.transition = '');
+				}
+
+				function setActive(tab, scrollTo = true) {
+					if (!tab) return;
+					tabs.forEach(b => b.classList.remove('active'));
+					tab.classList.add('active');
+					moveSlider(tab);
+					const targetSel = tab.getAttribute('data-target');
+					const target = targetSel ? document.querySelector(targetSel) : null;
+					const name = tab.getAttribute('data-tab');
+					if (name) location.hash = name;
+					if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					const title = document.getElementById('mobile-nav-title');
+					if (title) title.textContent = tab.textContent;
+				}
+
+				tabs.forEach(btn => {
+					btn.addEventListener('click', (e) => {
+						e.preventDefault();
+						setActive(btn, true);
+					});
+				});
+
+				function syncFromScroll() {
+					const threshold = 120; // header offset allowance
+					let activeIdx = 0;
+					for (let i = 0; i < sections.length; i++) {
+						const rect = sections[i].getBoundingClientRect();
+						if (rect.top - threshold <= 0) activeIdx = i; else break;
+					}
+					const activeTab = tabs[activeIdx];
+					if (!activeTab || activeTab.classList.contains('active')) { moveSlider(activeTab); return; }
+					tabs.forEach(b => b.classList.remove('active'));
+					activeTab.classList.add('active');
+					moveSlider(activeTab);
+					const title = document.getElementById('mobile-nav-title');
+					if (title) title.textContent = activeTab.textContent;
+				}
+
+				// Initialize active by hash or first tab
+				const byHash = location.hash.slice(1);
+				const initial = tabs.find(t => t.getAttribute('data-tab') === byHash) || tabs[0];
+				setActive(initial, false);
+				moveSlider(initial, true);
+
+				window.addEventListener('scroll', syncFromScroll, { passive: true });
+				window.addEventListener('resize', () => moveSlider(tabContainer.querySelector('.tab-button.active')));
+			})();
+
+			// --- MOBILE NAV (Dropdown) ---
+			(function initMobileNav() {
+				const btn = document.getElementById('btn-mobile-nav');
+				const dd = document.getElementById('mobile-nav-dropdown');
+				const tabContainer = document.getElementById('wrapper-tabs');
+				if (!btn || !dd || !tabContainer) return;
+				const tabs = Array.from(tabContainer.querySelectorAll('.tab-button'));
+
+				function buildDropdown() {
+					dd.innerHTML = '';
+					tabs.forEach(t => {
+						const link = document.createElement('button');
+						link.className = 'mobile-nav-link';
+						link.type = 'button';
+						link.setAttribute('data-tab', t.getAttribute('data-tab'));
+						link.textContent = t.textContent;
+						link.addEventListener('click', () => {
+							t.click();
+							closeDropdown();
+							btn.focus();
+						});
+						dd.appendChild(link);
+					});
+				}
+				buildDropdown();
+
+				function openDropdown() {
+					dd.classList.add('is-visible');
+					btn.setAttribute('aria-expanded', 'true');
+				}
+				function closeDropdown() {
+					dd.classList.remove('is-visible');
+					btn.setAttribute('aria-expanded', 'false');
+				}
+				btn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					if (dd.classList.contains('is-visible')) closeDropdown(); else openDropdown();
+				});
+				document.addEventListener('click', (e) => { if (!dd.contains(e.target) && e.target !== btn) closeDropdown(); });
+				document.addEventListener('keydown', (e) => {
+					const links = Array.from(dd.querySelectorAll('.mobile-nav-link'));
+					const idx = links.indexOf(document.activeElement);
+					if (e.key === 'Escape') { closeDropdown(); return; }
+					if (!dd.classList.contains('is-visible')) return;
+					if (e.key === 'ArrowDown') { e.preventDefault(); links[(idx < 0 ? 0 : (idx + 1) % links.length)]?.focus(); }
+					if (e.key === 'ArrowUp') { e.preventDefault(); links[(idx < 0 ? links.length - 1 : (idx - 1 + links.length) % links.length)]?.focus(); }
+					if (e.key === 'Home') { e.preventDefault(); links[0]?.focus(); }
+					if (e.key === 'End') { e.preventDefault(); links[links.length - 1]?.focus(); }
+					if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('mobile-nav-link')) { e.preventDefault(); document.activeElement.click(); }
+				});
+
+				// Sync active state in dropdown
+				function syncActive() {
+					const current = (location.hash || '').slice(1);
+					const activeTab = tabs.find(t => t.getAttribute('data-tab') === current) || tabContainer.querySelector('.tab-button.active');
+					Array.from(dd.querySelectorAll('.mobile-nav-link')).forEach(link => {
+						link.classList.toggle('active', link.getAttribute('data-tab') === activeTab?.getAttribute('data-tab'));
+					});
+					const title = document.getElementById('mobile-nav-title');
+					if (title && activeTab) title.textContent = activeTab.textContent;
+				}
+				window.addEventListener('hashchange', syncActive);
+				syncActive();
+			})();
+
+			// --- MOTION DEMO ---
+			const motionBtn = document.getElementById('motion-toggle');
+			const motionDemo = document.getElementById('motion-demo');
+			if (motionBtn && motionDemo) {
+				motionBtn.addEventListener('click', () => {
+					motionDemo.querySelectorAll('.motion-box').forEach(box => box.classList.toggle('move'));
+				});
+			}
 		});
 	</script>
 </body>
