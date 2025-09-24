@@ -269,6 +269,11 @@
 							<div class="swatch-name">Night</div>
 							<div class="swatch-hex">var(--night)</div>
 						</div>
+                        <div class="color-swatch">
+                            <div class="swatch-color" style="background-color: var(--surface-dark);"></div>
+                            <div class="swatch-name">Surface (Dark)</div>
+                            <div class="swatch-hex">var(--surface-dark)</div>
+                        </div>
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--gray-50);"></div>
 							<div class="swatch-name">Gray 50</div>
@@ -525,7 +530,23 @@
 						</div>
 						<p class="text-caption">Selected: <span id="pill-value-1">daily</span></p>
 					</div>
-					<div class="ds-surface">
+					                    <div class="ds-surface">
+                        <h3>Switches</h3>
+                        <div style="display:flex; align-items:center; gap: var(--space-lg); flex-wrap: wrap;">
+                            <label class="switch">
+                                <input type="checkbox" aria-label="Enable notifications" checked>
+                                <span class="switch-track"><span class="switch-thumb"></span></span>
+                                <span class="switch-label">Notifications</span>
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" aria-label="Enable beta features">
+                                <span class="switch-track"><span class="switch-thumb"></span></span>
+                                <span class="switch-label">Beta Features</span>
+                            </label>
+                        </div>
+                        <p class="text-caption" style="margin-top: var(--space-sm);">Switches use <code>radius-full</code>, animate with <code>duration-quick</code>, and adopt <code>color-border-focus</code> on focus.</p>
+                    </div>
+<div class="ds-surface">
 						<h3>Slider</h3>
 						<div class="slider-container">
 							<input type="range" min="0" max="100" value="50" class="slider" id="my-slider">
