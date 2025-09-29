@@ -1,0 +1,78 @@
+# Precise edits for [README.md](cci:7://file:///c:/Repos/robonxt-visual-branding-guidelines/README.md:0:0-0:0)
+
+Edit in top-to-bottom order to keep line numbers stable. If numbers drift, use the “Anchor” to locate the spot.
+
+- **[Foundations → Core Philosophy] Insert after line 11**
+  - Anchor: the line with `Golden Rule: Clarity first, always.`
+  - Add:
+    ```md
+    Default to calm; earn your spikes. On rare, meaningful moments, we permit a controlled jolt to create contrast—then return to baseline.
+    ```
+
+- **[Foundations → Voice & Tone] Insert after line 16**
+  - Anchor: “The Golden Rule for Voice: Never use a joke if it gets in the way of clarity...”
+  - Add:
+    ```md
+    Rare High‑Intensity Moments: For pivotal launches or flagship narratives, tone may sharpen briefly (higher contrast, tighter phrasing) to create signal. Keep it purposeful, brief, and crystal clear.
+    ```
+
+- **[Typography] Insert after line 24**
+  - Anchor: the three bullets under Typography ending with “Letter Spacing: -1% for headings.”
+  - Add:
+    ```md
+    Rare Emphasis: In hero moments, you may step one weight/size above the table (e.g., H1 +1 size or weight) to create a short‑lived peak. Do not stack multiple extremes; revert to defaults after the moment.
+    ```
+
+- **[Layout & Motion → Motion] Insert after line 76**
+  - Anchor: Motion durations table ending with “duration-slow | 500ms | Large transitions (modals).”
+  - Add:
+    ```md
+    Controlled Peaks: For key reveals (e.g., hero intros), motion may accelerate or briefly overshoot within brand easing. Keep sequences short, singular, and paired with generous negative space.
+    ```
+
+- **[Color System → Brand Palette] Insert after line 110**
+  - Anchor: end of Fuchsia table header `| fuchsia-50 ... fuchsia-900 | *values omitted for brevity* |`
+  - Add:
+    ```md
+    Rare Contrast Spike: In high‑stakes moments, temporarily increase contrast (e.g., deeper accent range, bolder background/foreground pairing). Keep core tokens intact and restrict spikes to the hero frame or campaign slice.
+    ```
+
+- **[Color System → Semantic Color Tokens] Insert after line 166**
+  - Anchor: end of the semantic functional table line with `Danger Red`.
+  - Add:
+    ```md
+    Do not alter semantic tokens globally to “go loud.” If a spike is needed, scope it locally (component, section, or campaign) and ensure the rest of the system remains stable.
+    ```
+
+- **[Components → Buttons] Insert after line 185**
+  - Anchor: the four button variants list, last item “Ghost: Transparent with no border...”
+  - Add:
+    ```md
+    Hero Exception: In hero contexts, a single primary button may scale up (size or width) to anchor the moment. Avoid simultaneous extremes (size + color + motion).
+    ```
+
+- **[Components → Header] Insert after line 201**
+  - Anchor: “Behavior: Sticky to the top of the viewport.”
+  - Add:
+    ```md
+    Launch Mode (Rare): For major releases, the header may gain a subtle, time‑boxed accent (e.g., animated underline or elevated contrast). This treatment should not persist beyond the campaign window.
+    ```
+
+- **[Components → Modals] Insert after line 213**
+  - Anchor: “Motion: Modal and backdrop fade and scale in/out using duration-slow.”
+  - Add:
+    ```md
+    Full‑bleed Takeover (Rare): Allowed for flagship announcements. Keep copy minimal, interaction obvious, and exit frictionless. Retire after the moment passes.
+    ```
+
+- **[Components → Selection Controls] Insert after line 221 (EOF)**
+  - Anchor: end of file (after “The thumb animates with duration-quick.”)
+  - Add:
+    ```md
+    Peak Moments Guardrail: Selection controls should remain calm and stable even during spikes; avoid extremes here to preserve usability.
+    ```
+
+# Summary
+- Provided exact sentences and where to insert them.
+- Edits “sprinkle” the rare-extremes principle across philosophy, tone, type, motion, color, and components.
+- Apply in order; if line numbers shift, use the anchors.
