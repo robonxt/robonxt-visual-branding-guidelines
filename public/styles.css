@@ -1101,16 +1101,16 @@
 			transition: transform var(--duration-quick) var(--easing);
 		}
 
-		.switch input:focus-visible + .switch-track {
+		.switch input:focus-visible+.switch-track {
 			outline: var(--stroke-md) solid var(--color-border-focus);
 			outline-offset: 2px;
 		}
 
-		.switch input:checked + .switch-track {
+		.switch input:checked+.switch-track {
 			background: var(--color-primary);
 		}
 
-		.switch input:checked + .switch-track .switch-thumb {
+		.switch input:checked+.switch-track .switch-thumb {
 			transform: translateX(20px);
 		}
 
