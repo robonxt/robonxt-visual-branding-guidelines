@@ -63,127 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	// --- HEADER TABS (Pill Slider) & MOBILE NAV ---
-	(function initHeaderTabs() {
-		const wrapper = document.getElementById('wrapper-tabs');
-		if (!wrapper) return;
-		const slider = wrapper.querySelector('.tab-slider');
-		const buttons = Array.from(wrapper.querySelectorAll('.tab-button'));
-		const mobileBtn = document.getElementById('btn-mobile-nav');
-		const mobileDropdown = document.getElementById('mobile-nav-dropdown');
-		const mobileTitle = document.getElementById('mobile-nav-title');
-
-		function setActive(btn) {
-			buttons.forEach(b => b.classList.remove('active'));
-			btn.classList.add('active');
-			moveSlider(btn);
-			if (mobileTitle) mobileTitle.textContent = btn.textContent.trim();
-		}
-
-		function moveSlider(tab, noTransition = false) {
-			if (!tab || !slider) return;
-			if (noTransition) slider.style.transition = 'none';
-			const left = tab.offsetLeft;
-			slider.style.width = `${tab.offsetWidth}px`;
-			slider.style.transform = `translateX(${left}px)`;
-			if (noTransition) requestAnimationFrame(() => slider.style.transition = '');
-		}
-
-		function scrollToTarget(btn) {
-			const targetSel = btn.getAttribute('data-target');
-			const targetEl = targetSel ? document.querySelector(targetSel) : null;
-			if (targetEl) {
-				targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}
-		}
-
-		// Click behavior
-		wrapper.addEventListener('click', (e) => {
-			const btn = e.target.closest('.tab-button');
-			if (!btn) return;
-			setActive(btn);
-			scrollToTarget(btn);
-		});
-
-		// Initialize slider to active or first
-		const initial = wrapper.querySelector('.tab-button.active') || buttons[0];
-		if (initial) {
-			requestAnimationFrame(() => moveSlider(initial));
-			if (mobileTitle) mobileTitle.textContent = initial.textContent.trim();
-		}
-
-		// Update on resize (e.g., variable widths)
-		window.addEventListener('resize', () => {
-			const active = wrapper.querySelector('.tab-button.active') || buttons[0];
-			if (active) moveSlider(active);
-		});
-
-		// Recalculate after fonts/layout stabilize
-		if (window.document && 'fonts' in document && document.fonts.ready) {
-			document.fonts.ready.then(() => {
-				const active = wrapper.querySelector('.tab-button.active') || buttons[0];
-				if (active) moveSlider(active, true);
-			});
-		}
-		window.addEventListener('load', () => {
-			const active = wrapper.querySelector('.tab-button.active') || buttons[0];
-			if (active) moveSlider(active, true);
-		}, { once: true });
-
-		// Observe wrapper size changes (e.g., font swap, viewport changes)
-		if ('ResizeObserver' in window) {
-			const ro = new ResizeObserver(() => {
-				const active = wrapper.querySelector('.tab-button.active') || buttons[0];
-				if (active) moveSlider(active, true);
-			});
-			ro.observe(wrapper);
-		}
-
-		// Build Mobile Dropdown from header tabs
-		if (mobileDropdown && buttons.length) {
-			mobileDropdown.innerHTML = buttons.map((b, i) => {
-				const activeCls = b.classList.contains('active') ? ' active' : '';
-				return `<button class="mobile-nav-link${activeCls}" data-index="${i}" role="menuitem">${b.textContent.trim()}</button>`;
-			}).join('');
-			// Fallback guard
-			if (!mobileDropdown.innerHTML.trim()) {
-				mobileDropdown.innerHTML = `<button class="mobile-nav-link active" data-index="0" role="menuitem">Home</button>`;
-			}
-
-			mobileDropdown.addEventListener('click', (e) => {
-				const link = e.target.closest('.mobile-nav-link');
-				if (!link) return;
-				const idx = Number(link.getAttribute('data-index'));
-				const btn = buttons[idx];
-				if (!btn) return;
-				setActive(btn);
-				scrollToTarget(btn);
-				mobileDropdown.classList.remove('is-visible');
-			});
-		}
-
-		// Mobile menu toggle and outside click
-		if (mobileBtn && mobileDropdown) {
-			mobileBtn.setAttribute('aria-controls', 'mobile-nav-dropdown');
-			mobileBtn.addEventListener('click', (e) => {
-				e.stopPropagation();
-				mobileDropdown.classList.toggle('is-visible');
-				mobileBtn.setAttribute('aria-expanded', mobileDropdown.classList.contains('is-visible') ? 'true' : 'false');
-			});
-			// Add touchstart for some mobile browsers where click may be delayed/suppressed
-			mobileBtn.addEventListener('touchstart', (e) => {
-				e.stopPropagation();
-				mobileDropdown.classList.toggle('is-visible');
-				mobileBtn.setAttribute('aria-expanded', mobileDropdown.classList.contains('is-visible') ? 'true' : 'false');
-			}, { passive: true });
-			document.addEventListener('click', (e) => {
-				if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
-					mobileDropdown.classList.remove('is-visible');
-					mobileBtn.setAttribute('aria-expanded', 'false');
-				}
-			});
-		}
-	})();
+	// (Removed duplicate header tabs IIFE to avoid conflicting logic)
 
 	// --- TABS LOGIC ---
 	const tabContainer = document.querySelector('.tabs-list');
@@ -216,8 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const rect = activeButton.getBoundingClientRect();
 			const groupRect = group.getBoundingClientRect();
 			slider.style.width = `${rect.width}px`;
-			slider.style.height = `${rect.height}px`;
-			slider.style.transform = `translateX(${rect.left - groupRect.left - 4}px)`;
+			slider.style.transform = `translateX(${rect.left - groupRect.left}px)`;
 		}
 
 		group.addEventListener('click', (e) => {
@@ -292,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				const hex = rgbToHex(computedStyle);
 				if (!hex) return;
 				const ok = await copyTextToClipboard(hex);
-				const originalText = hexLabel.textContent;
 				hexLabel.textContent = ok ? `Copied ${hex}` : hex;
 				hexLabel.classList.add('copied');
 				setTimeout(() => {
@@ -317,8 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		function moveSlider(tab, noTransition = false) {
 			if (!tab || !slider) return;
 			if (noTransition) slider.style.transition = 'none';
-			const left = tab.offsetLeft;
-			const width = tab.clientWidth;
+			// Use rects like pill selector to ensure precise positioning within padded container
+			const tabRect = tab.getBoundingClientRect();
+			const containerRect = tabContainer.getBoundingClientRect();
+			const left = tabRect.left - containerRect.left; // subtract container padding (4px)
+			const width = tabRect.width;
 			slider.style.width = width + 'px';
 			slider.style.transform = `translateX(${left}px)`;
 			if (noTransition) requestAnimationFrame(() => slider.style.transition = '');
