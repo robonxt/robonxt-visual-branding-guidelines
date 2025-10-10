@@ -17,6 +17,14 @@
 	<link rel="stylesheet" href="components.css">
 	<!-- Demo-specific styles -->
 	<link rel="stylesheet" href="styles.css">
+	<!-- Prevent theme flash -->
+	<script>
+		(function() {
+			const saved = localStorage.getItem('robonxt_theme');
+			const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			document.documentElement.setAttribute('data-theme', theme);
+		})();
+	</script>
 </head>
 
 <body>
@@ -62,9 +70,8 @@
 	<main class="container">
 		<section id="overview" class="hero">
 			<h1>The Pragmatic Professional</h1>
-			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This page is built
-				entirely from the defined tokens and components, demonstrating a system that is clear, efficient, and a
-				little clever.</p>
+			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This page demonstrates
+				<code>tokens.css</code> and <code>components.css</code>—the two canonical stylesheets that implement the entire system.</p>
 		</section>
 
 		<!-- Foundations -->
@@ -73,15 +80,15 @@
 			<div class="ds-grid">
 				<div class="ds-surface">
 					<h3>Core Philosophy</h3>
-					<p class="text-medium"><strong>Golden Rule:</strong> Clarity first, always. The brand persona is a
-						confident, efficient expert with a witty, human touch.</p>
+					<p class="text-medium"><strong>Golden Rule:</strong> Clarity first, always.</p>
+					<p class="text-caption">The brand persona is a confident, efficient expert with a witty, human touch.</p>
 				</div>
 				<div class="ds-surface">
 					<h3>Voice & Tone</h3>
-					<ul class="text-medium" style="margin:0; padding-left: 1rem;">
-						<li><strong>Default Tone (90%)</strong>: Casual, clear, concise, helpful.</li>
-						<li><strong>Clever Aside (10%)</strong>: Witty in low‑stakes moments.</li>
-						<li><strong>Critical</strong>: Be 100% professional and direct.</li>
+					<ul class="text-medium list-reset">
+						<li><strong>Default:</strong> Casual, clear, concise, helpful.</li>
+						<li><strong>Clever Aside:</strong> Witty in low-stakes moments.</li>
+						<li><strong>Critical:</strong> Professional and direct.</li>
 					</ul>
 				</div>
 			</div>
@@ -90,30 +97,27 @@
 
 		<section id="typography" class="ds-section">
 			<h2>Typography</h2>
-			<p>A single, highly-legible font family, <strong>Inter</strong>, is used across the entire system to ensure
-				consistency and
-				clarity. The scale is designed for clear hierarchy on any screen size.</p>
+			<p><strong>Font Family:</strong> Inter · <strong>Line Height:</strong> 1.6 (body), 1.3 (headings) · <strong>Letter Spacing:</strong> -1% (headings)</p>
 			<div class="ds-grid">
 				<div class="ds-surface">
 					<h3>Type Scale</h3>
-					<div class="type-showcase"><span class="role">Heading 1 / 36px Bold</span>
-						<p class="text-h1">Primary Page Title</p>
+					<div class="type-showcase"><span class="role">H1 / 36px Bold</span>
+						<p class="text-h1">Primary Title</p>
 					</div>
-					<div class="type-showcase"><span class="role">Heading 2 / 24px Semi-Bold</span>
+					<div class="type-showcase"><span class="role">H2 / 24px Semi-Bold</span>
 						<p class="text-h2">Section Title</p>
 					</div>
-					<div class="type-showcase"><span class="role">Heading 3 / 20px Semi-Bold</span>
+					<div class="type-showcase"><span class="role">H3 / 20px Semi-Bold</span>
 						<p class="text-h3">Component Title</p>
 					</div>
-					<div class="type-showcase"><span class="role">Body (Base) / 16px Regular</span>
-						<p class="text-body-base">This is the default body text. All the main content, like this very
-							sentence, uses this style for optimal readability.</p>
+					<div class="type-showcase"><span class="role">Body / 16px Regular</span>
+						<p class="text-body-base">Default body text for optimal readability.</p>
 					</div>
 					<div class="type-showcase"><span class="role">Label / 14px Medium</span>
 						<p class="text-label">Button & Form Labels</p>
 					</div>
 					<div class="type-showcase"><span class="role">Caption / 14px Regular</span>
-						<p class="text-caption">Helper text, metadata, and captions live here.</p>
+						<p class="text-caption">Helper text and metadata.</p>
 					</div>
 				</div>
 			</div>
@@ -127,15 +131,15 @@
 				<div class="ds-surface">
 					<h3>Wordmark</h3>
 					<p class="text-logo"><span class="accent">robo</span>nxt</p>
-					<p class="text-caption" style="margin-top: var(--space-sm); color: var(--color-text-medium);">
+					<p class="text-caption color-caption">
 						Placeholder wordmark. Replace with official SVG when available. Logo colors are defined in the
 						Color System section.</p>
 				</div>
 
 				<div class="ds-surface">
 					<h3>Logo Palette</h3>
-					<p class="text-caption">Reserved for the official logo and core brand assets only.</p>
-					<div class="color-grid" style="margin-top: var(--space-sm);">
+					<p class="text-caption">Reserved for the official logo and core brand assets. <strong>Do not use for interactive UI components.</strong></p>
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--logo-teal);"></div>
 							<div class="swatch-name">Logo Teal</div>
@@ -161,31 +165,12 @@
 
 				<div class="ds-surface">
 					<h3>Brand Palette · Indigo</h3>
-					<div class="color-grid" style="margin-top: var(--space-sm);">
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-50);"></div>
-							<div class="swatch-name">Indigo 50</div>
-							<div class="swatch-hex">var(--indigo-50)</div>
-						</div>
+					<p class="text-caption">Primary interactive color. Calls-to-action, links, active states. Default: <code>indigo-600</code> (light), <code>indigo-500</code> (dark)</p>
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--indigo-100);"></div>
 							<div class="swatch-name">Indigo 100</div>
 							<div class="swatch-hex">var(--indigo-100)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-200);"></div>
-							<div class="swatch-name">Indigo 200</div>
-							<div class="swatch-hex">var(--indigo-200)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-300);"></div>
-							<div class="swatch-name">Indigo 300</div>
-							<div class="swatch-hex">var(--indigo-300)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-400);"></div>
-							<div class="swatch-name">Indigo 400</div>
-							<div class="swatch-hex">var(--indigo-400)</div>
 						</div>
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--indigo-500);"></div>
@@ -198,16 +183,6 @@
 							<div class="swatch-hex">var(--indigo-600)</div>
 						</div>
 						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-700);"></div>
-							<div class="swatch-name">Indigo 700</div>
-							<div class="swatch-hex">var(--indigo-700)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--indigo-800);"></div>
-							<div class="swatch-name">Indigo 800</div>
-							<div class="swatch-hex">var(--indigo-800)</div>
-						</div>
-						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--indigo-900);"></div>
 							<div class="swatch-name">Indigo 900</div>
 							<div class="swatch-hex">var(--indigo-900)</div>
@@ -217,31 +192,12 @@
 
 				<div class="ds-surface">
 					<h3>Brand Palette · Fuchsia</h3>
-					<div class="color-grid" style="margin-top: var(--space-sm);">
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-50);"></div>
-							<div class="swatch-name">Fuchsia 50</div>
-							<div class="swatch-hex">var(--fuchsia-50)</div>
-						</div>
+					<p class="text-caption">Secondary interactive color. High-emphasis accent for alternative actions. Default: <code>fuchsia-600</code> (light), <code>fuchsia-500</code> (dark)</p>
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--fuchsia-100);"></div>
 							<div class="swatch-name">Fuchsia 100</div>
 							<div class="swatch-hex">var(--fuchsia-100)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-200);"></div>
-							<div class="swatch-name">Fuchsia 200</div>
-							<div class="swatch-hex">var(--fuchsia-200)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-300);"></div>
-							<div class="swatch-name">Fuchsia 300</div>
-							<div class="swatch-hex">var(--fuchsia-300)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-400);"></div>
-							<div class="swatch-name">Fuchsia 400</div>
-							<div class="swatch-hex">var(--fuchsia-400)</div>
 						</div>
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--fuchsia-500);"></div>
@@ -254,16 +210,6 @@
 							<div class="swatch-hex">var(--fuchsia-600)</div>
 						</div>
 						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-700);"></div>
-							<div class="swatch-name">Fuchsia 700</div>
-							<div class="swatch-hex">var(--fuchsia-700)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--fuchsia-800);"></div>
-							<div class="swatch-name">Fuchsia 800</div>
-							<div class="swatch-hex">var(--fuchsia-800)</div>
-						</div>
-						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--fuchsia-900);"></div>
 							<div class="swatch-name">Fuchsia 900</div>
 							<div class="swatch-hex">var(--fuchsia-900)</div>
@@ -273,7 +219,7 @@
 
 				<div class="ds-surface">
 					<h3>Neutrals Palette</h3>
-					<div class="color-grid" style="margin-top: var(--space-sm);">
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--white);"></div>
 							<div class="swatch-name">Surface</div>
@@ -309,7 +255,7 @@
 
 				<div class="ds-surface">
 					<h3>Functional Palette</h3>
-					<div class="color-grid" style="margin-top: var(--space-sm);">
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--success);"></div>
 							<div class="swatch-name">Success</div>
@@ -333,35 +279,21 @@
 		<!-- Theming -->
 		<section id="theming" class="ds-section">
 			<h2>Theming</h2>
-			<p>Components reference semantic tokens so themes can swap values without changing component code.</p>
+			<p>Components reference semantic tokens, not raw color values, to support theming and interactive states. Set theme via <code>data-theme="light"</code> or <code>data-theme="dark"</code> on the root element.</p>
 			<div class="ds-grid">
 				<div class="ds-surface">
 					<h3>Semantic Tokens (Light/Dark)</h3>
-					<div class="color-grid">
+					<p class="text-caption">Theme-aware tokens that adapt automatically. Toggle theme to see changes.</p>
+					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--color-primary);"></div>
 							<div class="swatch-name">color-primary</div>
 							<div class="swatch-hex">var(--color-primary)</div>
 						</div>
 						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-primary-hover);"></div>
-							<div class="swatch-name">color-primary-hover</div>
-							<div class="swatch-hex">var(--color-primary-hover)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-primary-active);"></div>
-							<div class="swatch-name">color-primary-active</div>
-							<div class="swatch-hex">var(--color-primary-active)</div>
-						</div>
-						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--color-accent);"></div>
 							<div class="swatch-name">color-accent</div>
 							<div class="swatch-hex">var(--color-accent)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-accent-hover);"></div>
-							<div class="swatch-name">color-accent-hover</div>
-							<div class="swatch-hex">var(--color-accent-hover)</div>
 						</div>
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--color-surface);"></div>
@@ -372,11 +304,6 @@
 							<div class="swatch-color" style="background-color: var(--color-text-high);"></div>
 							<div class="swatch-name">color-text-high</div>
 							<div class="swatch-hex">var(--color-text-high)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-border-default);"></div>
-							<div class="swatch-name">color-border-default</div>
-							<div class="swatch-hex">var(--color-border-default)</div>
 						</div>
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--color-border-focus);"></div>
@@ -399,8 +326,6 @@
 							<div class="swatch-hex">var(--color-error)</div>
 						</div>
 					</div>
-					<p class="text-caption" style="margin-top: var(--space-sm);">Use the theme switch in the header to
-						see values adapt.</p>
 				</div>
 			</div>
 		</section>
@@ -408,15 +333,31 @@
 		<!-- Spacing (8pt Grid) -->
 		<section id="spacing" class="ds-section">
 			<h2>Spacing</h2>
+			<p>All spacing and component sizing values are based on an <strong>8-Point Grid System</strong>. This applies to padding, margins, gaps, and all component dimensions.</p>
 			<div class="ds-grid">
 				<div class="ds-surface">
-					<h3>8-Point Grid System</h3>
+					<h3>Spacing Scale</h3>
 					<div class="spacing-row">
-						<div class="spacing-block" style="width: var(--space-xs);">xs</div>
-						<div class="spacing-block" style="width: var(--space-sm);">sm</div>
-						<div class="spacing-block" style="width: var(--space-md);">md</div>
-						<div class="spacing-block" style="width: var(--space-lg);">lg</div>
-						<div class="spacing-block" style="width: var(--space-xl);">xl</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-xs"></div>
+							<span class="text-caption">xs · 8px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-sm"></div>
+							<span class="text-caption">sm · 16px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-md"></div>
+							<span class="text-caption">md · 24px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-lg"></div>
+							<span class="text-caption">lg · 32px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-xl"></div>
+							<span class="text-caption">xl · 48px</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -429,23 +370,23 @@
 			<div class="ds-grid">
 				<div class="ds-surface">
 					<h3>Corner Radius</h3>
-					<div class="radius-demo" style="margin-top: var(--space-sm);">
-						<div class="radius-item" style="border-radius: var(--radius-sm);">radius-sm (4px)</div>
-						<div class="radius-item" style="border-radius: var(--radius-md);">radius-md (8px)</div>
-						<div class="radius-item" style="border-radius: var(--radius-lg);">radius-lg (16px)</div>
-						<div class="radius-item" style="border-radius: var(--radius-full);">radius-full</div>
+					<div class="radius-demo demo-margin-top">
+						<div class="radius-item radius-demo-sm">radius-sm (4px)</div>
+						<div class="radius-item radius-demo-md">radius-md (8px)</div>
+						<div class="radius-item radius-demo-lg">radius-lg (16px)</div>
+						<div class="radius-item radius-demo-full">radius-full</div>
 					</div>
 				</div>
 				<div class="ds-surface">
 					<h3>Borders</h3>
-					<div class="border-demo" style="margin-top: var(--space-sm);">
+					<div class="border-demo demo-margin-top">
 						<div class="border-item">stroke-sm (1.5px)</div>
 						<div class="border-item focus">stroke-md (3px) · Focus</div>
 					</div>
 				</div>
 				<div class="ds-surface">
 					<h3>Elevation (Shadows)</h3>
-					<div class="shadow-demo" style="margin-top: var(--space-sm);">
+					<div class="shadow-demo demo-margin-top">
 						<div class="shadow-item shadow-sm">shadow-sm</div>
 						<div class="shadow-item shadow-md">shadow-md</div>
 						<div class="shadow-item shadow-lg">shadow-lg</div>
@@ -453,32 +394,25 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Motion</h3>
-					<p class="text-caption">Easing: cubic-bezier(0.4, 0, 0.2, 1)</p>
-					<div class="motion-demo" id="motion-demo" style="margin-top: var(--space-sm);">
+					<p class="text-caption"><strong>Easing:</strong> cubic-bezier(0.4, 0, 0.2, 1) · <strong>Durations:</strong> quick (150ms), medium (300ms), slow (500ms)</p>
+					<div class="motion-demo demo-margin-top" id="motion-demo">
 						<div class="motion-box quick"></div>
 						<div class="motion-box medium"></div>
 						<div class="motion-box slow"></div>
 					</div>
-					<button class="btn btn-outline" id="motion-toggle"
-						style="margin-top: var(--space-sm);">Animate</button>
+					<button class="btn btn-outline demo-margin-top" id="motion-toggle">Animate</button>
 				</div>
 			</div>
 		</section>
 
-
-
-
-
 		<section id="components" class="ds-section">
 			<h2>Components</h2>
-			<p>The tangible, interactive elements of the brand. Built from our core primitives and designed for clarity.
-			</p>
+			<p>Reusable building blocks constructed from foundations and design tokens. All components are defined in <code>components.css</code>.</p>
 			<div class="component-showcase-grid">
 				<div class="ds-surface">
-					<h3>Material Symbols · Rounded</h3>
-					<p class="text-caption">Icons inherit text color via <code>currentColor</code> and follow the
-						8‑point grid.</p>
-					<div class="icon-row" style="margin-top: var(--space-sm);">
+					<h3>Iconography</h3>
+					<p class="text-caption"><strong>Library:</strong> Material Symbols · <strong>Style:</strong> Rounded (exclusively) · <strong>Sizing:</strong> 16px, 24px (default), 32px</p>
+					<div class="icon-row demo-margin-top">
 						<span class="material-symbols-rounded icon-16">bolt</span>
 						<span class="material-symbols-rounded icon-24">bolt</span>
 						<span class="material-symbols-rounded icon-32">bolt</span>
@@ -486,7 +420,8 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Buttons</h3>
-					<div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+					<p class="text-caption"><strong>Primary:</strong> Most important action · <strong>Secondary:</strong> Alternative high-emphasis · <strong>Outline:</strong> Medium-emphasis · <strong>Ghost:</strong> Low-emphasis</p>
+					<div class="flex-buttons-container">
 						<button class="btn btn-primary">Primary</button>
 						<button class="btn btn-secondary">Secondary</button>
 						<button class="btn btn-outline">Outline</button>
@@ -496,7 +431,8 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Input Fields</h3>
-					<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+					<p class="text-caption">Uses <code>radius-md</code> and <code>stroke-sm</code>. Focus state uses <code>stroke-md</code> with <code>color-border-focus</code>.</p>
+					<div class="flex-inputs-container">
 						<div class="input-group">
 							<label for="name">Name</label>
 							<input type="text" id="name" class="input-field" placeholder="Default state">
@@ -511,30 +447,24 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Alerts</h3>
-					<div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+					<p class="text-caption">Structure: Icon + Title/Description. Uses semantic functional colors (<code>color-success</code>, <code>color-warning</code>, <code>color-error</code>).</p>
+					<div class="flex-alerts-container">
 						<div class="alert alert-success"><span class="material-symbols-rounded">task_alt</span>
 							<div class="alert-content">
-								<div class="alert-title">Success Message</div>
-								<p class="alert-description">Your changes have been saved.</p>
+								<div class="alert-title">Success</div>
+								<p class="alert-description">Changes saved.</p>
 							</div>
 						</div>
 						<div class="alert alert-warning"><span class="material-symbols-rounded">warning</span>
 							<div class="alert-content">
-								<div class="alert-title">Warning Message</div>
-								<p class="alert-description">Your session is about to expire.</p>
+								<div class="alert-title">Warning</div>
+								<p class="alert-description">Session expiring soon.</p>
 							</div>
 						</div>
 						<div class="alert alert-error"><span class="material-symbols-rounded">error</span>
 							<div class="alert-content">
-								<div class="alert-title">Error Message</div>
-								<p class="alert-description">Could not complete the request.</p>
-							</div>
-						</div>
-						<div class="alert alert-info"><span class="material-symbols-rounded">info</span>
-							<div class="alert-content">
-								<div class="alert-title">Information</div>
-								<p class="alert-description">Heads up: settings were saved, but some changes take
-									effect after reload.</p>
+								<div class="alert-title">Error</div>
+								<p class="alert-description">Request failed.</p>
 							</div>
 						</div>
 					</div>
@@ -567,6 +497,7 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Pill Selector</h3>
+					<p class="text-caption">For selecting one option from a small set. Slider uses <code>radius-full</code> and animates with <code>duration-medium</code>.</p>
 					<div class="pill-selector-group" id="pill-selector-1">
 						<div class="pill-selector-slider"></div>
 						<button class="btn-pill active" data-value="daily">Daily</button>
@@ -577,7 +508,8 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Switches</h3>
-					<div style="display:flex; align-items:center; gap: var(--space-lg); flex-wrap: wrap;">
+					<p class="text-caption">Binary on/off states. Track and thumb use <code>radius-full</code>. Animates with <code>duration-quick</code>. Focus state uses <code>stroke-md</code> outline with <code>color-border-focus</code>.</p>
+					<div class="flex-switch-container">
 						<label class="switch">
 							<input type="checkbox" aria-label="Enable notifications" checked>
 							<span class="switch-track"><span class="switch-thumb"></span></span>
@@ -589,19 +521,11 @@
 							<span class="switch-label">Beta Features</span>
 						</label>
 					</div>
-					<p class="text-caption" style="margin-top: var(--space-sm);">Switches use
-						<code>radius-full</code>, animate with <code>duration-quick</code>, and adopt
-						<code>color-border-focus</code> on focus.
-					</p>
+					<p class="text-caption demo-margin-top"><strong>Keyboard:</strong> Press Tab to focus, Space to toggle.</p>
 				</div>
 				<div class="ds-surface">
 					<h3>Sliders</h3>
-					<p class="text-caption">Default slider with neutral track</p>
-					<div class="slider-container" style="margin-bottom: var(--space-md);">
-						<input type="range" min="0" max="100" value="50" class="slider" id="my-slider">
-						<div class="slider-value-label">50</div>
-					</div>
-					<p class="text-caption">Filled variant showing difference from default value</p>
+					<p class="text-caption">Filled variant (<code>.slider-filled</code>) with colored track showing selected range using <code>color-primary</code>.</p>
 					<div class="slider-container">
 						<input type="range" min="0" max="100" value="50" class="slider-filled" id="my-slider-filled">
 						<div class="slider-value-label">50</div>
@@ -609,8 +533,8 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Dropdown & Avatars</h3>
-					<div style="display: flex; justify-content: space-between; align-items: center;">
-						<div style="display: flex; align-items: center; gap: var(--space-sm);">
+					<div class="flex-dropdown-container">
+						<div class="flex-avatar-container">
 							<img src="https://i.pravatar.cc/48?u=a" alt="Avatar" class="avatar avatar-md">
 							<div class="avatar avatar-md">JD</div>
 							<div class="avatar avatar-sm">A</div>
@@ -634,16 +558,15 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Progress Bar</h3>
-					<p class="text-caption">Visual indicator for task completion or loading states.</p>
-					<div class="progress-bar" style="margin: var(--space-md) 0;">
-						<div class="progress-indicator" style="width: 65%;"></div>
+					<p class="text-caption">Determinate progress indicator. Height: 8px (8-point grid). Width updates smoothly via CSS transitions.</p>
+					<div class="progress-bar progress-spacing">
+						<div class="progress-indicator progress-indicator-width"></div>
 					</div>
 				</div>
 				<div class="ds-surface">
 					<h3>Modals</h3>
-					<p class="text-caption">Critical overlays requiring user focus. Use <code>shadow-lg</code> for
-						elevation and <code>duration-slow</code> for animations.</p>
-					<button class="btn btn-outline" id="open-modal-btn" style="margin-top: var(--space-sm);">
+					<p class="text-caption">Uses <code>radius-lg</code> and <code>shadow-lg</code>. Content padding: <code>space-md</code>. Animates with <code>duration-medium</code>.</p>
+					<button class="btn btn-outline demo-margin-top" id="open-modal-btn">
 						<span class="material-symbols-rounded">open_in_new</span>
 						Launch Deletion Modal
 					</button>

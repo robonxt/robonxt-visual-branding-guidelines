@@ -77,7 +77,7 @@
 		grid-auto-flow: dense;
 	}
 
-	.component-showcase-grid > * {
+	.component-showcase-grid>* {
 		grid-column: auto;
 	}
 }
@@ -147,8 +147,8 @@
 .theme-switch {
 	position: relative;
 	display: inline-block;
-	width: 44px;
-	height: 24px;
+	width: var(--switch-track-width);
+	height: var(--switch-track-height);
 }
 
 .theme-switch input {
@@ -169,10 +169,10 @@
 .theme-slider:before {
 	position: absolute;
 	content: "";
-	height: 18px;
-	width: 18px;
-	left: 3px;
-	bottom: 3px;
+	height: var(--switch-thumb-size);
+	width: var(--switch-thumb-size);
+	left: var(--switch-thumb-offset);
+	bottom: var(--switch-thumb-offset);
 	background-color: var(--white);
 	border-radius: 50%;
 	transition: var(--duration-quick) var(--easing);
@@ -183,7 +183,7 @@ input:checked+.theme-slider {
 }
 
 input:checked+.theme-slider:before {
-	transform: translateX(20px);
+	transform: translateX(calc(var(--switch-track-width) - var(--switch-thumb-size) - (2 * var(--switch-thumb-offset))));
 }
 
 .theme-switch-wrapper .material-symbols-rounded {
@@ -300,18 +300,21 @@ input:checked+.theme-slider:before {
 .spacing-row {
 	display: flex;
 	align-items: flex-end;
-	gap: var(--space-sm);
+	gap: var(--space-lg);
 	flex-wrap: wrap;
+}
+
+.spacing-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-xs);
 }
 
 .spacing-block {
 	background: var(--color-primary);
-	color: var(--white);
 	border-radius: var(--radius-sm);
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	height: 32px;
+	height: 64px;
 }
 
 .radius-demo {
@@ -448,13 +451,13 @@ input:checked+.theme-slider:before {
 
 .mobile-nav-dropdown {
 	position: absolute;
-	top: calc(100% + 4px);
+	top: calc(100% + var(--pill-group-padding));
 	left: 0;
 	background: var(--color-surface);
 	border: var(--stroke-sm) solid var(--color-border-default);
 	border-radius: var(--radius-lg);
 	box-shadow: var(--shadow-md);
-	padding: 4px;
+	padding: var(--pill-group-padding);
 	min-width: 220px;
 	z-index: 60;
 	opacity: 0;
@@ -527,6 +530,107 @@ input:checked+.theme-slider:before {
 	width: 20px;
 	height: 20px;
 }
+
+/*-------------------------------------------*/
+/* 5. UTILITY CLASSES FOR INLINE STYLES     */
+/*-------------------------------------------*/
+
+/* Utility classes to replace inline styles found in HTML */
+.list-reset {
+	margin: 0;
+	padding-left: 1rem;
+}
+
+.color-caption {
+	margin-top: var(--space-sm);
+	color: var(--color-text-medium);
+}
+
+.demo-margin-top {
+	margin-top: var(--space-sm);
+}
+
+.flex-switch-container {
+	display: flex;
+	align-items: center;
+	gap: var(--space-lg);
+	flex-wrap: wrap;
+}
+
+.slider-container-spacing {
+	margin-bottom: var(--space-md);
+}
+
+/* Additional utility classes for remaining inline styles */
+.flex-buttons-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm);
+	align-items: center;
+}
+
+.flex-alerts-container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+.flex-dropdown-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-avatar-container {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.progress-indicator-width {
+	width: 65%;
+}
+
+/* Demo-specific utility classes for inline styles */
+.spacing-block-xs {
+	width: var(--space-xs);
+}
+
+.spacing-block-sm {
+	width: var(--space-sm);
+}
+
+.spacing-block-md {
+	width: var(--space-md);
+}
+
+.spacing-block-lg {
+	width: var(--space-lg);
+}
+
+.spacing-block-xl {
+	width: var(--space-xl);
+}
+
+.radius-demo-sm {
+	border-radius: var(--radius-sm);
+}
+
+.radius-demo-md {
+	border-radius: var(--radius-md);
+}
+
+.radius-demo-lg {
+	border-radius: var(--radius-lg);
+}
+
+.radius-demo-full {
+	border-radius: var(--radius-full);
+}
+
+/*-------------------------------------------*/
+/* 6. OVERRIDES                              */
+/*-------------------------------------------*/
 
 /* Progress indicator width override for demo */
 .progress-indicator {

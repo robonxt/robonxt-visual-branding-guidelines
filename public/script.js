@@ -1,371 +1,348 @@
-document.addEventListener('DOMContentLoaded', () => {
-	// --- RESPONSIVE NAVIGATION ---
-	const headerLeft = document.querySelector('.header-left');
-	const pillSelector = document.getElementById('wrapper-tabs');
-	const pageHeader = document.querySelector('.page-header');
+// --- UTILITIES ---
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
-	function checkNavigationOverflow() {
-		if (!headerLeft || !pillSelector || !pageHeader) return;
+function rgbToHex(rgbStr) {
+	const match = rgbStr.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+	if (!match) return null;
+	return `#${Number(match[1]).toString(16).padStart(2, '0')}${Number(match[2]).toString(16).padStart(2, '0')}${Number(match[3]).toString(16).padStart(2, '0')}`.toUpperCase();
+}
 
-		// Remove mobile mode temporarily to measure
-		headerLeft.classList.remove('mobile-mode');
-
-		// Check if content would overflow
-		const headerWidth = pageHeader.offsetWidth;
-		const headerLeftWidth = headerLeft.scrollWidth;
-		const themeSwitch = document.querySelector('.theme-switch-wrapper');
-		const themeWidth = themeSwitch ? themeSwitch.offsetWidth : 0;
-		const availableWidth = headerWidth - themeWidth - 48; // 48px for padding/gaps
-
-		if (headerLeftWidth > availableWidth) {
-			headerLeft.classList.add('mobile-mode');
+async function copyTextToClipboard(text) {
+	try {
+		if (navigator.clipboard && window.isSecureContext) {
+			await navigator.clipboard.writeText(text);
+			return true;
 		}
-	}
+		const ta = document.createElement('textarea');
+		ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+		document.body.appendChild(ta);
+		ta.focus(); ta.select(); document.execCommand('copy');
+		document.body.removeChild(ta);
+		return true;
+	} catch (e) { return false; }
+}
 
-	// Check on load and resize
-	checkNavigationOverflow();
-	window.addEventListener('resize', checkNavigationOverflow);
+const toggleVisibility = (element, force) => element.classList.toggle('is-visible', force);
 
-	// --- THEME SWITCHER ---
-	const themeCheckbox = document.getElementById('theme-checkbox');
-	const htmlEl = document.documentElement;
+const updateSliderPosition = (slider, activeButton) => {
+	if (!slider || !activeButton) return;
+	Object.assign(slider.style, {
+		left: `${activeButton.offsetLeft}px`,
+		width: `${activeButton.offsetWidth}px`,
+		height: `${activeButton.offsetHeight}px`,
+		top: `${activeButton.offsetTop}px`
+	});
+};
 
-	const setTheme = (theme) => {
-		htmlEl.setAttribute('data-theme', theme);
-		localStorage.setItem('robonxt_theme', theme);
-		themeCheckbox.checked = theme === 'dark';
+const updateFilledSlider = (slider) => {
+	const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+	slider.style.background = `linear-gradient(to right, var(--color-primary) ${percent}%, var(--color-border-default) ${percent}%)`;
+};
+
+const updateSliderLabel = (slider, label) => {
+	const percent = (slider.value - slider.min) / (slider.max - slider.min);
+	label.style.left = `${percent * (slider.offsetWidth - 20) + 10}px`;
+	label.textContent = slider.value;
+};
+
+const createModalManager = (backdropId, triggerIds = []) => {
+	const backdrop = $(`#${backdropId}`);
+	if (!backdrop) return null;
+
+	const toggle = (visible) => backdrop.classList.toggle('is-visible', visible);
+
+	triggerIds.forEach(id => $(`#${id}`)?.addEventListener('click', () => toggle(true)));
+	backdrop.addEventListener('click', (e) => e.target === backdrop && toggle(false));
+	document.addEventListener('keydown', (e) => e.key === 'Escape' && backdrop.classList.contains('is-visible') && toggle(false));
+
+	return { openModal: () => toggle(true), closeModal: () => toggle(false) };
+};
+
+const createDropdownManager = (toggleId, menuId) => {
+	const toggle = $(`#${toggleId}`);
+	const menu = $(`#${menuId}`);
+	if (!toggle || !menu) return null;
+
+	const setOpen = (open) => {
+		menu.classList.toggle('is-visible', open);
+		toggle.setAttribute('aria-expanded', open);
 	};
 
-	// Check for saved theme, else use device preference
-	const savedTheme = localStorage.getItem('robonxt_theme');
-	let initialTheme = savedTheme;
-	if (!savedTheme) {
-		// Detect device preference
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		initialTheme = prefersDark ? 'dark' : 'light';
-	}
-	setTheme(initialTheme);
+	toggle.addEventListener('click', (e) => {
+		e.stopPropagation();
+		setOpen(!menu.classList.contains('is-visible'));
+	});
+	document.addEventListener('click', (e) => !menu.contains(e.target) && e.target !== toggle && setOpen(false));
 
-	// Listen for device preference changes
-	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-		// Only update if no manual override in localStorage
-		if (!localStorage.getItem('robonxt_theme')) {
-			const newTheme = e.matches ? 'dark' : 'light';
-			setTheme(newTheme);
-		}
+	return { openDropdown: () => setOpen(true), closeDropdown: () => setOpen(false), toggle, menu };
+};
+
+const createPillSelector = (selectorId, valueDisplayId) => {
+	const group = $(`#${selectorId}`);
+	if (!group) return null;
+
+	const valueDisplay = $(`#${valueDisplayId}`);
+	const buttons = group.querySelectorAll('.btn-pill');
+	const slider = group.querySelector('.pill-selector-slider');
+
+	const updateSlider = (btn) => btn && updateSliderPosition(slider, btn);
+	const getActive = () => group.querySelector('.btn-pill.active');
+
+	updateSlider(getActive());
+
+	group.addEventListener('click', (e) => {
+		if (!e.target.classList.contains('btn-pill')) return;
+		buttons.forEach(btn => btn.classList.remove('active'));
+		e.target.classList.add('active');
+		if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
+		updateSlider(e.target);
 	});
 
-	themeCheckbox.addEventListener('change', () => {
-		const newTheme = themeCheckbox.checked ? 'dark' : 'light';
-		setTheme(newTheme);
+	window.addEventListener('resize', () => updateSlider(getActive()));
+
+	return { group, buttons, updateSlider };
+};
+
+// --- RESPONSIVE NAVIGATION ---
+const initResponsiveNavigation = () => {
+	const headerLeft = $('.header-left');
+	const pageHeader = $('.page-header');
+	if (!headerLeft || !pageHeader) return;
+
+	const checkOverflow = () => {
+		headerLeft.classList.remove('mobile-mode');
+		const themeWidth = $('.theme-switch-wrapper')?.offsetWidth || 0;
+		const available = pageHeader.offsetWidth - themeWidth - 48;
+		if (headerLeft.scrollWidth > available) headerLeft.classList.add('mobile-mode');
+	};
+
+	checkOverflow();
+	window.addEventListener('resize', checkOverflow);
+};
+
+// --- THEME SWITCHER ---
+const initThemeSwitcher = () => {
+	const checkbox = $('#theme-checkbox');
+	if (!checkbox) return;
+
+	const setTheme = (theme) => {
+		document.documentElement.setAttribute('data-theme', theme);
+		localStorage.setItem('robonxt_theme', theme);
+		checkbox.checked = theme === 'dark';
+	};
+
+	const saved = localStorage.getItem('robonxt_theme');
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+	
+	if (saved) {
+		setTheme(saved);
+	} else {
+		const theme = prefersDark.matches ? 'dark' : 'light';
+		document.documentElement.setAttribute('data-theme', theme);
+		checkbox.checked = theme === 'dark';
+	}
+
+	prefersDark.addEventListener('change', (e) => !localStorage.getItem('robonxt_theme') && setTheme(e.matches ? 'dark' : 'light'));
+	checkbox.addEventListener('change', () => setTheme(checkbox.checked ? 'dark' : 'light'));
+};
+
+// --- MODAL LOGIC ---
+const initModal = () => {
+	const manager = createModalManager('modal-backdrop', ['open-modal-btn']);
+	if (manager) ['close-modal-btn', 'cancel-modal-btn'].forEach(id => $(`#${id}`)?.addEventListener('click', manager.closeModal));
+};
+
+// --- DROPDOWN LOGIC ---
+const initDropdown = () => createDropdownManager('dropdown-toggle', 'dropdown-menu');
+
+// --- TABS LOGIC ---
+const initTabs = () => {
+	const container = $('.tabs-list');
+	if (!container) return;
+
+	container.addEventListener('click', (e) => {
+		if (!e.target.classList.contains('tab-trigger')) return;
+		const targetId = e.target.dataset.tab;
+		container.querySelectorAll('.tab-trigger').forEach(t => t.classList.remove('active'));
+		e.target.classList.add('active');
+		$$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === targetId));
+	});
+};
+
+// --- PILL SELECTOR LOGIC ---
+const initPillSelectors = () => createPillSelector('pill-selector-1', 'pill-value-1');
+
+// --- SLIDER LOGIC ---
+const initSliders = () => {
+	const slider = $('#my-slider');
+	const label = $('.slider-value-label');
+	if (slider && label) {
+		const update = () => updateSliderLabel(slider, label);
+		const setOpacity = (val) => label.style.opacity = val;
+		slider.addEventListener('input', update);
+		['mouseenter', 'mousedown'].forEach(e => slider.addEventListener(e, () => setOpacity('1')));
+		['mouseleave', 'mouseup'].forEach(e => slider.addEventListener(e, () => setOpacity('0')));
+		update();
+	}
+
+	const filled = $('#my-slider-filled');
+	if (filled) {
+		const update = () => updateFilledSlider(filled);
+		filled.addEventListener('input', update);
+		update();
+	}
+};
+
+// --- COLOR SWATCH COPY LOGIC ---
+const initColorSwatches = () => {
+	$$('.color-swatch').forEach((swatch) => {
+		swatch.setAttribute('tabindex', '0');
+		swatch.setAttribute('role', 'button');
+		const colorEl = swatch.querySelector('.swatch-color');
+		const hexLabel = swatch.querySelector('.swatch-hex');
+		const originalText = hexLabel.textContent;
+
+		const handleCopy = async () => {
+			const hex = rgbToHex(getComputedStyle(colorEl).backgroundColor);
+			if (!hex) return;
+			const ok = await copyTextToClipboard(hex);
+			hexLabel.textContent = ok ? `Copied ${hex}` : hex;
+			hexLabel.classList.add('copied');
+			setTimeout(() => {
+				hexLabel.textContent = originalText;
+				hexLabel.classList.remove('copied');
+			}, 1200);
+		};
+
+		swatch.addEventListener('click', handleCopy);
+		swatch.addEventListener('keydown', (e) => ['Enter', ' '].includes(e.key) && (e.preventDefault(), handleCopy()));
+	});
+};
+
+// --- HEADER TABS ---
+const initHeaderTabs = () => {
+	const container = $('#wrapper-tabs');
+	if (!container) return;
+
+	const tabs = Array.from(container.querySelectorAll('.btn-pill'));
+	const sections = tabs.map(t => $(t.getAttribute('data-target'))).filter(Boolean);
+	const slider = container.querySelector('.pill-selector-slider');
+
+	const updateSlider = (tab) => tab && updateSliderPosition(slider, tab);
+
+	const setActive = (tab, scrollTo = true) => {
+		if (!tab) return;
+		tabs.forEach(t => t.classList.remove('active'));
+		tab.classList.add('active');
+		const target = $(tab.getAttribute('data-target'));
+		const name = tab.getAttribute('data-tab');
+		if (name) location.hash = name;
+		if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		const title = $('#mobile-nav-title');
+		if (title) title.textContent = tab.textContent;
+		updateSlider(tab);
+	};
+
+	tabs.forEach(btn => btn.addEventListener('click', (e) => (e.preventDefault(), setActive(btn, true))));
+
+	const syncFromScroll = () => {
+		let activeIdx = 0;
+		for (let i = 0; i < sections.length; i++) {
+			if (sections[i].getBoundingClientRect().top - 120 <= 0) activeIdx = i;
+			else break;
+		}
+		const activeTab = tabs[activeIdx];
+		if (!activeTab || activeTab.classList.contains('active')) return;
+		tabs.forEach(t => t.classList.remove('active'));
+		activeTab.classList.add('active');
+		const title = $('#mobile-nav-title');
+		if (title) title.textContent = activeTab.textContent;
+		updateSlider(activeTab);
+	};
+
+	const hash = location.hash.slice(1);
+	setActive(tabs.find(t => t.getAttribute('data-tab') === hash) || tabs[0], false);
+
+	window.addEventListener('scroll', syncFromScroll, { passive: true });
+	window.addEventListener('resize', () => updateSlider(container.querySelector('.btn-pill.active')));
+};
+
+// --- MOBILE NAVIGATION ---
+const initMobileNavigation = () => {
+	const btn = $('#btn-mobile-nav');
+	const dd = $('#mobile-nav-dropdown');
+	const container = $('#wrapper-tabs');
+	if (!btn || !dd || !container) return;
+
+	const tabs = Array.from(container.querySelectorAll('.btn-pill'));
+
+	const buildDropdown = () => {
+		dd.innerHTML = '';
+		tabs.forEach(t => {
+			const link = document.createElement('button');
+			link.className = 'mobile-nav-link';
+			link.type = 'button';
+			link.setAttribute('data-tab', t.getAttribute('data-tab'));
+			link.textContent = t.textContent;
+			link.addEventListener('click', () => (t.click(), manager.closeDropdown(), btn.focus()));
+			dd.appendChild(link);
+		});
+	};
+
+	const manager = createDropdownManager('btn-mobile-nav', 'mobile-nav-dropdown');
+	if (!manager) return;
+
+	buildDropdown();
+
+	document.addEventListener('keydown', (e) => {
+		const links = Array.from(dd.querySelectorAll('.mobile-nav-link'));
+		const idx = links.indexOf(document.activeElement);
+		if (e.key === 'Escape') return manager.closeDropdown();
+		if (!dd.classList.contains('is-visible')) return;
+		if (e.key === 'ArrowDown') { e.preventDefault(); links[(idx < 0 ? 0 : (idx + 1) % links.length)]?.focus(); }
+		if (e.key === 'ArrowUp') { e.preventDefault(); links[(idx < 0 ? links.length - 1 : (idx - 1 + links.length) % links.length)]?.focus(); }
+		if (e.key === 'Home') { e.preventDefault(); links[0]?.focus(); }
+		if (e.key === 'End') { e.preventDefault(); links[links.length - 1]?.focus(); }
+		if (['Enter', ' '].includes(e.key) && document.activeElement?.classList.contains('mobile-nav-link')) { e.preventDefault(); document.activeElement.click(); }
 	});
 
-	// --- MODAL LOGIC ---
-	const openModalBtn = document.getElementById('open-modal-btn');
-	const closeModalBtn = document.getElementById('close-modal-btn');
-	const cancelModalBtn = document.getElementById('cancel-modal-btn');
-	const modalBackdrop = document.getElementById('modal-backdrop');
-
-	const openModal = () => modalBackdrop.classList.add('is-visible');
-	const closeModal = () => modalBackdrop.classList.remove('is-visible');
-
-	openModalBtn.addEventListener('click', openModal);
-	closeModalBtn.addEventListener('click', closeModal);
-	cancelModalBtn.addEventListener('click', closeModal);
-	modalBackdrop.addEventListener('click', (event) => { if (event.target === modalBackdrop) closeModal(); });
-	document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modalBackdrop.classList.contains('is-visible')) closeModal(); });
-
-	// --- DROPDOWN LOGIC ---
-	const dropdownToggle = document.getElementById('dropdown-toggle');
-	const dropdownMenu = document.getElementById('dropdown-menu');
-
-	dropdownToggle.addEventListener('click', (event) => {
-		event.stopPropagation();
-		dropdownMenu.classList.toggle('is-visible');
-	});
-
-	document.addEventListener('click', (event) => {
-		if (dropdownToggle && !dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-			dropdownMenu.classList.remove('is-visible');
-		}
-	});
-
-	// (Removed duplicate header tabs IIFE to avoid conflicting logic)
-
-	// --- TABS LOGIC ---
-	const tabContainer = document.querySelector('.tabs-list');
-	if (tabContainer) {
-		tabContainer.addEventListener('click', (event) => {
-			if (event.target.classList.contains('tab-trigger')) {
-				const targetTabId = event.target.dataset.tab;
-				tabContainer.querySelectorAll('.tab-trigger').forEach(trigger => trigger.classList.remove('active'));
-				event.target.classList.add('active');
-				document.querySelectorAll('.tab-pane').forEach(pane => {
-					pane.classList.remove('active');
-					if (pane.id === targetTabId) pane.classList.add('active');
-				});
-			}
+	const syncActive = () => {
+		const hash = location.hash.slice(1);
+		const activeTab = tabs.find(t => t.getAttribute('data-tab') === hash) || container.querySelector('.btn-pill.active');
+		dd.querySelectorAll('.mobile-nav-link').forEach(link => {
+			link.classList.toggle('active', link.getAttribute('data-tab') === activeTab?.getAttribute('data-tab'));
 		});
+		const title = $('#mobile-nav-title');
+		if (title && activeTab) title.textContent = activeTab.textContent;
+	};
+
+	window.addEventListener('hashchange', syncActive);
+	syncActive();
+};
+
+// --- MOTION DEMO ---
+const initMotionDemo = () => {
+	const btn = $('#motion-toggle');
+	const demo = $('#motion-demo');
+	if (btn && demo) {
+		btn.addEventListener('click', () => demo.querySelectorAll('.motion-box').forEach(box => box.classList.toggle('move')));
 	}
+};
 
-	// --- PILL SELECTOR LOGIC ---
-	function setupPillSelector(selectorId, valueDisplayId) {
-		const group = document.getElementById(selectorId);
-		if (!group) return;
-		const valueDisplay = document.getElementById(valueDisplayId);
-		const buttons = group.querySelectorAll('.btn-pill');
-		const slider = group.querySelector('.pill-selector-slider');
+// --- INITIALIZATION ---
+const init = () => {
+	initResponsiveNavigation();
+	initThemeSwitcher();
+	initModal();
+	initDropdown();
+	initTabs();
+	initPillSelectors();
+	initSliders();
+	initColorSwatches();
+	initHeaderTabs();
+	initMobileNavigation();
+	initMotionDemo();
+};
 
-		function updateSlider(activeButton) {
-			if (!slider || !activeButton) return;
-			const rect = activeButton.getBoundingClientRect();
-			const groupRect = group.getBoundingClientRect();
-			slider.style.left = `${activeButton.offsetLeft}px`;
-			slider.style.width = `${activeButton.offsetWidth}px`;
-			slider.style.height = `${activeButton.offsetHeight}px`;
-			slider.style.top = `${activeButton.offsetTop}px`;
-		}
-
-		// Initialize slider position
-		const activeBtn = group.querySelector('.btn-pill.active');
-		if (activeBtn) updateSlider(activeBtn);
-
-		group.addEventListener('click', (e) => {
-			if (e.target.classList.contains('btn-pill')) {
-				buttons.forEach(btn => btn.classList.remove('active'));
-				e.target.classList.add('active');
-				if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
-				updateSlider(e.target);
-			}
-		});
-
-		// Update on window resize
-		window.addEventListener('resize', () => {
-			const active = group.querySelector('.btn-pill.active');
-			if (active) updateSlider(active);
-		});
-	}
-	setupPillSelector('pill-selector-1', 'pill-value-1');
-
-	// --- SLIDER LOGIC ---
-	const slider = document.getElementById('my-slider');
-	const sliderValueLabel = document.querySelector('.slider-value-label');
-
-	if (slider && sliderValueLabel) {
-		function updateSliderLabel(value) {
-			const percent = (value - slider.min) / (slider.max - slider.min);
-			const labelPosition = percent * (slider.offsetWidth - 20) + 10;
-			sliderValueLabel.style.left = `${labelPosition}px`;
-			sliderValueLabel.textContent = value;
-		}
-		slider.addEventListener('input', () => updateSliderLabel(slider.value));
-		slider.addEventListener('mouseenter', () => sliderValueLabel.style.opacity = '1');
-		slider.addEventListener('mouseleave', () => sliderValueLabel.style.opacity = '0');
-		slider.addEventListener('mousedown', () => sliderValueLabel.style.opacity = '1');
-		slider.addEventListener('mouseup', () => sliderValueLabel.style.opacity = '0');
-		updateSliderLabel(slider.value);
-	}
-
-	// --- FILLED SLIDER LOGIC ---
-	const sliderFilled = document.getElementById('my-slider-filled');
-	if (sliderFilled) {
-		function updateFilledSlider() {
-			const value = sliderFilled.value;
-			const min = sliderFilled.min;
-			const max = sliderFilled.max;
-			const percent = ((value - min) / (max - min)) * 100;
-			sliderFilled.style.background = `linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) ${percent}%, var(--color-border-default) ${percent}%, var(--color-border-default) 100%)`;
-		}
-		sliderFilled.addEventListener('input', updateFilledSlider);
-		updateFilledSlider();
-	}
-
-	// --- COLOR SWATCH COPY LOGIC ---
-	function rgbToHex(rgbStr) {
-		const match = rgbStr.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
-		if (!match) return null;
-		return `#${Number(match[1]).toString(16).padStart(2, '0')}${Number(match[2]).toString(16).padStart(2, '0')}${Number(match[3]).toString(16).padStart(2, '0')}`.toUpperCase();
-	}
-
-	async function copyTextToClipboard(text) {
-		try {
-			if (navigator.clipboard && window.isSecureContext) {
-				await navigator.clipboard.writeText(text);
-				return true;
-			}
-			const ta = document.createElement('textarea');
-			ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-			document.body.appendChild(ta);
-			ta.focus(); ta.select(); document.execCommand('copy');
-			document.body.removeChild(ta);
-			return true;
-		} catch (e) { return false; }
-	}
-
-	function setupColorSwatches() {
-		document.querySelectorAll('.color-swatch').forEach((swatch) => {
-			swatch.setAttribute('tabindex', '0');
-			swatch.setAttribute('role', 'button');
-			const colorEl = swatch.querySelector('.swatch-color');
-			const hexLabel = swatch.querySelector('.swatch-hex');
-			const originalHexText = hexLabel.textContent;
-
-			async function handleCopy() {
-				const computedStyle = getComputedStyle(colorEl).backgroundColor;
-				const hex = rgbToHex(computedStyle);
-				if (!hex) return;
-				const ok = await copyTextToClipboard(hex);
-				hexLabel.textContent = ok ? `Copied ${hex}` : hex;
-				hexLabel.classList.add('copied');
-				setTimeout(() => {
-					hexLabel.textContent = originalHexText;
-					hexLabel.classList.remove('copied');
-				}, 1200);
-			}
-			swatch.addEventListener('click', handleCopy);
-			swatch.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopy(); } });
-		});
-	}
-	setupColorSwatches();
-
-	// --- TABS (Header) ---
-	(function initTabs() {
-		const tabContainer = document.getElementById('wrapper-tabs');
-		if (!tabContainer) return;
-		const tabs = Array.from(tabContainer.querySelectorAll('.btn-pill'));
-		const sections = tabs.map(t => document.querySelector(t.getAttribute('data-target'))).filter(Boolean);
-		const slider = tabContainer.querySelector('.pill-selector-slider');
-
-		function updateSlider(activeTab) {
-			if (!slider || !activeTab) return;
-			slider.style.left = `${activeTab.offsetLeft}px`;
-			slider.style.width = `${activeTab.offsetWidth}px`;
-			slider.style.height = `${activeTab.offsetHeight}px`;
-			slider.style.top = `${activeTab.offsetTop}px`;
-		}
-
-		function setActive(tab, scrollTo = true) {
-			if (!tab) return;
-			tabs.forEach(b => b.classList.remove('active'));
-			tab.classList.add('active');
-			const targetSel = tab.getAttribute('data-target');
-			const target = targetSel ? document.querySelector(targetSel) : null;
-			const name = tab.getAttribute('data-tab');
-			if (name) location.hash = name;
-			if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			const title = document.getElementById('mobile-nav-title');
-			if (title) title.textContent = tab.textContent;
-			updateSlider(tab);
-		}
-
-		tabs.forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				e.preventDefault();
-				setActive(btn, true);
-			});
-		});
-
-		function syncFromScroll() {
-			const threshold = 120; // header offset allowance
-			let activeIdx = 0;
-			for (let i = 0; i < sections.length; i++) {
-				const rect = sections[i].getBoundingClientRect();
-				if (rect.top - threshold <= 0) activeIdx = i; else break;
-			}
-			const activeTab = tabs[activeIdx];
-			if (!activeTab || activeTab.classList.contains('active')) return;
-			tabs.forEach(b => b.classList.remove('active'));
-			activeTab.classList.add('active');
-			const title = document.getElementById('mobile-nav-title');
-			if (title) title.textContent = activeTab.textContent;
-			updateSlider(activeTab);
-		}
-
-		// Initialize active by hash or first tab
-		const byHash = location.hash.slice(1);
-		const initial = tabs.find(t => t.getAttribute('data-tab') === byHash) || tabs[0];
-		setActive(initial, false);
-
-		window.addEventListener('scroll', syncFromScroll, { passive: true });
-
-		// Update slider on window resize
-		window.addEventListener('resize', () => {
-			const active = tabContainer.querySelector('.btn-pill.active');
-			if (active) updateSlider(active);
-		});
-	})();
-
-	// --- MOBILE NAV (Dropdown) ---
-	(function initMobileNav() {
-		const btn = document.getElementById('btn-mobile-nav');
-		const dd = document.getElementById('mobile-nav-dropdown');
-		const tabContainer = document.getElementById('wrapper-tabs');
-		if (!btn || !dd || !tabContainer) return;
-		const tabs = Array.from(tabContainer.querySelectorAll('.btn-pill'));
-
-		function buildDropdown() {
-			dd.innerHTML = '';
-			tabs.forEach(t => {
-				const link = document.createElement('button');
-				link.className = 'mobile-nav-link';
-				link.type = 'button';
-				link.setAttribute('data-tab', t.getAttribute('data-tab'));
-				link.textContent = t.textContent;
-				link.addEventListener('click', () => {
-					t.click();
-					closeDropdown();
-					btn.focus();
-				});
-				dd.appendChild(link);
-			});
-		}
-		buildDropdown();
-
-		function openDropdown() {
-			dd.classList.add('is-visible');
-			btn.setAttribute('aria-expanded', 'true');
-		}
-		function closeDropdown() {
-			dd.classList.remove('is-visible');
-			btn.setAttribute('aria-expanded', 'false');
-		}
-		btn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			if (dd.classList.contains('is-visible')) closeDropdown(); else openDropdown();
-		});
-		document.addEventListener('click', (e) => { if (!dd.contains(e.target) && e.target !== btn) closeDropdown(); });
-		document.addEventListener('keydown', (e) => {
-			const links = Array.from(dd.querySelectorAll('.mobile-nav-link'));
-			const idx = links.indexOf(document.activeElement);
-			if (e.key === 'Escape') { closeDropdown(); return; }
-			if (!dd.classList.contains('is-visible')) return;
-			if (e.key === 'ArrowDown') { e.preventDefault(); links[(idx < 0 ? 0 : (idx + 1) % links.length)]?.focus(); }
-			if (e.key === 'ArrowUp') { e.preventDefault(); links[(idx < 0 ? links.length - 1 : (idx - 1 + links.length) % links.length)]?.focus(); }
-			if (e.key === 'Home') { e.preventDefault(); links[0]?.focus(); }
-			if (e.key === 'End') { e.preventDefault(); links[links.length - 1]?.focus(); }
-			if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('mobile-nav-link')) { e.preventDefault(); document.activeElement.click(); }
-		});
-
-		// Sync active state in dropdown
-		function syncActive() {
-			const current = (location.hash || '').slice(1);
-			const activeTab = tabs.find(t => t.getAttribute('data-tab') === current) || tabContainer.querySelector('.tab-button.active');
-			Array.from(dd.querySelectorAll('.mobile-nav-link')).forEach(link => {
-				link.classList.toggle('active', link.getAttribute('data-tab') === activeTab?.getAttribute('data-tab'));
-			});
-			const title = document.getElementById('mobile-nav-title');
-			if (title && activeTab) title.textContent = activeTab.textContent;
-		}
-		window.addEventListener('hashchange', syncActive);
-		syncActive();
-	})();
-
-	// --- MOTION DEMO ---
-	const motionBtn = document.getElementById('motion-toggle');
-	const motionDemo = document.getElementById('motion-demo');
-	if (motionBtn && motionDemo) {
-		motionBtn.addEventListener('click', () => {
-			motionDemo.querySelectorAll('.motion-box').forEach(box => box.classList.toggle('move'));
-		});
-	}
-});
+document.addEventListener('DOMContentLoaded', init);
