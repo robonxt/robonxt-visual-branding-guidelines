@@ -100,13 +100,31 @@ Core interactive colors for the UI. The `500` or `600` shade is the default.
 
 | Token | Hex |
 | :--- | :--- |
-| `indigo-50` ... `indigo-900` | *values omitted for brevity* |
+| `indigo-50` | `#EEF2FF` |
+| `indigo-100` | `#E0E7FF` |
+| `indigo-200` | `#C7D2FE` |
+| `indigo-300` | `#A5B4FC` |
+| `indigo-400` | `#818CF8` |
+| `indigo-500` | `#6366F1` |
+| `indigo-600` | `#4F46E5` |
+| `indigo-700` | `#4338CA` |
+| `indigo-800` | `#3730A3` |
+| `indigo-900` | `#312E81` |
 
 **Secondary: Fuchsia** (High-emphasis accent color for secondary actions)
 
 | Token | Hex |
 | :--- | :--- |
-| `fuchsia-50` ... `fuchsia-900` | *values omitted for brevity* |
+| `fuchsia-50` | `#FDF4FF` |
+| `fuchsia-100` | `#FAE8FF` |
+| `fuchsia-200` | `#F5D0FE` |
+| `fuchsia-300` | `#F0ABFC` |
+| `fuchsia-400` | `#E879F9` |
+| `fuchsia-500` | `#D946EF` |
+| `fuchsia-600` | `#C026D3` |
+| `fuchsia-700` | `#A21CAF` |
+| `fuchsia-800` | `#86198F` |
+| `fuchsia-900` | `#701A75` |
 
 **Accents** (Illustrations, highlights; not for primary interaction)
 
