@@ -358,7 +358,7 @@ p {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--duration-slow) var(--easing), visibility var(--duration-slow) var(--easing);
+    transition: opacity var(--duration-medium) var(--easing), visibility var(--duration-medium) var(--easing);
     z-index: 100;
 }
 
@@ -374,7 +374,7 @@ p {
     width: 90%;
     max-width: 504px;
     transform: scale(0.95);
-    transition: transform var(--duration-slow) var(--easing);
+    transition: transform var(--duration-medium) var(--easing);
 }
 
 .modal-backdrop.is-visible .modal-surface {
@@ -578,10 +578,20 @@ p {
     position: relative;
     display: inline-flex;
     align-items: center;
+    gap: var(--pill-group-gap);
     background-color: var(--color-background);
     border-radius: var(--radius-full);
-    padding: var(--space-xs);
+    padding: var(--pill-group-padding);
     border: var(--stroke-sm) solid var(--color-border-default);
+}
+
+.pill-selector-slider {
+    position: absolute;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: left var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .btn-pill {
@@ -593,17 +603,27 @@ p {
     color: var(--color-text-medium);
     cursor: pointer;
     transition: color var(--duration-medium) var(--easing), background-color var(--duration-medium) var(--easing);
-    z-index: 1;
+    z-index: 3;
     white-space: nowrap;
+    position: relative;
 }
 
-.btn-pill:hover {
+.btn-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+    border-radius: var(--radius-full);
+    transition: background-color var(--duration-medium) var(--easing);
+    z-index: -1;
+}
+
+.btn-pill:hover:not(.active)::before {
     background-color: var(--color-surface-hover);
 }
 
 .btn-pill.active {
     color: var(--white);
-    background-color: var(--color-primary);
 }
 
 .slider {
@@ -642,6 +662,48 @@ p {
     border: 2px solid var(--color-surface);
 }
 
+.slider-filled {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) 50%, var(--color-border-default) 50%, var(--color-border-default) 100%);
+    border-radius: var(--radius-full);
+    outline: none;
+    opacity: 0.9;
+    transition: opacity .2s;
+}
+
+.slider-filled:hover {
+    opacity: 1;
+}
+
+.slider-filled::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.slider-filled::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.slider-filled::-moz-range-track {
+    background: transparent;
+}
+
 .slider-value-label {
     position: absolute;
     top: -8px;
@@ -672,8 +734,8 @@ p {
 
 .switch-track {
     position: relative;
-    width: 44px;
-    height: 24px;
+    width: var(--switch-track-width);
+    height: var(--switch-track-height);
     background: var(--color-border-default);
     border-radius: var(--radius-full);
     transition: background-color var(--duration-quick) var(--easing);
@@ -681,10 +743,10 @@ p {
 
 .switch-thumb {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 16px;
-    height: 16px;
+    top: var(--switch-thumb-offset);
+    left: var(--switch-thumb-offset);
+    width: var(--switch-thumb-size);
+    height: var(--switch-thumb-size);
     background: var(--white);
     border-radius: 50%;
     box-shadow: var(--shadow-sm);
@@ -701,7 +763,7 @@ p {
 }
 
 .switch input:checked+.switch-track .switch-thumb {
-    transform: translateX(24px);
+    transform: translateX(calc(var(--switch-track-width) - var(--switch-thumb-size) - (2 * var(--switch-thumb-offset))));
 }
 
 .switch-label {

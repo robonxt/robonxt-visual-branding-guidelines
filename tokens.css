@@ -10,6 +10,7 @@
 /* 0. PRIMITIVES (raw tokens)                */
 /*-------------------------------------------*/
 :root {
+    scroll-behavior: smooth;
     --font-family: 'Inter', sans-serif;
 
     /* Typography Scale */
@@ -64,6 +65,14 @@
     --duration-medium: 300ms;
     --duration-slow: 500ms;
     --easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Component Sizing */
+    --switch-track-width: 44px;
+    --switch-track-height: 24px;
+    --switch-thumb-size: 16px;
+    --switch-thumb-offset: 4px;
+    --pill-group-padding: 4px;
+    --pill-group-gap: 2px;
 
     /* Indigo */
     --indigo-50: #EEF2FF;

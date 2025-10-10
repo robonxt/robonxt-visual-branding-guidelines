@@ -62,12 +62,23 @@
 .component-showcase-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: var(--space-md);
+	gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+	.component-showcase-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (min-width: 1024px) {
 	.component-showcase-grid {
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-flow: dense;
+	}
+
+	.component-showcase-grid > * {
+		grid-column: auto;
 	}
 }
 
@@ -466,40 +477,6 @@ input:checked+.theme-slider:before {
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
 	background: var(--color-surface-hover);
-}
-
-.tab-list {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	background: var(--color-background);
-	border: var(--stroke-sm) solid var(--color-border-default);
-	border-radius: var(--radius-full);
-	padding: var(--space-xs);
-	overflow: hidden;
-}
-
-.tab-button {
-	font: var(--font-label);
-	padding: var(--space-xs);
-	border: none;
-	background: transparent;
-	color: var(--color-text-medium);
-	border-radius: var(--radius-full);
-	cursor: pointer;
-	position: relative;
-	z-index: 1;
-	white-space: nowrap;
-	transition: color var(--duration-medium) var(--easing), background-color var(--duration-medium) var(--easing);
-}
-
-.tab-button:hover {
-	background-color: var(--color-surface-hover);
-}
-
-.tab-button.active {
-	color: var(--white);
-	background-color: var(--color-primary);
 }
 
 .hero,

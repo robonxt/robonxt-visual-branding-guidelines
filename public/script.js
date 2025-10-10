@@ -87,13 +87,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (!group) return;
 		const valueDisplay = document.getElementById(valueDisplayId);
 		const buttons = group.querySelectorAll('.btn-pill');
+		const slider = group.querySelector('.pill-selector-slider');
+
+		function updateSlider(activeButton) {
+			if (!slider || !activeButton) return;
+			const rect = activeButton.getBoundingClientRect();
+			const groupRect = group.getBoundingClientRect();
+			slider.style.left = `${activeButton.offsetLeft}px`;
+			slider.style.width = `${activeButton.offsetWidth}px`;
+			slider.style.height = `${activeButton.offsetHeight}px`;
+			slider.style.top = `${activeButton.offsetTop}px`;
+		}
+
+		// Initialize slider position
+		const activeBtn = group.querySelector('.btn-pill.active');
+		if (activeBtn) updateSlider(activeBtn);
 
 		group.addEventListener('click', (e) => {
 			if (e.target.classList.contains('btn-pill')) {
 				buttons.forEach(btn => btn.classList.remove('active'));
 				e.target.classList.add('active');
 				if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
+				updateSlider(e.target);
 			}
+		});
+
+		// Update on window resize
+		window.addEventListener('resize', () => {
+			const active = group.querySelector('.btn-pill.active');
+			if (active) updateSlider(active);
 		});
 	}
 	setupPillSelector('pill-selector-1', 'pill-value-1');
@@ -115,6 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		slider.addEventListener('mousedown', () => sliderValueLabel.style.opacity = '1');
 		slider.addEventListener('mouseup', () => sliderValueLabel.style.opacity = '0');
 		updateSliderLabel(slider.value);
+	}
+
+	// --- FILLED SLIDER LOGIC ---
+	const sliderFilled = document.getElementById('my-slider-filled');
+	if (sliderFilled) {
+		function updateFilledSlider() {
+			const value = sliderFilled.value;
+			const min = sliderFilled.min;
+			const max = sliderFilled.max;
+			const percent = ((value - min) / (max - min)) * 100;
+			sliderFilled.style.background = `linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) ${percent}%, var(--color-border-default) ${percent}%, var(--color-border-default) 100%)`;
+		}
+		sliderFilled.addEventListener('input', updateFilledSlider);
+		updateFilledSlider();
 	}
 
 	// --- COLOR SWATCH COPY LOGIC ---
@@ -169,8 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	(function initTabs() {
 		const tabContainer = document.getElementById('wrapper-tabs');
 		if (!tabContainer) return;
-		const tabs = Array.from(tabContainer.querySelectorAll('.tab-button'));
+		const tabs = Array.from(tabContainer.querySelectorAll('.btn-pill'));
 		const sections = tabs.map(t => document.querySelector(t.getAttribute('data-target'))).filter(Boolean);
+		const slider = tabContainer.querySelector('.pill-selector-slider');
+
+		function updateSlider(activeTab) {
+			if (!slider || !activeTab) return;
+			slider.style.left = `${activeTab.offsetLeft}px`;
+			slider.style.width = `${activeTab.offsetWidth}px`;
+			slider.style.height = `${activeTab.offsetHeight}px`;
+			slider.style.top = `${activeTab.offsetTop}px`;
+		}
 
 		function setActive(tab, scrollTo = true) {
 			if (!tab) return;
@@ -183,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			const title = document.getElementById('mobile-nav-title');
 			if (title) title.textContent = tab.textContent;
+			updateSlider(tab);
 		}
 
 		tabs.forEach(btn => {
@@ -205,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			activeTab.classList.add('active');
 			const title = document.getElementById('mobile-nav-title');
 			if (title) title.textContent = activeTab.textContent;
+			updateSlider(activeTab);
 		}
 
 		// Initialize active by hash or first tab
@@ -213,6 +260,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		setActive(initial, false);
 
 		window.addEventListener('scroll', syncFromScroll, { passive: true });
+
+		// Update slider on window resize
+		window.addEventListener('resize', () => {
+			const active = tabContainer.querySelector('.btn-pill.active');
+			if (active) updateSlider(active);
+		});
 	})();
 
 	// --- MOBILE NAV (Dropdown) ---
@@ -221,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const dd = document.getElementById('mobile-nav-dropdown');
 		const tabContainer = document.getElementById('wrapper-tabs');
 		if (!btn || !dd || !tabContainer) return;
-		const tabs = Array.from(tabContainer.querySelectorAll('.tab-button'));
+		const tabs = Array.from(tabContainer.querySelectorAll('.btn-pill'));
 
 		function buildDropdown() {
 			dd.innerHTML = '';

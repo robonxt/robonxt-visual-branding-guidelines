@@ -30,16 +30,16 @@
 				<div class="mobile-nav-dropdown" id="mobile-nav-dropdown" role="menu"></div>
 			</div>
 			<div class="mobile-nav-title" id="mobile-nav-title"></div>
-			<nav class="tab-list" id="wrapper-tabs">
-				<div class="tab-slider"></div>
-				<button class="tab-button active" data-tab="foundations" data-target="#foundations">Foundations</button>
-				<button class="tab-button" data-tab="typography" data-target="#typography">Typography</button>
-				<button class="tab-button" data-tab="colors" data-target="#colors">Colors</button>
-				<button class="tab-button" data-tab="theming" data-target="#theming">Theming</button>
-				<button class="tab-button" data-tab="spacing" data-target="#spacing">Spacing</button>
-				<button class="tab-button" data-tab="layout-motion" data-target="#layout-motion">Layout &
+			<nav class="pill-selector-group" id="wrapper-tabs">
+				<div class="pill-selector-slider"></div>
+				<button class="btn-pill active" data-tab="foundations" data-target="#foundations">Foundations</button>
+				<button class="btn-pill" data-tab="typography" data-target="#typography">Typography</button>
+				<button class="btn-pill" data-tab="colors" data-target="#colors">Colors</button>
+				<button class="btn-pill" data-tab="theming" data-target="#theming">Theming</button>
+				<button class="btn-pill" data-tab="spacing" data-target="#spacing">Spacing</button>
+				<button class="btn-pill" data-tab="layout-motion" data-target="#layout-motion">Layout &
 					Motion</button>
-				<button class="tab-button" data-tab="components" data-target="#components">Components</button>
+				<button class="btn-pill" data-tab="components" data-target="#components">Components</button>
 			</nav>
 		</div>
 		<div class="theme-switch-wrapper">
@@ -474,9 +474,7 @@
 			<p>The tangible, interactive elements of the brand. Built from our core primitives and designed for clarity.
 			</p>
 			<div class="component-showcase-grid">
-				<!-- Column 1 -->
-				<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
-					<div class="ds-surface">
+				<div class="ds-surface">
 						<h3>Material Symbols · Rounded</h3>
 						<p class="text-caption">Icons inherit text color via <code>currentColor</code> and follow the
 							8‑point grid.</p>
@@ -511,73 +509,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Column 2 -->
-				<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
-					<div class="ds-surface">
-						<h3>Tabs</h3>
-						<div>
-							<div class="tabs-list">
-								<button class="tab-trigger active" data-tab="tab1">Profile</button>
-								<button class="tab-trigger" data-tab="tab2">Dashboard</button>
-								<button class="tab-trigger" data-tab="tab3">Settings</button>
-							</div>
-							<div class="tab-content">
-								<div class="tab-pane active" id="tab1">
-									<p>This is the profile tab content. It's clean, simple, and right to the point.</p>
-								</div>
-								<div class="tab-pane" id="tab2">
-									<p>Welcome to your dashboard. All your important information lives here.</p>
-								</div>
-								<div class="tab-pane" id="tab3">
-									<p>Here you can configure your application settings and preferences.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="ds-surface ds-interactive-card">
-						<h3>Interactive Card</h3>
-						<p class="text-caption">This surface has hover and shadow effects, making it suitable for
-							clickable cards that link to other pages or trigger actions.</p>
-					</div>
-					<div class="ds-surface">
-						<h3>Pill Selector</h3>
-						<div class="pill-selector-group" id="pill-selector-1">
-							<button class="btn-pill active" data-value="daily">Daily</button>
-							<button class="btn-pill" data-value="monthly">Monthly</button>
-							<button class="btn-pill" data-value="yearly">Yearly</button>
-						</div>
-						<p class="text-caption">Selected: <span id="pill-value-1">daily</span></p>
-					</div>
-					<div class="ds-surface">
-						<h3>Switches</h3>
-						<div style="display:flex; align-items:center; gap: var(--space-lg); flex-wrap: wrap;">
-							<label class="switch">
-								<input type="checkbox" aria-label="Enable notifications" checked>
-								<span class="switch-track"><span class="switch-thumb"></span></span>
-								<span class="switch-label">Notifications</span>
-							</label>
-							<label class="switch">
-								<input type="checkbox" aria-label="Enable beta features">
-								<span class="switch-track"><span class="switch-thumb"></span></span>
-								<span class="switch-label">Beta Features</span>
-							</label>
-						</div>
-						<p class="text-caption" style="margin-top: var(--space-sm);">Switches use
-							<code>radius-full</code>, animate with <code>duration-quick</code>, and adopt
-							<code>color-border-focus</code> on focus.
-						</p>
-					</div>
-					<div class="ds-surface">
-						<h3>Slider</h3>
-						<div class="slider-container">
-							<input type="range" min="0" max="100" value="50" class="slider" id="my-slider">
-							<div class="slider-value-label">50</div>
-						</div>
-					</div>
-				</div>
-				<!-- Column 3 -->
-				<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
 					<div class="ds-surface">
 						<h3>Alerts</h3>
 						<div style="display: flex; flex-direction: column; gap: var(--space-sm);">
@@ -608,6 +539,74 @@
 							</div>
 						</div>
 					</div>
+				<div class="ds-surface">
+						<h3>Tabs</h3>
+						<div>
+							<div class="tabs-list">
+								<button class="tab-trigger active" data-tab="tab1">Profile</button>
+								<button class="tab-trigger" data-tab="tab2">Dashboard</button>
+								<button class="tab-trigger" data-tab="tab3">Settings</button>
+							</div>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab1">
+									<p>This is the profile tab content. It's clean, simple, and right to the point.</p>
+								</div>
+								<div class="tab-pane" id="tab2">
+									<p>Welcome to your dashboard. All your important information lives here.</p>
+								</div>
+								<div class="tab-pane" id="tab3">
+									<p>Here you can configure your application settings and preferences.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ds-surface ds-interactive-card">
+						<h3>Interactive Card</h3>
+						<p class="text-caption">This surface has hover and shadow effects, making it suitable for
+							clickable cards that link to other pages or trigger actions.</p>
+					</div>
+					<div class="ds-surface">
+						<h3>Pill Selector</h3>
+						<div class="pill-selector-group" id="pill-selector-1">
+							<div class="pill-selector-slider"></div>
+							<button class="btn-pill active" data-value="daily">Daily</button>
+							<button class="btn-pill" data-value="monthly">Monthly</button>
+							<button class="btn-pill" data-value="yearly">Yearly</button>
+						</div>
+						<p class="text-caption">Selected: <span id="pill-value-1">daily</span></p>
+					</div>
+					<div class="ds-surface">
+						<h3>Switches</h3>
+						<div style="display:flex; align-items:center; gap: var(--space-lg); flex-wrap: wrap;">
+							<label class="switch">
+								<input type="checkbox" aria-label="Enable notifications" checked>
+								<span class="switch-track"><span class="switch-thumb"></span></span>
+								<span class="switch-label">Notifications</span>
+							</label>
+							<label class="switch">
+								<input type="checkbox" aria-label="Enable beta features">
+								<span class="switch-track"><span class="switch-thumb"></span></span>
+								<span class="switch-label">Beta Features</span>
+							</label>
+						</div>
+						<p class="text-caption" style="margin-top: var(--space-sm);">Switches use
+							<code>radius-full</code>, animate with <code>duration-quick</code>, and adopt
+							<code>color-border-focus</code> on focus.
+						</p>
+					</div>
+				<div class="ds-surface">
+						<h3>Sliders</h3>
+						<p class="text-caption">Default slider with neutral track</p>
+						<div class="slider-container" style="margin-bottom: var(--space-md);">
+							<input type="range" min="0" max="100" value="50" class="slider" id="my-slider">
+							<div class="slider-value-label">50</div>
+						</div>
+						<p class="text-caption">Filled variant showing difference from default value</p>
+						<div class="slider-container">
+							<input type="range" min="0" max="100" value="50" class="slider-filled" id="my-slider-filled">
+							<div class="slider-value-label">50</div>
+						</div>
+					</div>
 					<div class="ds-surface">
 						<h3>Dropdown & Avatars</h3>
 						<div style="display: flex; justify-content: space-between; align-items: center;">
@@ -634,18 +633,20 @@
 						</div>
 					</div>
 					<div class="ds-surface">
-						<h3>Modals & Progress</h3>
-						<p>Modals are used for critical tasks that require user focus. They use `shadow-lg` for
-							elevation.</p>
+						<h3>Progress Bar</h3>
+						<p class="text-caption">Visual indicator for task completion or loading states.</p>
 						<div class="progress-bar" style="margin: var(--space-md) 0;">
-							<div class="progress-indicator"></div>
+							<div class="progress-indicator" style="width: 65%;"></div>
 						</div>
-						<button class="btn btn-outline" id="open-modal-btn">
+					</div>
+					<div class="ds-surface">
+						<h3>Modals</h3>
+						<p class="text-caption">Critical overlays requiring user focus. Use <code>shadow-lg</code> for elevation and <code>duration-slow</code> for animations.</p>
+						<button class="btn btn-outline" id="open-modal-btn" style="margin-top: var(--space-sm);">
 							<span class="material-symbols-rounded">open_in_new</span>
 							Launch Deletion Modal
 						</button>
 					</div>
-				</div>
 			</div>
 		</section>
 	</main>
