@@ -2,6 +2,77 @@
 
 Welcome to the official guide for the "robonxt" brand identity and design system. This document is the single source of truth for our visual and interactive language. Its purpose is to ensure all products are consistent, accessible, and feel like "robonxt".
 
+---
+
+## Using the Design System
+
+This repository provides two canonical stylesheets that implement the entire design system:
+
+*   **`tokens.css`** — Design tokens (colors, typography, spacing, motion, etc.)
+*   **`components.css`** — Reusable component implementations (buttons, inputs, modals, etc.)
+
+### Installation
+
+Add this repository as a Git submodule to your project:
+
+```bash
+git submodule add https://github.com/robonxt/robonxt-visual-branding-guidelines.git design-system
+git submodule init
+```
+
+### Usage
+
+Reference the stylesheets in your HTML:
+
+```html
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/components.css">
+<link rel="stylesheet" href="your-app-styles.css">
+```
+
+Set the theme on the root element:
+
+```html
+<html data-theme="light">
+```
+
+Use design tokens and component classes in your markup:
+
+```html
+<button class="btn btn-primary">Primary Action</button>
+<div class="alert alert-success">
+    <span class="material-symbols-rounded">check_circle</span>
+    <div class="alert-content">
+        <div class="alert-title">Success</div>
+        <p class="alert-description">Your changes have been saved.</p>
+    </div>
+</div>
+```
+
+### Updating the Design System
+
+Pull the latest changes:
+
+```bash
+cd design-system
+git pull origin main
+cd ..
+git add design-system
+git commit -m "Update design system"
+```
+
+Pin to a specific version for stability:
+
+```bash
+cd design-system
+git checkout v1.0.0
+cd ..
+git add design-system
+git commit -m "Pin design system to v1.0.0"
+```
+
+---
+
 ## 1. Foundations
 
 Foundations are the core philosophies and universal rules that govern the entire design language.
@@ -11,9 +82,9 @@ The "robonxt" brand persona is a confident, efficient expert with a witty, human
 *   **Golden Rule:** **Clarity first, always.**
 
 #### Voice & Tone
-*   **Default Tone (90% of content):** Casual, clear, concise, and helpful. Uses simple language and contractions. The goal is to be an approachable expert.
-*   **The Clever Aside (10% of content):** In low-stakes moments (success messages, empty states), the brand can use witty, context-aware humor.
-*   **The Golden Rule for Voice:** Never use a joke if it gets in the way of clarity. For critical information like error messages, the tone is 100% professional and direct.
+*   **Default Tone:** Casual, clear, concise, and helpful. Uses simple language and contractions. The goal is to be an approachable expert.
+*   **The Clever Aside:** In low-stakes moments (success messages, empty states), the brand can use witty, context-aware humor.
+*   **The Golden Rule for Voice:** Never use a joke if it gets in the way of clarity. For critical information like error messages, the tone is professional and direct.
 
 ### 1.2. Typography
 The system uses a single, highly-legible font family to ensure consistency and readability.
