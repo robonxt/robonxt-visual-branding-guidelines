@@ -417,6 +417,9 @@ input:checked+.theme-slider:before {
 	gap: var(--space-sm);
 	flex: 1;
 	min-width: 0;
+}
+
+.header-left:not(.mobile-mode) {
 	overflow: hidden;
 }
 
@@ -457,7 +460,7 @@ input:checked+.theme-slider:before {
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(-6px);
-	transition: opacity var(--duration-medium) var(--easing), transform var(--duration-medium) var(--easing);
+	transition: opacity var(--duration-quick) var(--easing), transform var(--duration-quick) var(--easing);
 }
 
 .mobile-nav-dropdown.is-visible {

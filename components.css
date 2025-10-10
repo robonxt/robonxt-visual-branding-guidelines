@@ -38,7 +38,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-text-high);
     font: var(--font-body-base);
-    transition: background-color var(--duration-medium), color var(--duration-medium);
+    transition: background-color var(--duration-slow), color var(--duration-slow);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
