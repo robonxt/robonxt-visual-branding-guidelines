@@ -101,7 +101,7 @@
     /* Neutrals */
     --white: #FFFFFF;
     --black: #000000;
-    --light: #FAFAFA;
+    --light: #F9F9F9;
     --night: #0F172A;
     --surface-dark: #1E293B;
     --gray-50: #F9FAFB;
@@ -114,6 +114,18 @@
     --gray-700: #374151;
     --gray-800: #1F2937;
     --gray-900: #111827;
+
+    /* Slate Swatch */
+    --slate-50: #F8FAFC;
+    --slate-100: #F1F5F9;
+    --slate-200: #E2E8F0;
+    --slate-300: #CBD5E1;
+    --slate-400: #94A3B8;
+    --slate-500: #64748B;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1E293B;
+    --slate-900: #0F172A;
 
     /* Functional */
     --success: #059669;
@@ -142,9 +154,9 @@
     --color-accent: var(--fuchsia-600);
     --color-accent-hover: var(--fuchsia-700);
 
-    --color-background: var(--white);
-    --color-surface: var(--white);
-    --color-surface-hover: var(--gray-50);
+    --color-background: var(--light);
+    --color-surface: var(--gray-50);
+    --color-surface-hover: var(--gray-100);
     --color-header-bg: var(--accent-positive);
 
     --color-text-high: var(--gray-900);

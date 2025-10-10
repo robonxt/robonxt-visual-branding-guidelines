@@ -219,13 +219,29 @@ Used for all core UI surfaces, text, and borders.
 
 | Name | Hex | Light Mode Use | Dark Mode Use |
 | :--- | :--- | :--- | :--- |
-| **Surface** | `#FFFFFF` | Main Page & Component Background | *(Not Used)* |
+| **Surface** | `#F9FAFB` | Component Background (Cards, Modals) | Component background (`slate-800`) |
+| **Light** | `#F9F9F9` | Main page background | *(Not Used)* |
+| **Night** | `#0F172A` | *(Not Used)* | Main page background |
 | **Text (High)** | `#111827` | **Default text.** Headings, body copy. | High-emphasis text (`#FFFFFF`) |
 | **Text (Medium)** | `#4B5563` | Sub-headings, labels, helper text. | Medium-emphasis text (`#D1D5DB`) |
 | **Text (Low)** | `#9CA3AF` | Disabled text, decorative details. | Low-emphasis, disabled text (`#6B7280`) |
 | **Border** | `#E5E7EB` | Dividers, default borders. | Borders, dividers (`#374151`) |
-| **Night** | `#0F172A` | *(Not Used)* | Main page background |
-| **Surface (Dark)** | `#1E293B`| *(Not Used)* | Component background (Cards, Modals) |
+
+##### Slate Swatch
+Subtle neutral scale used primarily in dark contexts. Mirrors standard slate (50–900).
+
+| Token | Hex |
+| :--- | :--- |
+| `slate-50` | `#F8FAFC` |
+| `slate-100` | `#F1F5F9` |
+| `slate-200` | `#E2E8F0` |
+| `slate-300` | `#CBD5E1` |
+| `slate-400` | `#94A3B8` |
+| `slate-500` | `#64748B` |
+| `slate-600` | `#475569` |
+| `slate-700` | `#334155` |
+| `slate-800` | `#1E293B` |
+| `slate-900` | `#0F172A` |
 
 #### 2.1.4. Functional Palette
 Used exclusively to communicate system status.
@@ -249,9 +265,9 @@ Components should reference these semantic tokens, not raw color values, to supp
 | `color-accent` | `fuchsia-600` | `fuchsia-500` |
 | `color-accent-hover` | `fuchsia-700` | `fuchsia-400` |
 | **Surfaces** | | |
-| `color-background` | `white` | `night` (`#0F172A`) |
-| `color-surface` | `white` | `surface-dark` (`#1E293B`) |
-| `color-surface-hover`| `gray-50` | `gray-800` |
+| `color-background` | `light` (`#F9F9F9`) | `night` (`#0F172A`) |
+| `color-surface` | `gray-50` | `surface-dark` (`#1E293B`) |
+| `color-surface-hover`| `gray-100` | `gray-800` |
 | **Text** | | |
 | `color-text-high` | `gray-900` | `white` |
 | `color-text-medium`| `gray-600` | `gray-300` |
