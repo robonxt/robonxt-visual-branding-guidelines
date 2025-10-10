@@ -105,8 +105,8 @@ The system uses a single, highly-legible font family to ensure consistency and r
 ### 1.3. Layout & Motion
 These are the rules for spacing, shape, and animation that create a consistent physical structure and feel.
 
-#### Spacing
-All spacing values are based on an **8-Point Grid System**.
+#### Spacing & Sizing
+All spacing and component sizing values are based on an **8-Point Grid System**. This applies to padding, margins, gaps, and all component dimensions (width, height, etc.).
 
 | Token | Value | Use Case |
 | :--- | :--- | :--- |
@@ -115,6 +115,13 @@ All spacing values are based on an **8-Point Grid System**.
 | `space-md` | 24px | Padding inside components (cards, modals). |
 | `space-lg` | 32px | Separation between component groups. |
 | `space-xl` | 48px | Margin between major page sections. |
+
+**Component Sizing Examples:**
+*   Avatar sizes: 32px, 48px, 64px
+*   Icon sizes: 16px, 24px, 32px
+*   Progress bar height: 8px
+*   Switch track: 44px × 24px
+*   Scrollbar width: 8px
 
 #### Corner Radius
 | Token | Value | Use Case |

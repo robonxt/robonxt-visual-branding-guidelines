@@ -1,14 +1,14 @@
 /*
-    Components CSS (canonical)
+    Components
     Reusable component implementations following the robonxt design system.
-    Requires: tokens.css
-    Usage (HTML):
+    Requires tokens.css to be loaded first.
+    Link it in your HTML:
     <link rel="stylesheet" href="/path/to/tokens.css">
     <link rel="stylesheet" href="/path/to/components.css">
 */
 
 /*-------------------------------------------*/
-/* 0. GLOBAL RESETS & BASE STYLES            */
+/* 0. BASE STYLES                            */
 /*-------------------------------------------*/
 *,
 *::before,
@@ -81,7 +81,7 @@ p {
 }
 
 /*-------------------------------------------*/
-/* 2. UTILITY CLASSES                        */
+/* 2. UTILITIES                              */
 /*-------------------------------------------*/
 .text-high {
     color: var(--color-text-high);
@@ -258,7 +258,7 @@ p {
 
 .alert-title {
     font: var(--font-label);
-    margin-bottom: 4px;
+    margin-bottom: var(--space-xs);
 }
 
 .alert-description {
@@ -292,7 +292,7 @@ p {
 }
 
 /*-------------------------------------------*/
-/* 5. INPUT FIELDS                           */
+/* 5. INPUTS                                 */
 /*-------------------------------------------*/
 .input-group {
     display: flex;
@@ -372,7 +372,7 @@ p {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: 90%;
-    max-width: 500px;
+    max-width: 504px;
     transform: scale(0.95);
     transition: transform var(--duration-slow) var(--easing);
 }
@@ -508,7 +508,7 @@ p {
     z-index: 50;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     transition: opacity var(--duration-medium) var(--easing), transform var(--duration-medium) var(--easing);
 }
 
@@ -549,13 +549,13 @@ p {
 }
 
 .dropdown-divider {
-    height: 1px;
+    height: var(--stroke-sm);
     background-color: var(--color-border-default);
     margin: var(--space-xs) 0;
 }
 
 /*-------------------------------------------*/
-/* 10. PROGRESS INDICATORS                   */
+/* 10. PROGRESS                              */
 /*-------------------------------------------*/
 .progress-bar {
     width: 100%;
@@ -574,8 +574,6 @@ p {
 /*-------------------------------------------*/
 /* 11. SELECTION CONTROLS                    */
 /*-------------------------------------------*/
-
-/* Pill Selector */
 .pill-selector-group {
     position: relative;
     display: inline-flex;
@@ -608,7 +606,6 @@ p {
     background-color: var(--color-primary);
 }
 
-/* Range Slider */
 .slider {
     -webkit-appearance: none;
     appearance: none;
@@ -628,8 +625,8 @@ p {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: var(--color-primary);
     border-radius: 50%;
     cursor: pointer;
@@ -637,8 +634,8 @@ p {
 }
 
 .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: var(--color-primary);
     border-radius: 50%;
     cursor: pointer;
@@ -647,10 +644,10 @@ p {
 
 .slider-value-label {
     position: absolute;
-    top: -10px;
+    top: -8px;
     background-color: var(--color-text-high);
     color: var(--color-surface);
-    padding: 2px 6px;
+    padding: var(--space-xs);
     border-radius: var(--radius-sm);
     font: var(--font-caption);
     transform: translateX(-50%);
@@ -659,7 +656,6 @@ p {
     transition: opacity var(--duration-quick);
 }
 
-/* Switch */
 .switch {
     display: inline-flex;
     align-items: center;
@@ -685,10 +681,10 @@ p {
 
 .switch-thumb {
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 18px;
-    height: 18px;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
     background: var(--white);
     border-radius: 50%;
     box-shadow: var(--shadow-sm);
@@ -705,7 +701,7 @@ p {
 }
 
 .switch input:checked+.switch-track .switch-thumb {
-    transform: translateX(20px);
+    transform: translateX(24px);
 }
 
 .switch-label {
