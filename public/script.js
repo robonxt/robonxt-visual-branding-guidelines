@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+	// --- RESPONSIVE NAVIGATION ---
+	const headerLeft = document.querySelector('.header-left');
+	const pillSelector = document.getElementById('wrapper-tabs');
+	const pageHeader = document.querySelector('.page-header');
+
+	function checkNavigationOverflow() {
+		if (!headerLeft || !pillSelector || !pageHeader) return;
+
+		// Remove mobile mode temporarily to measure
+		headerLeft.classList.remove('mobile-mode');
+
+		// Check if content would overflow
+		const headerWidth = pageHeader.offsetWidth;
+		const headerLeftWidth = headerLeft.scrollWidth;
+		const themeSwitch = document.querySelector('.theme-switch-wrapper');
+		const themeWidth = themeSwitch ? themeSwitch.offsetWidth : 0;
+		const availableWidth = headerWidth - themeWidth - 48; // 48px for padding/gaps just in case
+
+		if (headerLeftWidth > availableWidth) {
+			headerLeft.classList.add('mobile-mode');
+		}
+	}
+
+	// Check on load and resize
+	checkNavigationOverflow();
+	window.addEventListener('resize', checkNavigationOverflow);
+
 	// --- THEME SWITCHER ---
 	const themeCheckbox = document.getElementById('theme-checkbox');
 	const htmlEl = document.documentElement;

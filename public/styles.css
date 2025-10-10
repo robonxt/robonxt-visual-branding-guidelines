@@ -141,6 +141,7 @@
 	display: flex;
 	align-items: center;
 	gap: var(--space-xs);
+	flex-shrink: 0;
 }
 
 .theme-switch {
@@ -415,6 +416,8 @@ input:checked+.theme-slider:before {
 	align-items: center;
 	gap: var(--space-sm);
 	flex: 1;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .mobile-nav {
@@ -428,14 +431,16 @@ input:checked+.theme-slider:before {
 	font: var(--font-label);
 }
 
-@media (max-width: 768px) {
-	.mobile-nav {
-		display: block;
-	}
+.header-left.mobile-mode .mobile-nav {
+	display: block;
+}
 
-	.mobile-nav-title {
-		display: block;
-	}
+.header-left.mobile-mode .mobile-nav-title {
+	display: block;
+}
+
+.header-left.mobile-mode .pill-selector-group {
+	display: none;
 }
 
 .mobile-nav-dropdown {

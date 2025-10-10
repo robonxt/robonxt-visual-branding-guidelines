@@ -404,8 +404,16 @@ Interactive behavior defines how components respond to user input. These pattern
 *   **Hover:** Card translates up 4px and shadow transitions from `shadow-md` to `shadow-lg` using `duration-quick`.
 *   **Keyboard:** `Enter` or `Space` triggers the copy action when focused.
 
-### 4.10. Implementation Notes
+### 4.10. Responsive Navigation
+*   **Dynamic Adaptation:** Navigation automatically switches between pill selector and mobile menu based on available space, not fixed breakpoints.
+*   **Overflow Detection:** JavaScript measures if the pill selector would cause horizontal overflow and toggles mobile mode accordingly.
+*   **Mobile Mode:** When space is constrained, the pill selector hides and a hamburger menu appears with the current section title.
+*   **Anchored Controls:** Theme switch and auxiliary controls remain anchored to the right side using `flex-shrink: 0`.
+*   **Universal Compatibility:** Works on all screen sizes from small mobile devices (iPhone 4S) to ultrawide monitors without hardcoded breakpoints.
+
+### 4.11. Implementation Notes
 *   **Framework Agnostic:** These behavior patterns are intentionally described without prescribing specific JavaScript implementations. Implement them using your framework of choice (React, Vue, Svelte, vanilla JS, etc.).
 *   **Accessibility:** All interactive elements must be keyboard accessible and provide appropriate ARIA attributes.
 *   **Performance:** Use CSS transitions and transforms for animations when possible. Avoid animating properties that trigger layout recalculations (e.g., `height`, `width` on non-absolute elements).
 *   **Responsive Behavior:** On touch devices, ensure touch targets are at least 44px × 44px. Hover states may not apply on touch devices—ensure all functionality is accessible via tap/click.
+*   **Dynamic Layouts:** Prefer JavaScript-based overflow detection over fixed breakpoints for truly responsive designs that adapt to any device or viewport size.
