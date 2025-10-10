@@ -1,2 +1,3 @@
 [build]
+  command = "cp tokens.css public/tokens.css && cp components.css public/components.css"
   publish = "public"

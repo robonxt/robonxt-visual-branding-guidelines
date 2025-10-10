@@ -1,0 +1,10 @@
+# Build artifacts (copied during Netlify build)
+public/tokens.css
+public/components.css
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
