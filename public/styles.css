@@ -978,7 +978,7 @@ input:checked+.theme-slider:before {
 	align-items: center;
 	background-color: var(--color-background);
 	border-radius: var(--radius-full);
-	padding: 4px;
+	padding: var(--space-xs);
 	border: var(--stroke-sm) solid var(--color-border-default);
 }
 
@@ -990,29 +990,18 @@ input:checked+.theme-slider:before {
 	background-color: transparent;
 	color: var(--color-text-medium);
 	cursor: pointer;
-	transition: color var(--duration-medium) var(--easing);
+	transition: color var(--duration-medium) var(--easing), background-color var(--duration-medium) var(--easing);
 	z-index: 1;
+	white-space: nowrap;
+}
+
+.btn-pill:hover {
+	background-color: var(--color-surface-hover);
 }
 
 .btn-pill.active {
 	color: var(--white);
-}
-
-.pill-slider {
-	position: absolute;
-	top: 4px;
-	left: 0;
-	height: calc(100% - 8px);
 	background-color: var(--color-primary);
-	border-radius: var(--radius-full);
-	box-shadow: var(--shadow-sm);
-	transition: transform var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
-}
-
-/* SLIDER */
-.slider-container {
-	position: relative;
-	padding-top: var(--space-sm);
 }
 
 .slider {
@@ -1310,7 +1299,8 @@ input:checked+.theme-slider:before {
 	background: var(--color-background);
 	border: var(--stroke-sm) solid var(--color-border-default);
 	border-radius: var(--radius-full);
-	padding: 4px;
+	padding: var(--space-xs);
+	gap: var(--space-xs);
 	overflow: hidden;
 }
 
@@ -1324,35 +1314,17 @@ input:checked+.theme-slider:before {
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
+	white-space: nowrap;
+	transition: color var(--duration-medium) var(--easing), background-color var(--duration-medium) var(--easing);
+}
+
+.tab-button:hover {
+	background-color: var(--color-surface-hover);
 }
 
 .tab-button.active {
 	color: var(--white);
-}
-
-.tab-slider {
-	position: absolute;
-	top: 4px;
-	left: 0;
-	height: calc(100% - 8px);
-	width: 0;
-	background: var(--color-primary);
-	border-radius: var(--radius-full);
-	box-shadow: var(--shadow-sm);
-	transform: translateX(0);
-	transition: transform var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
-	z-index: 0;
-}
-
-@media (max-width: 768px) {
-	.tab-list {
-		display: none;
-	}
-}
-
-/* Smooth scrolling and anchor offset for sticky header */
-html {
-	scroll-behavior: smooth;
+	background-color: var(--color-primary);
 }
 
 .hero,

@@ -87,32 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (!group) return;
 		const valueDisplay = document.getElementById(valueDisplayId);
 		const buttons = group.querySelectorAll('.btn-pill');
-		const slider = document.createElement('div');
-		slider.className = 'pill-slider';
-		group.prepend(slider);
-
-		function updateSlider(activeButton) {
-			if (!activeButton) return;
-			const rect = activeButton.getBoundingClientRect();
-			const groupRect = group.getBoundingClientRect();
-			slider.style.width = `${rect.width}px`;
-			slider.style.transform = `translateX(${rect.left - groupRect.left}px)`;
-		}
 
 		group.addEventListener('click', (e) => {
 			if (e.target.classList.contains('btn-pill')) {
 				buttons.forEach(btn => btn.classList.remove('active'));
 				e.target.classList.add('active');
-				updateSlider(e.target);
 				if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
 			}
-		});
-
-		const initialActive = group.querySelector('.btn-pill.active');
-		if (initialActive) updateSlider(initialActive);
-		window.addEventListener('resize', () => {
-			const active = group.querySelector('.btn-pill.active');
-			if (active) updateSlider(active);
 		});
 	}
 	setupPillSelector('pill-selector-1', 'pill-value-1');
@@ -189,27 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		const tabContainer = document.getElementById('wrapper-tabs');
 		if (!tabContainer) return;
 		const tabs = Array.from(tabContainer.querySelectorAll('.tab-button'));
-		const slider = tabContainer.querySelector('.tab-slider');
 		const sections = tabs.map(t => document.querySelector(t.getAttribute('data-target'))).filter(Boolean);
-
-		function moveSlider(tab, noTransition = false) {
-			if (!tab || !slider) return;
-			if (noTransition) slider.style.transition = 'none';
-			// Use rects like pill selector to ensure precise positioning within padded container
-			const tabRect = tab.getBoundingClientRect();
-			const containerRect = tabContainer.getBoundingClientRect();
-			const left = tabRect.left - containerRect.left; // subtract container padding (4px)
-			const width = tabRect.width;
-			slider.style.width = width + 'px';
-			slider.style.transform = `translateX(${left}px)`;
-			if (noTransition) requestAnimationFrame(() => slider.style.transition = '');
-		}
 
 		function setActive(tab, scrollTo = true) {
 			if (!tab) return;
 			tabs.forEach(b => b.classList.remove('active'));
 			tab.classList.add('active');
-			moveSlider(tab);
 			const targetSel = tab.getAttribute('data-target');
 			const target = targetSel ? document.querySelector(targetSel) : null;
 			const name = tab.getAttribute('data-tab');
@@ -234,10 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (rect.top - threshold <= 0) activeIdx = i; else break;
 			}
 			const activeTab = tabs[activeIdx];
-			if (!activeTab || activeTab.classList.contains('active')) { moveSlider(activeTab); return; }
+			if (!activeTab || activeTab.classList.contains('active')) return;
 			tabs.forEach(b => b.classList.remove('active'));
 			activeTab.classList.add('active');
-			moveSlider(activeTab);
 			const title = document.getElementById('mobile-nav-title');
 			if (title) title.textContent = activeTab.textContent;
 		}
@@ -246,10 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		const byHash = location.hash.slice(1);
 		const initial = tabs.find(t => t.getAttribute('data-tab') === byHash) || tabs[0];
 		setActive(initial, false);
-		moveSlider(initial, true);
 
 		window.addEventListener('scroll', syncFromScroll, { passive: true });
-		window.addEventListener('resize', () => moveSlider(tabContainer.querySelector('.tab-button.active')));
 	})();
 
 	// --- MOBILE NAV (Dropdown) ---
