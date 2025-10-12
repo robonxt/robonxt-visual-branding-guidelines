@@ -1,4 +1,4 @@
-# robonxt - The Brand & Design System (v2)
+# robonxt - The Brand & Design System
 
 Welcome to the official guide for the "robonxt" brand identity and design system. This document is the single source of truth for our visual and interactive language. Its purpose is to ensure all products are consistent, accessible, and feel like "robonxt".
 
