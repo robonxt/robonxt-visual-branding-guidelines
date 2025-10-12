@@ -57,7 +57,13 @@ const createModalManager = (backdropId, triggerIds = []) => {
 
 	if (isEscapable) {
 		backdrop.addEventListener('click', (e) => e.target === backdrop && toggle(false));
-		document.addEventListener('keydown', (e) => e.key === 'Escape' && backdrop.classList.contains('is-visible') && toggle(false));
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && backdrop.classList.contains('is-visible')) {
+				const allModals = Array.from(document.querySelectorAll('.modal-backdrop.is-visible'));
+				const topmost = allModals[allModals.length - 1];
+				if (topmost === backdrop) toggle(false);
+			}
+		});
 	}
 
 	return { openModal: () => toggle(true), closeModal: () => toggle(false) };
@@ -153,8 +159,21 @@ const initThemeSwitcher = () => {
 
 // --- MODAL LOGIC ---
 const initModal = () => {
-	const manager = createModalManager('modal-backdrop', ['open-modal-btn']);
-	if (manager) ['close-modal-btn', 'cancel-modal-btn'].forEach(id => $(`#${id}`)?.addEventListener('click', manager.closeModal));
+	const criticalManager = createModalManager('modal-backdrop', ['open-modal-btn']);
+	if (criticalManager) ['close-modal-btn', 'cancel-modal-btn'].forEach(id => $(`#${id}`)?.addEventListener('click', criticalManager.closeModal));
+
+	const infoManager = createModalManager('info-modal-backdrop', ['open-info-modal-btn']);
+	if (infoManager) {
+		['close-info-modal-btn', 'close-info-modal-footer-btn'].forEach(id => $(`#${id}`)?.addEventListener('click', infoManager.closeModal));
+		
+		const learnMoreLink = $('#learn-more-link');
+		if (learnMoreLink) {
+			learnMoreLink.addEventListener('click', (e) => {
+				e.preventDefault();
+				infoManager.openModal();
+			});
+		}
+	}
 };
 
 // --- DROPDOWN LOGIC ---

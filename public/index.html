@@ -79,7 +79,17 @@
 			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This living
 				documentation demonstrates <code>tokens.css</code> and <code>components.css</code>—the two canonical
 				stylesheets that implement the entire system. View source to see implementation details.</p>
-			<div class="flex-buttons-container demo-margin-top">
+
+		<!-- Success Alert (Hidden by default) -->
+		<div class="alert alert-success" id="delete-success-alert" style="display: none; margin-top: var(--space-md);">
+			<span class="material-symbols-rounded">task_alt</span>
+			<div class="alert-content">
+				<div class="alert-title">Successfully Deleted</div>
+				<p class="alert-description">The item has been permanently removed from the system.</p>
+			</div>
+		</div>
+
+		<div class="flex-buttons-container demo-margin-top">
 				<a href="https://github.com/robonxt/robonxt-visual-branding-guidelines/" target="_blank"
 					rel="noopener noreferrer" class="btn btn-primary">
 					<span class="material-symbols-rounded">code</span>
@@ -431,6 +441,13 @@
 							Disabled
 						</button>
 					</div>
+					<p class="text-caption demo-margin-top"><strong>Loading State:</strong> Click to see loading animation</p>
+					<div class="flex-buttons-container">
+						<button class="btn btn-primary" id="demo-loading-btn">
+							<span class="material-symbols-rounded">sync</span>
+							Sync Data
+						</button>
+					</div>
 					<p class="text-caption demo-margin-top"><strong>Icon Button Variants:</strong></p>
 					<div class="flex-buttons-container">
 						<button class="btn btn-icon btn-primary" aria-label="Primary action">
@@ -699,7 +716,10 @@
 				<a href="#" class="text-caption" style="margin-right: auto; color: var(--color-text-medium);"
 					id="learn-more-link">Learn more about deletions</a>
 				<button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
-				<button class="btn btn-danger">Yes, delete it</button>
+				<button class="btn btn-danger" id="confirm-delete-btn">
+					<span class="material-symbols-rounded">delete</span>
+					Yes, delete it
+				</button>
 			</div>
 		</div>
 	</div>
@@ -745,34 +765,48 @@
 				updateSlider();
 			}
 
-			// Info modal management
-			const infoModalBackdrop = document.getElementById('info-modal-backdrop');
-			const openInfoModalBtn = document.getElementById('open-info-modal-btn');
-			const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
-			const closeInfoModalFooterBtn = document.getElementById('close-info-modal-footer-btn');
-			const learnMoreLink = document.getElementById('learn-more-link');
+			// Demo loading button
+			const demoLoadingBtn = document.getElementById('demo-loading-btn');
+			if (demoLoadingBtn) {
+				demoLoadingBtn.addEventListener('click', () => {
+					const icon = demoLoadingBtn.querySelector('.material-symbols-rounded');
+					const originalIcon = icon.textContent;
 
-			const openInfoModal = () => infoModalBackdrop.classList.add('is-visible');
-			const closeInfoModal = () => infoModalBackdrop.classList.remove('is-visible');
+					demoLoadingBtn.classList.add('btn-loading');
+					icon.textContent = 'progress_activity';
 
-			if (openInfoModalBtn) openInfoModalBtn.addEventListener('click', openInfoModal);
-			if (closeInfoModalBtn) closeInfoModalBtn.addEventListener('click', closeInfoModal);
-			if (closeInfoModalFooterBtn) closeInfoModalFooterBtn.addEventListener('click', closeInfoModal);
-			if (learnMoreLink) learnMoreLink.addEventListener('click', (e) => {
-				e.preventDefault();
-				document.getElementById('modal-backdrop').classList.remove('is-visible');
-				openInfoModal();
-			});
-
-			// Escapable modal handling
-			if (infoModalBackdrop) {
-				infoModalBackdrop.addEventListener('click', (e) => {
-					if (e.target === infoModalBackdrop) closeInfoModal();
+					setTimeout(() => {
+						demoLoadingBtn.classList.remove('btn-loading');
+						icon.textContent = originalIcon;
+					}, 3000);
 				});
-				document.addEventListener('keydown', (e) => {
-					if (e.key === 'Escape' && infoModalBackdrop.classList.contains('is-visible')) {
-						closeInfoModal();
-					}
+			}
+
+			// Delete button with loading state
+			const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+			const criticalModal = document.getElementById('modal-backdrop');
+			const deleteSuccessAlert = document.getElementById('delete-success-alert');
+
+			if (confirmDeleteBtn) {
+				confirmDeleteBtn.addEventListener('click', () => {
+					const icon = confirmDeleteBtn.querySelector('.material-symbols-rounded');
+					const originalIcon = icon.textContent;
+
+					confirmDeleteBtn.classList.add('btn-loading');
+					icon.textContent = 'progress_activity';
+
+					setTimeout(() => {
+						confirmDeleteBtn.classList.remove('btn-loading');
+						icon.textContent = originalIcon;
+						criticalModal.classList.remove('is-visible');
+
+						deleteSuccessAlert.style.display = 'flex';
+						deleteSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+						setTimeout(() => {
+							deleteSuccessAlert.style.display = 'none';
+						}, 5000);
+					}, 2000);
 				});
 			}
 

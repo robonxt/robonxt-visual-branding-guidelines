@@ -301,6 +301,7 @@ Components are the reusable building blocks of our user interface. Each componen
 *   **Active/Press:** Immediate visual change (darker color or brightness adjustment).
 *   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset.
 *   **Disabled:** Opacity reduced to 0.5, cursor changes to `not-allowed`, no hover effects.
+*   **Loading State:** Add `.btn-loading` class to show animated spinner icon. Button becomes non-interactive (pointer-events disabled) while loading. Spinner rotates continuously using a 1s linear animation. Can be applied to any button variant.
 *   **Default Icon Button Hover:** Background transitions to `color-surface-hover`, color changes to `color-primary` using `duration-quick`.
 *   **Variant Icon Button Hover:** Follows the same hover behavior as the corresponding button variant.
 
@@ -344,7 +345,8 @@ Components are the reusable building blocks of our user interface. Each componen
 #### Interactions
 *   **Open:** Backdrop fades in with blur effect. Modal scales from 0.95 to 1.0 and fades in (opacity 0 to 1) using `duration-medium` with decelerate easing.
 *   **Close:** Reverse animation—modal scales down and fades out, backdrop fades out using `duration-medium`.
-*   **Dismissal (Default):** Clicking outside the modal or pressing `Escape` closes it. For critical actions or multi-step flows, disable dismissal and require explicit user action via buttons.
+*   **Dismissal (Default):** Clicking outside the modal or pressing `Escape` closes it. For critical actions or multi-step flows, set `data-escapable="false"` to disable dismissal and require explicit user action via buttons.
+*   **Modal Stacking:** Multiple modals can be open simultaneously. Each subsequent modal appears above the previous with incrementing z-index. Escape key only closes the topmost visible modal.
 *   **Focus Trap:** Focus should remain within the modal while it's open.
 *   **Scroll Lock:** Body scroll should be disabled when modal is open (add `.scroll-lock` class to body).
 

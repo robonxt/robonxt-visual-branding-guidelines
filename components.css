@@ -181,6 +181,24 @@ p {
     cursor: not-allowed;
 }
 
+.btn-loading {
+    pointer-events: none;
+    position: relative;
+}
+
+.btn-loading .material-symbols-rounded {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .btn-primary {
     background-color: var(--color-primary);
     color: var(--white);
@@ -420,6 +438,14 @@ body.scroll-lock {
     transition: opacity var(--duration-medium) var(--easing), visibility 0s var(--duration-medium);
     backdrop-filter: blur(2px);
     z-index: 1100;
+}
+
+.modal-backdrop.is-visible ~ .modal-backdrop {
+    z-index: 1200;
+}
+
+.modal-backdrop.is-visible ~ .modal-backdrop.is-visible ~ .modal-backdrop {
+    z-index: 1300;
 }
 
 .modal-backdrop.is-visible {
