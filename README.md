@@ -22,52 +22,18 @@ git submodule init
 
 ### Usage
 
-Reference the stylesheets in your HTML:
+1. Reference the stylesheets in your HTML:
+   ```html
+   <link rel="stylesheet" href="design-system/tokens.css">
+   <link rel="stylesheet" href="design-system/components.css">
+   ```
 
-```html
-<link rel="stylesheet" href="design-system/tokens.css">
-<link rel="stylesheet" href="design-system/components.css">
-<link rel="stylesheet" href="your-app-styles.css">
-```
+2. Set the theme on the root element:
+   ```html
+   <html data-theme="light">
+   ```
 
-Set the theme on the root element:
-
-```html
-<html data-theme="light">
-```
-
-Use design tokens and component classes in your markup:
-
-```html
-<button class="btn btn-primary">Primary Action</button>
-<div class="alert alert-success">
-    <span class="material-symbols-rounded">check_circle</span>
-    <div class="alert-content">
-        <div class="alert-title">Success</div>
-        <p class="alert-description">Your changes have been saved.</p>
-    </div>
-</div>
-
-<!-- Modal Example (with optional footer) -->
-<div class="modal-backdrop" id="my-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
-    <div class="modal-dialog" tabindex="-1">
-        <div class="modal-header">
-            <h2 id="modal-heading" class="modal-title">Modal Title</h2>
-            <button class="btn btn-icon" aria-label="Close">
-                <span class="material-symbols-rounded">close</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>Modal content goes here.</p>
-        </div>
-        <!-- Footer is optional -->
-        <div class="modal-footer">
-            <button class="btn btn-outline">Cancel</button>
-            <button class="btn btn-primary">Confirm</button>
-        </div>
-    </div>
-</div>
-```
+3. Use design tokens and component classes in your markup. See the [live examples](public/index.html) for implementation details.
 
 ### Updating the Design System
 
