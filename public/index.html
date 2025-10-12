@@ -489,6 +489,24 @@
 						<button class="btn btn-ghost">Ghost</button>
 						<button class="btn btn-primary" disabled>Disabled</button>
 					</div>
+					<p class="text-caption demo-margin-top"><strong>Icon Buttons:</strong> Support all variants</p>
+					<div class="flex-buttons-container">
+						<button class="btn btn-icon btn-primary" aria-label="Add">
+							<span class="material-symbols-rounded">add</span>
+						</button>
+						<button class="btn btn-icon btn-secondary" aria-label="Favorite">
+							<span class="material-symbols-rounded">star</span>
+						</button>
+						<button class="btn btn-icon btn-outline" aria-label="Edit">
+							<span class="material-symbols-rounded">edit</span>
+						</button>
+						<button class="btn btn-icon" aria-label="Settings">
+							<span class="material-symbols-rounded">settings</span>
+						</button>
+						<button class="btn btn-icon btn-danger" aria-label="Delete">
+							<span class="material-symbols-rounded">delete</span>
+						</button>
+					</div>
 				</div>
 				<div class="ds-surface">
 					<h3>Input Fields</h3>
@@ -626,7 +644,7 @@
 				</div>
 				<div class="ds-surface">
 					<h3>Modals</h3>
-					<p class="text-caption">Uses <code>radius-lg</code> and <code>shadow-lg</code>. Content padding: <code>space-md</code>. Animates with <code>duration-medium</code>.</p>
+					<p class="text-caption">Uses <code>radius-lg</code> and <code>shadow-lg</code>. All internal spacing uses <code>space-sm</code>. Animates with <code>duration-medium</code> and decelerate easing.</p>
 					<button class="btn btn-outline demo-margin-top" id="open-modal-btn">
 						<span class="material-symbols-rounded">open_in_new</span>
 						Launch Deletion Modal
@@ -641,21 +659,22 @@
 	</footer>
 
 	<!-- Modal Structure (Initially Hidden) -->
-	<div class="modal-backdrop" id="modal-backdrop">
-		<div class="modal-surface">
-			<header class="modal-header">
-				<h3>Are you absolutely sure?</h3>
-				<button class="btn btn-ghost" id="close-modal-btn"><span
-						class="material-symbols-rounded">close</span></button>
-			</header>
+	<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+		<div class="modal-dialog" tabindex="-1">
+			<div class="modal-header">
+				<h2 id="modal-heading" class="modal-title">Are you absolutely sure?</h2>
+				<button class="btn btn-icon" id="close-modal-btn" aria-label="Close">
+					<span class="material-symbols-rounded">close</span>
+				</button>
+			</div>
 			<div class="modal-body">
 				<p>This action cannot be undone. This will permanently delete the selected item and remove its data from
 					our servers. This is a critical task, so the tone is direct and the choices are clear.</p>
 			</div>
-			<footer class="modal-footer">
+			<div class="modal-footer">
 				<button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
 				<button class="btn btn-danger">Yes, delete it</button>
-			</footer>
+			</div>
 		</div>
 	</div>
 
