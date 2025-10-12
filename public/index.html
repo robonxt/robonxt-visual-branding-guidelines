@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>robonxt | Visual Branding Guidelines</title>
-	<!-- 1. FONT & ICONS -->
+	<meta name="description" content="Complete interactive showcase of the robonxt brand identity and design system. Living documentation for tokens.css and components.css.">
+
+	<!-- Fonts & Icons -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-	<!-- Canonical design tokens -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+	<!-- Design System Stylesheets -->
 	<link rel="stylesheet" href="tokens.css">
-	<!-- Reusable component styles -->
 	<link rel="stylesheet" href="components.css">
-	<!-- Demo-specific styles -->
 	<link rel="stylesheet" href="styles.css">
-	<!-- Prevent theme flash -->
+
+	<!-- Prevent Theme Flash -->
 	<script>
 		(function() {
 			const saved = localStorage.getItem('robonxt_theme');
@@ -28,34 +29,33 @@
 </head>
 
 <body>
+	<!-- Page Header with Navigation -->
 	<header class="page-header container">
 		<div class="header-left">
+			<!-- Mobile Navigation -->
 			<div class="mobile-nav">
-				<button class="btn btn-icon" id="btn-mobile-nav" aria-label="Open menu" aria-haspopup="true"
-					aria-expanded="false" aria-controls="mobile-nav-dropdown">
+				<button class="btn btn-icon" id="btn-mobile-nav" aria-label="Open menu" aria-haspopup="true" aria-expanded="false" aria-controls="mobile-nav-dropdown">
 					<span class="material-symbols-rounded">menu</span>
 				</button>
 				<div class="mobile-nav-dropdown" id="mobile-nav-dropdown" role="menu"></div>
 			</div>
 			<div class="mobile-nav-title" id="mobile-nav-title"></div>
+
+			<!-- Desktop Navigation -->
 			<nav class="pill-selector-group" id="wrapper-tabs">
 				<div class="pill-selector-slider"></div>
-				<button class="btn-pill active" data-tab="foundations" data-target="#foundations">Foundations</button>
-				<button class="btn-pill" data-tab="typography" data-target="#typography">Typography</button>
+				<button class="btn-pill active" data-tab="overview" data-target="#overview">Overview</button>
+				<button class="btn-pill" data-tab="foundations" data-target="#foundations">Foundations</button>
 				<button class="btn-pill" data-tab="colors" data-target="#colors">Colors</button>
-				<button class="btn-pill" data-tab="theming" data-target="#theming">Theming</button>
-				<button class="btn-pill" data-tab="spacing" data-target="#spacing">Spacing</button>
-				<button class="btn-pill" data-tab="layout-motion" data-target="#layout-motion">Layout &
-					Motion</button>
 				<button class="btn-pill" data-tab="components" data-target="#components">Components</button>
 			</nav>
 		</div>
+
+		<!-- Theme Switch & GitHub Link -->
 		<div class="theme-switch-wrapper">
-			<a href="https://github.com/robonxt/robonxt-visual-branding-guidelines/" target="_blank"
-				rel="noopener noreferrer" class="btn btn-icon" aria-label="View on GitHub">
+			<a href="https://github.com/robonxt/robonxt-visual-branding-guidelines/" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="View on GitHub">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-					<path
-						d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+					<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
 				</svg>
 			</a>
 			<span class="material-symbols-rounded icon-light">light_mode</span>
@@ -68,21 +68,36 @@
 	</header>
 
 	<main class="container">
+		<!-- Hero / Overview -->
 		<section id="overview" class="hero">
-			<h1>The Pragmatic Professional</h1>
-			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This page demonstrates
-				<code>tokens.css</code> and <code>components.css</code>—the two canonical stylesheets that implement the entire system.</p>
+			<h1>robonxt Design System</h1>
+			<p>A complete, interactive showcase of the "robonxt" brand identity and design system. This living documentation demonstrates <code>tokens.css</code> and <code>components.css</code>—the two canonical stylesheets that implement the entire system. View source to see implementation details.</p>
+			<div class="flex-buttons-container demo-margin-top">
+				<a href="https://github.com/robonxt/robonxt-visual-branding-guidelines/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+					<span class="material-symbols-rounded">code</span>
+					View on GitHub
+				</a>
+				<a href="#components" class="btn btn-outline">
+					<span class="material-symbols-rounded">widgets</span>
+					Browse Components
+				</a>
+			</div>
 		</section>
 
-		<!-- Foundations -->
+		<!-- Foundations Section -->
 		<section id="foundations" class="ds-section">
 			<h2>Foundations</h2>
+			<p>Core philosophies and universal rules that govern the entire design language.</p>
+
 			<div class="ds-grid">
+				<!-- Core Philosophy -->
 				<div class="ds-surface">
 					<h3>Core Philosophy</h3>
 					<p class="text-medium"><strong>Golden Rule:</strong> Clarity first, always.</p>
 					<p class="text-caption">The brand persona is a confident, efficient expert with a witty, human touch.</p>
 				</div>
+
+				<!-- Voice & Tone -->
 				<div class="ds-surface">
 					<h3>Voice & Tone</h3>
 					<ul class="text-medium list-reset">
@@ -91,51 +106,100 @@
 						<li><strong>Critical:</strong> Professional and direct.</li>
 					</ul>
 				</div>
-			</div>
-		</section>
 
-
-		<section id="typography" class="ds-section">
-			<h2>Typography</h2>
-			<p><strong>Font Family:</strong> Inter · <strong>Line Height:</strong> 1.6 (body), 1.3 (headings) · <strong>Letter Spacing:</strong> -1% (headings)</p>
-			<div class="ds-grid">
+				<!-- Typography -->
 				<div class="ds-surface">
-					<h3>Type Scale</h3>
-					<div class="type-showcase"><span class="role">H1 / 36px Bold</span>
-						<p class="text-h1">Primary Title</p>
-					</div>
-					<div class="type-showcase"><span class="role">H2 / 24px Semi-Bold</span>
-						<p class="text-h2">Section Title</p>
-					</div>
-					<div class="type-showcase"><span class="role">H3 / 20px Semi-Bold</span>
-						<p class="text-h3">Component Title</p>
-					</div>
-					<div class="type-showcase"><span class="role">Body / 16px Regular</span>
-						<p class="text-body-base">Default body text for optimal readability.</p>
-					</div>
-					<div class="type-showcase"><span class="role">Label / 14px Medium</span>
-						<p class="text-label">Button & Form Labels</p>
-					</div>
-					<div class="type-showcase"><span class="role">Caption / 14px Regular</span>
-						<p class="text-caption">Helper text and metadata.</p>
+					<h3>Typography</h3>
+					<p class="text-caption"><strong>Font Family:</strong> Inter · <strong>Line Height:</strong> 1.6 (body), 1.3 (headings) · <strong>Letter Spacing:</strong> -1% (headings)</p>
+					<div class="type-showcase demo-margin-top">
+						<div class="text-h1">Heading 1 (36px Bold)</div>
+						<div class="text-h2">Heading 2 (24px Semi-Bold)</div>
+						<div class="text-h3">Heading 3 (20px Semi-Bold)</div>
+						<div class="text-body-base">Body (16px Regular)</div>
+						<div class="text-label">Label (14px Medium)</div>
+						<div class="text-caption">Caption (14px Regular)</div>
 					</div>
 				</div>
-			</div>
 
+				<!-- Spacing -->
+				<div class="ds-surface">
+					<h3>Spacing (8-Point Grid)</h3>
+					<p class="text-caption">All spacing and component sizing values are based on an 8-point grid system.</p>
+					<div class="spacing-row demo-margin-top">
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-xs"></div>
+							<span class="text-caption">xs · 8px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-sm"></div>
+							<span class="text-caption">sm · 16px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-md"></div>
+							<span class="text-caption">md · 24px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-lg"></div>
+							<span class="text-caption">lg · 32px</span>
+						</div>
+						<div class="spacing-item">
+							<div class="spacing-block spacing-block-xl"></div>
+							<span class="text-caption">xl · 48px</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Corner Radius -->
+				<div class="ds-surface">
+					<h3>Corner Radius</h3>
+					<div class="radius-demo demo-margin-top">
+						<div class="radius-item radius-demo-sm">sm (4px)</div>
+						<div class="radius-item radius-demo-md">md (8px)</div>
+						<div class="radius-item radius-demo-lg">lg (16px)</div>
+						<div class="radius-item radius-demo-full">full</div>
+					</div>
+				</div>
+
+				<!-- Borders -->
+				<div class="ds-surface">
+					<h3>Borders</h3>
+					<div class="border-demo demo-margin-top">
+						<div class="border-item">stroke-sm (1.5px)</div>
+						<div class="border-item focus">stroke-md (3px) · Focus</div>
+					</div>
+				</div>
+
+				<!-- Elevation -->
+				<div class="ds-surface">
+					<h3>Elevation (Shadows)</h3>
+					<div class="shadow-demo demo-margin-top">
+						<div class="shadow-item shadow-sm">shadow-sm</div>
+						<div class="shadow-item shadow-md">shadow-md</div>
+						<div class="shadow-item shadow-lg">shadow-lg</div>
+					</div>
+				</div>
+
+				<!-- Motion -->
+				<div class="ds-surface">
+					<h3>Motion</h3>
+					<p class="text-caption"><strong>Easing:</strong> cubic-bezier(0.4, 0, 0.2, 1) · <strong>Durations:</strong> quick (150ms), medium (300ms), slow (500ms)</p>
+					<div class="motion-demo demo-margin-top" id="motion-demo">
+						<div class="motion-box quick"></div>
+						<div class="motion-box medium"></div>
+						<div class="motion-box slow"></div>
+					</div>
+					<button class="btn btn-outline demo-margin-top" id="motion-toggle">Animate</button>
+				</div>
+			</div>
 		</section>
 
-		<!-- Colors -->
+		<!-- Colors Section -->
 		<section id="colors" class="ds-section">
 			<h2>Colors</h2>
-			<div class="ds-grid">
-				<div class="ds-surface">
-					<h3>Wordmark</h3>
-					<p class="text-logo"><span class="accent">robo</span>nxt</p>
-					<p class="text-caption color-caption">
-						Placeholder wordmark. Replace with official SVG when available. Logo colors are defined in the
-						Color System section.</p>
-				</div>
+			<p>Our color system is built for brand expression, accessibility, and clear communication.</p>
 
+			<div class="ds-grid">
+				<!-- Logo Palette -->
 				<div class="ds-surface">
 					<h3>Logo Palette</h3>
 					<p class="text-caption">Reserved for the official logo and core brand assets. <strong>Do not use for interactive UI components.</strong></p>
@@ -163,6 +227,7 @@
 					</div>
 				</div>
 
+				<!-- Brand Palette - Indigo -->
 				<div class="ds-surface">
 					<h3>Brand Palette · Indigo</h3>
 					<p class="text-caption">Primary interactive color. Calls-to-action, links, active states. Default: <code>indigo-600</code> (light), <code>indigo-500</code> (dark)</p>
@@ -190,6 +255,7 @@
 					</div>
 				</div>
 
+				<!-- Brand Palette - Fuchsia -->
 				<div class="ds-surface">
 					<h3>Brand Palette · Fuchsia</h3>
 					<p class="text-caption">Secondary interactive color. High-emphasis accent for alternative actions. Default: <code>fuchsia-600</code> (light), <code>fuchsia-500</code> (dark)</p>
@@ -217,8 +283,10 @@
 					</div>
 				</div>
 
+				<!-- Neutrals Palette -->
 				<div class="ds-surface">
 					<h3>Neutrals Palette</h3>
+					<p class="text-caption">Used for all core UI surfaces, text, and borders.</p>
 					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--gray-50);"></div>
@@ -236,21 +304,6 @@
 							<div class="swatch-hex">var(--night)</div>
 						</div>
 						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--surface-dark);"></div>
-							<div class="swatch-name">Surface (Dark)</div>
-							<div class="swatch-hex">var(--surface-dark)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--gray-50);"></div>
-							<div class="swatch-name">Gray 50</div>
-							<div class="swatch-hex">var(--gray-50)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--gray-200);"></div>
-							<div class="swatch-name">Border</div>
-							<div class="swatch-hex">var(--gray-200)</div>
-						</div>
-						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--gray-900);"></div>
 							<div class="swatch-name">Text High</div>
 							<div class="swatch-hex">var(--gray-900)</div>
@@ -258,64 +311,10 @@
 					</div>
 				</div>
 
-				<div class="ds-surface">
-					<h3>Slate Swatch</h3>
-					<div class="color-grid demo-margin-top">
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-50);"></div>
-							<div class="swatch-name">Slate 50</div>
-							<div class="swatch-hex">var(--slate-50)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-100);"></div>
-							<div class="swatch-name">Slate 100</div>
-							<div class="swatch-hex">var(--slate-100)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-200);"></div>
-							<div class="swatch-name">Slate 200</div>
-							<div class="swatch-hex">var(--slate-200)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-300);"></div>
-							<div class="swatch-name">Slate 300</div>
-							<div class="swatch-hex">var(--slate-300)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-400);"></div>
-							<div class="swatch-name">Slate 400</div>
-							<div class="swatch-hex">var(--slate-400)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-500);"></div>
-							<div class="swatch-name"><strong>Slate 500</strong></div>
-							<div class="swatch-hex">var(--slate-500)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-600);"></div>
-							<div class="swatch-name">Slate 600</div>
-							<div class="swatch-hex">var(--slate-600)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-700);"></div>
-							<div class="swatch-name">Slate 700</div>
-							<div class="swatch-hex">var(--slate-700)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-800);"></div>
-							<div class="swatch-name"><strong>Slate 800</strong></div>
-							<div class="swatch-hex">var(--slate-800)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--slate-900);"></div>
-							<div class="swatch-name">Slate 900</div>
-							<div class="swatch-hex">var(--slate-900)</div>
-						</div>
-					</div>
-				</div>
-
+				<!-- Functional Palette -->
 				<div class="ds-surface">
 					<h3>Functional Palette</h3>
+					<p class="text-caption">Used exclusively to communicate system status.</p>
 					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--success);"></div>
@@ -334,16 +333,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
 
-		<!-- Theming -->
-		<section id="theming" class="ds-section">
-			<h2>Theming</h2>
-			<p>Components reference semantic tokens, not raw color values, to support theming and interactive states. Set theme via <code>data-theme="light"</code> or <code>data-theme="dark"</code> on the root element.</p>
-			<div class="ds-grid">
+				<!-- Semantic Tokens -->
 				<div class="ds-surface">
-					<h3>Semantic Tokens (Light/Dark)</h3>
+					<h3>Semantic Tokens</h3>
 					<p class="text-caption">Theme-aware tokens that adapt automatically. Toggle theme to see changes.</p>
 					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
@@ -366,135 +359,65 @@
 							<div class="swatch-name">color-text-high</div>
 							<div class="swatch-hex">var(--color-text-high)</div>
 						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-border-focus);"></div>
-							<div class="swatch-name">color-border-focus</div>
-							<div class="swatch-hex">var(--color-border-focus)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-success);"></div>
-							<div class="swatch-name">color-success</div>
-							<div class="swatch-hex">var(--color-success)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-warning);"></div>
-							<div class="swatch-name">color-warning</div>
-							<div class="swatch-hex">var(--color-warning)</div>
-						</div>
-						<div class="color-swatch">
-							<div class="swatch-color" style="background-color: var(--color-error);"></div>
-							<div class="swatch-name">color-error</div>
-							<div class="swatch-hex">var(--color-error)</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Spacing (8pt Grid) -->
-		<section id="spacing" class="ds-section">
-			<h2>Spacing</h2>
-			<p>All spacing and component sizing values are based on an <strong>8-Point Grid System</strong>. This applies to padding, margins, gaps, and all component dimensions.</p>
-			<div class="ds-grid">
-				<div class="ds-surface">
-					<h3>Spacing Scale</h3>
-					<div class="spacing-row">
-						<div class="spacing-item">
-							<div class="spacing-block spacing-block-xs"></div>
-							<span class="text-caption">xs · 8px</span>
-						</div>
-						<div class="spacing-item">
-							<div class="spacing-block spacing-block-sm"></div>
-							<span class="text-caption">sm · 16px</span>
-						</div>
-						<div class="spacing-item">
-							<div class="spacing-block spacing-block-md"></div>
-							<span class="text-caption">md · 24px</span>
-						</div>
-						<div class="spacing-item">
-							<div class="spacing-block spacing-block-lg"></div>
-							<span class="text-caption">lg · 32px</span>
-						</div>
-						<div class="spacing-item">
-							<div class="spacing-block spacing-block-xl"></div>
-							<span class="text-caption">xl · 48px</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</section>
-
-		<!-- Layout & Motion -->
-		<section id="layout-motion" class="ds-section">
-			<h2>Layout & Motion</h2>
-			<div class="ds-grid">
-				<div class="ds-surface">
-					<h3>Corner Radius</h3>
-					<div class="radius-demo demo-margin-top">
-						<div class="radius-item radius-demo-sm">radius-sm (4px)</div>
-						<div class="radius-item radius-demo-md">radius-md (8px)</div>
-						<div class="radius-item radius-demo-lg">radius-lg (16px)</div>
-						<div class="radius-item radius-demo-full">radius-full</div>
-					</div>
-				</div>
-				<div class="ds-surface">
-					<h3>Borders</h3>
-					<div class="border-demo demo-margin-top">
-						<div class="border-item">stroke-sm (1.5px)</div>
-						<div class="border-item focus">stroke-md (3px) · Focus</div>
-					</div>
-				</div>
-				<div class="ds-surface">
-					<h3>Elevation (Shadows)</h3>
-					<div class="shadow-demo demo-margin-top">
-						<div class="shadow-item shadow-sm">shadow-sm</div>
-						<div class="shadow-item shadow-md">shadow-md</div>
-						<div class="shadow-item shadow-lg">shadow-lg</div>
-					</div>
-				</div>
-				<div class="ds-surface">
-					<h3>Motion</h3>
-					<p class="text-caption"><strong>Easing:</strong> cubic-bezier(0.4, 0, 0.2, 1) · <strong>Durations:</strong> quick (150ms), medium (300ms), slow (500ms)</p>
-					<div class="motion-demo demo-margin-top" id="motion-demo">
-						<div class="motion-box quick"></div>
-						<div class="motion-box medium"></div>
-						<div class="motion-box slow"></div>
-					</div>
-					<button class="btn btn-outline demo-margin-top" id="motion-toggle">Animate</button>
-				</div>
-			</div>
-		</section>
-
+		<!-- Components Section -->
 		<section id="components" class="ds-section">
 			<h2>Components</h2>
-			<p>Reusable building blocks constructed from foundations and design tokens. All components are defined in <code>components.css</code>.</p>
+			<p>Reusable building blocks constructed from foundations and design tokens. All components are defined in <code>components.css</code>. View page source to see implementation.</p>
+
 			<div class="component-showcase-grid">
+
+				<!-- Iconography -->
 				<div class="ds-surface">
 					<h3>Iconography</h3>
-					<p class="text-caption"><strong>Library:</strong> Material Symbols · <strong>Style:</strong> Rounded (exclusively) · <strong>Sizing:</strong> 16px, 24px (default), 32px</p>
+					<p class="text-caption"><strong>Library:</strong> Material Symbols · <strong>Style:</strong> Rounded (exclusively) · <strong>Sizing:</strong> 16px, 24px (default), 32px, 48px</p>
 					<div class="icon-row demo-margin-top">
 						<span class="material-symbols-rounded icon-16">bolt</span>
 						<span class="material-symbols-rounded icon-24">bolt</span>
 						<span class="material-symbols-rounded icon-32">bolt</span>
 					</div>
 				</div>
+
+				<!-- Buttons -->
 				<div class="ds-surface">
 					<h3>Buttons</h3>
-					<p class="text-caption"><strong>Primary:</strong> Most important action · <strong>Secondary:</strong> Alternative high-emphasis · <strong>Outline:</strong> Medium-emphasis · <strong>Ghost:</strong> Low-emphasis</p>
+					<p class="text-caption">All button variants with hover, focus, and disabled states. Icon buttons are 48px × 48px touch targets.</p>
 					<div class="flex-buttons-container">
-						<button class="btn btn-primary">Primary</button>
-						<button class="btn btn-secondary">Secondary</button>
-						<button class="btn btn-outline">Outline</button>
-						<button class="btn btn-ghost">Ghost</button>
-						<button class="btn btn-primary" disabled>Disabled</button>
+						<button class="btn btn-primary">
+							<span class="material-symbols-rounded">check</span>
+							Primary
+						</button>
+						<button class="btn btn-secondary">
+							<span class="material-symbols-rounded">star</span>
+							Secondary
+						</button>
+						<button class="btn btn-outline">
+							<span class="material-symbols-rounded">edit</span>
+							Outline
+						</button>
+						<button class="btn btn-ghost">
+							<span class="material-symbols-rounded">visibility</span>
+							Ghost
+						</button>
+						<button class="btn btn-danger">
+							<span class="material-symbols-rounded">delete</span>
+							Danger
+						</button>
+						<button class="btn btn-outline" disabled>
+							<span class="material-symbols-rounded">block</span>
+							Disabled
+						</button>
 					</div>
-					<p class="text-caption demo-margin-top"><strong>Icon Buttons:</strong> Support all variants</p>
+					<p class="text-caption demo-margin-top"><strong>Icon Button Variants:</strong></p>
 					<div class="flex-buttons-container">
-						<button class="btn btn-icon btn-primary" aria-label="Add">
+						<button class="btn btn-icon btn-primary" aria-label="Primary action">
 							<span class="material-symbols-rounded">add</span>
 						</button>
-						<button class="btn btn-icon btn-secondary" aria-label="Favorite">
+						<button class="btn btn-icon btn-secondary" aria-label="Secondary action">
 							<span class="material-symbols-rounded">star</span>
 						</button>
 						<button class="btn btn-icon btn-outline" aria-label="Edit">
@@ -506,88 +429,133 @@
 						<button class="btn btn-icon btn-danger" aria-label="Delete">
 							<span class="material-symbols-rounded">delete</span>
 						</button>
+						<button class="btn btn-icon btn-primary" disabled aria-label="Disabled">
+							<span class="material-symbols-rounded">block</span>
+						</button>
 					</div>
 				</div>
+
+				<!-- Input Fields -->
 				<div class="ds-surface">
 					<h3>Input Fields</h3>
-					<p class="text-caption">Uses <code>radius-md</code> and <code>stroke-sm</code>. Focus state uses <code>stroke-md</code> with <code>color-border-focus</code>.</p>
+					<p class="text-caption">Form controls with default, focus, error, and disabled states. Uses <code>radius-md</code> and <code>stroke-sm</code>.</p>
 					<div class="flex-inputs-container">
 						<div class="input-group">
-							<label for="name">Name</label>
-							<input type="text" id="name" class="input-field" placeholder="Default state">
-							<span class="helper-text">This is some helpful text.</span>
+							<label for="input-default">Default State</label>
+							<input type="text" id="input-default" class="input-field" placeholder="Enter text...">
+							<span class="helper-text">This is helpful text.</span>
 						</div>
 						<div class="input-group error">
-							<label for="email">Email</label>
-							<input type="email" id="email" class="input-field" value="not-an-email">
+							<label for="input-error">Error State</label>
+							<input type="email" id="input-error" class="input-field" value="not-an-email">
 							<span class="helper-text">Please enter a valid email address.</span>
 						</div>
+						<div class="input-group">
+							<label for="input-disabled">Disabled State</label>
+							<input type="text" id="input-disabled" class="input-field" value="Cannot edit" disabled>
+							<span class="helper-text">This field is disabled.</span>
+						</div>
 					</div>
 				</div>
+
+				<!-- Alerts -->
 				<div class="ds-surface">
 					<h3>Alerts</h3>
-					<p class="text-caption">Structure: Icon + Title/Description. Uses semantic functional colors (<code>color-success</code>, <code>color-warning</code>, <code>color-error</code>).</p>
+					<p class="text-caption">Feedback messages with semantic colors. Structure: Icon + Title/Description + Optional Close Button.</p>
 					<div class="flex-alerts-container">
-						<div class="alert alert-success"><span class="material-symbols-rounded">task_alt</span>
+						<div class="alert alert-success">
+							<span class="material-symbols-rounded">task_alt</span>
 							<div class="alert-content">
 								<div class="alert-title">Success</div>
-								<p class="alert-description">Changes saved.</p>
+								<p class="alert-description">Your changes have been saved successfully.</p>
 							</div>
 						</div>
-						<div class="alert alert-warning"><span class="material-symbols-rounded">warning</span>
+						<div class="alert alert-warning">
+							<span class="material-symbols-rounded">warning</span>
 							<div class="alert-content">
 								<div class="alert-title">Warning</div>
-								<p class="alert-description">Session expiring soon.</p>
+								<p class="alert-description">Your session will expire in 5 minutes.</p>
 							</div>
 						</div>
-						<div class="alert alert-error"><span class="material-symbols-rounded">error</span>
+						<div class="alert alert-error">
+							<span class="material-symbols-rounded">error</span>
 							<div class="alert-content">
 								<div class="alert-title">Error</div>
-								<p class="alert-description">Request failed.</p>
+								<p class="alert-description">Failed to save changes. Please try again.</p>
+							</div>
+						</div>
+						<div class="alert alert-info">
+							<span class="material-symbols-rounded">info</span>
+							<div class="alert-content">
+								<div class="alert-title">Information</div>
+								<p class="alert-description">New features are now available.</p>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- Modals -->
 				<div class="ds-surface">
-					<h3>Tabs</h3>
-					<div>
-						<div class="tabs-list">
-							<button class="tab-trigger active" data-tab="tab1">Profile</button>
-							<button class="tab-trigger" data-tab="tab2">Dashboard</button>
-							<button class="tab-trigger" data-tab="tab3">Settings</button>
-						</div>
-						<div class="tab-content">
-							<div class="tab-pane active" id="tab1">
-								<p>This is the profile tab content. It's clean, simple, and right to the point.</p>
-							</div>
-							<div class="tab-pane" id="tab2">
-								<p>Welcome to your dashboard. All your important information lives here.</p>
-							</div>
-							<div class="tab-pane" id="tab3">
-								<p>Here you can configure your application settings and preferences.</p>
-							</div>
-						</div>
+					<h3>Modals</h3>
+					<p class="text-caption">Overlays with backdrop blur. All internal spacing uses <code>space-sm</code>. Animates with <code>duration-medium</code> and decelerate easing. Footer can include optional text links aligned left.</p>
+					<div class="flex-buttons-container demo-margin-top">
+						<button class="btn btn-outline" id="open-modal-btn">
+							<span class="material-symbols-rounded">warning</span>
+							Critical Action (Non-Escapable)
+						</button>
+						<button class="btn btn-ghost" id="open-info-modal-btn">
+							<span class="material-symbols-rounded">info</span>
+							Info Modal (Escapable)
+						</button>
 					</div>
 				</div>
-				<div class="ds-surface ds-interactive-card">
-					<h3>Interactive Card</h3>
-					<p class="text-caption">This surface has hover and shadow effects, making it suitable for
-						clickable cards that link to other pages or trigger actions.</p>
-				</div>
+
+				<!-- Dropdowns -->
 				<div class="ds-surface">
-					<h3>Pill Selector</h3>
+					<h3>Dropdowns</h3>
+					<p class="text-caption">Contextual menus with keyboard navigation. Uses <code>radius-lg</code>, <code>shadow-md</code>, and <code>stroke-sm</code> border.</p>
+					<div class="dropdown">
+						<button class="btn btn-outline" id="dropdown-toggle">
+							<span>Options</span>
+							<span class="material-symbols-rounded">expand_more</span>
+						</button>
+						<div class="dropdown-menu" id="dropdown-menu">
+							<button class="dropdown-item">
+								<span class="material-symbols-rounded">person</span>
+								View Profile
+							</button>
+							<button class="dropdown-item">
+								<span class="material-symbols-rounded">settings</span>
+								Account Settings
+							</button>
+							<div class="dropdown-divider"></div>
+							<button class="dropdown-item">
+								<span class="material-symbols-rounded text-error">logout</span>
+								Log Out
+							</button>
+						</div>
+					</div>
+					<p class="text-caption demo-margin-top"><strong>Keyboard:</strong> Tab to focus toggle button, Enter/Space to open, Arrow Up/Down to navigate items, Enter to select, Escape to close.</p>
+				</div>
+
+				<!-- Pill Selectors -->
+				<div class="ds-surface">
+					<h3>Pill Selectors</h3>
 					<p class="text-caption">For selecting one option from a small set. Slider uses <code>radius-full</code> and animates with <code>duration-medium</code>.</p>
-					<div class="pill-selector-group" id="pill-selector-1">
+					<div class="pill-selector-group demo-margin-top" id="pill-selector-1">
 						<div class="pill-selector-slider"></div>
 						<button class="btn-pill active" data-value="daily">Daily</button>
+						<button class="btn-pill" data-value="weekly">Weekly</button>
 						<button class="btn-pill" data-value="monthly">Monthly</button>
 						<button class="btn-pill" data-value="yearly">Yearly</button>
 					</div>
-					<p class="text-caption">Selected: <span id="pill-value-1">daily</span></p>
+					<p class="text-caption demo-margin-top">Selected: <span id="pill-value-1">daily</span></p>
 				</div>
+
+				<!-- Switches -->
 				<div class="ds-surface">
 					<h3>Switches</h3>
-					<p class="text-caption">Binary on/off states. Track and thumb use <code>radius-full</code>. Animates with <code>duration-quick</code>. Focus state uses <code>stroke-md</code> outline with <code>color-border-focus</code>.</p>
+					<p class="text-caption">Binary on/off states. Track and thumb use <code>radius-full</code>. Animates with <code>duration-quick</code>.</p>
 					<div class="flex-switch-container">
 						<label class="switch">
 							<input type="checkbox" aria-label="Enable notifications" checked>
@@ -599,86 +567,226 @@
 							<span class="switch-track"><span class="switch-thumb"></span></span>
 							<span class="switch-label">Beta Features</span>
 						</label>
+						<label class="switch">
+							<input type="checkbox" aria-label="Enable dark mode" checked>
+							<span class="switch-track"><span class="switch-thumb"></span></span>
+							<span class="switch-label">Dark Mode</span>
+						</label>
 					</div>
-					<p class="text-caption demo-margin-top"><strong>Keyboard:</strong> Press Tab to focus, Space to toggle.</p>
+					<p class="text-caption demo-margin-top"><strong>Keyboard:</strong> Tab to focus, Space to toggle.</p>
 				</div>
+
+				<!-- Sliders -->
 				<div class="ds-surface">
 					<h3>Sliders</h3>
-					<p class="text-caption">Filled variant (<code>.slider-filled</code>) with colored track showing selected range using <code>color-primary</code>.</p>
+					<p class="text-caption">For selecting a value from a continuous range. Filled variant shows selected range using <code>color-primary</code>.</p>
 					<div class="slider-container">
+						<label for="my-slider-filled" class="text-caption">Volume</label>
 						<input type="range" min="0" max="100" value="50" class="slider-filled" id="my-slider-filled">
-						<div class="slider-value-label">50</div>
 					</div>
 				</div>
+
+				<!-- Tabs -->
 				<div class="ds-surface">
-					<h3>Dropdown & Avatars</h3>
-					<div class="flex-dropdown-container">
-						<div class="flex-avatar-container">
-							<img src="https://i.pravatar.cc/48?u=a" alt="Avatar" class="avatar avatar-md">
-							<div class="avatar avatar-md">JD</div>
-							<div class="avatar avatar-sm">A</div>
+					<h3>Tabs</h3>
+					<p class="text-caption">For switching between different content views. Active indicator animates using <code>duration-medium</code>.</p>
+					<div>
+						<div class="tabs-list">
+							<button class="tab-trigger active" data-tab="tab1">Profile</button>
+							<button class="tab-trigger" data-tab="tab2">Dashboard</button>
+							<button class="tab-trigger" data-tab="tab3">Settings</button>
 						</div>
-						<div class="dropdown">
-							<button class="btn btn-outline" id="dropdown-toggle">
-								<span>Options</span>
-								<span class="material-symbols-rounded">expand_more</span>
-							</button>
-							<div class="dropdown-menu" id="dropdown-menu">
-								<button class="dropdown-item"><span class="material-symbols-rounded">person</span>View
-									Profile</button>
-								<button class="dropdown-item"><span
-										class="material-symbols-rounded">settings</span>Account Settings</button>
-								<div class="dropdown-divider"></div>
-								<button class="dropdown-item"><span
-										class="material-symbols-rounded text-error">logout</span>Log Out</button>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab1">
+								<p>This is the profile tab content. Clean, simple, and to the point.</p>
+							</div>
+							<div class="tab-pane" id="tab2">
+								<p>Welcome to your dashboard. All your important information lives here.</p>
+							</div>
+							<div class="tab-pane" id="tab3">
+								<p>Configure your application settings and preferences here.</p>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- Progress Indicators -->
 				<div class="ds-surface">
-					<h3>Progress Bar</h3>
-					<p class="text-caption">Determinate progress indicator. Height: 8px (8-point grid). Width updates smoothly via CSS transitions.</p>
+					<h3>Progress Indicators</h3>
+					<p class="text-caption">Determinate progress bar. Height: 8px (8-point grid). Width updates smoothly via CSS transitions. Active state shows animated shimmer effect.</p>
 					<div class="progress-bar progress-spacing">
 						<div class="progress-indicator progress-indicator-width"></div>
 					</div>
+					<p class="text-caption demo-margin-top"><strong>Active Progress:</strong></p>
+					<div class="progress-bar progress-spacing">
+						<div class="progress-indicator progress-indicator-active" style="width: 65%;"></div>
+					</div>
 				</div>
+
+				<!-- Avatars -->
 				<div class="ds-surface">
-					<h3>Modals</h3>
-					<p class="text-caption">Uses <code>radius-lg</code> and <code>shadow-lg</code>. All internal spacing uses <code>space-sm</code>. Animates with <code>duration-medium</code> and decelerate easing.</p>
-					<button class="btn btn-outline demo-margin-top" id="open-modal-btn">
-						<span class="material-symbols-rounded">open_in_new</span>
-						Launch Deletion Modal
-					</button>
+					<h3>Avatars</h3>
+					<p class="text-caption">Circular user representations. Sizes: 32px (sm), 48px (md), 64px (lg).</p>
+					<div class="flex-avatar-container demo-margin-top">
+						<div class="avatar avatar-sm">A</div>
+						<div class="avatar avatar-md">JD</div>
+						<div class="avatar avatar-lg">RN</div>
+						<img src="https://i.pravatar.cc/48?u=a" alt="Avatar" class="avatar avatar-md">
+					</div>
 				</div>
+
+				<!-- Interactive Cards -->
+				<div class="ds-surface ds-interactive-card">
+					<h3>Interactive Card</h3>
+					<p class="text-caption">This card has hover effects (translateY -4px and shadow transition). Suitable for clickable surfaces that navigate or trigger actions.</p>
+					<p class="text-caption demo-margin-top"><strong>Hover me!</strong> Notice the lift and shadow change.</p>
+				</div>
+
 			</div>
 		</section>
 	</main>
 
 	<footer class="page-footer">
-		robonxt - &copy; 2025.
+		robonxt &copy; 2025. View source to see implementation details.
 	</footer>
 
-	<!-- Modal Structure (Initially Hidden) -->
-	<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+	<!-- Critical Modal (Non-Escapable) -->
+	<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-heading" data-escapable="false">
 		<div class="modal-dialog" tabindex="-1">
 			<div class="modal-header">
-				<h2 id="modal-heading" class="modal-title">Are you absolutely sure?</h2>
-				<button class="btn btn-icon" id="close-modal-btn" aria-label="Close">
-					<span class="material-symbols-rounded">close</span>
-				</button>
+				<h2 id="modal-heading" class="modal-title">Confirm Deletion</h2>
 			</div>
 			<div class="modal-body">
-				<p>This action cannot be undone. This will permanently delete the selected item and remove its data from
-					our servers. This is a critical task, so the tone is direct and the choices are clear.</p>
+				<p>This action cannot be undone. This will permanently delete the selected item and remove its data from our servers.</p>
+				<p>Are you absolutely sure you want to proceed?</p>
 			</div>
 			<div class="modal-footer">
+				<a href="#" class="text-caption" style="margin-right: auto; color: var(--color-text-medium);" id="learn-more-link">Learn more about deletions</a>
 				<button class="btn btn-outline" id="cancel-modal-btn">Cancel</button>
 				<button class="btn btn-danger">Yes, delete it</button>
 			</div>
 		</div>
 	</div>
 
+	<!-- Info Modal (Escapable) -->
+	<div class="modal-backdrop" id="info-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="info-modal-heading" data-escapable="true">
+		<div class="modal-dialog" tabindex="-1">
+			<div class="modal-header">
+				<h2 id="info-modal-heading" class="modal-title">About Deletions</h2>
+				<button class="btn btn-icon" id="close-info-modal-btn" aria-label="Close">
+					<span class="material-symbols-rounded">close</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h3>Understanding Permanent Deletion</h3>
+				<p>When you delete an item, the following happens:</p>
+				<ul>
+					<li>The item is immediately removed from your account</li>
+					<li>All associated data is permanently erased from our servers</li>
+					<li>This action cannot be reversed or undone</li>
+					<li>Backups are also purged within 30 days</li>
+				</ul>
+				<p>If you're unsure, consider archiving the item instead of deleting it.</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" id="close-info-modal-footer-btn">Got it</button>
+			</div>
+		</div>
+	</div>
+
 	<script src="script.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// Update slider value display
+			const slider = document.getElementById('my-slider-filled');
+			if (slider) {
+				const updateSlider = () => {
+					const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+					slider.style.background = `linear-gradient(to right, var(--color-primary) ${percent}%, var(--color-border-default) ${percent}%)`;
+				};
+				slider.addEventListener('input', updateSlider);
+				updateSlider();
+			}
+
+			// Info modal management
+			const infoModalBackdrop = document.getElementById('info-modal-backdrop');
+			const openInfoModalBtn = document.getElementById('open-info-modal-btn');
+			const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
+			const closeInfoModalFooterBtn = document.getElementById('close-info-modal-footer-btn');
+			const learnMoreLink = document.getElementById('learn-more-link');
+
+			const openInfoModal = () => infoModalBackdrop.classList.add('is-visible');
+			const closeInfoModal = () => infoModalBackdrop.classList.remove('is-visible');
+
+			if (openInfoModalBtn) openInfoModalBtn.addEventListener('click', openInfoModal);
+			if (closeInfoModalBtn) closeInfoModalBtn.addEventListener('click', closeInfoModal);
+			if (closeInfoModalFooterBtn) closeInfoModalFooterBtn.addEventListener('click', closeInfoModal);
+			if (learnMoreLink) learnMoreLink.addEventListener('click', (e) => {
+				e.preventDefault();
+				document.getElementById('modal-backdrop').classList.remove('is-visible');
+				openInfoModal();
+			});
+
+			// Escapable modal handling
+			if (infoModalBackdrop) {
+				infoModalBackdrop.addEventListener('click', (e) => {
+					if (e.target === infoModalBackdrop) closeInfoModal();
+				});
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && infoModalBackdrop.classList.contains('is-visible')) {
+						closeInfoModal();
+					}
+				});
+			}
+
+			// Critical modal management (non-escapable)
+			const criticalModal = document.getElementById('modal-backdrop');
+			const openCriticalBtn = document.getElementById('open-modal-btn');
+			const cancelCriticalBtn = document.getElementById('cancel-modal-btn');
+
+			const openCriticalModal = () => criticalModal.classList.add('is-visible');
+			const closeCriticalModal = () => criticalModal.classList.remove('is-visible');
+
+			if (openCriticalBtn) openCriticalBtn.addEventListener('click', openCriticalModal);
+			if (cancelCriticalBtn) cancelCriticalBtn.addEventListener('click', closeCriticalModal);
+
+			// Dropdown arrow key navigation
+			const dropdownToggle = document.getElementById('dropdown-toggle');
+			const dropdownMenu = document.getElementById('dropdown-menu');
+			if (dropdownToggle && dropdownMenu) {
+				const items = Array.from(dropdownMenu.querySelectorAll('.dropdown-item'));
+				let focusedIndex = -1;
+
+				document.addEventListener('keydown', (e) => {
+					if (!dropdownMenu.classList.contains('is-visible')) return;
+
+					if (e.key === 'ArrowDown') {
+						e.preventDefault();
+						focusedIndex = (focusedIndex + 1) % items.length;
+						items[focusedIndex].focus();
+					} else if (e.key === 'ArrowUp') {
+						e.preventDefault();
+						focusedIndex = focusedIndex <= 0 ? items.length - 1 : focusedIndex - 1;
+						items[focusedIndex].focus();
+					} else if (e.key === 'Home') {
+						e.preventDefault();
+						focusedIndex = 0;
+						items[focusedIndex].focus();
+					} else if (e.key === 'End') {
+						e.preventDefault();
+						focusedIndex = items.length - 1;
+						items[focusedIndex].focus();
+					}
+				});
+
+				dropdownToggle.addEventListener('click', () => {
+					if (dropdownMenu.classList.contains('is-visible')) {
+						focusedIndex = -1;
+					}
+				});
+			}
+		});
+	</script>
 </body>
 
 </html>

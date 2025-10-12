@@ -1,4 +1,4 @@
-# robonxt - The Brand & Design System (v2)
+# robonxt - The Brand & Design System (Revised)
 
 Welcome to the official guide for the "robonxt" brand identity and design system. This document is the single source of truth for our visual and interactive language. Its purpose is to ensure all products are consistent, accessible, and feel like "robonxt".
 
@@ -64,6 +64,21 @@ Use design tokens and component classes in your markup:
         <div class="modal-footer">
             <button class="btn btn-outline">Cancel</button>
             <button class="btn btn-primary">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<!-- Info Modal Example (no footer) -->
+<div class="modal-backdrop" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-heading">
+    <div class="modal-dialog" tabindex="-1">
+        <div class="modal-header">
+            <h2 id="info-heading" class="modal-title">Information</h2>
+            <button class="btn btn-icon" aria-label="Close">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>This modal has no footer, just informational content.</p>
         </div>
     </div>
 </div>
@@ -138,8 +153,8 @@ All spacing and component sizing values are based on an **8-Point Grid System**.
 
 **Component Sizing Examples:**
 *   Touch target: minimum 48px (configurable via `--touch-target`)
-*   Avatar sizes: 32px, 48px, 64px (configurable via `--avatar-size-sm`, `--avatar-size-md`, `--avatar-size-lg`)
-*   Icon sizes: 16px, 24px, 32px (configurable via `--icon-size-sm`, `--icon-size-md`, `--icon-size-lg`)
+*   Avatar sizes: 32px, 48px, 64px (configurable via `--avatar-size-xs`, `--avatar-size-sm`, `--avatar-size-md`)
+*   Icon sizes: 16px, 24px, 32px (configurable via `--icon-size-xs`, `--icon-size-sm`, `--icon-size-md`)
 *   Progress bar height: 8px (configurable via `--progress-height`)
 *   Switch track: 44px × 24px (configurable via `--switch-track-width` and `--switch-track-height`)
 *   Switch thumb: 16px (configurable via `--switch-thumb-size`)
@@ -169,7 +184,7 @@ All spacing and component sizing values are based on an **8-Point Grid System**.
 | `shadow-lg` | Prominent shadow for critical overlays like Modals. |
 
 #### Motion
-*   **Easing:** Standard easing is `cubic-bezier(0.4, 0, 0.2, 1)`. Decelerate easing is `cubic-bezier(0, 0, 0.2, 1)`.
+*   **Easing:** All animations use `cubic-bezier(0.4, 0, 0.2, 1)`.
 
 | Token | Value | Use Case |
 | :--- | :--- | :--- |
@@ -303,251 +318,162 @@ Components should reference these semantic tokens, not raw color values, to supp
 
 ---
 
-## 3. Components & Interactions
+## 3. Components
 
-Components are the reusable building blocks of our user interface. Each component section includes both its visual structure and interactive behavior.
+Components are the reusable building blocks of our user interface, constructed from the foundations and systems defined above.
 
-### 3.1. Core Interaction Principles
-*   **Immediate Feedback:** All interactions must provide visual feedback within `duration-quick` (150ms).
-*   **Smooth Transitions:** State changes use `duration-medium` (300ms) as the default. Use `duration-quick` for micro-interactions and `duration-slow` (500ms) for major UI changes.
-*   **Predictable Motion:** All animations use the standard easing function `cubic-bezier(0.4, 0, 0.2, 1)`.
-*   **Accessibility:** All interactive elements must be keyboard accessible and provide appropriate ARIA attributes.
-*   **Touch Targets:** On touch devices, ensure touch targets are at least 48px × 48px (using `--touch-target`).
-
-### 3.2. Iconography
+### 3.1. Iconography
 *   **Library:** **Material Symbols**
 *   **Style:** **Rounded** (exclusively)
 *   **Sizing:** Must use the 8-point grid (`16px`, `24px`, `32px`, `48px`, etc.). `24px` is the default.
 *   **Color:** Icons should inherit the color of the surrounding text (`currentColor`).
 
-### 3.3. Buttons
-
-#### Structure
+### 3.2. Buttons
 *   **Primary:** Solid fill using `color-primary`. For the most important action.
 *   **Secondary:** Solid fill using `color-accent`. For alternative, high-emphasis actions.
 *   **Outline:** Transparent with a `color-border-default` border. For medium-emphasis actions.
 *   **Ghost:** Transparent with no border. For low-emphasis actions.
-*   **Danger:** Solid fill using `color-error`. For destructive actions.
-*   **Icon Buttons:** Square button (48px × 48px) for icon-only actions. Supports all variants (`.btn-icon.btn-primary`, `.btn-icon.btn-secondary`, `.btn-icon.btn-outline`, `.btn-icon.btn-danger`). Default icon button (`.btn-icon` alone) has transparent background with no border and uses `color-text-medium`.
+*   **Icon:** Square button for icon-only actions. Transparent background with no border. Uses `color-text-medium` by default, transitions to `color-primary` on hover.
 
-#### Interactions
-*   **Hover:** Background color transitions to hover state using `duration-quick`.
-*   **Active/Press:** Immediate visual change (darker color or brightness adjustment).
-*   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset.
-*   **Disabled:** Opacity reduced to 0.5, cursor changes to `not-allowed`, no hover effects.
-*   **Default Icon Button Hover:** Background transitions to `color-surface-hover`, color changes to `color-primary` using `duration-quick`.
-*   **Variant Icon Button Hover:** Follows the same hover behavior as the corresponding button variant.
-
-### 3.4. Input Fields
-
-#### Structure
+### 3.3. Input Fields
 *   **Primitives:** Use `radius-md` and `stroke-sm`.
+*   **States:** The label and border must re-color on `focus` (to `color-border-focus`) and `error` (to `color-error`). The focus state must use `stroke-md`.
 *   **Spacing:** Label is `space-xs` from the container; internal padding is `space-sm`.
-*   **States:** Default, Focus, Error, Disabled.
 
-#### Interactions
-*   **Focus:** Border width changes from `stroke-sm` to `stroke-md` and color changes to `color-border-focus` using `duration-quick`.
-*   **Error State:** Border color changes to `color-error`. Label and helper text also adopt error color.
-*   **Hover:** Border color transitions to `color-text-medium` using `duration-quick`.
-*   **Disabled:** Background changes to `color-text-low`, cursor changes to `not-allowed`, opacity 0.7.
-
-### 3.5. Alerts
-
-#### Structure
-*   **Components:** Icon + Title/Description + Optional Close Button.
+### 3.4. Alerts
+*   **Structure:** Icon + Title/Description + Optional Close Button.
 *   **Types:** Must use the semantic functional colors (`color-success`, `color-warning`, `color-error`) and a neutral `Info` style.
-*   **Spacing:** Internal padding is `space-sm`, gap between elements is `space-sm`.
 
-#### Interactions
-*   **Close Button:** Uses icon button interaction pattern (hover to `color-primary`).
-*   **Dismissal:** Fades out using `duration-medium` when close button is clicked.
-
-### 3.6. Modals
-
-#### Structure
-*   **Components:** `.modal-backdrop` (overlay) and `.modal-dialog` (content container).
-*   **Primitives:** Use `radius-lg` and `shadow-lg`.
-*   **Spacing:** All internal spacing uses `space-sm`.
-*   **Layout:**
-    *   **Header (Required):** Contains title and close button. Optional `.modal-titlebar` groups image (optional) + title. Separated by bottom border using `stroke-sm`.
-    *   **Body (Required):** Scrollable content area. Supports rich typography (headings, lists, code blocks).
-    *   **Footer (Optional):** When present, contains action buttons. Optional `.has-credit` variant uses grid layout for attribution text + actions.
-*   **Backdrop:** Semi-transparent overlay (`rgba(0, 0, 0, 0.5)`) with `backdrop-filter: blur(2px)` for modern depth effect.
-*   **Responsive:** Footer with credit stacks vertically on screens narrower than 480px.
-
-#### Interactions
-*   **Open:** Backdrop fades in with blur effect. Modal scales from 0.95 to 1.0 and fades in (opacity 0 to 1) using `duration-medium` with decelerate easing.
-*   **Close:** Reverse animation—modal scales down and fades out, backdrop fades out using `duration-medium`.
-*   **Dismissal (Default):** Clicking outside the modal or pressing `Escape` closes it. For critical actions or multi-step flows, disable dismissal and require explicit user action via buttons.
-*   **Focus Trap:** Focus should remain within the modal while it's open.
-*   **Scroll Lock:** Body scroll should be disabled when modal is open (add `.scroll-lock` class to body).
-
-### 3.7. Dropdowns
-
-#### Structure
-*   **Purpose:** A menu that appears when a user interacts with a trigger element.
-*   **Components:** Trigger `button` and menu container.
-*   **Primitives:** The menu uses `radius-lg`, `shadow-md`, and a `stroke-sm` border.
-*   **Spacing:** Padding within the menu is `space-xs`. Interactive items inside use `radius-md` with `space-xs` vertical and `space-sm` horizontal padding.
-
-#### Interactions
-*   **Open:** Menu fades in (opacity 0 to 1) and translates up (8px) using `duration-medium`.
-*   **Close:** Reverse animation using `duration-medium`.
-*   **Click Outside:** Clicking outside the dropdown closes it.
-*   **Item Hover:** Background transitions to `color-surface-hover` using `duration-quick`.
-*   **Keyboard Navigation:**
-    *   `Arrow Down/Up`: Navigate through items.
-    *   `Enter` or `Space`: Select the focused item.
-    *   `Escape`: Close the dropdown.
-    *   `Home/End`: Jump to first/last item.
-
-### 3.8. Selection Controls
-
-#### Pill Selectors
-
-**Structure:**
-*   **Purpose:** For selecting one option from a small, related set.
-*   **Components:** Container (`.pill-selector-group`), slider (`.pill-selector-slider`), buttons (`.btn-pill`).
-*   **Slider:** The moving element has `radius-full` and uses `color-primary`.
-*   **Usage:** All pill selector implementations (navigation, filters, toggles) use these same classes for consistency.
-
-**Interactions:**
-*   **Click:** Active state changes immediately. The slider element animates to the new position and width using `duration-medium`.
-*   **Slider Animation:** The background slider smoothly transitions its `left` and `width` properties to match the active button's position and dimensions.
-*   **Hover (Non-Active):** Background color transitions to `color-surface-hover` using `duration-medium`.
-*   **Active State:** Text color changes to `white`. The slider provides the `color-primary` background.
-*   **Navigation:** When pill selectors control page sections, clicking a pill should smoothly scroll to the target section using `scroll-behavior: smooth`.
-
-#### Switches
-
-**Structure:**
-*   **Purpose:** For binary on/off states.
-*   **Components:** Track and thumb, both with `radius-full`.
-*   **Sizing:** Track is 44px × 24px, thumb is 16px.
-
-**Interactions:**
-*   **Toggle:** Thumb translates horizontally using `duration-quick` with standard easing.
-*   **State Change:** Track background color transitions from `color-border-default` to `color-primary` using `duration-quick`.
-*   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset appears on the track.
-*   **Calculation:** Thumb translation distance is calculated as: `track-width - thumb-size - (2 × thumb-offset)`.
-
-#### Sliders
-
-**Structure:**
-*   **Purpose:** For selecting a value from a continuous range.
-*   **Default (`.slider`):** Standard slider with neutral track using `color-border-default`.
-*   **Filled (`.slider-filled`):** Variant with colored track showing the difference from the default/zero value. The filled portion uses `color-primary` to visualize the selected range.
-*   **Height:** 8px (using `--progress-height`).
-
-**Interactions:**
-*   **Drag:** Value updates in real-time as the user drags the thumb.
-*   **Hover:** Track opacity increases from 0.9 to 1.0 using `duration-quick`.
-*   **Filled Variant:** The colored portion of the track updates dynamically as the value changes, creating a visual representation of the selected range.
-*   **Focus:** Thumb receives `stroke-md` outline in `color-border-focus`.
-
-#### Tabs
-
-**Structure:**
-*   **Purpose:** For switching between different content views.
-*   **Components:** Tab list container, tab triggers, tab content panes.
-*   **Active Indicator:** Underline or slider that animates to show active tab.
-
-**Interactions:**
-*   **Click:** Active state changes immediately. Content area updates without animation.
-*   **Underline Animation:** The active indicator (underline or slider) animates using `duration-medium` to the new tab position.
-*   **Scroll Sync:** When using scroll-based navigation, the active tab updates automatically as sections enter the viewport.
-*   **Hover:** Tab color transitions to `color-text-high` using `duration-quick`.
-
-### 3.9. Progress Indicators
-
-#### Structure
-*   **Purpose:** To show task completion or loading state.
-*   **Height:** 8px (using `--progress-height`).
-*   **Track:** Uses `color-border-default`.
-*   **Indicator:** Uses `color-primary`.
-*   **Active State:** Add `.progress-indicator-active` class to show animated shimmer effect during active progress.
-
-#### Interactions
-*   **Determinate:** The progress bar's width updates smoothly as the value changes using `duration-medium` transition.
-*   **Active Animation:** The `.progress-indicator-active` class adds a shimmer effect (white gradient overlay) that animates left-to-right continuously (2s duration) to indicate ongoing activity.
-*   **Static Progress:** Use `.progress-indicator` alone for completed or paused progress without animation.
-
-### 3.10. Interactive Cards
-
-#### Structure
-*   **Purpose:** Clickable surfaces that navigate or trigger actions.
-*   **Primitives:** Use `radius-lg` and `shadow-md`.
-*   **Spacing:** Internal padding uses `space-md`.
-
-#### Interactions
-*   **Hover:** Card translates up 4px (`translateY(-4px)`) and shadow transitions from `shadow-md` to `shadow-lg` using `duration-quick`.
-*   **Click:** Card acts as a clickable surface, navigating to a new page or triggering an action.
-*   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset.
-
-### 3.11. Header
-
-#### Structure
+### 3.5. Header
 *   **Purpose:** A persistent surface for global navigation and branding.
 *   **Layout:** Uses Flexbox (`justify-content: space-between`) to align the logo left and actions right.
 *   **Spacing:** Horizontal padding is `space-md` on desktop and `space-sm` on mobile.
 *   **Separation:** A `stroke-sm` bottom border using `color-border-default` separates it from page content.
 *   **Behavior:** Sticky to the top of the viewport.
 
-#### Interactions
-*   **Scroll:** Background color and shadow can transition on scroll for visual feedback.
-*   **Navigation Items:** Follow button or pill selector interaction patterns depending on implementation.
+### 3.6. Dropdowns
+*   **Purpose:** A menu that appears when a user interacts with a trigger element.
+*   **Structure:** Composed of a trigger `button` and a menu container.
+*   **Primitives:** The menu uses `radius-lg`, `shadow-md`, and a `stroke-sm` border.
+*   **Spacing:** Padding within the menu is `space-xs`. Interactive items inside use `radius-md` with `space-xs` vertical and `space-sm` horizontal padding.
+*   **Motion:** Fades and translates into view using `duration-medium`.
+
+### 3.7. Modals
+*   **Structure:** Composed of `.modal-backdrop` (overlay) and `.modal-dialog` (content container).
+*   **Primitives:** Use `radius-lg` and `shadow-lg`.
+*   **Spacing:** All internal spacing uses `space-sm`.
+*   **Layout:**
+    *   **Header (Required):** Contains title and close button. Optional `.modal-titlebar` groups image (optional) + title. Separated by bottom border using `stroke-sm`.
+    *   **Body (Required):** Scrollable content area. Supports rich typography (headings, lists, code blocks).
+    *   **Footer (Optional):** When present, contains action buttons. Optional `.has-credit` variant uses grid layout for attribution text + actions.
+*   **Backdrop:** Semi-transparent overlay with `backdrop-filter: blur(2px)` for modern depth effect.
+*   **Motion:** Backdrop fades in/out. Modal scales from 0.95 to 1.0 and fades using `duration-medium` with decelerate easing.
+*   **Responsive:** Footer with credit stacks vertically on screens narrower than 480px.
+
+### 3.8. Selection Controls
+*   **Pill Selectors:** For selecting one option from a small, related set.
+    *   **Structure:** Container uses `.pill-selector-group` class. Contains a `.pill-selector-slider` element followed by multiple `.btn-pill` button elements.
+    *   **Classes:** `.pill-selector-group` (container), `.pill-selector-slider` (animated background), `.btn-pill` (individual options).
+    *   **Slider:** The moving element has `radius-full` and uses `color-primary`.
+    *   **Motion:** The slider animates its position and width using `duration-medium`.
+    *   **Usage:** All pill selector implementations (navigation, filters, toggles) use these same classes for consistency.
+*   **Switches:** For binary on/off states.
+    *   **Structure:** Composed of a track and thumb, both with `radius-full`.
+    *   **Motion:** The thumb animates with `duration-quick`.
+*   **Sliders:** For selecting a value from a continuous range.
+    *   **Default (`.slider`):** Standard slider with neutral track using `color-border-default`.
+    *   **Filled (`.slider-filled`):** Variant with colored track showing the difference from the default/zero value. The filled portion uses `color-primary` to visualize the selected range.
 
 ---
 
-## 4. Responsive Behavior
+## 4. Interactive Behavior
 
-### 4.1. Responsive Navigation
+Interactive behavior defines how components respond to user input. These patterns ensure a consistent, predictable experience across all "robonxt" products.
+
+### 4.1. Core Principles
+*   **Immediate Feedback:** All interactions must provide visual feedback within `duration-quick` (150ms).
+*   **Smooth Transitions:** State changes use `duration-medium` (300ms) as the default. Use `duration-quick` for micro-interactions and `duration-slow` (500ms) for major UI changes.
+*   **Predictable Motion:** All animations use the standard easing function `cubic-bezier(0.4, 0, 0.2, 1)`.
+
+### 4.2. Button Interactions
+*   **Hover:** Background color transitions to hover state using `duration-quick`.
+*   **Active/Press:** Immediate visual change (darker color or brightness adjustment).
+*   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset.
+*   **Disabled:** Opacity reduced to 0.5, cursor changes to `not-allowed`, no hover effects.
+
+### 4.3. Form Controls
+
+#### Input Fields
+*   **Focus:** Border width changes from `stroke-sm` to `stroke-md` and color changes to `color-border-focus` using `duration-quick`.
+*   **Error State:** Border color changes to `color-error`. Label and helper text also adopt error color.
+*   **Hover:** Border color transitions to `color-text-medium` using `duration-quick`.
+
+#### Switches
+*   **Toggle:** Thumb translates horizontally using `duration-quick` with standard easing.
+*   **State Change:** Track background color transitions from `color-border-default` to `color-primary` using `duration-quick`.
+*   **Focus:** `stroke-md` outline in `color-border-focus` with 2px offset appears on the track.
+*   **Calculation:** Thumb translation distance is calculated as: `track-width - thumb-size - (2 × thumb-offset)`.
+
+#### Sliders
+*   **Drag:** Value updates in real-time as the user drags the thumb.
+*   **Hover:** Track opacity increases from 0.9 to 1.0.
+*   **Filled Variant:** The colored portion of the track updates dynamically as the value changes, creating a visual representation of the selected range.
+
+### 4.4. Selection Controls
+
+#### Pill Selectors
+*   **Click:** Active state changes immediately. The slider element animates to the new position and width using `duration-medium`.
+*   **Slider Animation:** The background slider smoothly transitions its `left` and `width` properties to match the active button's position and dimensions.
+*   **Hover (Non-Active):** Background color transitions to `color-surface-hover` using `duration-medium`.
+*   **Active State:** Text color changes to `white`. The slider provides the `color-primary` background.
+*   **Navigation:** When pill selectors control page sections, clicking a pill should smoothly scroll to the target section using `scroll-behavior: smooth`.
+
+#### Tabs
+*   **Click:** Active state changes immediately. Content area updates without animation.
+*   **Underline Animation:** The active indicator (underline or slider) animates using `duration-medium` to the new tab position.
+*   **Scroll Sync:** When using scroll-based navigation, the active tab updates automatically as sections enter the viewport.
+
+### 4.5. Overlays & Modals
+*   **Open:** Backdrop fades in with blur effect. Modal scales from 0.95 to 1.0 and fades in (opacity 0 to 1) using `duration-medium` with decelerate easing.
+*   **Close:** Reverse animation—modal scales down and fades out, backdrop fades out using `duration-medium`.
+*   **Dismissal (Default):** Clicking outside the modal or pressing `Escape` closes it. For critical actions or multi-step flows, disable dismissal and require explicit user action via buttons.
+*   **Focus Trap:** Focus should remain within the modal while it's open.
+*   **Scroll Lock:** Body scroll should be disabled when modal is open (add `.scroll-lock` class to body).
+
+### 4.6. Dropdowns
+*   **Open:** Menu fades in (opacity 0 to 1) and translates up (8px) using `duration-medium`.
+*   **Close:** Reverse animation using `duration-medium`.
+*   **Click Outside:** Clicking outside the dropdown closes it.
+*   **Keyboard Navigation:**
+    *   `Arrow Down/Up`: Navigate through items.
+    *   `Enter` or `Space`: Select the focused item.
+    *   `Escape`: Close the dropdown.
+    *   `Home/End`: Jump to first/last item.
+
+### 4.7. Interactive Cards
+*   **Hover:** Card translates up 4px (`translateY(-4px)`) and shadow transitions from `shadow-md` to `shadow-lg` using `duration-quick`.
+*   **Click:** Card acts as a clickable surface, navigating to a new page or triggering an action.
+
+### 4.8. Progress Indicators
+*   **Determinate:** The progress bar's width updates smoothly as the value changes. Use CSS transitions on the `width` property.
+*   **Indeterminate:** For unknown durations, use a loading animation (not defined in this system—implement based on brand guidelines).
+
+### 4.9. Color Swatches (Demo-Specific)
+*   **Click/Tap:** Copies the computed hex color value to the clipboard.
+*   **Feedback:** The hex label text changes to "Copied #XXXXXX" with `color-primary` for 1200ms, then reverts.
+*   **Hover:** Card translates up 4px and shadow transitions from `shadow-md` to `shadow-lg` using `duration-quick`.
+*   **Keyboard:** `Enter` or `Space` triggers the copy action when focused.
+
+### 4.10. Responsive Navigation
 *   **Dynamic Adaptation:** Navigation automatically switches between pill selector and mobile menu based on available space, not fixed breakpoints.
 *   **Overflow Detection:** JavaScript measures if the pill selector would cause horizontal overflow and toggles mobile mode accordingly.
 *   **Mobile Mode:** When space is constrained, the pill selector hides and a hamburger menu appears with the current section title.
 *   **Anchored Controls:** Theme switch and auxiliary controls remain anchored to the right side using `flex-shrink: 0`.
 *   **Universal Compatibility:** Works on all screen sizes from small mobile devices (iPhone 4S) to ultrawide monitors without hardcoded breakpoints.
 
-### 4.2. Touch Device Considerations
-*   **Touch Targets:** Ensure all interactive elements are at least 48px × 48px (using `--touch-target`).
-*   **Hover States:** Hover states may not apply on touch devices—ensure all functionality is accessible via tap/click.
-*   **Gestures:** Support standard touch gestures where appropriate (swipe to dismiss, pinch to zoom, etc.).
-
-### 4.3. Breakpoint Philosophy
-*   **Prefer Content-Based:** Use JavaScript-based overflow detection over fixed breakpoints for truly responsive designs.
-*   **When Fixed Breakpoints Are Needed:** Use logical breakpoints based on content needs, not device categories.
-*   **Mobile-First:** Design for mobile first, then progressively enhance for larger screens.
-
----
-
-## 5. Implementation Guidelines
-
-### 5.1. Framework Agnostic
-These patterns are intentionally described without prescribing specific JavaScript implementations. Implement them using your framework of choice (React, Vue, Svelte, vanilla JS, etc.).
-
-### 5.2. Performance
-*   **CSS Transitions:** Use CSS transitions and transforms for animations when possible.
-*   **Avoid Layout Thrashing:** Avoid animating properties that trigger layout recalculations (e.g., `height`, `width` on non-absolute elements).
-*   **Hardware Acceleration:** Use `transform` and `opacity` for animations to leverage GPU acceleration.
-
-### 5.3. Accessibility
-*   **Keyboard Navigation:** All interactive elements must be keyboard accessible.
-*   **ARIA Attributes:** Provide appropriate ARIA attributes for screen readers.
-*   **Focus Management:** Ensure logical focus order and visible focus indicators.
-*   **Color Contrast:** Maintain WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text).
-
-### 5.4. Browser Support
-*   **Modern Browsers:** Chrome, Firefox, Safari, Edge (latest 2 versions).
-*   **Progressive Enhancement:** Core functionality should work without JavaScript.
-*   **Graceful Degradation:** Advanced features can degrade gracefully in older browsers.
-
----
-
-## 6. Demo-Specific Components
-
-### 6.1. Color Swatches
-*   **Purpose:** Interactive color palette demonstration (not for production use).
-*   **Click/Tap:** Copies the computed hex color value to the clipboard.
-*   **Feedback:** The hex label text changes to "Copied #XXXXXX" with `color-primary` for 1200ms, then reverts.
-*   **Hover:** Card translates up 4px and shadow transitions from `shadow-md` to `shadow-lg` using `duration-quick`.
-*   **Keyboard:** `Enter` or `Space` triggers the copy action when focused.
+### 4.11. Implementation Notes
+*   **Framework Agnostic:** These behavior patterns are intentionally described without prescribing specific JavaScript implementations. Implement them using your framework of choice (React, Vue, Svelte, vanilla JS, etc.).
+*   **Accessibility:** All interactive elements must be keyboard accessible and provide appropriate ARIA attributes.
+*   **Performance:** Use CSS transitions and transforms for animations when possible. Avoid animating properties that trigger layout recalculations (e.g., `height`, `width` on non-absolute elements).
+*   **Responsive Behavior:** On touch devices, ensure touch targets are at least 48px × 48px (using `--touch-target`). Hover states may not apply on touch devices—ensure all functionality is accessible via tap/click.
+*   **Dynamic Layouts:** Prefer JavaScript-based overflow detection over fixed breakpoints for truly responsive designs that adapt to any device or viewport size.
