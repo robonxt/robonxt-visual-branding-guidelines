@@ -51,10 +51,14 @@ const createModalManager = (backdropId, triggerIds = []) => {
 	if (!backdrop) return null;
 
 	const toggle = (visible) => backdrop.classList.toggle('is-visible', visible);
+	const isEscapable = backdrop.dataset.escapable !== 'false';
 
 	triggerIds.forEach(id => $(`#${id}`)?.addEventListener('click', () => toggle(true)));
-	backdrop.addEventListener('click', (e) => e.target === backdrop && toggle(false));
-	document.addEventListener('keydown', (e) => e.key === 'Escape' && backdrop.classList.contains('is-visible') && toggle(false));
+
+	if (isEscapable) {
+		backdrop.addEventListener('click', (e) => e.target === backdrop && toggle(false));
+		document.addEventListener('keydown', (e) => e.key === 'Escape' && backdrop.classList.contains('is-visible') && toggle(false));
+	}
 
 	return { openModal: () => toggle(true), closeModal: () => toggle(false) };
 };
@@ -134,7 +138,7 @@ const initThemeSwitcher = () => {
 
 	const saved = localStorage.getItem('robonxt_theme');
 	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-	
+
 	if (saved) {
 		setTheme(saved);
 	} else {
