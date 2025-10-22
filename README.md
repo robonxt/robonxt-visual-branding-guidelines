@@ -202,17 +202,22 @@ Core interactive colors for the UI. The `500` or `600` shade is the default.
 | **Neutral** | Cool Gray | `#64748B` |
 
 #### 2.1.3. Neutrals Palette
-Used for all core UI surfaces, text, and borders.
+Used for all core UI surfaces, text, and borders. Optimized for high contrast and clear visual hierarchy.
 
 | Name | Hex | Light Mode Use | Dark Mode Use |
 | :--- | :--- | :--- | :--- |
-| **Surface** | `#F9FAFB` | Component Background (Cards, Modals) | Component background (`slate-800`) |
-| **Light** | `#F9F9F9` | Main page background | *(Not Used)* |
-| **Night** | `#0F172A` | *(Not Used)* | Main page background |
-| **Text (High)** | `#111827` | **Default text.** Headings, body copy. | High-emphasis text (`#FFFFFF`) |
-| **Text (Medium)** | `#4B5563` | Sub-headings, labels, helper text. | Medium-emphasis text (`#D1D5DB`) |
-| **Text (Low)** | `#9CA3AF` | Disabled text, decorative details. | Low-emphasis, disabled text (`#6B7280`) |
-| **Border** | `#E5E7EB` | Dividers, default borders. | Borders, dividers (`#374151`) |
+| **White** | `#FFFFFF` | Component surfaces (Cards, Modals, Header) | High-emphasis text |
+| **Light** | `#E0E0E0` | Main page background | *(Not Used)* |
+| **Night** | `#171717` | *(Not Used)* | Main page background |
+| **Gray-50** | `#FAFAFA` | Subtle backgrounds | *(Not Used)* |
+| **Gray-100** | `#F5F5F5` | Hover states | *(Not Used)* |
+| **Gray-300** | `#D4D4D4` | Borders, dividers | *(Not Used)* |
+| **Gray-400** | `#A3A3A3` | *(Not Used)* | Medium-emphasis text |
+| **Gray-500** | `#737373` | Low-emphasis text | Low-emphasis text |
+| **Gray-600** | `#525252` | Medium-emphasis text | Borders, dividers |
+| **Gray-700** | `#404040` | *(Not Used)* | Hover states |
+| **Gray-800** | `#262626` | *(Not Used)* | Component surfaces (Cards, Modals, Header) |
+| **Gray-900** | `#0A0A0A` | **High-emphasis text.** Headings, body copy. | *(Not Used)* |
 
 ##### Slate Swatch
 Subtle neutral scale used primarily in dark contexts. Mirrors standard slate (50–900).
@@ -252,15 +257,16 @@ Components should reference these semantic tokens, not raw color values, to supp
 | `color-accent` | `fuchsia-600` | `fuchsia-500` |
 | `color-accent-hover` | `fuchsia-700` | `fuchsia-400` |
 | **Surfaces** | | |
-| `color-background` | `light` (`#F9F9F9`) | `night` (`#0F172A`) |
-| `color-surface` | `gray-50` | `surface-dark` (`#1E293B`) |
-| `color-surface-hover`| `gray-100` | `gray-800` |
+| `color-background` | `light` (`#E0E0E0`) | `night` (`#171717`) |
+| `color-surface` | `white` (`#FFFFFF`) | `gray-800` (`#262626`) |
+| `color-surface-hover`| `gray-100` (`#F5F5F5`) | `gray-700` (`#404040`) |
+| `color-header-bg` | `white` (`#FFFFFF`) | `gray-800` (`#262626`) |
 | **Text** | | |
-| `color-text-high` | `gray-900` | `white` |
-| `color-text-medium`| `gray-600` | `gray-300` |
-| `color-text-low` | `gray-400` | `gray-500` |
+| `color-text-high` | `gray-900` (`#0A0A0A`) | `white` (`#FFFFFF`) |
+| `color-text-medium`| `gray-600` (`#525252`) | `gray-400` (`#A3A3A3`) |
+| `color-text-low` | `gray-500` (`#737373`) | `gray-500` (`#737373`) |
 | **Borders** | | |
-| `color-border-default`| `gray-200` | `gray-700` |
+| `color-border-default`| `gray-300` (`#D4D4D4`) | `gray-600` (`#525252`) |
 | `color-border-focus`| `indigo-500` | `indigo-400` |
 | **Functional** | | |
 | `color-success` | `Success Green` | `Success Green` |
