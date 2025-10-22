@@ -114,19 +114,70 @@ const createPillSelector = (selectorId, valueDisplayId) => {
 	return { group, buttons, updateSlider };
 };
 
-// --- RESPONSIVE NAVIGATION ---
-const initResponsiveNavigation = () => {
-	const headerLeft = $('.header-left');
+// --- NAVIGATION TOGGLE & OVERFLOW DETECTION ---
+const initNavigation = () => {
+	const headerNav = $('#header-nav');
+	const toggle = $('#nav-toggle');
+	const navItems = $('#nav-items');
 	const pageHeader = $('.page-header');
-	if (!headerLeft || !pageHeader) return;
+	if (!headerNav || !toggle || !navItems || !pageHeader) return;
 
-	const checkOverflow = () => {
-		headerLeft.classList.remove('mobile-mode');
-		const themeWidth = $('.theme-switch-wrapper')?.offsetWidth || 0;
-		const available = pageHeader.offsetWidth - themeWidth - 48;
-		if (headerLeft.scrollWidth > available) headerLeft.classList.add('mobile-mode');
+	const closeNav = () => {
+		navItems.classList.remove('is-visible');
+		toggle.setAttribute('aria-expanded', 'false');
 	};
 
+	const toggleNav = () => {
+		const isVisible = navItems.classList.toggle('is-visible');
+		toggle.setAttribute('aria-expanded', isVisible);
+	};
+
+	// Overflow detection: switch to compact mode when content doesn't fit
+	const checkOverflow = () => {
+		// Temporarily remove compact to measure natural width
+		headerNav.classList.remove('compact');
+		
+		// Force a reflow to get accurate measurements
+		void headerNav.offsetWidth;
+		
+		const themeWidth = $('.theme-switch-wrapper')?.offsetWidth || 0;
+		const navItemsWidth = navItems.scrollWidth;
+		const available = pageHeader.offsetWidth - themeWidth - 32; // 32px for padding/gaps
+		
+		// If nav items don't fit, switch to compact mode
+		if (navItemsWidth > available) {
+			headerNav.classList.add('compact');
+		}
+	};
+
+	toggle.addEventListener('click', (e) => {
+		e.stopPropagation();
+		toggleNav();
+	});
+
+	// Close on outside click
+	document.addEventListener('click', (e) => {
+		if (!navItems.contains(e.target) && e.target !== toggle) {
+			closeNav();
+		}
+	});
+
+	// Close on escape
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && navItems.classList.contains('is-visible')) {
+			closeNav();
+			toggle.focus();
+		}
+	});
+
+	// Close when a nav item is clicked
+	navItems.addEventListener('click', (e) => {
+		if (e.target.classList.contains('btn-pill')) {
+			closeNav();
+		}
+	});
+
+	// Check overflow on load and resize
 	checkOverflow();
 	window.addEventListener('resize', checkOverflow);
 };
@@ -245,7 +296,7 @@ const initColorSwatches = () => {
 
 // --- HEADER TABS ---
 const initHeaderTabs = () => {
-	const container = $('#wrapper-tabs');
+	const container = $('#nav-items');
 	if (!container) return;
 
 	const tabs = Array.from(container.querySelectorAll('.btn-pill'));
@@ -262,8 +313,11 @@ const initHeaderTabs = () => {
 		const name = tab.getAttribute('data-tab');
 		if (name) location.hash = name;
 		if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		const title = $('#mobile-nav-title');
-		if (title) title.textContent = tab.textContent;
+		
+		// Update mobile nav title
+		const navTitle = $('#nav-title');
+		if (navTitle) navTitle.textContent = tab.textContent;
+		
 		updateSlider(tab);
 	};
 
@@ -279,8 +333,11 @@ const initHeaderTabs = () => {
 		if (!activeTab || activeTab.classList.contains('active')) return;
 		tabs.forEach(t => t.classList.remove('active'));
 		activeTab.classList.add('active');
-		const title = $('#mobile-nav-title');
-		if (title) title.textContent = activeTab.textContent;
+		
+		// Update mobile nav title
+		const navTitle = $('#nav-title');
+		if (navTitle) navTitle.textContent = activeTab.textContent;
+		
 		updateSlider(activeTab);
 	};
 
@@ -291,58 +348,6 @@ const initHeaderTabs = () => {
 	window.addEventListener('resize', () => updateSlider(container.querySelector('.btn-pill.active')));
 };
 
-// --- MOBILE NAVIGATION ---
-const initMobileNavigation = () => {
-	const btn = $('#btn-mobile-nav');
-	const dd = $('#mobile-nav-dropdown');
-	const container = $('#wrapper-tabs');
-	if (!btn || !dd || !container) return;
-
-	const tabs = Array.from(container.querySelectorAll('.btn-pill'));
-
-	const buildDropdown = () => {
-		dd.innerHTML = '';
-		tabs.forEach(t => {
-			const link = document.createElement('button');
-			link.className = 'mobile-nav-link';
-			link.type = 'button';
-			link.setAttribute('data-tab', t.getAttribute('data-tab'));
-			link.textContent = t.textContent;
-			link.addEventListener('click', () => (t.click(), manager.closeDropdown(), btn.focus()));
-			dd.appendChild(link);
-		});
-	};
-
-	const manager = createDropdownManager('btn-mobile-nav', 'mobile-nav-dropdown');
-	if (!manager) return;
-
-	buildDropdown();
-
-	document.addEventListener('keydown', (e) => {
-		const links = Array.from(dd.querySelectorAll('.mobile-nav-link'));
-		const idx = links.indexOf(document.activeElement);
-		if (e.key === 'Escape') return manager.closeDropdown();
-		if (!dd.classList.contains('is-visible')) return;
-		if (e.key === 'ArrowDown') { e.preventDefault(); links[(idx < 0 ? 0 : (idx + 1) % links.length)]?.focus(); }
-		if (e.key === 'ArrowUp') { e.preventDefault(); links[(idx < 0 ? links.length - 1 : (idx - 1 + links.length) % links.length)]?.focus(); }
-		if (e.key === 'Home') { e.preventDefault(); links[0]?.focus(); }
-		if (e.key === 'End') { e.preventDefault(); links[links.length - 1]?.focus(); }
-		if (['Enter', ' '].includes(e.key) && document.activeElement?.classList.contains('mobile-nav-link')) { e.preventDefault(); document.activeElement.click(); }
-	});
-
-	const syncActive = () => {
-		const hash = location.hash.slice(1);
-		const activeTab = tabs.find(t => t.getAttribute('data-tab') === hash) || container.querySelector('.btn-pill.active');
-		dd.querySelectorAll('.mobile-nav-link').forEach(link => {
-			link.classList.toggle('active', link.getAttribute('data-tab') === activeTab?.getAttribute('data-tab'));
-		});
-		const title = $('#mobile-nav-title');
-		if (title && activeTab) title.textContent = activeTab.textContent;
-	};
-
-	window.addEventListener('hashchange', syncActive);
-	syncActive();
-};
 
 // --- MOTION DEMO ---
 const initMotionDemo = () => {
@@ -355,7 +360,7 @@ const initMotionDemo = () => {
 
 // --- INITIALIZATION ---
 const init = () => {
-	initResponsiveNavigation();
+	initNavigation();
 	initThemeSwitcher();
 	initModal();
 	initDropdown();
@@ -364,7 +369,6 @@ const init = () => {
 	initSliders();
 	initColorSwatches();
 	initHeaderTabs();
-	initMobileNavigation();
 	initMotionDemo();
 };
 

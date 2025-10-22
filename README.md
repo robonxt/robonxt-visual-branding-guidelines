@@ -456,25 +456,32 @@ Components are the reusable building blocks of our user interface. Each componen
 
 #### Structure
 *   **Purpose:** A persistent surface for global navigation and branding.
-*   **Layout:** Uses Flexbox (`justify-content: space-between`) to align the logo left and actions right.
-*   **Spacing:** Horizontal padding is `space-md` on desktop and `space-sm` on mobile.
+*   **Layout:** Uses Flexbox (`justify-content: space-between`) to align navigation left and actions right.
+*   **Spacing:** Consistent `space-xs` (8px) padding on all screen sizes. Internal gaps use `space-xs`.
 *   **Separation:** A `stroke-sm` bottom border using `color-border-default` separates it from page content.
-*   **Behavior:** Sticky to the top of the viewport.
+*   **Behavior:** Sticky to the top of the viewport with `overflow: visible` to allow dropdowns.
+*   **Components:** Navigation container (`.header-nav`), toggle button (`.nav-toggle`), section title (`.nav-title`), navigation items (`.nav-items`).
 
 #### Interactions
+*   **Default Mode:** Navigation pills display inline with animated slider. Toggle button and section title are hidden.
+*   **Compact Mode:** When overflow is detected (content doesn't fit), `.compact` class is added. Toggle button and section title become visible, pills transform into dropdown menu, slider is hidden.
+*   **Overflow Detection:** JavaScript measures available space and switches modes dynamically based on content needs, not device size.
+*   **Toggle:** Click hamburger to show/hide dropdown. Dropdown closes on outside click, escape key, or item selection.
 *   **Scroll:** Background color and shadow can transition on scroll for visual feedback.
-*   **Navigation Items:** Follow button or pill selector interaction patterns depending on implementation.
+*   **Navigation Items:** Follow pill selector interaction patterns (default) or vertical menu items (compact).
 
 ---
 
 ## 4. Responsive Behavior
 
 ### 4.1. Responsive Navigation
-*   **Dynamic Adaptation:** Navigation automatically switches between pill selector and mobile menu based on available space, not fixed breakpoints.
-*   **Overflow Detection:** JavaScript measures if the pill selector would cause horizontal overflow and toggles mobile mode accordingly.
-*   **Mobile Mode:** When space is constrained, the pill selector hides and a hamburger menu appears with the current section title.
-*   **Anchored Controls:** Theme switch and auxiliary controls remain anchored to the right side using `flex-shrink: 0`.
-*   **Universal Compatibility:** Works on all screen sizes from small mobile devices (iPhone 4S) to ultrawide monitors without hardcoded breakpoints.
+*   **Content-Based Adaptation:** Navigation switches between default and compact modes based on available space, not fixed breakpoints.
+*   **Overflow Detection:** JavaScript measures if navigation content would overflow and toggles `.compact` class accordingly.
+*   **Default Mode:** Pills display inline with animated slider. Toggle button and section title hidden.
+*   **Compact Mode:** Toggle button and current section title visible. Pills transform into vertical dropdown menu positioned absolutely below header.
+*   **Section Title:** Displays current active section name in compact mode. Updates automatically on scroll or click.
+*   **Dropdown Behavior:** Opens/closes with smooth fade and slide animation. Closes on outside click, escape key, or item selection.
+*   **Universal Compatibility:** Works on all screen sizes from small mobile devices to ultrawide monitors without hardcoded breakpoints.
 
 ### 4.2. Touch Device Considerations
 *   **Touch Targets:** Ensure all interactive elements are at least 48px × 48px (using `--touch-target`).
@@ -482,8 +489,10 @@ Components are the reusable building blocks of our user interface. Each componen
 *   **Gestures:** Support standard touch gestures where appropriate (swipe to dismiss, pinch to zoom, etc.).
 
 ### 4.3. Breakpoint Philosophy
-*   **Prefer Content-Based:** Use JavaScript-based overflow detection over fixed breakpoints for truly responsive designs.
+*   **Content-Based First:** Prefer JavaScript-based overflow detection over fixed breakpoints for truly responsive designs that adapt to actual content needs.
+*   **Simple Implementation:** Content-based detection can be implemented simply—measure if content fits, switch modes if it doesn't.
 *   **When Fixed Breakpoints Are Needed:** Use logical breakpoints based on content needs, not device categories.
+*   **Avoid Device-Specific Breakpoints:** Don't use arbitrary breakpoints like 768px or 1024px that assume device sizes.
 *   **Mobile-First:** Design for mobile first, then progressively enhance for larger screens.
 
 ---

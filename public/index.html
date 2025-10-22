@@ -33,26 +33,20 @@
 <body>
 	<!-- Page Header with Navigation -->
 	<header class="page-header container">
-		<div class="header-left">
-			<!-- Mobile Navigation -->
-			<div class="mobile-nav">
-				<button class="btn btn-icon" id="btn-mobile-nav" aria-label="Open menu" aria-haspopup="true"
-					aria-expanded="false" aria-controls="mobile-nav-dropdown">
-					<span class="material-symbols-rounded">menu</span>
-				</button>
-				<div class="mobile-nav-dropdown" id="mobile-nav-dropdown" role="menu"></div>
-			</div>
-			<div class="mobile-nav-title" id="mobile-nav-title"></div>
-
-			<!-- Desktop Navigation -->
-			<nav class="pill-selector-group" id="wrapper-tabs">
+		<!-- Navigation -->
+		<nav class="header-nav" id="header-nav">
+			<button class="nav-toggle btn btn-icon" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+				<span class="material-symbols-rounded">menu</span>
+			</button>
+			<span class="nav-title" id="nav-title">Overview</span>
+			<div class="nav-items pill-selector-group" id="nav-items">
 				<div class="pill-selector-slider"></div>
 				<button class="btn-pill active" data-tab="overview" data-target="#overview">Overview</button>
 				<button class="btn-pill" data-tab="foundations" data-target="#foundations">Foundations</button>
 				<button class="btn-pill" data-tab="colors" data-target="#colors">Colors</button>
 				<button class="btn-pill" data-tab="components" data-target="#components">Components</button>
-			</nav>
-		</div>
+			</div>
+		</nav>
 
 		<!-- Theme Switch & GitHub Link -->
 		<div class="theme-switch-wrapper">
