@@ -114,72 +114,135 @@ const createPillSelector = (selectorId, valueDisplayId) => {
 	return { group, buttons, updateSlider };
 };
 
-// --- NAVIGATION TOGGLE & OVERFLOW DETECTION ---
-const initNavigation = () => {
-	const headerNav = $('#header-nav');
-	const toggle = $('#nav-toggle');
-	const navItems = $('#nav-items');
-	const pageHeader = $('.page-header');
-	if (!headerNav || !toggle || !navItems || !pageHeader) return;
+// --- RESPONSIVE TABS SYSTEM ---
+const initResponsiveTabs = () => {
+	const tabsContainer = $('#responsive-tabs');
+	const tabsList = $('#tabs-list');
+	const hamburgerUI = $('#hamburger-ui');
+	const hamburgerWrapper = $('#hamburger-wrapper');
+	const hamburgerText = $('#hamburger-text');
+	const dropdown = $('#tabs-dropdown');
+	const slider = tabsContainer.querySelector('.responsive-tabs-slider');
+	const allButtons = Array.from(tabsList.querySelectorAll('.responsive-tabs-btn'));
 
-	const closeNav = () => {
-		navItems.classList.remove('is-visible');
-		toggle.setAttribute('aria-expanded', 'false');
+	if (!tabsContainer || !tabsList || !dropdown) return;
+
+	let activeButton = allButtons[0];
+	let isDropdownOpen = false;
+
+	const updateSlider = (btn) => {
+		if (!btn || !slider) return;
+		slider.style.left = `${btn.offsetLeft}px`;
+		slider.style.width = `${btn.offsetWidth}px`;
+		slider.style.height = '32px';
+		slider.style.top = '50%';
+		slider.style.transform = 'translateY(-50%)';
 	};
 
-	const toggleNav = () => {
-		const isVisible = navItems.classList.toggle('is-visible');
-		toggle.setAttribute('aria-expanded', isVisible);
+	const populateDropdown = () => {
+		dropdown.innerHTML = '';
+		allButtons.forEach(btn => {
+			const item = document.createElement('button');
+			item.className = 'responsive-tabs-dropdown-item';
+			item.textContent = btn.textContent;
+			item.dataset.tab = btn.dataset.tab;
+			if (btn === activeButton) item.classList.add('active');
+			item.addEventListener('click', (e) => {
+				e.stopPropagation();
+				selectTab(btn, true);
+			});
+			dropdown.appendChild(item);
+		});
 	};
 
-	// Overflow detection: switch to compact mode when content doesn't fit
+	const selectTab = (btn, closeDropdown = false) => {
+		if (!btn) return;
+		activeButton = btn;
+
+		allButtons.forEach(b => b.classList.remove('active'));
+		btn.classList.add('active');
+
+		updateSlider(btn);
+
+		hamburgerText.textContent = btn.textContent;
+
+		Array.from(dropdown.children).forEach(item => {
+			item.classList.toggle('active', item.dataset.tab === btn.dataset.tab);
+		});
+
+		const target = document.querySelector(btn.dataset.target);
+		if (target) {
+			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		if (closeDropdown) {
+			isDropdownOpen = false;
+			dropdown.classList.remove('visible');
+		}
+	};
+
 	const checkOverflow = () => {
-		// Temporarily remove compact to measure natural width
-		headerNav.classList.remove('compact');
-		
-		// Force a reflow to get accurate measurements
-		void headerNav.offsetWidth;
-		
-		const themeWidth = $('.theme-switch-wrapper')?.offsetWidth || 0;
-		const navItemsWidth = navItems.scrollWidth;
-		const available = pageHeader.offsetWidth - themeWidth - 32; // 32px for padding/gaps
-		
-		// If nav items don't fit, switch to compact mode
-		if (navItemsWidth > available) {
-			headerNav.classList.add('compact');
+		tabsList.style.display = 'flex';
+		hamburgerUI.classList.remove('visible');
+		slider.classList.remove('hidden');
+
+		const pageHeader = $('.page-header');
+		const themeSwitch = $('.theme-switch-wrapper');
+		if (!pageHeader || !themeSwitch) return;
+
+		const headerWidth = pageHeader.offsetWidth;
+		const actionsWidth = themeSwitch.offsetWidth;
+		const headerPadding = 32;
+		const gapBetween = 32;
+
+		const availableWidth = headerWidth - headerPadding - actionsWidth - gapBetween;
+		const tabsWidth = tabsList.scrollWidth;
+
+		if (tabsWidth > availableWidth) {
+			tabsList.style.display = 'none';
+			hamburgerUI.classList.add('visible');
+			slider.classList.add('hidden');
+			dropdown.classList.remove('visible');
+			isDropdownOpen = false;
+		} else {
+			updateSlider(activeButton);
 		}
 	};
 
-	toggle.addEventListener('click', (e) => {
+	hamburgerWrapper.addEventListener('click', (e) => {
 		e.stopPropagation();
-		toggleNav();
-	});
+		isDropdownOpen = !isDropdownOpen;
+		dropdown.classList.toggle('visible', isDropdownOpen);
 
-	// Close on outside click
-	document.addEventListener('click', (e) => {
-		if (!navItems.contains(e.target) && e.target !== toggle) {
-			closeNav();
+		if (isDropdownOpen) {
+			const rect = hamburgerWrapper.getBoundingClientRect();
+			dropdown.style.top = `${rect.bottom + 8}px`;
+			dropdown.style.left = `${rect.left}px`;
 		}
 	});
 
-	// Close on escape
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && navItems.classList.contains('is-visible')) {
-			closeNav();
-			toggle.focus();
-		}
+	allButtons.forEach(btn => {
+		btn.addEventListener('click', () => selectTab(btn, false));
 	});
 
-	// Close when a nav item is clicked
-	navItems.addEventListener('click', (e) => {
-		if (e.target.classList.contains('btn-pill')) {
-			closeNav();
+	const closeDropdownOnOutside = (e) => {
+		if (hamburgerWrapper.contains(e.target) || dropdown.contains(e.target)) {
+			return;
 		}
-	});
+		isDropdownOpen = false;
+		dropdown.classList.remove('visible');
+	};
 
-	// Check overflow on load and resize
-	checkOverflow();
-	window.addEventListener('resize', checkOverflow);
+	document.addEventListener('click', closeDropdownOnOutside);
+	document.addEventListener('touchstart', closeDropdownOnOutside);
+
+	populateDropdown();
+	updateSlider(activeButton);
+
+	setTimeout(() => checkOverflow(), 100);
+
+	window.addEventListener('resize', () => setTimeout(checkOverflow, 50));
+	window.addEventListener('load', () => setTimeout(checkOverflow, 100));
 };
 
 // --- THEME SWITCHER ---
@@ -216,7 +279,7 @@ const initModal = () => {
 	const infoManager = createModalManager('info-modal-backdrop', ['open-info-modal-btn']);
 	if (infoManager) {
 		['close-info-modal-btn', 'close-info-modal-footer-btn'].forEach(id => $(`#${id}`)?.addEventListener('click', infoManager.closeModal));
-		
+
 		const learnMoreLink = $('#learn-more-link');
 		if (learnMoreLink) {
 			learnMoreLink.addEventListener('click', (e) => {
@@ -313,11 +376,11 @@ const initHeaderTabs = () => {
 		const name = tab.getAttribute('data-tab');
 		if (name) location.hash = name;
 		if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		
+
 		// Update mobile nav title
 		const navTitle = $('#nav-title');
 		if (navTitle) navTitle.textContent = tab.textContent;
-		
+
 		updateSlider(tab);
 	};
 
@@ -333,11 +396,11 @@ const initHeaderTabs = () => {
 		if (!activeTab || activeTab.classList.contains('active')) return;
 		tabs.forEach(t => t.classList.remove('active'));
 		activeTab.classList.add('active');
-		
+
 		// Update mobile nav title
 		const navTitle = $('#nav-title');
 		if (navTitle) navTitle.textContent = activeTab.textContent;
-		
+
 		updateSlider(activeTab);
 	};
 
@@ -360,7 +423,7 @@ const initMotionDemo = () => {
 
 // --- INITIALIZATION ---
 const init = () => {
-	initNavigation();
+	initResponsiveTabs();
 	initThemeSwitcher();
 	initModal();
 	initDropdown();
@@ -368,7 +431,6 @@ const init = () => {
 	initPillSelectors();
 	initSliders();
 	initColorSwatches();
-	initHeaderTabs();
 	initMotionDemo();
 };
 

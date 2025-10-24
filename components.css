@@ -1008,3 +1008,149 @@ body.scroll-lock {
     font: var(--font-label);
     color: var(--color-text-high);
 }
+
+/*-------------------------------------------*/
+/* RESPONSIVE TABS (PILL SELECTOR)          */
+/*-------------------------------------------*/
+.responsive-tabs {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pill-group-gap);
+    background-color: var(--color-background);
+    border-radius: var(--radius-full);
+    padding: var(--pill-group-padding);
+    border: var(--stroke-sm) solid var(--color-border-default);
+    height: 40px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.responsive-tabs-slider {
+    position: absolute;
+    background-color: var(--color-primary);
+    border-radius: 16px;
+    transition: left var(--duration-medium) var(--easing), width var(--duration-medium) var(--easing);
+    z-index: 2;
+    pointer-events: none;
+    display: block;
+    height: 32px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.responsive-tabs-slider.hidden {
+    display: none !important;
+}
+
+.responsive-tabs-btn {
+    font: var(--font-label);
+    padding: 0 16px;
+    border-radius: var(--radius-full);
+    border: none;
+    background-color: transparent;
+    color: var(--color-text-medium);
+    cursor: pointer;
+    transition: color var(--duration-medium) var(--easing);
+    z-index: 3;
+    white-space: nowrap;
+    position: relative;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.responsive-tabs-btn:hover:not(.active) {
+    color: var(--color-text-high);
+}
+
+.responsive-tabs-btn.active {
+    color: var(--white);
+}
+
+.responsive-tabs-hamburger {
+    display: none;
+    align-items: center;
+    gap: 0;
+    z-index: 3;
+    width: 100%;
+    padding: 0;
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+}
+
+.responsive-tabs-hamburger.visible {
+    display: flex;
+}
+
+.responsive-tabs-hamburger-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    min-width: 0;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.responsive-tabs-hamburger-text {
+    font: var(--font-label);
+    color: var(--color-text-high);
+    white-space: nowrap;
+    flex: 1;
+    padding: 0 var(--space-xs);
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.responsive-tabs-dropdown {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: var(--stroke-sm) solid var(--color-border-default);
+    z-index: 1000;
+    min-width: 200px;
+    overflow: hidden;
+}
+
+.responsive-tabs-dropdown.visible {
+    display: flex;
+}
+
+.responsive-tabs-dropdown-item {
+    padding: var(--space-xs) var(--space-sm);
+    font: var(--font-label);
+    color: var(--color-text-high);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color var(--duration-quick) var(--easing);
+}
+
+.responsive-tabs-dropdown-item:hover {
+    background-color: var(--color-surface-hover);
+}
+
+.responsive-tabs-dropdown-item.active {
+    background-color: var(--color-primary);
+    color: var(--white);
+    font-weight: 600;
+}

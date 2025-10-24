@@ -381,16 +381,18 @@ Components are the reusable building blocks of our user interface. Each componen
 
 **Structure:**
 *   **Purpose:** For selecting one option from a small, related set.
-*   **Components:** Container (`.pill-selector-group`), slider (`.pill-selector-slider`), buttons (`.btn-pill`).
-*   **Slider:** The moving element has `radius-full` and uses `color-primary`.
+*   **Components:** Container (`.responsive-tabs`), slider (`.responsive-tabs-slider`), buttons (`.responsive-tabs-btn`).
+*   **Slider:** The moving element has `16px` border-radius (2:1 ratio with 32px height) and uses `color-primary`.
+*   **Track:** Height of `40px` with `4px` padding and `2px` gaps between buttons.
+*   **Buttons:** Height of `32px` with `16px` horizontal padding and `radius-full`.
 *   **Usage:** All pill selector implementations (navigation, filters, toggles) use these same classes for consistency.
 
 **Interactions:**
-*   **Click:** Active state changes immediately. The slider element animates to the new position and width using `duration-medium`.
-*   **Slider Animation:** The background slider smoothly transitions its `left` and `width` properties to match the active button's position and dimensions.
+*   **Click:** Active state changes immediately. The slider animates to the new position and width using `duration-medium`.
+*   **Slider Animation:** The background slider smoothly transitions its position and size to match the active button.
 *   **Hover (Non-Active):** Background color transitions to `color-surface-hover` using `duration-medium`.
 *   **Active State:** Text color changes to `white`. The slider provides the `color-primary` background.
-*   **Navigation:** When pill selectors control page sections, clicking a pill should smoothly scroll to the target section using `scroll-behavior: smooth`.
+*   **Navigation:** When pill selectors control page sections, clicking a pill smoothly scrolls to the target section.
 
 #### Switches
 

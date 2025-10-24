@@ -33,18 +33,26 @@
 <body>
 	<!-- Page Header with Navigation -->
 	<header class="page-header container">
-		<!-- Navigation -->
-		<nav class="header-nav" id="header-nav">
-			<button class="nav-toggle btn btn-icon" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-				<span class="material-symbols-rounded">menu</span>
-			</button>
-			<span class="nav-title" id="nav-title">Overview</span>
-			<div class="nav-items pill-selector-group" id="nav-items">
-				<div class="pill-selector-slider"></div>
-				<button class="btn-pill active" data-tab="overview" data-target="#overview">Overview</button>
-				<button class="btn-pill" data-tab="foundations" data-target="#foundations">Foundations</button>
-				<button class="btn-pill" data-tab="colors" data-target="#colors">Colors</button>
-				<button class="btn-pill" data-tab="components" data-target="#components">Components</button>
+		<!-- Responsive Tab System -->
+		<nav class="responsive-tabs" id="responsive-tabs">
+			<div class="responsive-tabs-slider"></div>
+
+			<!-- Visible Tabs (shown when not overflowing) -->
+			<div id="tabs-list" class="responsive-tabs-list" style="display: flex; gap: var(--pill-group-gap); align-items: center;">
+				<button class="responsive-tabs-btn active" data-tab="overview" data-target="#overview">Overview</button>
+				<button class="responsive-tabs-btn" data-tab="foundations" data-target="#foundations">Foundations</button>
+				<button class="responsive-tabs-btn" data-tab="colors" data-target="#colors">Colors</button>
+				<button class="responsive-tabs-btn" data-tab="components" data-target="#components">Components</button>
+			</div>
+
+			<!-- Hamburger UI (shown when overflowing) -->
+			<div class="responsive-tabs-hamburger" id="hamburger-ui">
+				<button class="responsive-tabs-hamburger-wrapper" id="hamburger-wrapper" aria-label="Toggle menu" aria-expanded="false">
+					<span class="btn btn-icon" id="hamburger-btn" style="pointer-events: none;">
+						<span class="material-symbols-rounded">menu</span>
+					</span>
+					<span class="responsive-tabs-hamburger-text" id="hamburger-text">Overview</span>
+				</button>
 			</div>
 		</nav>
 
@@ -58,6 +66,9 @@
 			<span class="material-symbols-rounded icon-dark">dark_mode</span>
 		</div>
 	</header>
+
+	<!-- Dropdown Menu (positioned fixed) -->
+	<div class="responsive-tabs-dropdown" id="tabs-dropdown"></div>
 
 	<main class="container">
 		<!-- Hero / Overview -->
