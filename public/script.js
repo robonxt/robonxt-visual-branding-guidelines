@@ -114,20 +114,19 @@ const createPillSelector = (selectorId, valueDisplayId) => {
 	return { group, buttons, updateSlider };
 };
 
-// --- RESPONSIVE TABS SYSTEM ---
-const initResponsiveTabs = () => {
-	const tabsContainer = $('#responsive-tabs');
+// --- NAVIGATION TOGGLE & OVERFLOW DETECTION ---
+const initNavigation = () => {
+	const headerNav = $('#responsive-tabs');
+	const hamburgerWrapper = $('#hamburger-wrapper');
 	const tabsList = $('#tabs-list');
 	const hamburgerUI = $('#hamburger-ui');
-	const hamburgerWrapper = $('#hamburger-wrapper');
 	const hamburgerText = $('#hamburger-text');
 	const dropdown = $('#tabs-dropdown');
-	const slider = tabsContainer.querySelector('.responsive-tabs-slider');
+	const slider = headerNav?.querySelector('.responsive-tabs-slider');
+	if (!headerNav || !tabsList || !dropdown) return;
+
 	const allButtons = Array.from(tabsList.querySelectorAll('.responsive-tabs-btn'));
-
-	if (!tabsContainer || !tabsList || !dropdown) return;
-
-	let activeButton = allButtons[0];
+	let activeButton = allButtons.find(btn => btn.classList.contains('active')) || allButtons[0];
 	let isDropdownOpen = false;
 
 	const updateSlider = (btn) => {
@@ -137,22 +136,6 @@ const initResponsiveTabs = () => {
 		slider.style.height = '32px';
 		slider.style.top = '50%';
 		slider.style.transform = 'translateY(-50%)';
-	};
-
-	const populateDropdown = () => {
-		dropdown.innerHTML = '';
-		allButtons.forEach(btn => {
-			const item = document.createElement('button');
-			item.className = 'responsive-tabs-dropdown-item';
-			item.textContent = btn.textContent;
-			item.dataset.tab = btn.dataset.tab;
-			if (btn === activeButton) item.classList.add('active');
-			item.addEventListener('click', (e) => {
-				e.stopPropagation();
-				selectTab(btn, true);
-			});
-			dropdown.appendChild(item);
-		});
 	};
 
 	const selectTab = (btn, closeDropdown = false) => {
@@ -178,6 +161,22 @@ const initResponsiveTabs = () => {
 			isDropdownOpen = false;
 			dropdown.classList.remove('visible');
 		}
+	};
+
+	const populateDropdown = () => {
+		dropdown.innerHTML = '';
+		allButtons.forEach(btn => {
+			const item = document.createElement('button');
+			item.className = 'responsive-tabs-dropdown-item';
+			item.textContent = btn.textContent;
+			item.dataset.tab = btn.dataset.tab;
+			if (btn === activeButton) item.classList.add('active');
+			item.addEventListener('click', (e) => {
+				e.stopPropagation();
+				selectTab(btn, true);
+			});
+			dropdown.appendChild(item);
+		});
 	};
 
 	const checkOverflow = () => {
@@ -244,6 +243,75 @@ const initResponsiveTabs = () => {
 
 	window.addEventListener('resize', () => setTimeout(checkOverflow, 50));
 	window.addEventListener('load', () => setTimeout(checkOverflow, 100));
+};
+
+// --- HEADER TABS ---
+const initHeaderTabs = () => {
+	const container = $('#responsive-tabs');
+	if (!container) return;
+
+	const tabs = Array.from(container.querySelectorAll('.responsive-tabs-btn'));
+	const sections = tabs.map(t => document.querySelector(t.dataset.target)).filter(Boolean);
+	const slider = container.querySelector('.responsive-tabs-slider');
+
+	const updateSlider = (btn) => {
+		if (!btn || !slider) return;
+		slider.style.left = `${btn.offsetLeft}px`;
+		slider.style.width = `${btn.offsetWidth}px`;
+		slider.style.height = '32px';
+		slider.style.top = '50%';
+		slider.style.transform = 'translateY(-50%)';
+	};
+
+	const setActive = (tab, scrollTo = true) => {
+		if (!tab) return;
+		tabs.forEach(t => t.classList.remove('active'));
+		tab.classList.add('active');
+		const target = document.querySelector(tab.dataset.target);
+		const name = tab.dataset.tab;
+		if (name) location.hash = name;
+		if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+		// Update mobile nav title
+		const navTitle = $('#nav-title');
+		if (navTitle) navTitle.textContent = tab.textContent;
+
+		// Update responsive tabs hamburger text
+		const hamburgerText = $('#hamburger-text');
+		if (hamburgerText) hamburgerText.textContent = tab.textContent;
+
+		updateSlider(tab);
+	};
+
+	tabs.forEach(btn => btn.addEventListener('click', (e) => (e.preventDefault(), setActive(btn, true))));
+
+	const syncFromScroll = () => {
+		let activeIdx = 0;
+		for (let i = 0; i < sections.length; i++) {
+			if (sections[i].getBoundingClientRect().top - 120 <= 0) activeIdx = i;
+			else break;
+		}
+		const activeTab = tabs[activeIdx];
+		if (!activeTab || activeTab.classList.contains('active')) return;
+		tabs.forEach(t => t.classList.remove('active'));
+		activeTab.classList.add('active');
+
+		// Update mobile nav title
+		const navTitle = $('#nav-title');
+		if (navTitle) navTitle.textContent = activeTab.textContent;
+
+		// Update responsive tabs hamburger text
+		const hamburgerText = $('#hamburger-text');
+		if (hamburgerText) hamburgerText.textContent = activeTab.textContent;
+
+		updateSlider(activeTab);
+	};
+
+	const hash = location.hash.slice(1);
+	setActive(tabs.find(t => t.dataset.tab === hash) || tabs[0], false);
+
+	window.addEventListener('scroll', syncFromScroll, { passive: true });
+	window.addEventListener('resize', () => updateSlider(container.querySelector('.responsive-tabs-btn.active')));
 };
 
 // --- THEME SWITCHER ---
@@ -358,61 +426,6 @@ const initColorSwatches = () => {
 	});
 };
 
-// --- HEADER TABS ---
-const initHeaderTabs = () => {
-	const container = $('#nav-items');
-	if (!container) return;
-
-	const tabs = Array.from(container.querySelectorAll('.btn-pill'));
-	const sections = tabs.map(t => $(t.getAttribute('data-target'))).filter(Boolean);
-	const slider = container.querySelector('.pill-selector-slider');
-
-	const updateSlider = (tab) => tab && updateSliderPosition(slider, tab);
-
-	const setActive = (tab, scrollTo = true) => {
-		if (!tab) return;
-		tabs.forEach(t => t.classList.remove('active'));
-		tab.classList.add('active');
-		const target = $(tab.getAttribute('data-target'));
-		const name = tab.getAttribute('data-tab');
-		if (name) location.hash = name;
-		if (scrollTo && target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-		// Update mobile nav title
-		const navTitle = $('#nav-title');
-		if (navTitle) navTitle.textContent = tab.textContent;
-
-		updateSlider(tab);
-	};
-
-	tabs.forEach(btn => btn.addEventListener('click', (e) => (e.preventDefault(), setActive(btn, true))));
-
-	const syncFromScroll = () => {
-		let activeIdx = 0;
-		for (let i = 0; i < sections.length; i++) {
-			if (sections[i].getBoundingClientRect().top - 120 <= 0) activeIdx = i;
-			else break;
-		}
-		const activeTab = tabs[activeIdx];
-		if (!activeTab || activeTab.classList.contains('active')) return;
-		tabs.forEach(t => t.classList.remove('active'));
-		activeTab.classList.add('active');
-
-		// Update mobile nav title
-		const navTitle = $('#nav-title');
-		if (navTitle) navTitle.textContent = activeTab.textContent;
-
-		updateSlider(activeTab);
-	};
-
-	const hash = location.hash.slice(1);
-	setActive(tabs.find(t => t.getAttribute('data-tab') === hash) || tabs[0], false);
-
-	window.addEventListener('scroll', syncFromScroll, { passive: true });
-	window.addEventListener('resize', () => updateSlider(container.querySelector('.btn-pill.active')));
-};
-
-
 // --- MOTION DEMO ---
 const initMotionDemo = () => {
 	const btn = $('#motion-toggle');
@@ -424,7 +437,8 @@ const initMotionDemo = () => {
 
 // --- INITIALIZATION ---
 const init = () => {
-	initResponsiveTabs();
+	initNavigation();
+	initHeaderTabs();
 	initThemeSwitcher();
 	initModal();
 	initDropdown();
