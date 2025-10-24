@@ -194,6 +194,7 @@ p {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -440,11 +441,11 @@ body.scroll-lock {
     z-index: 1100;
 }
 
-.modal-backdrop.is-visible ~ .modal-backdrop {
+.modal-backdrop.is-visible~.modal-backdrop {
     z-index: 1200;
 }
 
-.modal-backdrop.is-visible ~ .modal-backdrop.is-visible ~ .modal-backdrop {
+.modal-backdrop.is-visible~.modal-backdrop.is-visible~.modal-backdrop {
     z-index: 1300;
 }
 

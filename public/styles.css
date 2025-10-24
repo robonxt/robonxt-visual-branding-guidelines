@@ -466,9 +466,9 @@ input:checked+.theme-slider:before {
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(-8px);
-	transition: opacity var(--duration-quick) var(--easing), 
-	            transform var(--duration-quick) var(--easing),
-	            visibility 0s var(--duration-quick);
+	transition: opacity var(--duration-quick) var(--easing),
+		transform var(--duration-quick) var(--easing),
+		visibility 0s var(--duration-quick);
 }
 
 .header-nav.compact .nav-items.is-visible {

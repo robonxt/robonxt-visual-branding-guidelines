@@ -38,16 +38,19 @@
 			<div class="responsive-tabs-slider"></div>
 
 			<!-- Visible Tabs (shown when not overflowing) -->
-			<div id="tabs-list" class="responsive-tabs-list" style="display: flex; gap: var(--pill-group-gap); align-items: center;">
+			<div id="tabs-list" class="responsive-tabs-list"
+				style="display: flex; gap: var(--pill-group-gap); align-items: center;">
 				<button class="responsive-tabs-btn active" data-tab="overview" data-target="#overview">Overview</button>
-				<button class="responsive-tabs-btn" data-tab="foundations" data-target="#foundations">Foundations</button>
+				<button class="responsive-tabs-btn" data-tab="foundations"
+					data-target="#foundations">Foundations</button>
 				<button class="responsive-tabs-btn" data-tab="colors" data-target="#colors">Colors</button>
 				<button class="responsive-tabs-btn" data-tab="components" data-target="#components">Components</button>
 			</div>
 
 			<!-- Hamburger UI (shown when overflowing) -->
 			<div class="responsive-tabs-hamburger" id="hamburger-ui">
-				<button class="responsive-tabs-hamburger-wrapper" id="hamburger-wrapper" aria-label="Toggle menu" aria-expanded="false">
+				<button class="responsive-tabs-hamburger-wrapper" id="hamburger-wrapper" aria-label="Toggle menu"
+					aria-expanded="false">
 					<span class="btn btn-icon" id="hamburger-btn" style="pointer-events: none;">
 						<span class="material-symbols-rounded">menu</span>
 					</span>
@@ -78,16 +81,17 @@
 				documentation demonstrates <code>tokens.css</code> and <code>components.css</code>—the two canonical
 				stylesheets that implement the entire system. View source to see implementation details.</p>
 
-		<!-- Success Alert (Hidden by default) -->
-		<div class="alert alert-success" id="delete-success-alert" style="display: none; margin-top: var(--space-md);">
-			<span class="material-symbols-rounded">task_alt</span>
-			<div class="alert-content">
-				<div class="alert-title">Successfully Deleted</div>
-				<p class="alert-description">The item has been permanently removed from the system.</p>
+			<!-- Success Alert (Hidden by default) -->
+			<div class="alert alert-success" id="delete-success-alert"
+				style="display: none; margin-top: var(--space-md);">
+				<span class="material-symbols-rounded">task_alt</span>
+				<div class="alert-content">
+					<div class="alert-title">Successfully Deleted</div>
+					<p class="alert-description">The item has been permanently removed from the system.</p>
+				</div>
 			</div>
-		</div>
 
-		<div class="flex-buttons-container demo-margin-top">
+			<div class="flex-buttons-container demo-margin-top">
 				<a href="https://github.com/robonxt/robonxt-visual-branding-guidelines/" target="_blank"
 					rel="noopener noreferrer" class="btn btn-primary">
 					<span class="material-symbols-rounded">code</span>
@@ -202,7 +206,8 @@
 				<div class="ds-surface">
 					<h3>Motion</h3>
 					<p class="text-caption"><strong>Easing:</strong> cubic-bezier(0.4, 0, 0.2, 1) ·
-						<strong>Durations:</strong> quick (150ms), medium (300ms), slow (500ms)</p>
+						<strong>Durations:</strong> quick (150ms), medium (300ms), slow (500ms)
+					</p>
 					<div class="motion-demo demo-margin-top" id="motion-demo">
 						<div class="motion-box quick"></div>
 						<div class="motion-box medium"></div>
@@ -252,7 +257,8 @@
 				<div class="ds-surface">
 					<h3>Brand Palette · Indigo</h3>
 					<p class="text-caption">Primary interactive color. Calls-to-action, links, active states. Default:
-						<code>indigo-600</code> (light), <code>indigo-500</code> (dark)</p>
+						<code>indigo-600</code> (light), <code>indigo-500</code> (dark)
+					</p>
 					<div class="color-grid demo-margin-top">
 						<div class="color-swatch">
 							<div class="swatch-color" style="background-color: var(--indigo-100);"></div>
@@ -392,7 +398,8 @@
 		<section id="components" class="ds-section">
 			<h2>Components</h2>
 			<p>Reusable building blocks constructed from foundations and design tokens. All components are defined in
-				<code>components.css</code>. View page source to see implementation.</p>
+				<code>components.css</code>. View page source to see implementation.
+			</p>
 
 			<div class="component-showcase-grid">
 
@@ -439,7 +446,8 @@
 							Disabled
 						</button>
 					</div>
-					<p class="text-caption demo-margin-top"><strong>Loading State:</strong> Click to see loading animation</p>
+					<p class="text-caption demo-margin-top"><strong>Loading State:</strong> Click to see loading
+						animation</p>
 					<div class="flex-buttons-container">
 						<button class="btn btn-primary" id="demo-loading-btn">
 							<span class="material-symbols-rounded">sync</span>
@@ -473,7 +481,8 @@
 				<div class="ds-surface">
 					<h3>Input Fields</h3>
 					<p class="text-caption">Form controls with default, focus, error, and disabled states. Uses
-						<code>radius-md</code> and <code>stroke-sm</code>.</p>
+						<code>radius-md</code> and <code>stroke-sm</code>.
+					</p>
 					<div class="flex-inputs-container">
 						<div class="input-group">
 							<label for="input-default">Default State</label>
@@ -535,7 +544,8 @@
 					<h3>Modals</h3>
 					<p class="text-caption">Overlays with backdrop blur. All internal spacing uses
 						<code>space-sm</code>. Animates with <code>duration-medium</code> and decelerate easing. Footer
-						can include optional text links aligned left.</p>
+						can include optional text links aligned left.
+					</p>
 					<div class="flex-buttons-container demo-margin-top">
 						<button class="btn btn-outline" id="open-modal-btn">
 							<span class="material-symbols-rounded">warning</span>
@@ -552,7 +562,8 @@
 				<div class="ds-surface">
 					<h3>Dropdowns</h3>
 					<p class="text-caption">Contextual menus with keyboard navigation. Uses <code>radius-lg</code>,
-						<code>shadow-md</code>, and <code>stroke-sm</code> border.</p>
+						<code>shadow-md</code>, and <code>stroke-sm</code> border.
+					</p>
 					<div class="dropdown">
 						<button class="btn btn-outline" id="dropdown-toggle">
 							<span>Options</span>
@@ -582,7 +593,8 @@
 				<div class="ds-surface">
 					<h3>Pill Selectors</h3>
 					<p class="text-caption">For selecting one option from a small set. Slider uses
-						<code>radius-full</code> and animates with <code>duration-medium</code>.</p>
+						<code>radius-full</code> and animates with <code>duration-medium</code>.
+					</p>
 					<div class="pill-selector-group demo-margin-top" id="pill-selector-1">
 						<div class="pill-selector-slider"></div>
 						<button class="btn-pill active" data-value="daily">Daily</button>

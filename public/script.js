@@ -163,7 +163,6 @@ const initResponsiveTabs = () => {
 		btn.classList.add('active');
 
 		updateSlider(btn);
-
 		hamburgerText.textContent = btn.textContent;
 
 		Array.from(dropdown.children).forEach(item => {
@@ -207,6 +206,8 @@ const initResponsiveTabs = () => {
 		} else {
 			updateSlider(activeButton);
 		}
+
+		hamburgerText.textContent = activeButton.textContent;
 	};
 
 	hamburgerWrapper.addEventListener('click', (e) => {
