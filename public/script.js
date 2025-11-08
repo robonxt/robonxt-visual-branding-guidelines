@@ -128,6 +128,7 @@ const initNavigation = () => {
 	const allButtons = Array.from(tabsList.querySelectorAll('.responsive-tabs-btn'));
 	let activeButton = allButtons.find(btn => btn.classList.contains('active')) || allButtons[0];
 	let isDropdownOpen = false;
+	let resizeObserver = null;
 
 	const updateSlider = (btn) => {
 		if (!btn || !slider) return;
@@ -188,11 +189,13 @@ const initNavigation = () => {
 		const themeSwitch = $('.theme-switch-wrapper');
 		if (!pageHeader || !themeSwitch) return;
 
+		// Use CSS custom properties instead of hardcoded values
+		const rootStyles = getComputedStyle(document.documentElement);
+		const headerPadding = parseFloat(rootStyles.getPropertyValue('--nav-header-padding') || '32');
+		const gapBetween = parseFloat(rootStyles.getPropertyValue('--nav-gap-between') || '32');
+
 		const headerWidth = pageHeader.offsetWidth;
 		const actionsWidth = themeSwitch.offsetWidth;
-		const headerPadding = 32;
-		const gapBetween = 32;
-
 		const availableWidth = headerWidth - headerPadding - actionsWidth - gapBetween;
 		const tabsWidth = tabsList.scrollWidth;
 
@@ -207,6 +210,31 @@ const initNavigation = () => {
 		}
 
 		hamburgerText.textContent = activeButton.textContent;
+	};
+
+	// Initialize ResizeObserver instead of window resize events
+	const initResizeObserver = () => {
+		if (resizeObserver) {
+			resizeObserver.disconnect();
+		}
+
+		resizeObserver = new ResizeObserver(entries => {
+			for (let entry of entries) {
+				// Debounce using requestAnimationFrame for better performance
+				requestAnimationFrame(() => {
+					checkOverflow();
+				});
+			}
+		});
+
+		// Observe the page header for size changes
+		const pageHeader = $('.page-header');
+		if (pageHeader) {
+			resizeObserver.observe(pageHeader);
+		}
+
+		// Also observe the tabs list itself
+		resizeObserver.observe(tabsList);
 	};
 
 	hamburgerWrapper.addEventListener('click', (e) => {
@@ -239,10 +267,16 @@ const initNavigation = () => {
 	populateDropdown();
 	updateSlider(activeButton);
 
+	// Initialize ResizeObserver and run initial check
+	initResizeObserver();
 	setTimeout(() => checkOverflow(), 100);
 
-	window.addEventListener('resize', () => setTimeout(checkOverflow, 50));
-	window.addEventListener('load', () => setTimeout(checkOverflow, 100));
+	// Cleanup function
+	return () => {
+		if (resizeObserver) {
+			resizeObserver.disconnect();
+		}
+	};
 };
 
 // --- HEADER TABS ---

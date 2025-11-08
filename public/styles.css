@@ -7,6 +7,14 @@
 /*-------------------------------------------*/
 /* 1. DEMO LAYOUT & PAGE STRUCTURE           */
 /*-------------------------------------------*/
+
+/* Navigation Custom Properties */
+:root {
+	--nav-header-padding: 32px;
+	--nav-gap-between: 32px;
+	--nav-debounce-delay: 50ms;
+}
+
 .container {
 	max-width: 1400px;
 	margin: 0 auto;
