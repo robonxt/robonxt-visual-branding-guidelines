@@ -381,7 +381,7 @@ Components are the reusable building blocks of our user interface. Each componen
 
 **Structure:**
 *   **Purpose:** For selecting one option from a small, related set.
-*   **Components:** Container (`.responsive-tabs`), slider (`.responsive-tabs-slider`), buttons (`.responsive-tabs-btn`).
+*   **Components:** Container (`.pill-group`), slider (`.pill-group-slider`), buttons (`.pill-group-btn`).
 *   **Slider:** The moving element has `16px` border-radius (2:1 ratio with 32px height) and uses `color-primary`.
 *   **Track:** Height of `40px` with `4px` padding and `2px` gaps between buttons.
 *   **Buttons:** Height of `32px` with `16px` horizontal padding and `radius-full`.
@@ -468,15 +468,17 @@ Components are the reusable building blocks of our user interface. Each componen
 *   **Spacing:** Consistent `space-xs` (8px) padding on all screen sizes. Internal gaps use `space-xs`.
 *   **Separation:** A `stroke-sm` bottom border using `color-border-default` separates it from page content.
 *   **Behavior:** Sticky to the top of the viewport with `overflow: visible` to allow dropdowns.
-*   **Components:** Navigation container (`.header-nav`), toggle button (`.nav-toggle`), section title (`.nav-title`), navigation items (`.nav-items`).
+*   **Components:** Navigation container (`.nav-tabs`), slider (`.nav-tabs-slider`), tab buttons (`.nav-tabs-btn`), hamburger toggle (`.nav-hamburger`), dropdown menu (`.nav-dropdown`).
 
 #### Interactions
-*   **Default Mode:** Navigation pills display inline with animated slider. Toggle button and section title are hidden.
-*   **Compact Mode:** When overflow is detected (content doesn't fit), `.compact` class is added. Toggle button and section title become visible, pills transform into dropdown menu, slider is hidden.
-*   **Overflow Detection:** JavaScript measures available space and switches modes dynamically based on content needs, not device size.
-*   **Toggle:** Click hamburger to show/hide dropdown. Dropdown closes on outside click, escape key, or item selection.
-*   **Scroll:** Background color and shadow can transition on scroll for visual feedback.
-*   **Navigation Items:** Follow pill selector interaction patterns (default) or vertical menu items (compact).
+*   **Default Mode:** Navigation pills display inline with animated slider. Hamburger interface is hidden.
+*   **Compact Mode:** When overflow is detected, hamburger interface becomes visible with current section title. Pills transform into dropdown menu, slider is hidden.
+*   **Advanced Overflow Detection:** Uses `ResizeObserver` API for real-time space monitoring with debounced updates. Measures available space against navigation content width dynamically.
+*   **Smooth Transitions:** All mode switches use CSS transitions with proper timing functions. Slider animates position and width using `duration-medium`.
+*   **Toggle Interaction:** Click hamburger to show/hide dropdown. Dropdown positioned relative to trigger button with proper offset.
+*   **Auto-Update:** Section title in hamburger updates automatically based on scroll position or active tab selection.
+*   **Keyboard Navigation:** Full keyboard support including Tab navigation, Enter/Space activation, and Escape to close dropdown.
+*   **Touch Optimization:** Touch targets meet minimum 48px requirement. Dropdown closes on outside touch/click.
 
 ---
 
@@ -484,12 +486,15 @@ Components are the reusable building blocks of our user interface. Each componen
 
 ### 4.1. Responsive Navigation
 *   **Content-Based Adaptation:** Navigation switches between default and compact modes based on available space, not fixed breakpoints.
-*   **Overflow Detection:** JavaScript measures if navigation content would overflow and toggles `.compact` class accordingly.
-*   **Default Mode:** Pills display inline with animated slider. Toggle button and section title hidden.
-*   **Compact Mode:** Toggle button and current section title visible. Pills transform into vertical dropdown menu positioned absolutely below header.
-*   **Section Title:** Displays current active section name in compact mode. Updates automatically on scroll or click.
-*   **Dropdown Behavior:** Opens/closes with smooth fade and slide animation. Closes on outside click, escape key, or item selection.
-*   **Universal Compatibility:** Works on all screen sizes from small mobile devices to ultrawide monitors without hardcoded breakpoints.
+*   **Advanced Overflow Detection:** Uses `ResizeObserver` API for real-time monitoring of container space changes. Debounced with `requestAnimationFrame` for optimal performance.
+*   **Dynamic Space Calculation:** Measures header width, subtracts action controls width and padding, compares against navigation content scroll width.
+*   **Default Mode:** Pills display inline with animated slider. Hamburger interface hidden. Slider smoothly tracks active pill position.
+*   **Compact Mode:** Hamburger interface with current section title visible. Pills transform into vertical dropdown menu. Slider hidden.
+*   **Section Title Synchronization:** Current section name displays in hamburger and updates automatically on scroll or tab selection.
+*   **Dropdown Positioning:** Dropdown positioned relative to hamburger trigger with proper offset (8px) and viewport awareness.
+*   **Performance Optimized:** Uses `ResizeObserver` instead of window resize events for better performance and accuracy.
+*   **Universal Compatibility:** Works seamlessly across all screen sizes and devices without hardcoded breakpoints.
+*   **State Persistence:** Maintains active tab state across mode switches and page reloads using URL hash.
 
 ### 4.2. Touch Device Considerations
 *   **Touch Targets:** Ensure all interactive elements are at least 48px × 48px (using `--touch-target`).
@@ -498,10 +503,13 @@ Components are the reusable building blocks of our user interface. Each componen
 
 ### 4.3. Breakpoint Philosophy
 *   **Content-Based First:** Prefer JavaScript-based overflow detection over fixed breakpoints for truly responsive designs that adapt to actual content needs.
-*   **Simple Implementation:** Content-based detection can be implemented simply—measure if content fits, switch modes if it doesn't.
+*   **Advanced Implementation:** Use `ResizeObserver` API for accurate, performant content measurement instead of window resize events.
+*   **Performance Considerations:** Debounce overflow detection with `requestAnimationFrame` to prevent layout thrashing and ensure smooth interactions.
+*   **Dynamic Calculation:** Calculate available space by measuring container dimensions and subtracting fixed element widths (padding, controls, gaps).
 *   **When Fixed Breakpoints Are Needed:** Use logical breakpoints based on content needs, not device categories.
 *   **Avoid Device-Specific Breakpoints:** Don't use arbitrary breakpoints like 768px or 1024px that assume device sizes.
 *   **Mobile-First:** Design for mobile first, then progressively enhance for larger screens.
+*   **Real-Time Adaptation:** System should respond immediately to content changes, font size adjustments, or interface modifications.
 
 ---
 
