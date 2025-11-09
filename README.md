@@ -342,17 +342,21 @@ Components are the reusable building blocks of our user interface. Each componen
 *   **Primitives:** Use `radius-lg` and `shadow-lg`.
 *   **Spacing:** All internal spacing uses `space-sm`.
 *   **Layout:**
-    *   **Header (Required):** Contains title and close button. Optional `.modal-titlebar` groups image (optional) + title. Separated by bottom border using `stroke-sm`.
+    *   **Header (Required):** Contains title and optional close button. Optional `.modal-titlebar` groups image (optional) + title. Separated by bottom border using `stroke-sm`.
+        *   **Escapable Modals:** Include a close button (×) in the top-right of the header.
+        *   **Non-Escapable Modals:** Do NOT include a close button in the header.
     *   **Body (Required):** Scrollable content area. Supports rich typography (headings, lists, code blocks).
     *   **Footer (Optional):** When present, contains action buttons. Optional `.has-credit` variant uses grid layout for attribution text + actions.
+        *   **Non-Escapable Modals:** Footer MUST include at least one action button that closes the modal.
 *   **Backdrop:** Semi-transparent overlay (`rgba(0, 0, 0, 0.5)`) with `backdrop-filter: blur(2px)` for modern depth effect.
 *   **Responsive:** Footer with credit stacks vertically on screens narrower than 480px.
 
 #### Interactions
 *   **Open:** Backdrop fades in with blur effect. Modal scales from 0.95 to 1.0 and fades in (opacity 0 to 1) using `duration-medium` with decelerate easing.
 *   **Close:** Reverse animation—modal scales down and fades out, backdrop fades out using `duration-medium`.
-*   **Dismissal (Default):** Clicking outside the modal or pressing `Escape` closes it. For critical actions or multi-step flows, set `data-escapable="false"` to disable dismissal and require explicit user action via buttons.
-*   **Modal Stacking:** Multiple modals can be open simultaneously. Each subsequent modal appears above the previous with incrementing z-index. Escape key only closes the topmost visible modal.
+*   **Escapable Modals (Default):** Clicking outside the modal, pressing `Escape`, or clicking the close button (×) in the header closes the modal.
+*   **Non-Escapable Modals:** For critical actions or multi-step flows, set `data-escapable="false"` to disable backdrop/escape dismissal. Users must interact with action buttons in the footer to close the modal. Do NOT include a close button (×) in the header for non-escapable modals.
+*   **Modal Stacking:** Multiple modals can be open simultaneously. Each subsequent modal appears above the previous with incrementing z-index. Escape key only closes the topmost visible escapable modal.
 *   **Focus Trap:** Focus should remain within the modal while it's open.
 *   **Scroll Lock:** Body scroll should be disabled when modal is open (add `.scroll-lock` class to body).
 

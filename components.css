@@ -813,6 +813,7 @@ body.scroll-lock {
 /*-------------------------------------------*/
 /* 11. SELECTION CONTROLS                    */
 /*-------------------------------------------*/
+.pill-group,
 .pill-selector-group {
     position: relative;
     display: inline-flex;
@@ -824,6 +825,7 @@ body.scroll-lock {
     border: var(--stroke-sm) solid var(--color-border-default);
 }
 
+.pill-group-slider,
 .pill-selector-slider {
     position: absolute;
     background-color: var(--color-primary);
@@ -833,6 +835,7 @@ body.scroll-lock {
     pointer-events: none;
 }
 
+.pill-group-btn,
 .btn-pill {
     font: var(--font-label);
     padding: var(--space-xs) var(--space-sm);
@@ -847,6 +850,7 @@ body.scroll-lock {
     position: relative;
 }
 
+.pill-group-btn::before,
 .btn-pill::before {
     content: '';
     position: absolute;
@@ -857,10 +861,12 @@ body.scroll-lock {
     z-index: -1;
 }
 
+.pill-group-btn:hover:not(.active)::before,
 .btn-pill:hover:not(.active)::before {
     background-color: var(--color-surface-hover);
 }
 
+.pill-group-btn.active,
 .btn-pill.active {
     color: var(--white);
 }
@@ -1011,8 +1017,9 @@ body.scroll-lock {
 }
 
 /*-------------------------------------------*/
-/* RESPONSIVE TABS (PILL SELECTOR)          */
+/* NAVIGATION TABS (HEADER)                 */
 /*-------------------------------------------*/
+.nav-tabs,
 .responsive-tabs {
     position: relative;
     display: inline-flex;
@@ -1029,6 +1036,7 @@ body.scroll-lock {
     margin: 0;
 }
 
+.nav-tabs-slider,
 .responsive-tabs-slider {
     position: absolute;
     background-color: var(--color-primary);
@@ -1044,10 +1052,12 @@ body.scroll-lock {
     margin: 0;
 }
 
+.nav-tabs-slider.hidden,
 .responsive-tabs-slider.hidden {
     display: none !important;
 }
 
+.nav-tabs-btn,
 .responsive-tabs-btn {
     font: var(--font-label);
     padding: 0 16px;
@@ -1069,14 +1079,17 @@ body.scroll-lock {
     box-sizing: border-box;
 }
 
+.nav-tabs-btn:hover:not(.active),
 .responsive-tabs-btn:hover:not(.active) {
     color: var(--color-text-high);
 }
 
+.nav-tabs-btn.active,
 .responsive-tabs-btn.active {
     color: var(--white);
 }
 
+.nav-hamburger,
 .responsive-tabs-hamburger {
     display: none;
     align-items: center;
@@ -1089,10 +1102,12 @@ body.scroll-lock {
     height: 40px;
 }
 
+.nav-hamburger.visible,
 .responsive-tabs-hamburger.visible {
     display: flex;
 }
 
+.nav-hamburger-wrapper,
 .responsive-tabs-hamburger-wrapper {
     display: flex;
     align-items: center;
@@ -1108,6 +1123,7 @@ body.scroll-lock {
     margin: 0;
 }
 
+.nav-hamburger-text,
 .responsive-tabs-hamburger-text {
     font: var(--font-label);
     color: var(--color-text-high);
@@ -1118,6 +1134,7 @@ body.scroll-lock {
     box-sizing: border-box;
 }
 
+.nav-dropdown,
 .responsive-tabs-dropdown {
     position: fixed;
     display: none;
@@ -1131,10 +1148,12 @@ body.scroll-lock {
     overflow: hidden;
 }
 
+.nav-dropdown.visible,
 .responsive-tabs-dropdown.visible {
     display: flex;
 }
 
+.nav-dropdown-item,
 .responsive-tabs-dropdown-item {
     padding: var(--space-xs) var(--space-sm);
     font: var(--font-label);
@@ -1146,10 +1165,12 @@ body.scroll-lock {
     transition: background-color var(--duration-quick) var(--easing);
 }
 
+.nav-dropdown-item:hover,
 .responsive-tabs-dropdown-item:hover {
     background-color: var(--color-surface-hover);
 }
 
+.nav-dropdown-item.active,
 .responsive-tabs-dropdown-item.active {
     background-color: var(--color-primary);
     color: var(--white);

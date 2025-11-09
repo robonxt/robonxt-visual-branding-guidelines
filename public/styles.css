@@ -487,12 +487,12 @@ input:checked+.theme-slider:before {
 }
 
 /* Hide slider in compact mode */
-.header-nav.compact .nav-items .pill-selector-slider {
+.header-nav.compact .nav-items .pill-group-slider {
 	display: none;
 }
 
 /* Stack pills vertically in compact mode */
-.header-nav.compact .nav-items .btn-pill {
+.header-nav.compact .nav-items .pill-group-btn {
 	width: 100%;
 	text-align: left;
 	justify-content: flex-start;
@@ -500,7 +500,7 @@ input:checked+.theme-slider:before {
 	padding: var(--space-xs) var(--space-sm);
 }
 
-.header-nav.compact .nav-items .btn-pill.active {
+.header-nav.compact .nav-items .pill-group-btn.active {
 	background-color: var(--color-surface-hover);
 	color: var(--color-text-high);
 }

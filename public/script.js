@@ -93,16 +93,16 @@ const createPillSelector = (selectorId, valueDisplayId) => {
 	if (!group) return null;
 
 	const valueDisplay = $(`#${valueDisplayId}`);
-	const buttons = group.querySelectorAll('.btn-pill');
-	const slider = group.querySelector('.pill-selector-slider');
+	const buttons = group.querySelectorAll('.pill-group-btn');
+	const slider = group.querySelector('.pill-group-slider');
 
 	const updateSlider = (btn) => btn && updateSliderPosition(slider, btn);
-	const getActive = () => group.querySelector('.btn-pill.active');
+	const getActive = () => group.querySelector('.pill-group-btn.active');
 
 	updateSlider(getActive());
 
 	group.addEventListener('click', (e) => {
-		if (!e.target.classList.contains('btn-pill')) return;
+		if (!e.target.classList.contains('pill-group-btn')) return;
 		buttons.forEach(btn => btn.classList.remove('active'));
 		e.target.classList.add('active');
 		if (valueDisplay) valueDisplay.textContent = e.target.dataset.value;
@@ -116,16 +116,16 @@ const createPillSelector = (selectorId, valueDisplayId) => {
 
 // --- NAVIGATION TOGGLE & OVERFLOW DETECTION ---
 const initNavigation = () => {
-	const headerNav = $('#responsive-tabs');
+	const headerNav = $('#nav-tabs');
 	const hamburgerWrapper = $('#hamburger-wrapper');
 	const tabsList = $('#tabs-list');
 	const hamburgerUI = $('#hamburger-ui');
 	const hamburgerText = $('#hamburger-text');
 	const dropdown = $('#tabs-dropdown');
-	const slider = headerNav?.querySelector('.responsive-tabs-slider');
+	const slider = headerNav?.querySelector('.nav-tabs-slider');
 	if (!headerNav || !tabsList || !dropdown) return;
 
-	const allButtons = Array.from(tabsList.querySelectorAll('.responsive-tabs-btn'));
+	const allButtons = Array.from(tabsList.querySelectorAll('.nav-tabs-btn'));
 	let activeButton = allButtons.find(btn => btn.classList.contains('active')) || allButtons[0];
 	let isDropdownOpen = false;
 	let resizeObserver = null;
@@ -168,7 +168,7 @@ const initNavigation = () => {
 		dropdown.innerHTML = '';
 		allButtons.forEach(btn => {
 			const item = document.createElement('button');
-			item.className = 'responsive-tabs-dropdown-item';
+			item.className = 'nav-dropdown-item';
 			item.textContent = btn.textContent;
 			item.dataset.tab = btn.dataset.tab;
 			if (btn === activeButton) item.classList.add('active');
@@ -281,12 +281,12 @@ const initNavigation = () => {
 
 // --- HEADER TABS ---
 const initHeaderTabs = () => {
-	const container = $('#responsive-tabs');
+	const container = $('#nav-tabs');
 	if (!container) return;
 
-	const tabs = Array.from(container.querySelectorAll('.responsive-tabs-btn'));
+	const tabs = Array.from(container.querySelectorAll('.nav-tabs-btn'));
 	const sections = tabs.map(t => document.querySelector(t.dataset.target)).filter(Boolean);
-	const slider = container.querySelector('.responsive-tabs-slider');
+	const slider = container.querySelector('.nav-tabs-slider');
 
 	const updateSlider = (btn) => {
 		if (!btn || !slider) return;
@@ -345,7 +345,7 @@ const initHeaderTabs = () => {
 	setActive(tabs.find(t => t.dataset.tab === hash) || tabs[0], false);
 
 	window.addEventListener('scroll', syncFromScroll, { passive: true });
-	window.addEventListener('resize', () => updateSlider(container.querySelector('.responsive-tabs-btn.active')));
+	window.addEventListener('resize', () => updateSlider(container.querySelector('.nav-tabs-btn.active')));
 };
 
 // --- THEME SWITCHER ---
